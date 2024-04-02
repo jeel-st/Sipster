@@ -5,10 +5,10 @@ import { setBackgroundColorAsync } from 'expo-system-ui';
 export default function TestPage() {
   return (
     <><View>
-          <Text>TestPage</Text>
-      </View>
+      <Text>TestPage</Text>
+    </View>
       <Pressable onPress={console.log("Hello Biatch!")}>
-            <Text>Hello Biatch!</Text>
-        </Pressable></>
+        <Text>Hello Biatch! du Hund</Text>
+      </Pressable></>
   );
 }
