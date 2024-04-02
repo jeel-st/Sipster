@@ -1,9 +1,8 @@
 import { View, Text } from 'react-native';
+import HomePage from '../routes/HomePage';
 
 export default function Tab() {
   return (
-    <View style={{ justifyContent: 'center', alignItems: 'center', flex: 1 }}>
-      <Text>Index</Text>
-    </View>
+    <HomePage/>
   );
 }
