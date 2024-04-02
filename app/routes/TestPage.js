@@ -9,6 +9,7 @@ export default function TestPage() {
       </View>
       <Pressable onPress={console.log("Hello Biatch!")}>
             <Text>Hello Biatch!</Text>
+            <Text>Hello Hänger</Text>
         </Pressable></>
   );
 }
