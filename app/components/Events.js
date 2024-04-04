@@ -1,7 +1,7 @@
-import { View, Text, ScrollView } from 'react-native'
-import { events } from '../constants/events'
+import { ScrollView } from 'react-native'
+import { events } from '../constants'
+import { EventCard } from '../components'
 import React from 'react'
-import EventCard from './EventCard'
 
 export default function Events() {
     return (

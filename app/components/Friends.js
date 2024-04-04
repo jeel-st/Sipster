@@ -1,7 +1,7 @@
-import { View, Text, ScrollView } from 'react-native'
-import { friends } from '../constants/friends'
+import { ScrollView } from 'react-native'
+import { friends } from '../constants'
+import { FriendCard } from '../components'
 import React from 'react'
-import FriendCard from './FriendCard'
 
 export default function Friends() {
     return (

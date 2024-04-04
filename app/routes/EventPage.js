@@ -1,14 +1,11 @@
 import { View, Text, SafeAreaView } from 'react-native'
-import { Colors } from '../constants/styles'
+import { Games, Friends, Events } from '../components'
+import { styles } from '../constants'
 import React from 'react'
-import Games from '../components/Games'
-import Events from '../components/Events'
-import Friends from '../components/Friends'
-import { Stack } from 'expo-router'
 
 export default function EventPage() {
     return (
-        <SafeAreaView className="flex-1" style={{ backgroundColor: Colors.primary }}>
+        <SafeAreaView className="flex-1" style={{ backgroundColor: styles.Colors.primary }}>
             <View className="mx-6">
                 {/* Header */}
                 <View className="h-12">
@@ -16,26 +13,26 @@ export default function EventPage() {
 
                 {/* Branding */}
                 <View className="mt-5">
-                    <Text className="text-white font-bold text-2xl tracking-widest">sipster</Text>
+                    <Text className={styles.categoryText}>sipster</Text>
                 </View>
 
                 {/* Friends */}
                 <View className="mt-5">
-                    <Text className="text-white font-bold text-l tracking-widest">friends</Text>
+                    <Text className={styles.categoryText}>friends</Text>
                 </View>
-                <Friends/>
+                <Friends />
 
                 {/* Games */}
                 <View className="mt-5">
-                    <Text className="text-white font-bold text-l tracking-widest">games</Text>
+                    <Text className={styles.categoryText}>games</Text>
                 </View>
-                <Games/>
+                <Games />
 
                 {/* Events */}
                 <View>
-                    <Text className="text-white font-bold text-l tracking-widest">events</Text>
+                    <Text className={styles.categoryText}>events</Text>
                 </View>
-                <Events/>
+                <Events />
             </View>
         </SafeAreaView>
     )

@@ -1,9 +1,9 @@
 import { View, Text, ScrollView, SafeAreaView, Pressable, Image, Dimensions } from 'react-native'
-import { Colors } from '../constants/styles'
+import { styles } from '../constants'
 import { FontAwesome } from '@expo/vector-icons'
-import { Stack, router, useLocalSearchParams } from 'expo-router'
-import React from 'react'
+import { router, useLocalSearchParams } from 'expo-router'
 import { LinearGradient } from 'expo-linear-gradient'
+import React from 'react'
 
 const { width, height } = Dimensions.get('window');
 
@@ -14,11 +14,11 @@ export default function GamePage() {
         <ScrollView
             contentContainerStyle={{ paddingBottom: 20 }}
             className="flex-1"
-            style={{ backgroundColor: Colors.primary }}>
+            style={{ backgroundColor: styles.Colors.primary }}>
 
             <View className="w-full">
                 <SafeAreaView className="absolute z-20 flex-row justify-between items-center px-4 mt-10">
-                    <Pressable onPress={() => router.back()} className="w-10 h-10 rounded-xl justify-center items-center" style={{backgroundColor: Colors.primary}}>
+                    <Pressable onPress={() => router.back()} className="w-10 h-10 rounded-xl justify-center items-center" style={{ backgroundColor: styles.Colors.primary }}>
                         <View className="rounded-xl mr-1">
                             <FontAwesome name="chevron-left" size={24} color="white" />
                         </View>
