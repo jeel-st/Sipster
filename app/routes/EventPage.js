@@ -10,7 +10,7 @@ export default function EventPage() {
     return (
         <SafeAreaView className="flex-1" style={{ backgroundColor: Colors.primary }}>
             <View className="mx-6">
-                {/* Handy Header */}
+                {/* Header */}
                 <View className="h-12">
                 </View>
 
