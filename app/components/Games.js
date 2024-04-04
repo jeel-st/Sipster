@@ -1,6 +1,6 @@
 import { ScrollView } from 'react-native'
 import { games } from '../constants'
-import { GameCard } from '../components'
+import GameCard from './GameCard'
 import React from 'react'
 
 export default function Games() {

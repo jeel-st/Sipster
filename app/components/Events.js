@@ -1,6 +1,6 @@
 import { ScrollView } from 'react-native'
 import { events } from '../constants'
-import { EventCard } from '../components'
+import EventCard from './EventCard'
 import React from 'react'
 
 export default function Events() {
