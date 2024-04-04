@@ -42,7 +42,7 @@ export default function GamePage() {
                     {game.name}
                 </Text>
                 <Text className="text-neutral-400 text-center font-semibold">
-                    Spielzeit * {game.playtime}
+                    Spielzeit • {game.playtime}
                 </Text>
                 <Text className="text-neutral-400 mx-4 tracking-wide">
                     {game.desc}

@@ -6,5 +6,6 @@ export const Colors = {
 }
 
 export const categoryText = "text-white font-bold text-l tracking-widest"
+export const brandingText = "text-white font-bold text-2xl tracking-widest"
 
-export const styles = { Colors, categoryText }
+export const styles = { Colors, categoryText, brandingText }
