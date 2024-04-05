@@ -1,9 +1,17 @@
 import { View, Text, SafeAreaView } from 'react-native'
 import { Games, Friends, Events } from '../components'
-import { styles } from '../constants'
-import React from 'react'
+import { styles, events } from '../constants'
+import React, { useState } from 'react'
 
 export default function HomePage() {
+    const [displayEvent, setDisplayEvent] = useState(events[0]);
+
+    const handleEventSelection = (selectedEvent) => {
+        if (selectedEvent !== displayEvent) {
+            setDisplayEvent(selectedEvent);
+        }
+    };
+
     return (
         <SafeAreaView className="flex-1" style={{ backgroundColor: styles.Colors.primary }}>
             <View className="mx-6">
@@ -26,7 +34,7 @@ export default function HomePage() {
                 <View>
                     <Text className="text-white font-bold text-l tracking-widest">events</Text>
                 </View>
-                <Events />
+                <Events onSelectEvent={handleEventSelection} selectedEvent={displayEvent}/>
 
                 {/* Friends */}
                 <View className="mt-5">
