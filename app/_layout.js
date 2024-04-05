@@ -1,4 +1,9 @@
 import { Stack } from 'expo-router/stack'
+import { NativeWindStyleSheet } from "nativewind";
+
+NativeWindStyleSheet.setOutput({
+  default: "native",
+});
 
 export default function AppLayout(){
     return (
