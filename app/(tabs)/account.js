@@ -1,9 +1,8 @@
 import { View, Text } from 'react-native';
+import RegisterPage from '../routes/RegisterPage';
 
 export default function Tab() {
   return (
-    <View style={{ justifyContent: 'center', alignItems: 'center', flex: 1 }}>
-      <Text>Account</Text>
-    </View>
+    <RegisterPage />
   );
 }

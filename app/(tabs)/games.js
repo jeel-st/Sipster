@@ -1,9 +1,8 @@
 import { View, Text } from 'react-native';
+import LoginPage from '../routes/LoginPage';
 
 export default function Tab() {
   return (
-    <View style={{ justifyContent: 'center', alignItems: 'center', flex: 1 }}>
-      <Text>Games</Text>
-    </View>
+    <LoginPage />
   );
 }
