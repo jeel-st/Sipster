@@ -1,14 +1,14 @@
 import React from 'react';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { Entypo, FontAwesome5 } from '@expo/vector-icons';
-import { View, StyleSheet } from 'react-native';
+import { Entypo } from '@expo/vector-icons';
 import { Tabs } from 'expo-router';
+import { styles } from '../constants';
 
 export default function TabLayout() {
   return (
     <Tabs
-      screenOptions={{ tabBarActiveTintColor: '#DFFA54', headerShown: false,
-                        tabBarStyle: {backgroundColor: '#343434', flexDirection: 'row', justifyContent: 'space-around' },
+      screenOptions={{ tabBarActiveTintColor: styles.Colors.yellow, headerShown: false,
+                        tabBarStyle: {backgroundColor: styles.Colors.primary, flexDirection: 'row', justifyContent: 'space-around' },
                         tabBarLabelStyle: {fontSize: 0}
                     }}
     >
@@ -31,7 +31,7 @@ export default function TabLayout() {
         name="games"
         options={{
           title: '',
-          tabBarIcon: ({ color }) => <FontAwesome5 size={28} name="chess-knight" color={color} />,
+          tabBarIcon: ({ color }) => <Entypo size={28} name="game-controller" color={color} />,
           href: '/games',
         }}
       />

@@ -14,13 +14,13 @@ export default function EventPage() {
 
     return (
         <SafeAreaView className="flex-1" style={{ backgroundColor: styles.Colors.primary }}>
-            <View className="mx-6">
+            <View className="">
                 {/* Header */}
-                <View className="h-12">
+                <View className="h-12 mx-6">
                 </View>
 
                 {/* Branding */}
-                <View className="mt-5">
+                <View className="mt-5 mx-6">
                     <Text className={styles.brandingText}>sipster</Text>
                 </View>
 
@@ -28,13 +28,13 @@ export default function EventPage() {
                 <EventInfoCard event={displayEvent} />
 
                 {/* Events */}
-                <View className="mt-5">
+                <View className="mt-5 mx-6">
                     <Text className={styles.categoryText}>events</Text>
                 </View>
                 <Events onSelectEvent={handleEventSelection} selectedEvent={displayEvent}/>
 
                 {/* Button? */}
-                <View className="h-12 mt-5 rounded-xl shadow-xl shadow-black mx-20 items-center justify-center" style={{ backgroundColor: styles.Colors.yellow }}>
+                <View className="h-12 mt-5 rounded-xl shadow-md shadow-white mx-20 items-center justify-center" style={{ backgroundColor: styles.Colors.yellow }}>
                     <Text className="font-bold text-l tracking-widest">save the date {'>>'}</Text>
                 </View>
             </View>
