@@ -8,7 +8,7 @@ import TextField from '../components/TextField'
 export default function LoginPage() {
     return (
         <SafeAreaView className="flex-1 items-center" style={{ backgroundColor: Colors.primary }}>
-            <View className="mx-6">
+            <View className="mx-6 items-center">
 
                 {/* Distance */}
                 <View className="h-20 mt-20" />
@@ -19,9 +19,9 @@ export default function LoginPage() {
                 </View>
 
                 {/* input fields */}
-                <TextField />
+                <TextField placeholder="  username" />
 
-                <TextField />
+                <TextField placeholder="  password" />
 
                 {/* Button */}
                 <Button title="let's party" />

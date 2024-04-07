@@ -5,4 +5,5 @@ export const Colors = {
     white: "#FFFFF"
 }
 
-const {primary, secondary, yellow, white} = Colors;
+const { primary, secondary, yellow, white } = Colors;
+
