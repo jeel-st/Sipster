@@ -1,9 +1,8 @@
 import { View, Text } from 'react-native';
+import EventPage from '../routes/EventPage';
 
 export default function Tab() {
   return (
-    <View style={{ justifyContent: 'center', alignItems: 'center', flex: 1 }}>
-      <Text>Events</Text>
-    </View>
+    <EventPage/>
   );
 }
