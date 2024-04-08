@@ -3,13 +3,15 @@ import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { View, StyleSheet } from 'react-native';
 import { Tabs } from 'expo-router';
 
+
 export default function TabLayout() {
   return (
     <Tabs
-      screenOptions={{ tabBarActiveTintColor: '#DFFA54', headerShown: false,
-                        tabBarStyle: {backgroundColor: '#343434', flexDirection: 'row', justifyContent: 'space-around' },
-                        tabBarLabelStyle: {fontSize: 0}
-                    }}
+      screenOptions={{
+        tabBarActiveTintColor: '#DFFA54', headerShown: false,
+        tabBarStyle: { backgroundColor: '#343434', flexDirection: 'row', justifyContent: 'space-around' },
+        tabBarLabelStyle: { fontSize: 0 }
+      }}
     >
       <Tabs.Screen
         name="index"

@@ -3,6 +3,7 @@ import { Colors } from '../constants/styles'
 import React from 'react'
 import Button from '../components/Button'
 import TextField from '../components/TextField'
+import { router } from 'expo-router';
 
 
 export default function LoginPage() {
@@ -24,7 +25,7 @@ export default function LoginPage() {
                 <TextField placeholder="  password" />
 
                 {/* Button */}
-                <Button title="let's party" />
+                <Button title="let's party" navigation={() => router.navigate('(tabs)')} />
 
 
             </View>

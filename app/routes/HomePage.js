@@ -22,19 +22,19 @@ export default function HomePage() {
                 <View className="mt-5">
                     <Text className="text-white font-bold text-l tracking-widest">games</Text>
                 </View>
-                <Games/>
+                <Games />
 
                 {/* Events */}
                 <View>
                     <Text className="text-white font-bold text-l tracking-widest">events</Text>
                 </View>
-                <Events/>
+                <Events />
 
                 {/* Friends */}
                 <View className="mt-5">
                     <Text className="text-white font-bold text-l tracking-widest">friends</Text>
                 </View>
-                <Friends/>
+                <Friends />
             </View>
         </SafeAreaView>
     )

@@ -3,6 +3,7 @@ import { Colors } from '../constants/styles'
 import React from 'react'
 import Button from '../components/Button'
 import TextField from '../components/TextField'
+import { router } from 'expo-router';
 
 
 export default function RegisterPage() {
@@ -28,7 +29,7 @@ export default function RegisterPage() {
                 <TextField placeholder="  confirm password" />
 
                 {/* Button */}
-                <Button title="welcome to sipster!" />
+                <Button title="welcome to sipster!" navigation={() => router.navigate('routes/LoginPage')} />
 
 
             </View>
