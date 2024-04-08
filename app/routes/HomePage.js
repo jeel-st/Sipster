@@ -29,7 +29,6 @@ export default function HomePage() {
                     <Text className="text-white font-bold text-l tracking-widest">games</Text>
                 </View>
                 <Games />
-                <Games />
 
                 {/* Events */}
                 <View>
@@ -41,7 +40,6 @@ export default function HomePage() {
                 <View className="mt-5 mx-6">
                     <Text className="text-white font-bold text-l tracking-widest">friends</Text>
                 </View>
-                <Friends />
                 <Friends />
             </View>
         </SafeAreaView>
