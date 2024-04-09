@@ -27,7 +27,7 @@ app.get('/login/:username/:password/:tagline', async (req, res) => {
     const password = req.params.password;
     const tagline = req.params.tagline;
   
-    const usernameFinder = await db.collection("personalInformations").findOne({ username, password,tagline })
+    const usernameFinder = await db.collection("personalInformation").findOne({ username, password,tagline })
 
     if (usernameFinder) {
         
