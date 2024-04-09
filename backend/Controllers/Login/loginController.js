@@ -39,6 +39,13 @@ app.get('/login/:username/:password/:tagline', async (req, res) => {
 })
 
 
+app.use((req, res, next) =>{
+    res.send("Hello")
+    console.log("Hello")
+}
+)
+
+
 
 app.listen(3000)
 console.log('static server running on port 3000...')

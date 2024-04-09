@@ -16,3 +16,7 @@ GET {{host}}/login/gamsa/joelstinkt_*100/2020 HTTP/1.1
 
 
 ###
+
+GET {{host}}/
+
+###
