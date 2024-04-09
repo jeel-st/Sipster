@@ -1,16 +1,11 @@
-import { View, Text, SafeAreaView } from 'react-native'
-import { Events, EventInfoCard } from '../components'
-import { styles, events } from '../constants'
-import React, { useState } from 'react'
+import { View, Text, SafeAreaView } from 'react-native';
+import { Events, EventInfoCard } from '../components';
+import { styles } from '../constants';
+import React from 'react';
+import { useEventDisplay } from '../utils';
 
 export default function EventPage() {
-    const [displayEvent, setDisplayEvent] = useState(events[0]);
-
-    const handleEventSelection = (selectedEvent) => {
-        if (selectedEvent !== displayEvent) {
-            setDisplayEvent(selectedEvent);
-        }
-    };
+    const { displayEvent, handleEventSelection } = useEventDisplay();
 
     return (
         <SafeAreaView className="flex-1" style={{ backgroundColor: styles.Colors.primary }}>

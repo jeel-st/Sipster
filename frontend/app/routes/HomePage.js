@@ -2,15 +2,10 @@ import { View, Text, SafeAreaView } from 'react-native'
 import { Games, Friends, Events } from '../components'
 import { styles, events } from '../constants'
 import React, { useState } from 'react'
+import { useEventDisplay } from '../utils';
 
 export default function HomePage() {
-    const [displayEvent, setDisplayEvent] = useState(events[0]);
-
-    const handleEventSelection = (selectedEvent) => {
-        if (selectedEvent !== displayEvent) {
-            setDisplayEvent(selectedEvent);
-        }
-    };
+    const { displayEvent, handleEventSelection } = useEventDisplay();
 
     return (
         <SafeAreaView className="flex-1" style={{ backgroundColor: styles.Colors.primary }}>
