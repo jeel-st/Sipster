@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView } from 'react-native';
+import { View, Text, SafeAreaView, StatusBar } from 'react-native';
 import { Events, EventInfoCard } from '../components';
 import { styles } from '../constants';
 import React from 'react';
@@ -9,10 +9,9 @@ export default function EventPage() {
 
     return (
         <SafeAreaView className="flex-1" style={{ backgroundColor: styles.Colors.primary }}>
-            <View className="">
+            <View>
                 {/* Header */}
-                <View className="h-12 mx-6">
-                </View>
+                <View style={{height: StatusBar.currentHeight}}/>
 
                 {/* Branding */}
                 <View className="mt-5 mx-6">

@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView } from 'react-native'
+import { View, Text, SafeAreaView, StatusBar } from 'react-native'
 import { Games, Friends, Events } from '../components'
 import { styles, events } from '../constants'
 import React, { useState } from 'react'
@@ -11,8 +11,7 @@ export default function HomePage() {
         <SafeAreaView className="flex-1" style={{ backgroundColor: styles.Colors.primary }}>
             <View className="">
                 {/* Handy Header */}
-                <View className="h-12 mx-6">
-                </View>
+                <View style={{height: StatusBar.currentHeight}}/>
 
                 {/* Branding */}
                 <View className="mt-5 mx-6">
