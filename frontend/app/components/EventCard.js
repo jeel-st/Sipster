@@ -4,7 +4,7 @@ import React from 'react'
 
 export default function EventCard({ event, onClick, isSelected }) {
     return (
-        <Pressable onPress={onClick} className="h-10 m-1 rounded-xl shadow shadow-white overflow-visible mx-5" style={[
+        <Pressable onPress={onClick} className="h-10 m-1 rounded-xl shadow-xl shadow-black overflow-visible mx-5" style={[
             {
                 borderWidth: isSelected ? 1 : 0,
                 borderColor: styles.Colors.yellow,
