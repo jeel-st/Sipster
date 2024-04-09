@@ -1,7 +1,6 @@
 import React from 'react';
 import { TouchableOpacity, Text } from 'react-native';
 import { Colors } from '../constants/styles';
-import { router } from 'expo-router';
 
 const Button = ({ title, navigation }) => {
     return (

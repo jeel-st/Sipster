@@ -5,4 +5,5 @@ import LoginPage from "./LoginPage";
 import RegisterPage from "./RegisterPage";
 import WelcomePage from "./WelcomePage";
 
+
 export { GamePage, EventPage, HomePage, LoginPage, RegisterPage, WelcomePage }

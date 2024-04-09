@@ -11,7 +11,7 @@ export default function Events({ onSelectEvent, selectedEvent }) {
     };
 
     return (
-        <ScrollView className="mt-4 max-h-56" showsVerticalScrollIndicator={false} style={{ backgroundColor: styles.Colors.primary }}>
+        <ScrollView className="mt-4 max-h-48" showsVerticalScrollIndicator={false} style={{ backgroundColor: styles.Colors.primary }}>
             {
                 events.map((event, index) => <EventCard
                     event={event}

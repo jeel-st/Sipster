@@ -1,10 +1,9 @@
 import { View, Text, ScrollView, SafeAreaView, StatusBar, Pressable, Image, Dimensions } from 'react-native'
 import { FontAwesome } from '@expo/vector-icons'
 import { Entypo } from '@expo/vector-icons';
-import { LinearGradient } from 'expo-linear-gradient'
 import { router, useLocalSearchParams } from 'expo-router'
 import { styles } from '../constants'
-import { Friends, Games, TagCard } from '../components'
+import { Friends, TagCard } from '../components'
 import React from 'react'
 
 const { width, height } = Dimensions.get('window');
