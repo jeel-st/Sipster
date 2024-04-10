@@ -5,7 +5,7 @@ import TagCard from './TagCard'
 
 export default function EventInfoCard({ event }) {
     return (
-        <View className="h-72 m-1 mx-6 rounded-3xl shadow-xl shadow-black mt-5" style={{ backgroundColor: styles.Colors.yellow }}>
+        <View className="h-72 m-1 mx-6 rounded-3xl shadow-md shadow-black mt-5" style={{ backgroundColor: styles.Colors.yellow }}>
             <View className="flex-1 justify-start mx-5 my-5 space-y-3">
                 <Text className="text-black tracking-wide">{event.header}</Text>
                 <Text className="text-black font-semibold text-lg">{event.name}</Text>

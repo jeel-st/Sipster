@@ -29,7 +29,9 @@ export default function EventPage() {
                 <Events onSelectEvent={handleEventSelection} selectedEvent={displayEvent} />
 
                 {/* Button */}
-                <Button title="save the date >>" />
+                <View className="items-center">
+                    <Button title="save the date >>" />
+                </View>
             </View>
         </SafeAreaView>
     )
