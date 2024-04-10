@@ -10,7 +10,7 @@ const loginRouter = require('./routes/login')
 const registerRouter = require('./routes/register')
 const eventsRouter = require('./routes/events')
 
-const { connectToDB } = require('./database')
+const { connectToDB } = require('./databases/databaseMain')
 connectToDB()
 
 app.use('/login', loginRouter)

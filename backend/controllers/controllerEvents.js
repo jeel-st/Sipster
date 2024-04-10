@@ -1,4 +1,4 @@
-const database = require('../database')
+const database = require('../databases/databaseEvents')
 
 async function getEvents(req, res) {
     try {
@@ -11,14 +11,24 @@ async function getEvents(req, res) {
 
 async function postEvents(req, res) {
     try {
-        const events = await database.postEvents(req)
-        res.json()
+        const event = await database.postEvents(req)
+        res.json(event)
     } catch (error) {
+        res.status(500).send('Internal Server Error')
+    }
+}
+
+async function deleteEvents(req, res){
+    try{
+        const event = await database.deleteEvents(req)
+        res.json(event)
+    }catch{
         res.status(500).send('Internal Server Error')
     }
 }
 
 module.exports = {
     getEvents,
-    postEvents
+    postEvents,
+    deleteEvents
 }
