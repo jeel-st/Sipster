@@ -4,7 +4,7 @@ import { Colors } from '../constants/styles';
 
 const Button = ({ title, navigation }) => {
     return (
-        <TouchableOpacity className="px-6 py-4 rounded-3xl shadow-md shadow-black text-center mt-5 w-[180px] "
+        <TouchableOpacity className="px-6 py-4 rounded-3xl shadow-md shadow-black text-center mt-5 w-[200px] "
             style={{ backgroundColor: Colors.yellow }}
             onPress={navigation}
         >
