@@ -3,9 +3,9 @@ import { styles } from '../constants'
 import React from 'react'
 import TagCard from './TagCard'
 
-export default function EventInfoCard({event}) {
+export default function EventInfoCard({ event }) {
     return (
-        <View className="h-72 m-1 mx-6 rounded-3xl shadow-2xl shadow-white mt-5" style={{ backgroundColor: styles.Colors.yellow }}>
+        <View className="h-72 m-1 mx-6 rounded-3xl shadow-md shadow-black mt-5" style={{ backgroundColor: styles.Colors.yellow }}>
             <View className="flex-1 justify-start mx-5 my-5 space-y-3">
                 <Text className="text-black tracking-wide">{event.header}</Text>
                 <Text className="text-black font-semibold text-lg">{event.name}</Text>

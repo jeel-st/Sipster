@@ -7,10 +7,11 @@ import { styles } from '../constants';
 export default function TabLayout() {
   return (
     <Tabs
-      screenOptions={{ tabBarActiveTintColor: styles.Colors.yellow, headerShown: false,
-                        tabBarStyle: {backgroundColor: styles.Colors.primary, flexDirection: 'row', justifyContent: 'space-around' },
-                        tabBarLabelStyle: {fontSize: 0}
-                    }}
+      screenOptions={{
+        tabBarActiveTintColor: styles.Colors.yellow, headerShown: false,
+        tabBarStyle: { backgroundColor: styles.Colors.primary, flexDirection: 'row', justifyContent: 'space-around', paddingBottom: 3, },
+        tabBarLabelStyle: { fontSize: 0 }
+      }}
     >
       <Tabs.Screen
         name="index"
@@ -23,7 +24,7 @@ export default function TabLayout() {
         name="events"
         options={{
           title: '',
-          tabBarIcon: ({ color }) => <Entypo size={28}  name="calendar" color={color} />,
+          tabBarIcon: ({ color }) => <Entypo size={28} name="calendar" color={color} />,
           href: '/events',
         }}
       />

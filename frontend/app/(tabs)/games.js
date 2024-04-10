@@ -1,8 +1,7 @@
-import { View, Text } from 'react-native';
-import LoginPage from '../routes/LoginPage';
+import { GamePage } from '../routes';
 
 export default function Tab() {
   return (
-    <LoginPage />
+    <GamePage />
   );
 }

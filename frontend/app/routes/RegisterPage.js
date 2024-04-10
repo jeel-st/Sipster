@@ -4,6 +4,7 @@ import React from 'react'
 import Button from '../components/Button'
 import TextField from '../components/TextField'
 import { router } from 'expo-router';
+import { styles } from '../constants';
 
 
 export default function RegisterPage() {
@@ -30,6 +31,11 @@ export default function RegisterPage() {
 
                 {/* Button */}
                 <Button title="welcome to sipster!" navigation={() => router.navigate('routes/LoginPage')} />
+
+                {/* Sign In */}
+                <View className={styles.spaceText}>
+                    <Text className={styles.H3Text} onPress={() => router.navigate('routes/LoginPage')}> {'>>'} Sign In</Text>
+                </View>
 
 
             </View>
