@@ -1,12 +1,12 @@
 import { ScrollView } from 'react-native'
-import { events } from '../constants'
+import { useEvents } from '../utils/eventsFetcher';
 import EventCard from './EventCard'
-import React from 'react'
 
 export default function Events({ onSelectEvent, selectedEvent }) {
     const handleEventClick = (event) => {
         onSelectEvent(event);
     };
+    const events = useEvents();
 
     return (
         <ScrollView className="mt-4 max-h-56" showsVerticalScrollIndicator={false}>
