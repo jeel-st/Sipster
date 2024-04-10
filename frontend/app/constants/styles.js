@@ -10,7 +10,7 @@ export const Colors = {
 export const H3Text = "text-white font-bold text-l"
 // H2 Überschriften: z.B: events, friends, games
 export const categoryText = "text-white font-bold text-xl tracking-widest"
-// H2 Überschriften: z.B: sipster
+// H1 Überschriften: z.B: sipster
 export const brandingText = "text-white font-bold text-3xl tracking-widest"
 // Standartabstand zu den oberen Elementen  
 export const spaceText = "mt-4 mx-6"
