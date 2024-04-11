@@ -2,6 +2,7 @@ const { MongoClient } = require("mongodb")
 const dbe = require("../databases/databaseEvents")
 const dbl = require("../databases/databaseLogin")
 const dbr = require("../databases/databaseRegister")
+const dbf = require("../databases/databaseFriendSystem")
 
 let db = null;
 const url = `mongodb://localhost:27017/`;
@@ -39,6 +40,15 @@ async function postUser(req){
 async function deleteUser(req){
     return await dbr.deleteUser(req)
 }
+
+async function postFriendRequest(req){
+    return await dbf.postFriendRequest(req)
+}
+
+async function deleteFriendRequest(req){
+    return await dbf.deleteFriendRequest(req)
+}
+
 function getDB() {
     return db
 }
@@ -54,3 +64,5 @@ exports.getEvents = getEvents
 exports.getLoginData = getLoginData
 exports.postUser = postUser
 exports.deleteUser = deleteUser
+exports.postFriendRequest = postFriendRequest
+exports.deleteFriendRequest = deleteFriendRequest
