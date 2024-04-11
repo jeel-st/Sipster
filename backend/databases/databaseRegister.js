@@ -3,11 +3,11 @@ const { isValidPassword, isValidEmail } = require('../utils/registerLogic/regist
 
 
 async function postUser(req){
-    const { username, tagline, password, email, firstName, lastName, registerDate } = req.body
+    const { username, password, email, firstName, lastName, registerDate } = req.body
     const friends = null
-    const personalData = { username, tagline, password, email, firstName, lastName, registerDate, friends }
+    const personalData = { username, password, email, firstName, lastName, registerDate, friends }
     
-    const usernameFinder = await database.getDB().collection("personalInformation").findOne({ username: username, tagline: tagline })
+    const usernameFinder = await database.getDB().collection("personalInformation").findOne({ username: username})
     const emailFinder = await database.getDB().collection("personalInformation").findOne({ email: email })
 
     if (isValidPassword(password)) {
@@ -15,7 +15,7 @@ async function postUser(req){
         if (isValidEmail(email)) {
 
             if (usernameFinder) {
-                return "Duplicate username + tagline"
+                return "Duplicate username"
             } else if (emailFinder) {
                 return "Duplicate Email"
             } else {
@@ -33,9 +33,9 @@ async function postUser(req){
 
 async function deleteUser(req){
     const username = req.params.username
-    const tagline = req.params.tagline
+    const password = req.params.password
     try {
-        const result = await database.getDB().collection("personalInformation").deleteOne({ username: username, tagline: tagline })
+        const result = await database.getDB().collection("personalInformation").deleteOne({ username: username, password: password })
         if (result.deletedCount === 0) {
             return "Benutzer nicht gefunden"
         } else {

@@ -11,7 +11,8 @@ Content-Type: application/json
     "email": "larsstinkt@web.de",
     "firstName": "Lars",
     "lastName": "Gerigk",
-    "registerDate": "2024-04-09T12:00:00.000Z"
+    "registerDate": "2024-04-09T12:00:00.000Z",
+    "friends": "null"
 }
 
 ###
@@ -25,7 +26,8 @@ Content-Type: application/json
     "email": "js486@hdm-stuttgart.de",
     "firstName": "Joel",
     "lastName": "Starkov",
-    "registerDate": "2024-03-08T12:00:00.000Z"
+    "registerDate": "2024-03-08T12:00:00.000Z",
+    "friends": "null"
 }
 
 ###
@@ -54,7 +56,8 @@ Content-Type: application/json
     "email": "abcde12345",
     "firstName": "Hänger",
     "lastName": "123",
-    "registerDate": "2024-03-08T12:00:00.000Z"
+    "registerDate": "2024-03-08T12:00:00.000Z",
+    "friends": "null"
 }
 
 ###
@@ -69,10 +72,11 @@ Content-Type: application/json
     "firstName": "Hänger",
     "lastName": "123",
     "registerDate": "2024-03-08T12:00:00.000Z",
+    "friends": "null"
 }
 
 ###
 
-DELETE {{host}}/register/Crypto/1111 HTTP/1.1
+DELETE {{host}}/register/Crypto/crYpT123!!! HTTP/1.1
 
 ###

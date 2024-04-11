@@ -24,7 +24,7 @@ async function deleteEvents(req){
     return await dbe.deleteEvents(req)
 }
 
-async function getEvents(req){
+async function getEvents(){
     return await dbe.getEvents()
 }
 

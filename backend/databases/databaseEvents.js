@@ -28,9 +28,9 @@ async function deleteEvents(req){
     let result = await database.getDB().collection("events").deleteOne({date: date, name: name, time: time, header: header})
 
     if (result.deletedCount === 0) {
-        throw new Error("Benutzer nicht gefunden")
+        throw new Error("Event nicht gefunden")
     } else {
-        return("Benutzer erfolgreich gelöscht")
+        return("Event erfolgreich gelöscht")
     }
 }
 

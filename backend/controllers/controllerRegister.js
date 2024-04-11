@@ -1,4 +1,4 @@
-const database = require('../databases//databaseMain')
+const database = require('../databases/databaseMain')
 
 async function postRegister(req, res) {
     
