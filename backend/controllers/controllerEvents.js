@@ -1,4 +1,4 @@
-const database = require('../databases/databaseEvents')
+const database = require('../databases/databaseMain')
 
 async function getEvents(req, res) {
     try {

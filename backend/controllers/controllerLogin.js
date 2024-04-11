@@ -1,4 +1,4 @@
-const database = require('../databases/databaseLogin')
+const database = require('../databases/databaseMain')
 
 async function getLogin(req, res) {
 try{

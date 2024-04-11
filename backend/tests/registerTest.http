@@ -42,7 +42,8 @@ Content-Type: application/json
     "email": "lb486@hdm-stuttgart.de",
     "firstName": "Lars",
     "lastName": "Bauscher",
-    "registerDate": "2024-03-08T12:00:00.000Z"
+    "registerDate": "2024-03-08T12:00:00.000Z",
+    "friends": null
 }
 
 ###
@@ -72,7 +73,7 @@ Content-Type: application/json
     "email": "jeol@gmail.com",
     "firstName": "Hänger",
     "lastName": "123",
-    "registerDate": "2024-03-08T12:00:00.000Z"
+    "registerDate": "2024-03-08T12:00:00.000Z",
 }
 
 ###

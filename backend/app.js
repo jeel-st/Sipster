@@ -6,9 +6,9 @@ app.use(express.urlencoded({ extended: true }));
 
 const PORT = 3000
 
-const loginRouter = require('./routes/login')
-const registerRouter = require('./routes/register')
-const eventsRouter = require('./routes/events')
+const loginRouter = require('./routes/routerLogin')
+const registerRouter = require('./routes/routerRegister')
+const eventsRouter = require('./routes/routerEvents')
 
 const { connectToDB } = require('./databases/databaseMain')
 connectToDB()

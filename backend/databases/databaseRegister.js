@@ -4,8 +4,9 @@ const { isValidPassword, isValidEmail } = require('../utils/registerLogic/regist
 
 async function postUser(req){
     const { username, tagline, password, email, firstName, lastName, registerDate } = req.body
-    const personalData = { username, tagline, password, email, firstName, lastName, registerDate }
-
+    const friends = null
+    const personalData = { username, tagline, password, email, firstName, lastName, registerDate, friends }
+    
     const usernameFinder = await database.getDB().collection("personalInformation").findOne({ username: username, tagline: tagline })
     const emailFinder = await database.getDB().collection("personalInformation").findOne({ email: email })
 
