@@ -14,12 +14,16 @@ export default function LoginPage() {
     const { login, isLoggedIn, token, loginError } = useLogin();
 
     const handleLogin = () => {
+
         if (username === '' || password === '') {
             console.log("Bitte geben Sie Benutzernamen und Passwort ein.");
             return;
         } else {
             console.log("Es wurden Anmeldedaten eingegeben")
-            login(username, password);
+            login(username, password, () => {
+                router.navigate('(tabs)')
+                console.log("Login erfolgreich")
+            });
         }
     };
 
@@ -47,7 +51,10 @@ export default function LoginPage() {
                 {/* Sign Up */}
                 <View className={styles.spaceText}>
                     <Text className={styles.H3Text} onPress={() => router.navigate('routes/RegisterPage')}> {'>>'} Sign Up</Text>
-                    {loginError ? <Text>{loginError}</Text> : null}
+                </View>
+
+                <View className={styles.spaceText}>
+                    {loginError ? <Text className="text-red-500 text-center">{loginError}</Text> : null}
                 </View>
 
             </View>
