@@ -1,3 +1,4 @@
 import { useEventDisplay } from "./useEventDisplay";
+import { classNames } from "./classNames";
 
-export { useEventDisplay }
+export { useEventDisplay, classNames }

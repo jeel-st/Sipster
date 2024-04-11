@@ -1,81 +1,60 @@
-import { View, Text, Pressable, ScrollView, StatusBar, TextInput } from 'react-native'
+import { View, Text, StyleSheet, Pressable } from 'react-native'
+import { SafeAreaView } from 'react-native-safe-area-context'
+import { classNames } from '../utils'
 import { FontAwesome } from '@expo/vector-icons'
+import React from 'react'
 import { styles } from '../constants'
-import { FriendsTab } from '../components'
-import { router } from 'expo-router'
-import Animated, {
-    useSharedValue,
-    withTiming,
-    withDelay,
-  } from 'react-native-reanimated';
-import React, { useRef, useState } from 'react'
 
-export default function FriendsPage() {
-    const width = useSharedValue(40)
-    const opacity = useSharedValue(0)
-    const isActive = useSharedValue(false)
-    const inputRef = useRef(null);
-    const [searchText, setSearchText] = useState('');
-
-    const startAnimation = () => {
-        if(isActive.value){
-            opacity.value = withTiming(0)
-            width.value = withTiming(40)
-            isActive.value = false
-        }
-        else{
-            opacity.value = withDelay(100, withTiming(1));
-            width.value = withTiming(300)
-            isActive.value = true
-        }
-    }
-
+export default function FriendsPageNew() {
     return (
-        <View className="flex-1" style={{ backgroundColor: styles.Colors.primary }} >
-            <View className="flex-initial mx-6">
-                {/* Handy Header */}
-                <View style={{ height: StatusBar.currentHeight }} />
+        <SafeAreaView className={classNames(
+            'flex-1',
+            'bg-primary',
+        )}>
+            {/* Header Buttons*/}
+            <View className={classNames(
+                'flex-row justify-between items-center',
+                'px-4',
+                'w-full h-16',
+            )}>
+                {/* Back Button*/}
+                <Pressable>
+                    <View className={classNames(
+                        'justify-center items-center',
+                        'pr-1',
+                        'w-10 h-10',
+                        'rounded-xl bg-secondary',
+                    )}>
+                        <FontAwesome
+                            name="chevron-left"
+                            size={24}
+                            color="white"
+                        />
+                    </View>
+                </Pressable>
 
-                <View className="flex-1 flex-row mt-4 justify-between">
-                    {/* Back Button */}
-                    <Pressable onPress={() => router.back()}
-                        className="w-10 h-10 rounded-xl justify-center items-center"
-                        style={{ backgroundColor: styles.Colors.primary }}>
-                        <View className="rounded-xl">
-                            <FontAwesome name="chevron-left" size={24} color="white" />
-                        </View>
-                    </Pressable>
-
-                    {/* Search Button */}
-                    <Pressable onPress={startAnimation}
-                        className="z-20 w-10 h-10 rounded-full justify-center items-center"
-                        style={{ backgroundColor: styles.Colors.secondary }}>
-                        <View className="rounded-xl">
-                            <FontAwesome name="search" size={24} color="white" />
-                        </View>
-                    </Pressable>
-                    <Animated.View
-                        className="absolute h-10 rounded-full justify-center items-center top-0 right-0 w-80"
-                        style={{ backgroundColor: styles.Colors.secondary, width: width, opacity: opacity }}>
-                        <TextInput
-                            ref={inputRef}
-                            placeholder="Search Friends"
-                            placeholderTextColor={styles.Colors.white}
-                            clearButtonMode="always"
-                            onChangeText={(value) => {setSearchText(value) }}
-                            className="flex-1 h-10 text-white self-start ml-4 w-80" />
-                    </Animated.View>
-                </View>
-
-                {/* Branding */}
-                <View className="mt-12">
-                    <Text className={styles.brandingText}>Friends</Text>
-                </View>
-
-                {/* Friends Tab */}
-                <FriendsTab searchText={searchText}/>
+                {/* Search Button*/}
+                <Pressable>
+                    <View className={classNames(
+                        'justify-center items-center',
+                        'w-10 h-10',
+                        'rounded-xl bg-secondary',
+                    )}>
+                        <FontAwesome
+                            name="search"
+                            size={24}
+                            color="white"
+                        />
+                    </View>
+                </Pressable>
             </View>
-        </View>
 
+            {/* Heading Text*/}
+            <View className={classNames(
+                'px-4 pt-4'
+            )}>
+                <Text className={styles.brandingText}>Friends</Text>
+            </View>
+        </SafeAreaView>
     )
 }
