@@ -8,10 +8,10 @@ export function useLogin() {
     const [token, setToken] = useState(null);
     const [loginError, setLoginError] = useState('');
 
-    const login = (username, password, onLoginSuccess) => {
+    const login = (username, password, setLoginError, onLoginSuccess) => {
         axios.get(`http://85.215.71.124/login/${username}/${password}/2010`)
             .then(response => {
-                console.log("Es wurde ein passender Benutzer gefunden")
+                console.log("A suitable user has been found.")
                 setToken(response.data.token);
                 setIsLoggedIn(true);
                 setLoginError('');
@@ -21,9 +21,9 @@ export function useLogin() {
                 console.log(error);
                 setIsLoggedIn(false);
                 setToken(null);
-                setLoginError('Login fehlgeschlagen. Bitte überprüfen Sie Ihre Anmeldeinformationen.');
+                setLoginError('Login failed. Please check your login information.');
             })
     }
 
-    return { login, isLoggedIn, token, loginError };
+    return { login, isLoggedIn, token, loginError, setLoginError };
 }
