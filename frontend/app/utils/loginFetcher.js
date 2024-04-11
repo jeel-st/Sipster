@@ -6,7 +6,7 @@ export function useLogin() {
     const [token, setToken] = useState(null);
     const [loginError, setLoginError] = useState('');
 
-    const login = (username, password, navigateToRegisterPage) => {
+    const login = (username, password) => {
         axios.post('http://85.215.71.124/login', { username, password })
             .then(response => {
                 setToken(response.data.token);

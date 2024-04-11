@@ -14,7 +14,13 @@ export default function LoginPage() {
     const { login, isLoggedIn, token, loginError } = useLogin();
 
     const handleLogin = () => {
-        login(username, password, () => navigation.navigate('RegisterPage'));
+        if (username === '' || password === '') {
+            console.log("Bitte geben Sie Benutzernamen und Passwort ein.");
+            return;
+        } else {
+            console.log("Es wurden Anmeldedaten eingegeben")
+            login(username, password);
+        }
     };
 
 
@@ -31,16 +37,16 @@ export default function LoginPage() {
                 </View>
 
                 {/* input fields */}
-                <TextField placeholder="  username" value={username} onChangeText={setUsername} />
+                <TextField placeholder="  username" value={username} onChangeText={(text) => setUsername(text)} />
 
-                <TextField placeholder="  password" value={password} onChangeText={setPassword} secureTextEntry={true} />
+                <TextField placeholder="  password" value={password} onChangeText={(text) => setPassword(text)} secureTextEntry={true} />
 
                 {/* Button */}
-                <Button title="let's party" navigation={() => router.navigate('(tabs)')} />
+                <Button title="let's party" navigation={() => handleLogin()} />
 
                 {/* Sign Up */}
                 <View className={styles.spaceText}>
-                    <Text className={styles.H3Text} onPress={handleLogin}> {'>>'} Sign Up</Text>
+                    <Text className={styles.H3Text} onPress={() => router.navigate('routes/RegisterPage')}> {'>>'} Sign Up</Text>
                     {loginError ? <Text>{loginError}</Text> : null}
                 </View>
 
