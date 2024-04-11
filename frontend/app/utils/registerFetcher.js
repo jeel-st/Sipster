@@ -6,12 +6,18 @@ export function useRegister() {
     const [registerError, setRegisterError] = useState('');
 
     const register = (username, email, password, onRegisterSuccess) => {
-        // Senden eines POST-Requests mit axios
-        axios.post('http://85.215.71.124/register', {
-            username,
-            email,
-            password
-        })
+
+        axios.post('http://85.215.71.124/register',
+            {
+                username: username,
+                email: email,
+                password: password
+            },
+            {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
             .then(response => {
                 console.log("The user was successfully created", response.data);
                 setRegisterError('');
@@ -20,11 +26,10 @@ export function useRegister() {
                 }
             })
             .catch(error => {
-                // Fehlerbehandlung hier innerhalb des catch-Blocks
-                if (error.response && error.response.status === 400) {
+                console.error("Error during registration:", error);
+                if (error.response && error.response.status === 404) {
                     setRegisterError('This user already exists.');
                 } else {
-                    // Dies fängt auch Netzwerkfehler oder andere Statuscodes
                     setRegisterError('Register failed. Please check your register information.');
                 }
             });

@@ -26,7 +26,7 @@ export default function RegisterPage() {
             return;
         }
 
-        await register(username, email, password, () => {
+        register(username, email, password, () => {
             console.log("Registration successful.");
             router.navigate('routes/LoginPage');
         });
