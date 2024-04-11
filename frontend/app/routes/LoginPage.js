@@ -43,7 +43,7 @@ export default function LoginPage() {
                 {/* input fields */}
                 <TextField placeholder="  username" value={username} onChangeText={(text) => { setUsername(text); setLoginError('') }} />
 
-                <TextField placeholder="  password" value={password} onChangeText={(text) => { setPassword(text); setLoginError(''); }} secureTextEntry={true} />
+                <TextField placeholder="  password" value={password} onChangeText={(text) => { setPassword(text); setLoginError(''); }} hideText={'true'} />
 
                 {/* Button */}
                 <Button title="let's party" navigation={() => handleLogin()} />

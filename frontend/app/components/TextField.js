@@ -1,7 +1,7 @@
 import { View, TextInput } from 'react-native'
 import { styles } from '../constants';
 
-export default function ({ placeholder, onChangeText, value }) {
+export default function ({ placeholder, onChangeText, value, hideText }) {
 
     return (
         <View>
@@ -12,6 +12,7 @@ export default function ({ placeholder, onChangeText, value }) {
                 onChangeText={onChangeText}
                 value={value}
                 autoCapitalize="none"
+                secureTextEntry={hideText}
             />
         </View>
     )
