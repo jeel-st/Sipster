@@ -1,8 +1,9 @@
-import { View, Text, SafeAreaView, StatusBar } from 'react-native'
+import { View, Text, SafeAreaView, StatusBar, Pressable } from 'react-native'
 import { Games, Friends, Events } from '../components'
 import { styles } from '../constants'
 import React from 'react'
 import { useEventDisplay } from '../utils';
+import { router } from 'expo-router'
 
 export default function HomePage() {
     const { displayEvent, handleEventSelection } = useEventDisplay();
@@ -31,9 +32,12 @@ export default function HomePage() {
                 <Events onSelectEvent={handleEventSelection} selectedEvent={displayEvent} />
 
                 {/* Friends */}
-                <View className={styles.spaceText}>
+                <Pressable className={styles.spaceText}
+                    onPress={() => router.navigate({
+                        pathname: "/routes/FriendsPage"
+                    })}>
                     <Text className={styles.categoryText}>friends</Text>
-                </View>
+                </Pressable>
                 <Friends />
             </View>
         </SafeAreaView>
