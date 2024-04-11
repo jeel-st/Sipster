@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import axios from 'axios';
-import router, { useNavigation } from 'expo-router'
 
 
 export function useLogin() {

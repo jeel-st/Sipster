@@ -16,7 +16,7 @@ export default function LoginPage() {
     const handleLogin = () => {
 
         if (username === '' || password === '') {
-            setLoginError('Please enter your user name and password.')
+            setLoginError('Please enter your username and password.')
             return;
         } else {
             console.log("Login details have been entered.")
@@ -43,7 +43,7 @@ export default function LoginPage() {
                 {/* input fields */}
                 <TextField placeholder="  username" value={username} onChangeText={(text) => { setUsername(text); setLoginError('') }} />
 
-                <TextField placeholder="  password" value={password} onChangeText={(text) => { setPassword(text); setLoginError(''); }} hideText={'true'} />
+                <TextField placeholder="  password" value={password} onChangeText={(text) => { setPassword(text); setLoginError(''); }} hideText={true} />
 
                 {/* Button */}
                 <Button title="let's party" navigation={() => handleLogin()} />
