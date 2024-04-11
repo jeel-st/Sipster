@@ -8,7 +8,7 @@ export function useLogin() {
     const [loginError, setLoginError] = useState('');
 
     const login = (username, password, setLoginError, onLoginSuccess) => {
-        axios.get(`http://85.215.71.124/login/${username}/${password}/2010`)
+        axios.get(`http://85.215.71.124/login/${username}/${password}`)
             .then(response => {
                 console.log("A suitable user has been found.")
                 setToken(response.data.token);
