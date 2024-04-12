@@ -1,60 +1,47 @@
-import { View, Text, StyleSheet, Pressable } from 'react-native'
+import { View, Text } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { classNames } from '../utils'
-import { FontAwesome } from '@expo/vector-icons'
-import React from 'react'
-import { styles } from '../constants'
+import { styles, friends, friendsReceived, friendsSent } from '../constants'
+import { FriendsHeaderButtons, FriendsCategorys, FriendsContent } from '../components'
+import React, { useState } from 'react';
 
 export default function FriendsPageNew() {
+    const [selectedTab, setSelectedTab] = useState(0)
+    const [viewFriends, setViewFriends] = useState(friends)
+
+    const handleTabChange = (tabIndex) => {
+        setSelectedTab(tabIndex);
+
+        switch (tabIndex) {
+            case 0:
+                setViewFriends(friends)
+                break
+            case 1:
+                setViewFriends(friendsReceived)
+                break
+            case 2:
+                setViewFriends(friendsSent)
+        }
+      };
+
     return (
         <SafeAreaView className={classNames(
             'flex-1',
             'bg-primary',
         )}>
             {/* Header Buttons*/}
-            <View className={classNames(
-                'flex-row justify-between items-center',
-                'px-4',
-                'w-full h-16',
-            )}>
-                {/* Back Button*/}
-                <Pressable>
-                    <View className={classNames(
-                        'justify-center items-center',
-                        'pr-1',
-                        'w-10 h-10',
-                        'rounded-xl bg-secondary',
-                    )}>
-                        <FontAwesome
-                            name="chevron-left"
-                            size={24}
-                            color="white"
-                        />
-                    </View>
-                </Pressable>
-
-                {/* Search Button*/}
-                <Pressable>
-                    <View className={classNames(
-                        'justify-center items-center',
-                        'w-10 h-10',
-                        'rounded-xl bg-secondary',
-                    )}>
-                        <FontAwesome
-                            name="search"
-                            size={24}
-                            color="white"
-                        />
-                    </View>
-                </Pressable>
-            </View>
+            <FriendsHeaderButtons/>
 
             {/* Heading Text*/}
-            <View className={classNames(
-                'px-4 pt-4'
-            )}>
+            <View className={classNames( 'px-4 pt-4' )}>
                 <Text className={styles.brandingText}>Friends</Text>
             </View>
+
+            {/* Friends Categorys*/}
+            <FriendsCategorys selectedTab={selectedTab} onTabChange={handleTabChange}/>
+
+            {/* Friends Content*/}
+            <FriendsContent friends={viewFriends}/>
         </SafeAreaView>
     )
 }
