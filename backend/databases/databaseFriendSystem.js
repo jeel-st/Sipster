@@ -1,6 +1,7 @@
 const database = require("./databaseMain")
 
 async function postFriendRequest(req){
+    const invitations = await database.getDB().collection("invitations")
     const {fromSipsterID, toSipsterID} = req.body
     const timestamp = Date.now(); 
     const sendAt = new Date(timestamp).toISOString();
@@ -9,7 +10,7 @@ async function postFriendRequest(req){
     const userData = {fromSipsterID, toSipsterID, sendAt}
 
     try{
-        await database.getDB().collection("invitations").insertOne(userData)
+        await invitations.insertOne(userData)
     }catch(err){
         console.log(err)
         throw new Error("Database disconnected")
@@ -17,26 +18,28 @@ async function postFriendRequest(req){
 }
 
 async function acceptFriendRequest(req){
+    const personalInformation = await database.getDB().collection("personalInformation")
+    const invitations = await database.getDB().collection("invitations")
     const fromSipsterID = req.params.fromSipsterID
     const toSipsterID = req.params.toSipsterID
 
-    const fromUser = await database.getDB().collection("personalInformation").findOne({ username: fromSipsterID });
-    const toUser = await database.getDB().collection("personalInformation").findOne({ username: toSipsterID });
+    const fromUser = await personalInformation.findOne({ username: fromSipsterID });
+    const toUser = await personalInformation.findOne({ username: toSipsterID });
     
     if (!fromUser || !toUser) {
         throw new Error("Benutzer nicht gefunden");
     }
 
-    await database.getDB().collection("personalInformation").updateOne(
+    await personalInformation.updateOne(
         { username: fromSipsterID },
         { $addToSet: { friends: toUser.username } }
     );
     
-    await database.getDB().collection("personalInformation").updateOne(
+    await personalInformation.updateOne(
         { username: toSipsterID },
         { $addToSet: { friends: fromUser.username } }
     );
-    let result = await database.getDB().collection("invitations").deleteOne({fromSipsterID: fromSipsterID, toSipsterID: toSipsterID})
+    let result = await invitations.deleteOne({fromSipsterID: fromSipsterID, toSipsterID: toSipsterID})
 
     if (result.deletedCount === 0) {
         throw new Error("Anfrage nicht gefunden")
@@ -47,17 +50,20 @@ async function acceptFriendRequest(req){
 }
 
 async function declineFriendRequest(req){
+    const invitations = await database.getDB().collection("invitations")
+    const personalInformation = await database.getDB().collection("personalInformation")
+
     const fromSipsterID = req.params.fromSipsterID
     const toSipsterID = req.params.toSipsterID
 
-    const fromUser = await database.getDB().collection("personalInformation").findOne({ username: fromSipsterID });
-    const toUser = await database.getDB().collection("personalInformation").findOne({ username: toSipsterID });
+    const fromUser = await personalInformation.findOne({ username: fromSipsterID });
+    const toUser = await personalInformation.findOne({ username: toSipsterID });
     
     if (!fromUser || !toUser) {
         throw new Error("Benutzer nicht gefunden");
     }
 
-    let result = await database.getDB().collection("invitations").deleteOne({fromSipsterID: fromSipsterID, toSipsterID: toSipsterID})
+    let result = await invitations.deleteOne({fromSipsterID: fromSipsterID, toSipsterID: toSipsterID})
 
     if (result.deletedCount === 0) {
         throw new Error("Anfrage nicht gefunden")
@@ -68,15 +74,16 @@ async function declineFriendRequest(req){
 }
 
 async function removeFriend(req){
+    const personalInformation = await database.getDB().collection("personalInformation")
     try {
         const { fromSipsterID, toSipsterID } = req.params;
 
-        await database.getDB().collection("personalInformation").updateOne(
+        await personalInformation.updateOne(
             { username: fromSipsterID },
             { $pull: { friends: toSipsterID } }
         )
 
-        await database.getDB().collection("personalInformation").updateOne(
+        await personalInformation.updateOne(
             { username: toSipsterID },
             { $pull: { friends: fromSipsterID } }
         )
@@ -89,13 +96,13 @@ async function removeFriend(req){
     }
 }
 
-async function getFriendList(req){
+async function getFriendNameList(req){
+    const personalInformation = await database.getDB().collection("personalInformation")
     const username = req.params.username
 
     try {
         
-        const user = await database.getDB().collection("personalInformation").findOne({ username });
-
+        const user = await personalInformation.findOne({ username });
 
         if (!user) {
             throw new Error("Benutzer nicht gefunden");
@@ -111,10 +118,47 @@ async function getFriendList(req){
     }
 }
 
+async function getFriendList(req){
+    const personalInformation = await database.getDB().collection("personalInformation")
+    const username = req.params.username;
+    let friendList = new Array();
+
+    try {
+
+        const user = await personalInformation.findOne({ username });
+
+        if (!user) {
+            throw new Error("Benutzer nicht gefunden");
+        }
+
+        const friendNameList = user.friends;
+
+        if (!friendNameList){
+            return [];
+        }else {
+            let i = 0
+            for (const friend of friendNameList){
+                friendList.push(await personalInformation.findOne({username: friend}))
+                console.log("Hier bin ich")
+                console.log(friendList[i].username)
+                i++;
+            }
+
+        }
+
+        return friendList
+
+    }catch (error) {
+        throw new Error("Something went wrong while getting friend list");
+    }
+
+}
+
 module.exports = {
     postFriendRequest,
     acceptFriendRequest,
     declineFriendRequest,
     removeFriend,
+    getFriendNameList,
     getFriendList
 }

@@ -1,9 +1,10 @@
 const { MongoClient } = require("mongodb")
-const dbe = require("../databases/databaseEvents")
-const dbl = require("../databases/databaseLogin")
-const dbr = require("../databases/databaseRegister")
-const dbf = require("../databases/databaseFriendSystem")
-const dbp = require("../databases/databaseProfilePicture")
+const dbEvents = require("../databases/databaseEvents")
+const dbLogin = require("../databases/databaseLogin")
+const dbRegister = require("../databases/databaseRegister")
+const dbFriendSystem = require("../databases/databaseFriendSystem")
+const dbProfilePicture = require("../databases/databaseProfilePicture")
+const dbUser = require("../databases/databaseUser")
 
 let db = null;
 const url = `mongodb://localhost:27017/`;
@@ -19,51 +20,59 @@ async function connectToDB() {
 }
 
 async function postEvents(req){
-    return await dbe.postEvents(req)
+    return await dbEvents.postEvents(req)
 }
 
 async function deleteEvents(req){
-    return await dbe.deleteEvents(req)
+    return await dbEvents.deleteEvents(req)
 }
 
 async function getEvents(){
-    return await dbe.getEvents()
+    return await dbEvents.getEvents()
 }
 
 async function getLoginData(req){
-    return await dbl.getLoginData(req)
+    return await dbLogin.getLoginData(req)
 }
 
 async function postUser(req){
-    return await dbr.postUser(req)
+    return await dbRegister.postUser(req)
 }
 
 async function deleteUser(req){
-    return await dbr.deleteUser(req)
+    return await dbRegister.deleteUser(req)
 }
 
 async function postFriendRequest(req){
-    return await dbf.postFriendRequest(req)
+    return await dbFriendSystem.postFriendRequest(req)
 }
 
 async function acceptFriendRequest(req){
-    return await dbf.acceptFriendRequest(req)
+    return await dbFriendSystem.acceptFriendRequest(req)
 }
 
 async function declineFriendRequest(req){
-    return await dbf.declineFriendRequest(req)
+    return await dbFriendSystem.declineFriendRequest(req)
 }
 
 async function removeFriend(req){
-    return await dbf.removeFriend(req)
+    return await dbFriendSystem.removeFriend(req)
 }
 
 async function getFriendList(req){
-    return await dbf.getFriendList(req)
+    return await dbFriendSystem.getFriendList(req)
 }
 
 async function uploadProfilePicture(req){
-    return await dbp.uploadProfilePicture(req)
+    return await dbProfilePicture.uploadProfilePicture(req)
+}
+
+async function getUserData(req){
+    return await dbUser.getUserData(req)
+}
+
+async function postNewUsername(req){
+    return await dbUser.postNewUsername(req)
 }
 
 function getDB() {
@@ -87,3 +96,5 @@ exports.declineFriendRequest = declineFriendRequest
 exports.removeFriend = removeFriend
 exports.getFriendList = getFriendList
 exports.uploadProfilePicture = uploadProfilePicture
+exports.getUserData = getUserData
+exports.postNewUsername = postNewUsername

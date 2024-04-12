@@ -38,9 +38,9 @@ async function deleteFriendRequest(req, res){
     }
 }
 
-async function getFriendList(req, res) {
+async function getFriendNameList(req, res) {
     try {
-        const friendList = await database.getFriendList(req)
+        const friendList = await database.getFriendNameList(req)
 
         if (friendList.length == 0) {
             res.status(204).send("You have no friends yet...")
@@ -52,8 +52,23 @@ async function getFriendList(req, res) {
     }
 }
 
+async function getFriendList(req, res) {
+    try {
+        const friendList = await database.getFriendList(req)
+
+        if (friendList.length == 0) {
+            res.status(204).send("You have no Friends yet...")
+        } else {
+            res.send(friendList)
+        }
+    } catch (err) {
+        res.status(404).send("Something went wrong " + err)
+    }
+}
+
 module.exports = {
     postFriendRequest,
     deleteFriendRequest,
+    getFriendNameList,
     getFriendList
 }
