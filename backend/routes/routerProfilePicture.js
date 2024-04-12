@@ -19,16 +19,7 @@ const storage = multer.diskStorage({
     }
 });
 
-const upload = multer({
-    storage: storage,
-    fileFilter: function (req, file, cb) {
-        
-        if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
-            return cb(new Error('Only jpeg and png files are allowed!'), false);
-        }
-        cb(null, true);
-    }
-}).single('imageUpload');
+const upload = multer({storage: storage})
 
 router.post("/", upload.single('image'), profilePictureController.uploadProfilePicture)
 
