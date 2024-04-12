@@ -3,8 +3,10 @@ const { isValidPassword, isValidEmail } = require('../utils/registerLogic/regist
 
 
 async function postUser(req){
-    const { username, password, email, firstName, lastName, registerDate } = req.body
+    const { username, password, email, firstName, lastName} = req.body
     const friends = null
+    const timestamp = Date.now()
+    const registerDate = new Date(timestamp).toISOString();
     const personalData = { username, password, email, firstName, lastName, registerDate, friends }
     
     const usernameFinder = await database.getDB().collection("personalInformation").findOne({ username: username})
