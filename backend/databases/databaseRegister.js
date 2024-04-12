@@ -1,5 +1,5 @@
 const database = require("./databaseMain")
-const { isValidPassword, isValidEmail } = require('../utils/registerLogic/registerPatterns')
+const { isValidPassword, isValidEmail, encryptPassword } = require('../utils/registerLogic/registerPatterns')
 
 
 async function postUser(req){
@@ -7,7 +7,12 @@ async function postUser(req){
     const friends = null
     const timestamp = Date.now()
     const registerDate = new Date(timestamp).toISOString();
-    const personalData = { username, password, email, firstName, lastName, registerDate, friends }
+
+    encryptedPasswordAndSalt = await encryptPassword(password)
+    encryptedPassword = encryptedPasswordAndSalt[0]
+    salt = encryptedPasswordAndSalt[1]
+    
+    const personalData = { username, encryptedPassword, salt, email, firstName, lastName, registerDate, friends }
     
     const usernameFinder = await database.getDB().collection("personalInformation").findOne({ username: username})
     const emailFinder = await database.getDB().collection("personalInformation").findOne({ email: email })
@@ -21,6 +26,7 @@ async function postUser(req){
             } else if (emailFinder) {
                 return "Duplicate Email"
             } else {
+                
                 await database.getDB().collection('personalInformation').insertOne(personalData)
                 return "Success!"
             }

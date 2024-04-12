@@ -1,19 +1,35 @@
-const database = require("./databaseMain")
+const database = require("./databaseMain");
+const { encryptPasswordWithSalt } = require('../utils/registerLogic/registerPatterns');
 
-async function getLoginData(req){
-    const username = req.params.username
-    const password = req.params.password
+async function getLoginData(req) {
+    const username = req.params.username;
+    const password = req.params.password;
+    const collectionData = await database.getDB().collection("personalInformation");
 
-    const result = await database.getDB().collection("personalInformation").findOne({username, password})
-    if (result) {
+    const user = await collectionData.findOne({ username });
+    if (!user) {
+        throw new Error("Benutzer nicht gefunden!");
+    }
 
-        return(true)
+    try {
+        let salt = user.salt;
+        let encryptedPassword = await encryptPasswordWithSalt(salt, password);
 
-    } else {
-        throw new Error("Ungültige Anmeldedaten.")
+        const result = await collectionData.findOne({ username, encryptedPassword });
+
+        if (result) {
+
+            return true;
+
+        } else {
+            throw new Error("Ungültige Anmeldedaten.");
+        }
+    } catch (error) {
+        console.error(error);
+        throw new Error("Ein Fehler ist aufgetreten.");
     }
 }
 
 module.exports = {
     getLoginData
-}
+};
