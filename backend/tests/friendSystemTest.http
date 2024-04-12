@@ -12,6 +12,18 @@ Content-Type: application/json
 
 ###
 
-DELETE {{host}}/friends/gamsa/jeel HTTP/1.1
+DELETE {{host}}/friends/gamsa/jeel?status=true HTTP/1.1
+
+###
+
+DELETE {{host}}/friends/gamsa/jeel?status=false HTTP/1.1
+
+###
+
+DELETE {{host}}/friends/gamsa/jeel?remove=true
+
+###
+
+GET {{host}}/friends/gamsa
 
 ###

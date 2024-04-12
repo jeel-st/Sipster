@@ -16,19 +16,105 @@ async function postFriendRequest(req){
     }
 }
 
-async function deleteFriendRequest(req){
+async function acceptFriendRequest(req){
     const fromSipsterID = req.params.fromSipsterID
     const toSipsterID = req.params.toSipsterID
 
+    const fromUser = await database.getDB().collection("personalInformation").findOne({ username: fromSipsterID });
+    const toUser = await database.getDB().collection("personalInformation").findOne({ username: toSipsterID });
+    
+    if (!fromUser || !toUser) {
+        throw new Error("Benutzer nicht gefunden");
+    }
+
+    await database.getDB().collection("personalInformation").updateOne(
+        { username: fromSipsterID },
+        { $addToSet: { friends: toUser.username } }
+    );
+    
+    await database.getDB().collection("personalInformation").updateOne(
+        { username: toSipsterID },
+        { $addToSet: { friends: fromUser.username } }
+    );
     let result = await database.getDB().collection("invitations").deleteOne({fromSipsterID: fromSipsterID, toSipsterID: toSipsterID})
+
     if (result.deletedCount === 0) {
         throw new Error("Anfrage nicht gefunden")
     } else {
+
         return("Anfrage erfolgreich gelöscht")
+    }
+}
+
+async function declineFriendRequest(req){
+    const fromSipsterID = req.params.fromSipsterID
+    const toSipsterID = req.params.toSipsterID
+
+    const fromUser = await database.getDB().collection("personalInformation").findOne({ username: fromSipsterID });
+    const toUser = await database.getDB().collection("personalInformation").findOne({ username: toSipsterID });
+    
+    if (!fromUser || !toUser) {
+        throw new Error("Benutzer nicht gefunden");
+    }
+
+    let result = await database.getDB().collection("invitations").deleteOne({fromSipsterID: fromSipsterID, toSipsterID: toSipsterID})
+
+    if (result.deletedCount === 0) {
+        throw new Error("Anfrage nicht gefunden")
+    } else {
+
+        return("Anfrage erfolgreich gelöscht")
+    }
+}
+
+async function removeFriend(req){
+    try {
+        const { fromSipsterID, toSipsterID } = req.params;
+
+        await database.getDB().collection("personalInformation").updateOne(
+            { username: fromSipsterID },
+            { $pull: { friends: toSipsterID } }
+        )
+
+        await database.getDB().collection("personalInformation").updateOne(
+            { username: toSipsterID },
+            { $pull: { friends: fromSipsterID } }
+        )
+
+        return "Friend removed successfully"
+    } catch (error) {
+        
+        console.error(error);
+        throw new Error("An error occurred while removing friend")
+    }
+}
+
+async function getFriendList(req){
+    const username = req.params.username
+
+    try {
+        
+        const user = await database.getDB().collection("personalInformation").findOne({ username });
+
+
+        if (!user) {
+            throw new Error("Benutzer nicht gefunden");
+        }
+
+        const friendList = user.friends || [];
+
+        return friendList;
+    } catch (error) {
+        
+        console.error(error);
+        throw new Error("Something went wrong while getting friend list");
     }
 }
 
 module.exports = {
     postFriendRequest,
-    deleteFriendRequest
+    acceptFriendRequest,
+    declineFriendRequest,
+    removeFriend,
+    getFriendList
 }
