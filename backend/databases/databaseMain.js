@@ -3,6 +3,7 @@ const dbe = require("../databases/databaseEvents")
 const dbl = require("../databases/databaseLogin")
 const dbr = require("../databases/databaseRegister")
 const dbf = require("../databases/databaseFriendSystem")
+const dbp = require("../databases/databaseProfilePicture")
 
 let db = null;
 const url = `mongodb://localhost:27017/`;
@@ -61,6 +62,10 @@ async function getFriendList(req){
     return await dbf.getFriendList(req)
 }
 
+async function uploadProfilePicture(req){
+    return await dbp.uploadProfilePicture(req)
+}
+
 function getDB() {
     return db
 }
@@ -81,3 +86,4 @@ exports.acceptFriendRequest = acceptFriendRequest
 exports.declineFriendRequest = declineFriendRequest
 exports.removeFriend = removeFriend
 exports.getFriendList = getFriendList
+exports.uploadProfilePicture = uploadProfilePicture
