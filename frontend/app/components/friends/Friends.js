@@ -1,5 +1,5 @@
 import { ScrollView } from 'react-native'
-import { friends } from '../constants'
+import { friends } from '../../constants'
 import FriendCard from './FriendCard'
 import React from 'react'
 

@@ -1,5 +1,5 @@
 import { View, Text, Image, Pressable } from 'react-native'
-import { styles } from '../constants'
+import { styles } from '../../constants'
 import { router } from 'expo-router'
 import React from 'react'
 

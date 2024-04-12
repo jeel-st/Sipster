@@ -1,5 +1,5 @@
 import { View, Text, Pressable } from 'react-native'
-import { styles } from '../constants'
+import { styles } from '../../constants'
 import React from 'react'
 
 export default function FriendsTabButton({ title, isSelected, onClick }) {

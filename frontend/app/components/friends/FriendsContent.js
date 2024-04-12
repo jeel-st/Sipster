@@ -1,5 +1,5 @@
 import { View, Text, ScrollView } from 'react-native'
-import { classNames } from '../utils'
+import { classNames } from '../../utils'
 import FriendsContainer from './FriendsContainer'
 import React from 'react'
 

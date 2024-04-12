@@ -1,10 +1,10 @@
 import { View, Pressable, TextInput, Keyboard } from 'react-native'
 import { FontAwesome } from '@expo/vector-icons'
-import { classNames } from '../utils'
+import { classNames } from '../../utils'
 import React, { useRef, useState } from 'react'
 import { router } from 'expo-router'
 import Animated, { useSharedValue, withTiming } from 'react-native-reanimated'
-import { styles } from '../constants'
+import { styles } from '../../constants'
 
 export default function FriendsHeaderButtons({onSearchTextChange}) {
     const inputRef = useRef(null);
