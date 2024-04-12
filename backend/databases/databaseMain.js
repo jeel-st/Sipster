@@ -45,8 +45,20 @@ async function postFriendRequest(req){
     return await dbf.postFriendRequest(req)
 }
 
-async function deleteFriendRequest(req){
-    return await dbf.deleteFriendRequest(req)
+async function acceptFriendRequest(req){
+    return await dbf.acceptFriendRequest(req)
+}
+
+async function declineFriendRequest(req){
+    return await dbf.declineFriendRequest(req)
+}
+
+async function removeFriend(req){
+    return await dbf.removeFriend(req)
+}
+
+async function getFriendList(req){
+    return await dbf.getFriendList(req)
 }
 
 function getDB() {
@@ -65,4 +77,7 @@ exports.getLoginData = getLoginData
 exports.postUser = postUser
 exports.deleteUser = deleteUser
 exports.postFriendRequest = postFriendRequest
-exports.deleteFriendRequest = deleteFriendRequest
+exports.acceptFriendRequest = acceptFriendRequest
+exports.declineFriendRequest = declineFriendRequest
+exports.removeFriend = removeFriend
+exports.getFriendList = getFriendList
