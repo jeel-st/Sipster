@@ -6,8 +6,14 @@ import { FriendsHeaderButtons, FriendsCategorys, FriendsContent } from '../compo
 import React, { useState } from 'react';
 
 export default function FriendsPageNew() {
+    const [searchText, setSearchText] = useState('');
     const [selectedTab, setSelectedTab] = useState(0)
     const [viewFriends, setViewFriends] = useState(friends)
+    const [filterFriends, setFilterFriends] = useState(friends)
+
+    const handleSearchTextChange = (text) => {
+        setSearchText(text);
+    };
 
     const handleTabChange = (tabIndex) => {
         setSelectedTab(tabIndex);
@@ -22,7 +28,7 @@ export default function FriendsPageNew() {
             case 2:
                 setViewFriends(friendsSent)
         }
-      };
+    };
 
     return (
         <SafeAreaView className={classNames(
@@ -30,18 +36,18 @@ export default function FriendsPageNew() {
             'bg-primary',
         )}>
             {/* Header Buttons*/}
-            <FriendsHeaderButtons/>
+            <FriendsHeaderButtons onSearchTextChange={handleSearchTextChange} />
 
             {/* Heading Text*/}
-            <View className={classNames( 'px-4 pt-4' )}>
+            <View className={classNames('px-4 pt-4')}>
                 <Text className={styles.brandingText}>Friends</Text>
             </View>
 
             {/* Friends Categorys*/}
-            <FriendsCategorys selectedTab={selectedTab} onTabChange={handleTabChange}/>
+            <FriendsCategorys selectedTab={selectedTab} onTabChange={handleTabChange} />
 
             {/* Friends Content*/}
-            <FriendsContent friends={viewFriends}/>
+            <FriendsContent friends={viewFriends} searchText={searchText} />
         </SafeAreaView>
     )
 }
