@@ -13,7 +13,12 @@ async function getUserData(req) {
     return userData;
 }
 async function postNewUsername(req){
-    const {username, newUsername} = req.body
+    const {username, newUsername} = req.params
+    const personalInformation = await database.getDB().collection("personalInformation")
+    const filter = {username: username}
+    const update = {$set: {username: newUsername}}
+
+    await personalInformation.updateOne(filter, update)
 
 }
 
