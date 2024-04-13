@@ -3,6 +3,8 @@ import { classNames } from '../../utils'
 import FriendsContainer from './FriendsContainer'
 import React, { useEffect, useState } from 'react'
 import { AntDesign } from '@expo/vector-icons';
+import { Avatar, Center, NativeBaseProvider, Skeleton, VStack } from "native-base";
+import { styles } from '../../constants';
 
 export default function FriendsContent({ friends, searchText }) {
     if (!friends) return (<View>
@@ -26,7 +28,24 @@ export default function FriendsContent({ friends, searchText }) {
         }
     }, [searchText])
 
+    const Example = () => {
+        return <Center w="100%" className="mt-[15px]">
+            <VStack w="100%" maxW="400" borderWidth="0" space={8} overflow="hidden" rounded="md" _dark={{
+                borderColor: "coolGray.500"
+            }} _light={{
+                borderColor: "coolGray.200"
+            }}>
+                <Skeleton h="81" rounded="81" startColor={styles.Colors.primary} endColor={styles.Colors.secondary}/>
+                <Skeleton h="81" rounded="81" startColor={styles.Colors.primary} endColor={styles.Colors.secondary}/>
+                <Skeleton h="81" rounded="81" startColor={styles.Colors.primary} endColor={styles.Colors.secondary}/>
+                <Skeleton h="81" rounded="81" startColor={styles.Colors.primary} endColor={styles.Colors.secondary}/>
+                <Skeleton h="81" rounded="81" startColor={styles.Colors.primary} endColor={styles.Colors.secondary}/>
+            </VStack>
+        </Center>;
+    };
+
     return (
+        <NativeBaseProvider>
         <View className={classNames(
             'px-4 pt-4 space-y-3',
         )}>
@@ -55,6 +74,9 @@ export default function FriendsContent({ friends, searchText }) {
 
             {/* Friends Container ScrollView*/}
             <ScrollView showsVerticalScrollIndicator={false}>
+
+                {filteredFriends.length <= 0 && Example()}
+
                 {/* Added Friends*/}
                 {
                     filteredFriends.map((friend, index) =>
@@ -70,5 +92,6 @@ export default function FriendsContent({ friends, searchText }) {
             </ScrollView>
 
         </View>
+        </NativeBaseProvider>
     )
 }
