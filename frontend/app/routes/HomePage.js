@@ -1,12 +1,14 @@
 import { View, Text, SafeAreaView, StatusBar, Pressable } from 'react-native'
 import { Games, Friends, Events } from '../components'
 import { styles } from '../constants'
-import React from 'react'
 import { useEventDisplay } from '../utils';
 import { router } from 'expo-router'
+import useUser from '../utils/userFetcher';
+import React from 'react'
 
 export default function HomePage() {
     const { displayEvent, handleEventSelection } = useEventDisplay();
+    const user = useUser();
 
     return (
         <SafeAreaView className="flex-1" style={{ backgroundColor: styles.Colors.primary }}>
@@ -38,7 +40,10 @@ export default function HomePage() {
                     })}>
                     <Text className={styles.categoryText}>friends</Text>
                 </Pressable>
-                <Friends />
+                {
+                    user && (<Friends friends={user.friends} />)
+                }
+
             </View>
         </SafeAreaView>
     )

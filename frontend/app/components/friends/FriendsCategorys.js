@@ -1,4 +1,4 @@
-import { View, Text } from 'react-native'
+import { View } from 'react-native'
 import { classNames } from '../../utils'
 import FriendsTabButton from './FriendsTabButton'
 import React from 'react';

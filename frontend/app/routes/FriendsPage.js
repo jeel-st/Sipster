@@ -1,15 +1,17 @@
-import { View, Text } from 'react-native'
+import { View, Text, TouchableWithoutFeedback, Keyboard } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { classNames } from '../utils'
-import { styles, friends, friendsReceived, friendsSent } from '../constants'
+import { styles } from '../constants'
 import { FriendsHeaderButtons, FriendsCategorys, FriendsContent } from '../components'
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import useUser from '../utils/userFetcher'
 
-export default function FriendsPageNew() {
+export default function FriendsPage() {
+    const user = useUser();
+
     const [searchText, setSearchText] = useState('');
     const [selectedTab, setSelectedTab] = useState(0)
-    const [viewFriends, setViewFriends] = useState(friends)
-    const [filterFriends, setFilterFriends] = useState(friends)
+    const [viewFriends, setViewFriends] = useState(null)
 
     const handleSearchTextChange = (text) => {
         setSearchText(text);
@@ -20,34 +22,46 @@ export default function FriendsPageNew() {
 
         switch (tabIndex) {
             case 0:
-                setViewFriends(friends)
+                setViewFriends(user.friends)
                 break
             case 1:
-                setViewFriends(friendsReceived)
+                setViewFriends(user.friends)
                 break
             case 2:
-                setViewFriends(friendsSent)
+                setViewFriends(user.friends)
         }
     };
 
+    useEffect(() => {
+        if (user) {
+            setViewFriends(user.friends);
+        }
+    }, [user]);
+
     return (
-        <SafeAreaView className={classNames(
-            'flex-1',
-            'bg-primary',
-        )}>
-            {/* Header Buttons*/}
-            <FriendsHeaderButtons onSearchTextChange={handleSearchTextChange} />
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            <SafeAreaView className={classNames(
+                'flex-1',
+                'bg-primary',
+            )}>
+                {user && (
+                <>
+                    {/* Header Buttons*/}
+                    <FriendsHeaderButtons onSearchTextChange={handleSearchTextChange} />
 
-            {/* Heading Text*/}
-            <View className={classNames('px-4 pt-4')}>
-                <Text className={styles.brandingText}>Friends</Text>
-            </View>
+                    {/* Heading Text*/}
+                    <View className={classNames('px-4 pt-4')}>
+                        <Text className={styles.brandingText}>Friends</Text>
+                    </View>
 
-            {/* Friends Categorys*/}
-            <FriendsCategorys selectedTab={selectedTab} onTabChange={handleTabChange} />
+                    {/* Friends Categorys*/}
+                    <FriendsCategorys selectedTab={selectedTab} onTabChange={handleTabChange} />
 
-            {/* Friends Content*/}
-            <FriendsContent friends={viewFriends} searchText={searchText} />
-        </SafeAreaView>
+                    {/* Friends Content*/}
+                    <FriendsContent friends={viewFriends} searchText={searchText} />
+                </>
+            )}
+            </SafeAreaView>
+        </TouchableWithoutFeedback>
     )
 }
