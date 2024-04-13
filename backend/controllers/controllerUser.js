@@ -3,8 +3,8 @@ const database = require('../databases/databaseMain')
 
 async function getUserData(req, res) {
     try {
-        const userDataFinder = await database.getUserData(req)
-        res.send(true)
+        const userData = await database.getUserData(req)
+        res.send(userData)
     }catch (err){
         console.error(err)
         res.status(404).send("User not found");

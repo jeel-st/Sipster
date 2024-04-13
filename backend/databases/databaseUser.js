@@ -1,19 +1,20 @@
 const database = require("./databaseMain")
 
 async function getUserData(req) {
-    const username = req.body
+    const username = req.params.username
     const personalInformation = await database.getDB().collection("personalInformation")
 
     const userData = await personalInformation.findOne({username})
 
-    if (!username){
+    if (!userData){
         console.log("An error occured" )
         throw new Error("There was no User found with that username!")
     }
     return userData;
 }
-async function postNewUsername(username, newUsername){
-    return username;
+async function postNewUsername(req){
+    const {username, newUsername} = req.body
+
 }
 
 module.exports = {
