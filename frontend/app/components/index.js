@@ -11,5 +11,9 @@ import FriendsTabButton from './friends/FriendsTabButton';
 import FriendsContainer from './friends/FriendsContainer';
 import FriendsHeaderButtons from './friends/FriendsHeaderButtons';
 import FriendsContent from './friends/FriendsContent';
+import ProfileHeaderButtons from './ProfileHeaderButtons';
+import ProfileCard from './ProfileCard';
 
-export { Games, GameCard, Friends, FriendCard, Events, EventCard, EventInfoCard, TagCard, FriendsCategorys , FriendsTabButton, FriendsContainer, FriendsHeaderButtons, FriendsContent }
+export { Games, GameCard, Friends, FriendCard, Events, EventCard, EventInfoCard,
+     TagCard, FriendsCategorys , FriendsTabButton, FriendsContainer, FriendsHeaderButtons,
+      FriendsContent, ProfileHeaderButtons, ProfileCard }

@@ -6,6 +6,7 @@ import TextField from '../components/TextField'
 import { router } from 'expo-router'
 import { styles } from '../constants'
 import { useLogin } from '../utils/loginFetcher';
+import { storeUser } from '../utils/userFetcher'
 
 export default function LoginPage() {
 
@@ -36,7 +37,10 @@ export default function LoginPage() {
                 <TextField placeholder="  password" value={password} onChangeText={setPassword} secureTextEntry={true} />
 
                 {/* Button */}
-                <Button title="let's party" navigation={() => router.navigate('(tabs)')} />
+                <Button title="let's party" navigation={async () => {
+                    await storeUser("gamsa")
+                    router.navigate('(tabs)')
+                }} />
 
                 {/* Sign Up */}
                 <View className={styles.spaceText}>

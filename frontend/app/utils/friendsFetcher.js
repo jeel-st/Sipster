@@ -1,31 +1,26 @@
-import Relationship from '../entitys/relationship'
+import axios from "axios"
+import Friend from "../entitys/friend"
 
-function loadFriends(user) {
-    const relationships = loadRelationsships(user)
+export async function fetchFriendsData(username) {
+    try {
+        const response = await axios.get(`http://85.215.71.124/friends/${username}`)
+        console.log("[fetchFriendsData] fetch friends successfully")
 
-    const { friendsPending, friendsIncoming, friendsConfirmed } = []
-
-    relationships.forEach(relationship => {
-        if (relationship.status === 'pending') {
-            friendsPending.push(relationship)
-        } else if (relationship.status === 'incoming') {
-            friendsIncoming.push(relationship)
-        } else if (relationship.status === 'confirmed') {
-            friendsConfirmed.push(relationship)
-        }
-    })
-
-    user.friendsPending = friendsPending
-    user.friendsIncoming = friendsIncoming
-    user.friendsConfirmed = friendsConfirmed
+        const friends = await createFriends(response.data)
+        return friends
+    } catch (error) {
+        console.log(error)
+        throw error
+    }
 }
 
-async function loadRelationsships(user) {
-    const reponse = axios.get(`http://85.215.71.124/relations/${user.sipsterID}`).catch(error => console.log(error))
+function createFriends(friendsData) {
+    friendsData = friendMultiplier(friendsData)
 
-    const relationships = response.data.map(relationshipData => {
-        return new Relationship(relationshipData.fromSipsterID, relationshipData.toSipsterID, relationshipData.status)
-    });
+    const friends = friendsData.map(friend => new Friend(friend.firstName, friend.lastName, friend.registerDate, friend.username))
+    return friends
+}
 
-    return relationships
+function friendMultiplier(friendsData){
+    return friendsData.concat(friendsData, friendsData)
 }
