@@ -13,8 +13,8 @@ async function uploadProfilePicture(req, res) {
         form.on('file', (name, file) => {
             const originalFilename = file.originalFilename;
             const fileExtension = path.extname(originalFilename);
-            const username = req.body.username || req.fields.username
-            const newFilename = `Picture${username}`;
+            //const username = req.body.username || req.fields.username
+            const newFilename = `Picture${file.originalFilename}`;
          
             const filePath = path.join(uploadOptions.uploadDir, newFilename);
             if (fs.existsSync(filePath)) {
@@ -30,14 +30,14 @@ async function uploadProfilePicture(req, res) {
               console.log('Datei erfolgreich umbenannt');
             });
          
-            uploadedFilename = newFilename;
+            //uploadedFilename = newFilename;
         })
         form.on('error', () => { })
         form.on('close',async () => {
             //const uploadPicture = await database.uploadProfilePicture(req);
             
         })
-        form.parse(req)
+        await form.parse(req)
 
         //const uploadPicture = await database.uploadProfilePicture(req)
 
