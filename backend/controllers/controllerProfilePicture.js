@@ -35,13 +35,13 @@ async function uploadProfilePicture(req, res) {
         form.on('error', () => { })
         form.on('close',async () => {
             //const uploadPicture = await database.uploadProfilePicture(req);
-            
+            res.send("Success!")
         })
-        await form.parse(req)
+        form.parse(req)
 
         //const uploadPicture = await database.uploadProfilePicture(req)
 
-        res.send("Success!")
+        
     } catch (err) {
         console.log("Fehler beim Hochladen:" + err)
         res.status(500).send("Es ist ein Fehler aufgetreten" + err)
