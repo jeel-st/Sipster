@@ -4,6 +4,7 @@ import { FontAwesome } from '@expo/vector-icons'
 import { router, useLocalSearchParams } from 'expo-router'
 import { LinearGradient } from 'expo-linear-gradient'
 import React from 'react'
+import User from '../entitys/user'
 
 const { width, height } = Dimensions.get('window');
 

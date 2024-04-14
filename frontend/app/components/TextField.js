@@ -1,15 +1,16 @@
 import { View, TextInput } from 'react-native'
+import { styles } from '../constants';
 
-const TextField = ({ placeholder }) => {
+export default function ({ placeholder }) {
+
     return (
         <View>
             <TextInput
-                className="h-10 m-1 rounded-xl shadow-xl shadow-black w-64"
-                style={{ backgroundColor: '#343434' }}
+                className="h-10 m-1 rounded-xl shadow-md shadow-black w-64"
+                style={{ backgroundColor: styles.Colors.secondary }}
                 placeholder={placeholder}
+                autoCapitalize="none"
             />
         </View>
     )
 }
-
-export default TextField;
