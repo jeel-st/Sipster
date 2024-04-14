@@ -39,7 +39,7 @@ async function uploadProfilePicture(req, res) {
         })
         form.parse(req)
 
-        const uploadPicture = await database.uploadProfilePicture(req)
+        //const uploadPicture = await database.uploadProfilePicture(req)
 
         res.send("Success!")
     } catch (err) {
