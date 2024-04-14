@@ -5,7 +5,7 @@ async function uploadProfilePicture(req){
         
         const username = req.body.username
 
-        const imagePath = req.file.path
+        const imagePath = `../profilePictures/Picture${username}`
 
         const result = await database.getDB().collection('personalInformation').updateOne(
             {username: username},
