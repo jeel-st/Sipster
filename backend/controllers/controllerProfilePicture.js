@@ -18,7 +18,7 @@ async function uploadProfilePicture(req, res) {
          
             const filePath = path.join(uploadOptions.uploadDir, newFilename);
             if (fs.existsSync(filePath)) {
-                // Löschen der vorhandenen Datei
+                
                 fs.unlinkSync(filePath);
                 console.log(`Die vorhandene Datei "${filePath}" wurde gelöscht.`);
             }
@@ -34,12 +34,12 @@ async function uploadProfilePicture(req, res) {
         })
         form.on('error', () => { })
         form.on('close',async () => {
-            const uploadPicture = await database.uploadProfilePicture(req);
+            //const uploadPicture = await database.uploadProfilePicture(req);
             res.send("Success!"); 
         })
         form.parse(req)
 
-        const uploadPicture = await database.uploadProfilePicture(req)
+        //const uploadPicture = await database.uploadProfilePicture(req)
 
         res.send("Success!")
     } catch (err) {
