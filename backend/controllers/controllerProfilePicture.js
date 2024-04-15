@@ -13,6 +13,7 @@ async function uploadProfilePicture(req, res) {
         
         const form = new Form(uploadOptions)
         let username
+        let fileExtensionParam
         form.on('field', (name, value)=>{
             username = value
             console.log(`value: ${value}`)
@@ -22,7 +23,7 @@ async function uploadProfilePicture(req, res) {
             
             const originalFilename = file.originalFilename;
             const fileExtension = path.extname(originalFilename);
-
+            fileExtensionParam = fileExtension
             const newFilename = `Picture${username}${fileExtension}`;
             
             const filePath = path.join(uploadOptions.uploadDir, newFilename);
@@ -44,7 +45,7 @@ async function uploadProfilePicture(req, res) {
         })
         form.on('error', () => { })
         form.on('close',async () => {
-            const uploadPicture = await database.uploadProfilePicture(username, fileExtension);
+            const uploadPicture = await database.uploadProfilePicture(username, fileExtensionParam);
             res.send("Success!")
         })
         form.parse(req)
