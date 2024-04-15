@@ -1,12 +1,10 @@
 const database = require("./databaseMain")
 
-async function uploadProfilePicture(req){
+async function uploadProfilePicture(username, fileExtension){
     try{
-        
-        const username = req.body.username
 
-        const imagePath = `../profilePictures/Picture${username}`
-
+        const imagePath = `/home/sipster/sipster/backend/profilePictures/Picture${username}${fileExtension}`
+        console.log(imagePath)
         const result = await database.getDB().collection('personalInformation').updateOne(
             {username: username},
             { $set: { profilePicture: imagePath } }

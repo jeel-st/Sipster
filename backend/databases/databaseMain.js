@@ -63,8 +63,8 @@ async function getFriendList(req){
     return await dbFriendSystem.getFriendList(req)
 }
 
-async function uploadProfilePicture(req){
-    return await dbProfilePicture.uploadProfilePicture(req)
+async function uploadProfilePicture(username, fileExtension){
+    return await dbProfilePicture.uploadProfilePicture(username, fileExtension)
 }
 
 async function getUserData(req){

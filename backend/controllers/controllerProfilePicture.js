@@ -44,7 +44,7 @@ async function uploadProfilePicture(req, res) {
         })
         form.on('error', () => { })
         form.on('close',async () => {
-            //const uploadPicture = await database.uploadProfilePicture(req);
+            const uploadPicture = await database.uploadProfilePicture(username, fileExtension);
             res.send("Success!")
         })
         form.parse(req)
