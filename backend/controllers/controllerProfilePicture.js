@@ -10,10 +10,19 @@ async function uploadProfilePicture(req, res) {
     try {
         
         const form = new Form(uploadOptions)
-        let uploadedFilename; 
         let username
-        
+        form.on('field', (name, value)=>{
+            value = username
+            console.log(`value: ${value}`)
+        })
+        res.send("Success!")
         form.on('file', (name, file) => {
+            if (!usernameSet) {
+                
+                console.log("Waiting for username to be set...")
+                return
+            }
+            
             console.log(file)
             console.log(name)
 
@@ -40,11 +49,7 @@ async function uploadProfilePicture(req, res) {
         form.on('error', () => { })
         form.on('close',async () => {
             //const uploadPicture = await database.uploadProfilePicture(req);
-            form.on('field', (name, value)=>{
-                value = username
-                console.log(`value: ${value}`)
-            })
-            res.send("Success!")
+            
         })
         form.parse(req)
 
