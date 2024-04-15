@@ -43,5 +43,6 @@ async function postNewEmail(req, res) {
 module.exports = {
     getUserData,
     postNewUsername,
-    postNewPassword
+    postNewPassword,
+    postNewEmail
 }
