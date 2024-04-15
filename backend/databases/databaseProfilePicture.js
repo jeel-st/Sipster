@@ -1,4 +1,5 @@
 const database = require("./databaseMain")
+const log = require("../logging/logger")
 
 async function uploadProfilePicture(username, fileExtension){
     try{

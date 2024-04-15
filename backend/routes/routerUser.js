@@ -1,5 +1,8 @@
 const express = require('express')
 const router = express.Router()
+const logMiddleware = require("./logMiddleware");
+
+router.use(logMiddleware);
 
 const userController = require('../controllers/controllerUser')
 const registerController = require('../controllers/controllerRegister')

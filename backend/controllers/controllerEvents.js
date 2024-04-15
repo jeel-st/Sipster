@@ -1,4 +1,5 @@
 const database = require('../databases/databaseMain')
+const log = require("../logging/logger")
 
 async function getEvents(req, res) {
     try {

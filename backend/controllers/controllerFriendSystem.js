@@ -1,11 +1,12 @@
 const database = require("../databases/databaseMain")
+const log = require("../logging/logger")
 
 async function postFriendRequest(req, res){
     try{
         const friendRequestPost = await database.postFriendRequest(req)
         res.send("Friend request was send successfully!")
     }catch(err){
-        console.log(err)
+        log.error("Database request failed! " + err)
         res.status(404).send("Something went wrong")
     }
 }
@@ -33,7 +34,7 @@ async function deleteFriendRequest(req, res){
         }
 
     }catch(err){
-        console.log(err)
+        console.error(err)
         res.status(404).send("Something went wrong " + err)
     }
 }
