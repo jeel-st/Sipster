@@ -1,7 +1,9 @@
-import { GamePage } from '../routes';
+
+import Picker from '../routes/Picker';
 
 export default function Tab() {
   return (
-    <GamePage />
-  );
+    <Picker />
+  )
+
 }
