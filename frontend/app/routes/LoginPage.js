@@ -1,8 +1,7 @@
 import { View, Text, SafeAreaView } from 'react-native'
 import { Colors } from '../constants/styles'
 import React, { useState } from 'react'
-import Button from '../components/Button'
-import TextField from '../components/TextField'
+import { Button, TextField, PopUpWindow } from '../components'
 import { router } from 'expo-router'
 import { styles } from '../constants'
 import { useLogin } from '../utils/loginFetcher';
@@ -12,12 +11,23 @@ export default function LoginPage() {
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const { login, isLoggedIn, token, loginError } = useLogin();
+    const [loginError, setLoginError] = useState('');
+    const { login, isLoggedIn, token } = useLogin();
 
     const handleLogin = () => {
-        login(username, password, () => navigation.navigate('RegisterPage'));
-    };
 
+        if (username === '' || password === '') {
+            setLoginError('Please enter your username and password.')
+            return;
+        } else {
+            console.log("Login details have been entered.")
+            login(username, password, setLoginError, () => {
+                router.navigate('(tabs)')
+                console.log("Login successful.")
+                setLoginError('')
+            });
+        }
+    };
 
     return (
         <SafeAreaView className="flex-1 items-center" style={{ backgroundColor: Colors.primary }}>
@@ -32,20 +42,21 @@ export default function LoginPage() {
                 </View>
 
                 {/* input fields */}
-                <TextField placeholder="  username" value={username} onChangeText={setUsername} />
+                <TextField placeholder="  username" value={username} onChangeText={(text) => { setUsername(text); setLoginError('') }} />
 
-                <TextField placeholder="  password" value={password} onChangeText={setPassword} secureTextEntry={true} />
+                <TextField placeholder="  password" value={password} onChangeText={(text) => { setPassword(text); setLoginError(''); }} hideText={true} />
 
                 {/* Button */}
-                <Button title="let's party" navigation={async () => {
-                    await storeUser("gamsa")
-                    router.navigate('(tabs)')
-                }} />
+                <Button title="let's party" navigation={() => handleLogin()} />
 
                 {/* Sign Up */}
                 <View className={styles.spaceText}>
-                    <Text className={styles.H3Text} onPress={handleLogin}> {'>>'} Sign Up</Text>
-                    {loginError ? <Text>{loginError}</Text> : null}
+                    <Text className={styles.H3Text} onPress={() => router.navigate('routes/RegisterPage')}> {'>>'} Sign Up</Text>
+                </View>
+
+                {/* Error Message */}
+                <View className={styles.spaceText}>
+                    {loginError ? (<Text className="text-red-500 text-center">{loginError}</Text>) : null}
                 </View>
 
             </View>

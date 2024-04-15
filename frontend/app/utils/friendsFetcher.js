@@ -17,7 +17,11 @@ export async function fetchFriendsData(username) {
 function createFriends(friendsData) {
     friendsData = friendMultiplier(friendsData)
 
-    const friends = friendsData.map(friend => new Friend(friend.firstName, friend.lastName, friend.registerDate, friend.username))
+    let friends = []
+    if(friendsData != []){
+        friends= friendsData.map(friend => new Friend(friend.firstName, friend.lastName, friend.registerDate, friend.username))
+    }
+
     return friends
 }
 
