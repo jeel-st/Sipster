@@ -1,5 +1,5 @@
 const database = require("./databaseMain")
-const { isValidPassword, isValidEmail, encryptPassword } = require('../utils/registerLogic/registerPatterns')
+const { isValidPassword, isValidEmail, encryptPassword, comparePassword, encryptPasswordWithSalt } = require('../utils/registerLogic/registerPatterns')
 const log = require("../logging/logger")
 
 
@@ -45,17 +45,33 @@ async function postUser(req){
 async function deleteUser(req){
     const username = req.params.username
     const password = req.params.password
+    const personalInformation = await database.getDB().collection("personalInformation")
     try {
-        const result = await database.getDB().collection("personalInformation").deleteOne({ username: username, password: password })
-        if (result.deletedCount === 0) {
+        const user = await personalInformation.findOne({username: username})
+        
+        if (user == null) {
             return "Benutzer nicht gefunden"
         } else {
+            const salt = user.salt;
+            const encryptedPassword = await encryptPasswordWithSalt(salt, password)
+            const result = await personalInformation.deleteOne({ username: username, encryptedPassword: encryptedPassword })
+            if (result === 0) {
+                return "Passwort für " + username + " ist inkorrekt"
+            }
+            await deleteUserFromFriends(username)
             return "Benutzer erfolgreich gelöscht"
         }
     } catch (error) {
-        console.error("Fehler beim Löschen des Benutzers:", error)
+        log.error("Fehler beim Löschen des Benutzers:", error)
         return "Interner Serverfehler"
     }
+}
+
+async function deleteUserFromFriends(usernameToRemove) {
+    const result = await database.getDB().collection("personalInformation").updateMany(
+        { friends: usernameToRemove },
+        { $pull: { friends: usernameToRemove } }
+    );
 }
 
 module.exports = {
