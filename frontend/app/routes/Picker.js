@@ -15,26 +15,26 @@ export default function Picker() {
     }, []);
 
     const pickImage = async () => {
-        let result = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ImagePicker.MediaTypeOptions.Images,
-            allowsEditing: true,
-            aspect: [3, 3],
-            quality: 1,
-        });
+        if(hasPhotoPermission){
+            try {
+                let result = await ImagePicker.launchImageLibraryAsync({
+                    mediaTypes: ImagePicker.MediaTypeOptions.Images,
+                    allowsEditing: true,
+                    aspect: [3, 3],
+                    quality: 1,
+                });
 
-        if (!result.cancelled) {
-            setImage(result.assets[0].uri);
-            await uploadProfilePicture(result.assets[0])
+                console.log(result);
+
+                if (!result.cancelled) {
+                    setImage(result.assets[0].uri);
+                    await uploadProfilePicture(result.assets[0]);
+                }
+            } catch (error) {
+                console.log("[pickImageError] ", error);
+            }
         }
     };
-
-    if (hasPhotoPermission === false) {
-        return (
-            <View style={styles.container}>
-                <Text style={styles.text}>No access to internal Storage</Text>
-            </View>
-        );
-    }
 
     return (
         <SafeAreaView style={styles.container} className="bg-primary">
