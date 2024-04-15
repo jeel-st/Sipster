@@ -8,7 +8,7 @@ const path = require('path');
 
 async function uploadProfilePicture(req, res) {
     
-    
+
     try {
         
         const form = new Form(uploadOptions)
@@ -18,25 +18,20 @@ async function uploadProfilePicture(req, res) {
             console.log(`value: ${value}`)
         })
        
-        form.on('file', (name, file) => {
-            
-
-            console.log(file)
-            console.log(name)
+        form.on('file', (name, file), async () => {
 
             const originalFilename = file.originalFilename;
             const fileExtension = path.extname(originalFilename);
 
             const newFilename = `Picture${username}${fileExtension}`;
-            const existFile = `Picture${username}`
             
             const filePath = path.join(uploadOptions.uploadDir, newFilename);
-            const existFilePath = path.join(uploadOptions.uploadDir, existFile)
-            if (fs.existsSync(existFilePath)) {
-                
-                fs.unlinkSync(existFilePath);
-                console.log(`Die vorhandene Datei "${existFilePath}" wurde gelöscht.`);
+            const pictureURL = await database.getProfilePictureURL(username)
+            console.log(filePath)
+            if (pictureURL != null){
+                await database.deleteProfilePictureURL(username)
             }
+
             fs.rename(file.path, filePath, (err) => {
               if (err) {
                 console.error('Fehler beim Umbenennen der Datei:', err);

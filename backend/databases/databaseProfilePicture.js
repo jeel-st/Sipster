@@ -9,7 +9,7 @@ async function uploadProfilePicture(req){
 
         const result = await database.getDB().collection('personalInformation').updateOne(
             {username: username},
-            { $set: { profilbild: imagePath } }
+            { $set: { profilePicture: imagePath } }
         )
 
         if (result.modifiedCount === 1) {
@@ -24,6 +24,33 @@ async function uploadProfilePicture(req){
     }
 }
 
+async function getProfilePictureURL(username){
+    const result = await database.getDB().collection('personalInformation').findOne({username})
+    return result.profilePicture
+}
+
+async function deleteProfilePictureURL(username){
+    try {
+        const result = await database.getDB().collection('personalInformation').updateOne(
+            { username: username }, 
+            { $set: { profilePicture: null } }
+        )
+        
+        if (result.modifiedCount === 1) {
+            console.log(`Profilbild für Benutzer ${username} erfolgreich gelöscht.`)
+            return "Success"
+        } else {
+            console.log(`Profilbild für Benutzer ${username} nicht gefunden.`)
+            return "User not found"
+        }
+    } catch (error) {
+        console.error("Fehler beim Löschen des Profilbilds:", error)
+        return "Error"
+    }
+
+}
 module.exports = {
-    uploadProfilePicture
+    uploadProfilePicture,
+    getProfilePictureURL,
+    deleteProfilePictureURL
 }
