@@ -67,6 +67,9 @@ async function getFriendList(req, res) {
 }
 async function getFriendRecommendations(req, res) {
     try {
+        if (req.params.input.length < 1){
+            res.status(204).send("There is not enough input to follow the request")
+        }
         const friendReccommendations = await database.getFriendRecommendations(req)
         if (friendReccommendations == 0) {
             res.status(204).send("There are no friend Reccommendations with that input...")
