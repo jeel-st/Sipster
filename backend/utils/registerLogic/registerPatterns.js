@@ -7,9 +7,10 @@ function isValidEmail(email) {
 }
 
 function isValidPassword(password) {
+    console.log(password)
 
     var passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[a-zA-Z\d!@#$%^&*]{8,20}$/
-
+    console.log(passwordPattern.test(password))
     return passwordPattern.test(password);
 }
 
