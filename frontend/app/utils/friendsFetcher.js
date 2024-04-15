@@ -15,7 +15,7 @@ export async function fetchFriendsData(username) {
 }
 
 function createFriends(friendsData) {
-    friendsData = friendMultiplier(friendsData)
+    //friendsData = friendMultiplier(friendsData)
 
     let friends = []
     if(friendsData != []){
