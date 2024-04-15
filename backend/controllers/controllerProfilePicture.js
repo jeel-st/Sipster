@@ -8,11 +8,17 @@ const path = require('path');
 
 async function uploadProfilePicture(req, res) {
     try {
-        console.log(req.params.username)
-        console.log(req.body.username)
+        
         const form = new Form(uploadOptions)
         let uploadedFilename; 
+        form.on('field', (name, value)=>{
+            console.log(`name: ${name}`)
+            console.log(`value: ${value}`)
+        })
         form.on('file', (name, file) => {
+            console.log(file)
+            console.log(name)
+
             const originalFilename = file.originalFilename;
             const fileExtension = path.extname(originalFilename);
             const username = req.file
