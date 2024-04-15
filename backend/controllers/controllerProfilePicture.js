@@ -28,9 +28,10 @@ async function uploadProfilePicture(req, res) {
             const fileExtension = path.extname(originalFilename);
 
             const newFilename = `Picture${username}${fileExtension}`;
-            const existFilePath = `Picture${username}`
+            const existFile = `Picture${username}`
             
             const filePath = path.join(uploadOptions.uploadDir, newFilename);
+            const existFilePath = path.join(uploadOptions.uploadDir, existFile)
             if (fs.existsSync(existFilePath)) {
                 
                 fs.unlinkSync(existFilePath);
