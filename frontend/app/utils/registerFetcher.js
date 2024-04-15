@@ -5,13 +5,15 @@ import axios from 'axios';
 export function useRegister() {
     const [registerError, setRegisterError] = useState('');
 
-    const register = (username, email, password, onRegisterSuccess) => {
+    const register = (firstName, lastName, username, email, password, onRegisterSuccess) => {
 
         axios.post('http://85.215.71.124/register',
             {
-                username: username,
-                email: email,
-                password: password
+                "username": username,
+                "email": email,
+                "password": password,
+                "firstName": firstName,
+                "lastName": lastName
             },
             {
                 headers: {
@@ -27,7 +29,8 @@ export function useRegister() {
             })
             .catch(error => {
                 console.error("Error during registration:", error);
-                if (error.response && error.response.status === 404) {
+                console.log(error)
+                if (error.response && error.response.status === "404") {
                     setRegisterError('This user already exists.');
                 } else {
                     setRegisterError('Register failed. Please check your register information.');

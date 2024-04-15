@@ -10,6 +10,8 @@ import { useRegister } from '../utils/registerFetcher'
 
 export default function RegisterPage() {
 
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -26,7 +28,7 @@ export default function RegisterPage() {
             return;
         }
 
-        register(username, email, password, () => {
+        register(firstName, lastName, username, email, password, () => {
             console.log("Registration successful.");
             router.navigate('routes/LoginPage');
         });
@@ -45,6 +47,10 @@ export default function RegisterPage() {
                 </View>
 
                 {/* input fields */}
+                <TextField placeholder="  firstName" value={firstName} onChangeText={(text) => { setFirstName(text); setRegisterError('') }} />
+
+                <TextField placeholder="  lastName" value={lastName} onChangeText={(text) => { setLastName(text); setRegisterError('') }} />
+
                 <TextField placeholder="  username" value={username} onChangeText={(text) => { setUsername(text); setRegisterError('') }} />
 
                 <TextField placeholder="  email" value={email} onChangeText={(text) => { setEmail(text); setRegisterError('') }} />
