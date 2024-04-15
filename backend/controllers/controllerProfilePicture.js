@@ -19,38 +19,38 @@ async function uploadProfilePicture(req, res) {
             console.log(`value: ${value}`)
         })
        
-        await form.on('file', async (name, file) => {
-            
+        form.on('file', async (name, file) => {
+
             const originalFilename = file.originalFilename;
             const fileExtension = path.extname(originalFilename);
-            fileExtensionParam = fileExtension
+            fileExtensionParam = fileExtension;
             const newFilename = `Picture${username}${fileExtension}`;
-            
-            const filePath = path.join(uploadOptions.uploadDir, newFilename);
-            const pictureURL = await database.getProfilePictureURL(username)
-            console.log(filePath)
 
-            if (pictureURL != null){
+            const filePath = path.join(uploadOptions.uploadDir, newFilename);
+            const pictureURL = await database.getProfilePictureURL(username);
+            console.log(filePath);
+
+            if (pictureURL != null) {
                 fs.unlink(pictureURL, (err) => {
                     if (err) {
                         console.error('Fehler beim Löschen des Bildes aus dem Dateisystem:', err);
                         return;
                     }
                     console.log(`Bild ${pictureURL} erfolgreich gelöscht`);
-                    
-                })
-                const deleteURL = await database.deleteProfilePictureURL(username)
-                console.log("deleteURL:"+ deleteURL)
+
+                });
+                const deleteURL = await database.deleteProfilePictureURL(username);
+                console.log("deleteURL:" + deleteURL);
             }
 
             fs.rename(file.path, filePath, (err) => {
-              if (err) {
-                console.error('Fehler beim Umbenennen der Datei:', err);
-                return;
-              }
-              console.log('Datei erfolgreich umbenannt');
+                if (err) {
+                    console.error('Fehler beim Umbenennen der Datei:', err);
+                    return;
+                }
+                console.log('Datei erfolgreich umbenannt');
             });
-         
+
             //uploadedFilename = newFilename;
         })
         form.on('error', () => { })
