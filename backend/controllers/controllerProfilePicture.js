@@ -8,47 +8,59 @@ const path = require('path');
 
 async function uploadProfilePicture(req, res) {
     
-    
+
     try {
         
         const form = new Form(uploadOptions)
         let username
+        let fileExtensionParam
         form.on('field', (name, value)=>{
             username = value
             console.log(`value: ${value}`)
         })
        
-        form.on('file', (name, file) => {
-            
-
-            console.log(file)
-            console.log(name)
+        form.on('file', async (name, file) => {
 
             const originalFilename = file.originalFilename;
             const fileExtension = path.extname(originalFilename);
-
+            fileExtensionParam = fileExtension;
             const newFilename = `Picture${username}${fileExtension}`;
-            const existFilePath = `Picture${username}`
-            
+
             const filePath = path.join(uploadOptions.uploadDir, newFilename);
-            if (fs.existsSync(existFilePath)) {
-                
-                fs.unlinkSync(existFilePath);
-                console.log(`Die vorhandene Datei "${existFilePath}" wurde gelöscht.`);
+            const pictureURL = await database.getProfilePictureURL(username);
+            console.log(filePath);
+
+            if (pictureURL != null) {
+                fs.unlink(pictureURL, (err) => {
+                    if (err) {
+                        console.error('Fehler beim Löschen des Bildes aus dem Dateisystem:', err);
+                        return;
+                    }
+                    console.log(`Bild ${pictureURL} erfolgreich gelöscht`);
+
+                });
+                const deleteURL = await database.deleteProfilePictureURL(username);
+                const uploadPicture = await database.uploadProfilePicture(username, fileExtensionParam);
+                console.log("deleteURL:" + deleteURL);
+                console.log("PictureUploadWithDelete:"+uploadPicture)
+            }else{
+                const uploadPicture = await database.uploadProfilePicture(username, fileExtensionParam);
+                console.log("PictureUpload:"+uploadPicture)
             }
+
             fs.rename(file.path, filePath, (err) => {
-              if (err) {
-                console.error('Fehler beim Umbenennen der Datei:', err);
-                return;
-              }
-              console.log('Datei erfolgreich umbenannt');
+                if (err) {
+                    console.error('Fehler beim Umbenennen der Datei:', err);
+                    return;
+                }
+                console.log('Datei erfolgreich umbenannt');
             });
-         
+
             //uploadedFilename = newFilename;
         })
         form.on('error', () => { })
         form.on('close',async () => {
-            //const uploadPicture = await database.uploadProfilePicture(req);
+
             res.send("Success!")
         })
         form.parse(req)

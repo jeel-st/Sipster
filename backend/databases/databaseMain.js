@@ -79,6 +79,13 @@ async function postNewUsername(req){
     return await dbUser.postNewUsername(req)
 }
 
+async function getProfilePictureURL(username){
+    return await dbProfilePicture.getProfilePictureURL(username)
+}
+
+async function deleteProfilePictureURL(username){
+    return await dbProfilePicture.deleteProfilePictureURL(username)
+}
 function getDB() {
     return db
 }
@@ -103,3 +110,5 @@ exports.getFriendRecommendations = getFriendRecommendations
 exports.uploadProfilePicture = uploadProfilePicture
 exports.getUserData = getUserData
 exports.postNewUsername = postNewUsername
+exports.getProfilePictureURL = getProfilePictureURL
+exports.deleteProfilePictureURL = deleteProfilePictureURL
