@@ -10,11 +10,6 @@ async function uploadProfilePicture(username, fileExtension){
             { $set: { profilePicture: imagePath } }
         )
 
-        if (result.modifiedCount === 1) {
-            return 'Profilbild erfolgreich aktualisiert'
-        } else {
-            throw new Error('Benutzer nicht gefunden');
-        }
 
     }catch(err){
         console.error('Fehler beim Hochladen des Profilbildes:', err);
