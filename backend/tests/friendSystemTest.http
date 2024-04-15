@@ -1,4 +1,4 @@
-@host = http://85.215.71.124:3000
+@host = http://localhost:3000
 
 ###
 
@@ -27,3 +27,5 @@ DELETE {{host}}/friends/gamsa/jeel?remove=true
 GET {{host}}/friends/gamsa
 
 ###
+
+GET {{host}}/friends/reccommendations/l

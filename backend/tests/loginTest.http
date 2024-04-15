@@ -13,7 +13,7 @@ GET {{host}}/login/Lars/lol HTTP/1.1
 
 ###
 
-GET {{host}}/login/gamsa/joelstinkt_*100 HTTP/1.1
+GET {{host}}/login/gamsa/JoelStinkt*100 HTTP/1.1
 
 
 ###
@@ -21,3 +21,5 @@ GET {{host}}/login/gamsa/joelstinkt_*100 HTTP/1.1
 GET {{host}}/login/Crypto/crYpT123!!! HTTP/1.1
 
 ###
+
+GET {{host}}/login/juuliaeb/juuls123!E HTTP/1.1

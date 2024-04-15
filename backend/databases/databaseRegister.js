@@ -1,5 +1,6 @@
 const database = require("./databaseMain")
 const { isValidPassword, isValidEmail, encryptPassword } = require('../utils/registerLogic/registerPatterns')
+const log = require("../logging/logger")
 
 
 async function postUser(req){

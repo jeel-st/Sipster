@@ -1,0 +1,4 @@
+{"level":30,"time":1713214904495,"pid":72765,"hostname":"Lorenzs-MBP.fritz.box","msg":"Anfrage erhalten: GET /login/Lars/lol"}
+{"level":30,"time":1713214908558,"pid":72765,"hostname":"Lorenzs-MBP.fritz.box","msg":"Anfrage erhalten: GET /login/gamsa/JoelStinkt*100"}
+{"level":30,"time":1713214929706,"pid":72765,"hostname":"Lorenzs-MBP.fritz.box","msg":"Anfrage erhalten: POST /register"}
+{"level":30,"time":1713215004320,"pid":72859,"hostname":"Lorenzs-MBP.fritz.box","msg":"Anfrage erhalten: POST /register"}

@@ -1,4 +1,5 @@
 const database = require("./databaseMain")
+const log = require("../logging/logger")
 
 async function postFriendRequest(req){
     const invitations = await database.getDB().collection("invitations")
@@ -12,8 +13,7 @@ async function postFriendRequest(req){
     try{
         await invitations.insertOne(userData)
     }catch(err){
-        console.log(err)
-        throw new Error("Database disconnected")
+        throw new Error("Database disconnected" + err)
     }
 }
 
@@ -144,7 +144,6 @@ async function getFriendList(req){
             }
 
         }
-        console.log("Was ist passiert?")
         return friendList
 
     }catch (error) {
@@ -154,8 +153,21 @@ async function getFriendList(req){
 }
 
 async function getFriendRecommendations(req) {
+    try {
+    const personalInformation = await database.getDB().collection("personalInformation");
+    const input = req.params.input;
+    let friendRecommendations = [];
 
+        const regex = new RegExp(input, "i"); // "i" für Case-Insensitive-Suche
+        friendRecommendations = await personalInformation.find({ username: { $regex: regex } }).limit(15).toArray();
+
+    } catch (err) {
+        console.error("Something went wrong in the Method getFriendReccommendations() " + err)
+    }
+
+    return friendRecommendations;
 }
+
 
 module.exports = {
     postFriendRequest,

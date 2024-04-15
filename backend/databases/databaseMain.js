@@ -5,6 +5,7 @@ const dbRegister = require("../databases/databaseRegister")
 const dbFriendSystem = require("../databases/databaseFriendSystem")
 const dbProfilePicture = require("../databases/databaseProfilePicture")
 const dbUser = require("../databases/databaseUser")
+const log = require("../logging/logger")
 
 let db = null;
 const url = `mongodb://localhost:27017/`;

@@ -1,5 +1,6 @@
 const database = require("./databaseMain");
 const { encryptPasswordWithSalt } = require('../utils/registerLogic/registerPatterns');
+const log = require("../logging/logger")
 
 async function getLoginData(req) {
     const username = req.params.username;
