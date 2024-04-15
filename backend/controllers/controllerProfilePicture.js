@@ -8,7 +8,8 @@ const path = require('path');
 
 async function uploadProfilePicture(req, res) {
     try {
-        console.log(req.file)
+        console.log(req.params.username)
+        console.log(req.body.username)
         const form = new Form(uploadOptions)
         let uploadedFilename; 
         form.on('file', (name, file) => {
