@@ -14,6 +14,7 @@ async function postRegister(req, res) {
     }else if (pushingUser == "Password format false"){
         res.status(403).json(pushingUser)
     }else {
+        console.log("Something went wrong here:  " + req.params)
         res.status(404).json(pushingUser)
     }
 }
