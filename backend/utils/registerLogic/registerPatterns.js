@@ -21,15 +21,12 @@ async function encryptPassword(password) {
         .genSalt(saltRounds)
         .then(generatedSalt => {
             salt = generatedSalt;
-            console.log('Salt: ', generatedSalt)
             return bcrypt.hash(password, generatedSalt)
         })
         .then(hash => {
-            console.log('Hash: ', hash)
             encryptedPassword = hash;
         })
         .catch(err => console.error(err.message))
-    console.log('password: ' + encryptedPassword)
     return [encryptedPassword, salt]
 }
 
@@ -39,7 +36,6 @@ async function encryptPasswordWithSalt(salt, password){
     await bcrypt
         .hash(password, salt)
         .then(hash => {
-            console.log('Hash: ', hash)
             encryptedPassword = hash;
         })
         .catch(err => console.error(err.message))
