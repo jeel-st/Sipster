@@ -8,6 +8,7 @@ const path = require('path');
 
 async function uploadProfilePicture(req, res) {
     try {
+        console.log(req)
         const form = new Form(uploadOptions)
         let uploadedFilename; 
         form.on('file', (name, file) => {
@@ -15,7 +16,7 @@ async function uploadProfilePicture(req, res) {
             const fileExtension = path.extname(originalFilename);
             const username = req.body.username || req.fields.username
             const newFilename = `Picture${username}`;
-         
+            
             const filePath = path.join(uploadOptions.uploadDir, newFilename);
             if (fs.existsSync(filePath)) {
                 
