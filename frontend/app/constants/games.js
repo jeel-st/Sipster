@@ -1,5 +1,12 @@
 export const games = [
     {
+        name: "Wahrheit oder Pflicht",
+        profile: "https://images.thalia.media/03/-/3bfe01ecf5234c95acfd59d23f320489/wahrheit-oder-pflicht-die-edition-fuer-alle-ab-18-jahren-taschenbuch-emma-hegemann.jpeg",
+        playtime: "so lang du willst",
+        desc: "Es wird gewählt zwischen Wahrheit und Pflicht und dan bekommt man eine Frage oder Aufgabe die man erfüllen muss",
+        start: "'routes/RegisterPage'"
+    },
+    {
         name: "Bierpong",
         profile: "https://cdn.discordapp.com/attachments/1223359277662736476/1224823618156892253/OIG4.jpg?ex=661ee4e2&is=660c6fe2&hm=74adb0fdcafc440d645e1a53bb12b58c3839950f7670d085f997e7bf49b03896&",
         playtime: "ca. 20 min",
@@ -16,5 +23,6 @@ export const games = [
         profile: "https://cdn.discordapp.com/attachments/1223359277662736476/1224823618752483409/OIG1_1.jpg?ex=661ee4e2&is=660c6fe2&hm=5268d69ca42b0d25fbdeca5610b16a8bccd1d76b6125480f9cc72cc1ce93d62f&",
         playtime: "ca. 2 min",
         desc: "Einer kniet sich hin und macht Vogelbewegungen, der andere spuckt ihm die mische in den Mund"
-    },
+    }
+    
 ]

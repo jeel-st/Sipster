@@ -1,10 +1,11 @@
 import { View, Text, ScrollView, SafeAreaView, Pressable, Image, Dimensions } from 'react-native'
-import { styles } from '../constants'
+import { games, styles } from '../constants'
 import { FontAwesome } from '@expo/vector-icons'
 import { router, useLocalSearchParams } from 'expo-router'
 import { LinearGradient } from 'expo-linear-gradient'
 import React from 'react'
-import User from '../entitys/user'
+import Button from '../components/Button'
+
 
 const { width, height } = Dimensions.get('window');
 
@@ -48,6 +49,8 @@ export default function GamePage() {
                 <Text className="text-neutral-400 mx-4 tracking-wide">
                     {game.desc}
                 </Text>
+                {/*Schauen wie ich das mit gsme.start allgemein machen kann für alle spiele*/}
+                <Button title="let's party" navigation={() => router.navigate('routes/WoPStart')} />
             </View>
         </ScrollView>
     )
