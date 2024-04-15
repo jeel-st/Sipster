@@ -68,7 +68,7 @@ async function getFriendRecommendations(req){
 }
 
 async function uploadProfilePicture(req){
-    return await dbProfilePicture.uploadProfilePicture(req)
+    return await dbProfilePicture.uploadProfilePicture(username, fileExtension)
 }
 
 async function getUserData(req){
