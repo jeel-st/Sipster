@@ -7,10 +7,8 @@ function isValidEmail(email) {
 }
 
 function isValidPassword(password) {
-    console.log(password)
 
     var passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[a-zA-Z\d!@#$%^&*]{8,20}$/
-    console.log(passwordPattern.test(password))
     return passwordPattern.test(password);
 }
 
@@ -22,15 +20,12 @@ async function encryptPassword(password) {
         .genSalt(saltRounds)
         .then(generatedSalt => {
             salt = generatedSalt;
-            console.log('Salt: ', generatedSalt)
             return bcrypt.hash(password, generatedSalt)
         })
         .then(hash => {
-            console.log('Hash: ', hash)
             encryptedPassword = hash;
         })
         .catch(err => console.error(err.message))
-    console.log('password: ' + encryptedPassword)
     return [encryptedPassword, salt]
 }
 
@@ -40,7 +35,6 @@ async function encryptPasswordWithSalt(salt, password){
     await bcrypt
         .hash(password, salt)
         .then(hash => {
-            console.log('Hash: ', hash)
             encryptedPassword = hash;
         })
         .catch(err => console.error(err.message))
