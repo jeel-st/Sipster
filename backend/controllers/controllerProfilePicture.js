@@ -8,13 +8,13 @@ const path = require('path');
 
 async function uploadProfilePicture(req, res) {
     try {
-        console.log(req)
+        console.log(req.file)
         const form = new Form(uploadOptions)
         let uploadedFilename; 
         form.on('file', (name, file) => {
             const originalFilename = file.originalFilename;
             const fileExtension = path.extname(originalFilename);
-            const username = form.username
+            const username = req.file
             const newFilename = `Picture${username}`;
             
             const filePath = path.join(uploadOptions.uploadDir, newFilename);
