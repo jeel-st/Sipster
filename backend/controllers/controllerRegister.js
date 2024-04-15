@@ -14,7 +14,8 @@ async function postRegister(req, res) {
     }else if (pushingUser == "Password format false"){
         res.status(403).json(pushingUser)
     }else {
-        res.status(404).json(pushingUser)
+        console.log("Something went wrong here:  " + req.params)
+        res.status(404).json("Something went wrong" + pushingUser)
     }
 }
 
@@ -25,7 +26,7 @@ async function deleteRegister(req, res) {
         if(deleteUser == "Benutzer erfolgreich gelöscht"){
             res.json(deleteUser)
         }else{
-            res.status(404).json(deleteUser)
+            res.status(404).json("Something went wrong " + deleteUser)
         }
 }
 
