@@ -40,7 +40,12 @@ async function uploadProfilePicture(req, res) {
 
                 });
                 const deleteURL = await database.deleteProfilePictureURL(username);
+                const uploadPicture = await database.uploadProfilePicture(username, fileExtensionParam);
                 console.log("deleteURL:" + deleteURL);
+                console.log("PictureUploadWithDelete:"+uploadPicture)
+            }else{
+                const uploadPicture = await database.uploadProfilePicture(username, fileExtensionParam);
+                console.log("PictureUpload:"+uploadPicture)
             }
 
             fs.rename(file.path, filePath, (err) => {
@@ -56,8 +61,6 @@ async function uploadProfilePicture(req, res) {
         form.on('error', () => { })
         form.on('close',async () => {
 
-            const uploadPicture = await database.uploadProfilePicture(username, fileExtensionParam);
-            console.log("PictureUpload:"+uploadPicture)
             res.send("Success!")
         })
         form.parse(req)
