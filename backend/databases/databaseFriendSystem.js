@@ -157,18 +157,18 @@ async function getFriendList(req){
 }
 
 async function getFriendRecommendations(req) {
+    let friendRecommendations = [];
     try {
     const personalInformation = await database.getDB().collection("personalInformation");
     const input = req.params.input;
-    let friendRecommendations = [];
 
-        const regex = new RegExp(input, "i"); // "i" für Case-Insensitive-Suche
-        friendRecommendations = await personalInformation.find({ username: { $regex: regex } }).limit(15).toArray();
-
+    const regex = new RegExp(input, "i"); // "i" für Case-Insensitive-Suche
+    friendRecommendations = await personalInformation.find({ username: { $regex: regex } }).limit(15).toArray();
+    console.log(friendRecommendations)
     } catch (err) {
         console.error("Something went wrong in the Method getFriendReccommendations() " + err)
     }
-
+    console.log(friendRecommendations)
     return friendRecommendations;
 }
 
@@ -186,11 +186,10 @@ async function getInvitations(req) {
                 log.info(username + " was not found in the database!")
                 continue;
             }
-
             fromUsers.push(user)
         }
     }catch (err) {
-        
+
     }
 }
 
@@ -201,5 +200,6 @@ module.exports = {
     removeFriend,
     //getFriendNameList,
     getFriendList,
-    getFriendRecommendations
+    getFriendRecommendations,
+    getInvitations
 }
