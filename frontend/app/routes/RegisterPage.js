@@ -6,6 +6,7 @@ import TextField from '../components/TextField'
 import { router } from 'expo-router';
 import { styles } from '../constants';
 import { useRegister } from '../utils/registerFetcher'
+import SmallTextField from '../components/smallTextField'
 
 
 export default function RegisterPage() {
@@ -39,7 +40,7 @@ export default function RegisterPage() {
             <View className="mx-6 items-center">
 
                 {/* Distance */}
-                <View className="h-20 mt-20" />
+                <View className="h-4 mt-20" />
 
                 {/* Branding */}
                 <View className="mt-20 mb-5">
@@ -47,9 +48,20 @@ export default function RegisterPage() {
                 </View>
 
                 {/* input fields */}
-                <TextField placeholder="  firstName" value={firstName} onChangeText={(text) => { setFirstName(text); setRegisterError('') }} />
 
-                <TextField placeholder="  lastName" value={lastName} onChangeText={(text) => { setLastName(text); setRegisterError('') }} />
+                <View className="flex-row">
+                    <SmallTextField
+                        className="w-28"
+                        placeholder="   first name"
+                        value={firstName}
+                        onChangeText={(text) => { setFirstName(text); setRegisterError(''); }}
+                    />
+                    <SmallTextField
+                        placeholder="   last name"
+                        value={lastName}
+                        onChangeText={(text) => { setLastName(text); setRegisterError(''); }}
+                    />
+                </View>
 
                 <TextField placeholder="  username" value={username} onChangeText={(text) => { setUsername(text); setRegisterError('') }} />
 
