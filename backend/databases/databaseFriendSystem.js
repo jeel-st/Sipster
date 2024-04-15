@@ -96,7 +96,7 @@ async function removeFriend(req){
     }
 }
 
-async function getFriendNameList(req){
+/*async function getFriendNameList(req){
     const personalInformation = await database.getDB().collection("personalInformation")
     const username = req.params.username
 
@@ -116,7 +116,7 @@ async function getFriendNameList(req){
         console.error(error);
         throw new Error("Something went wrong while getting friend list");
     }
-}
+}*/
 
 async function getFriendList(req){
     const personalInformation = await database.getDB().collection("personalInformation")
@@ -138,7 +138,11 @@ async function getFriendList(req){
         }else {
             let i = 0
             for (const friend of friendNameList){
-                friendList.push(await personalInformation.findOne({username: friend}))
+                let currentFriend = await personalInformation.findOne({username: friend})
+                if (currentFriend == null) {
+                    continue;
+                }
+                friendList.push(currentFriend)
                 console.log(friendList[i].username)
                 i++;
             }
@@ -168,13 +172,32 @@ async function getFriendRecommendations(req) {
     return friendRecommendations;
 }
 
+async function getInvitations(req) {
+    try {
+        const username = req.params.username;
+        const personalInformation = await database.getDB().collection("personalInformation");
+        const invitations = await database.getDB().collection("invitations");
+        const from = invitations.find({fromUsername: username}, {username: 1}).toArray();
+        let fromUsers = [];
+        for (let username in from){
+            user = await personalInformation.findOne({username: username})
+
+            if (user == null){
+                log.info(username + " was not found in the database!")
+                continue;
+            }
+
+            fromUsers.push(user)
+        }
+    }
+}
 
 module.exports = {
     postFriendRequest,
     acceptFriendRequest,
     declineFriendRequest,
     removeFriend,
-    getFriendNameList,
+    //getFriendNameList,
     getFriendList,
     getFriendRecommendations
 }

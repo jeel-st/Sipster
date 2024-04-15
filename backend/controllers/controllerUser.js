@@ -21,8 +21,27 @@ async function postNewUsername(req, res) {
         res.status(404).send("Something went wrong")
     }
 }
+async function postNewPassword(req, res) {
+    try{
+        const postNewPassword = await database.postNewPassword(req)
+        res.send("Password was succesfully posted!")
+    }catch(err){
+        console.log(err)
+        res.status(404).send("Something went wrong")
+    }
+}
+async function postNewEmail(req, res) {
+    try{
+        const postNewEmail = await database.postNewEmail(req)
+        res.send("Email was succesfully posted!")
+    }catch(err){
+        console.log(err)
+        res.status(404).send("Something went wrong")
+    }
+}
 
 module.exports = {
     getUserData,
-    postNewUsername
+    postNewUsername,
+    postNewPassword
 }

@@ -68,6 +68,10 @@ async function getFriendRecommendations(req){
     return await dbFriendSystem.getFriendRecommendations(req);
 }
 
+async function getInvitations(req){
+    return await dbFriendSystem.getInvitations(req);
+}
+
 async function uploadProfilePicture(username, fileExtension){
     return await dbProfilePicture.uploadProfilePicture(username, fileExtension)
 }
@@ -78,6 +82,14 @@ async function getUserData(req){
 
 async function postNewUsername(req){
     return await dbUser.postNewUsername(req)
+}
+
+async function postNewPassword(req) {
+    return await dbUser.postNewPassword(req)
+}
+
+async function postNewEmail(req) {
+    return await dbUser.postNewEmail(req)
 }
 
 async function getProfilePictureURL(username){
@@ -108,8 +120,11 @@ exports.declineFriendRequest = declineFriendRequest
 exports.removeFriend = removeFriend
 exports.getFriendList = getFriendList
 exports.getFriendRecommendations = getFriendRecommendations
+exports.getInvitations = getInvitations
 exports.uploadProfilePicture = uploadProfilePicture
 exports.getUserData = getUserData
+exports.postNewEmail = postNewEmail
+exports.postNewPassword = postNewPassword
 exports.postNewUsername = postNewUsername
 exports.getProfilePictureURL = getProfilePictureURL
 exports.deleteProfilePictureURL = deleteProfilePictureURL

@@ -78,6 +78,20 @@ async function getFriendRecommendations(req, res) {
             res.send(friendReccommendations)
         }
     }catch (err) {
+        console.log("Something went wrong in this file")
+        res.status(404).send("Something went wrong " + err) 
+    }
+}
+
+async function getInvitations(req, res) {
+    try {
+        const invitations = await database.getInvitations(req)
+        if (invitations == null) {
+            res.status(204).send("There are no invitations for that username...")
+        }else {
+            res.send(invitations)
+        }
+    }catch (err) {
         res.status(404).send("Something went wrong " + err) 
     }
 }
@@ -87,5 +101,6 @@ module.exports = {
     deleteFriendRequest,
     getFriendNameList,
     getFriendList,
-    getFriendRecommendations
+    getFriendRecommendations,
+    getInvitations
 }
