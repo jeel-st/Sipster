@@ -6,6 +6,7 @@ import { LinearGradient } from 'expo-linear-gradient'
 import React from 'react'
 import Button from '../components/Button'
 
+
 const { width, height } = Dimensions.get('window');
 
 export default function GamePage() {

@@ -1,4 +1,4 @@
-@host = http://localhost:3000
+@host = http://85.215.71.124
 
 ###
 
@@ -75,5 +75,13 @@ Content-Type: application/json
 ###
 
 GET {{host}}/events HTTP/1.1
+
+###
+
+DELETE {{host}}/events/06.07/MediaNight/ab 17 Uhr/Vaihingen • 7 Apr 2024 HTTP/1.1
+
+###
+
+DELETE {{host}}/events/13.06/Straussi II/ab 19 Uhr/Vaihingen • 7 Apr 2024 HTTP/1.1
 
 ###

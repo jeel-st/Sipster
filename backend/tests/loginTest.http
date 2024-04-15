@@ -3,21 +3,21 @@
 
 ###
 
-GET {{host}}/login/jeel/larsstinkt_*100/0909 HTTP/1.1
+GET {{host}}/login/jeel/larsstinkt_*100 HTTP/1.1
 
 
 ###
 
-GET {{host}}/login/Lars/lol/1 HTTP/1.1
+GET {{host}}/login/Lars/lol HTTP/1.1
 
 
 ###
 
-GET {{host}}/login/gamsa/joelstinkt_*100/2020 HTTP/1.1
+GET {{host}}/login/gamsa/joelstinkt_*100 HTTP/1.1
 
 
 ###
 
-GET {{host}}/
+GET {{host}}/login/Crypto/crYpT123!!! HTTP/1.1
 
 ###

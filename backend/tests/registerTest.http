@@ -7,12 +7,11 @@ Content-Type: application/json
 
 {
     "username": "gamsa",
-    "tagline": "2010",
     "password": "lolichbinLars!12",
     "email": "larsstinkt@web.de",
     "firstName": "Lars",
     "lastName": "Gerigk",
-    "registerDate": "2024-04-09T12:00:00.000Z"
+    "friends": "null"
 }
 
 ###
@@ -22,12 +21,11 @@ Content-Type: application/json
 
 {
     "username": "jöl",
-    "tagline": "2010",
     "password": "lolichbinJoel1!",
     "email": "js486@hdm-stuttgart.de",
     "firstName": "Joel",
     "lastName": "Starkov",
-    "registerDate": "2024-03-08T12:00:00.000Z"
+    "friends": "null"
 }
 
 ###
@@ -37,12 +35,11 @@ Content-Type: application/json
 
 {
     "username": "Crypto",
-    "tagline": "1111",
     "password": "crYpT123!!!",
     "email": "lb486@hdm-stuttgart.de",
     "firstName": "Lars",
     "lastName": "Bauscher",
-    "registerDate": "2024-03-08T12:00:00.000Z"
+    "friends": null
 }
 
 ###
@@ -52,12 +49,11 @@ Content-Type: application/json
 
 {
     "username": "lolol",
-    "tagline": "1010",
     "password": "1nMMsjf!!2!",
     "email": "abcde12345",
     "firstName": "Hänger",
     "lastName": "123",
-    "registerDate": "2024-03-08T12:00:00.000Z"
+    "friends": "null"
 }
 
 ###
@@ -67,16 +63,15 @@ Content-Type: application/json
 
 {
     "username": "lolol",
-    "tagline": "1010",
     "password": "123456789",
     "email": "jeol@gmail.com",
     "firstName": "Hänger",
     "lastName": "123",
-    "registerDate": "2024-03-08T12:00:00.000Z"
+    "friends": "null"
 }
 
 ###
 
-DELETE {{host}}/register/Crypto/1111 HTTP/1.1
+DELETE {{host}}/register/Crypto/crYpT123!!! HTTP/1.1
 
 ###
