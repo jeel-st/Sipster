@@ -39,7 +39,8 @@ async function uploadProfilePicture(req, res) {
                     console.log(`Bild ${pictureURL} erfolgreich gelöscht`);
                     
                 })
-                await database.deleteProfilePictureURL(username)
+                const deleteURL = await database.deleteProfilePictureURL(username)
+                console.log("deleteURL:"+ deleteURL)
             }
 
             fs.rename(file.path, filePath, (err) => {
@@ -54,7 +55,9 @@ async function uploadProfilePicture(req, res) {
         })
         form.on('error', () => { })
         form.on('close',async () => {
+
             const uploadPicture = await database.uploadProfilePicture(username, fileExtensionParam);
+            console.log("PictureUpload:"+uploadPicture)
             res.send("Success!")
         })
         form.parse(req)
