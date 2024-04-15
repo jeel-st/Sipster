@@ -18,8 +18,8 @@ async function uploadProfilePicture(req, res) {
             console.log(`value: ${value}`)
         })
        
-        form.on('file', (name, file), async () => {
-
+        form.on('file', async (name, file) => {
+            
             const originalFilename = file.originalFilename;
             const fileExtension = path.extname(originalFilename);
 
