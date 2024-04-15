@@ -26,13 +26,15 @@ async function uploadProfilePicture(req, res) {
 
             const originalFilename = file.originalFilename;
             const fileExtension = path.extname(originalFilename);
+
             const newFilename = `Picture${username}${fileExtension}`;
+            const existFilePath = `Picture${username}`
             
             const filePath = path.join(uploadOptions.uploadDir, newFilename);
-            if (fs.existsSync(filePath)) {
+            if (fs.existsSync(existFilePath)) {
                 
-                fs.unlinkSync(filePath);
-                console.log(`Die vorhandene Datei "${filePath}" wurde gelöscht.`);
+                fs.unlinkSync(existFilePath);
+                console.log(`Die vorhandene Datei "${existFilePath}" wurde gelöscht.`);
             }
             fs.rename(file.path, filePath, (err) => {
               if (err) {
