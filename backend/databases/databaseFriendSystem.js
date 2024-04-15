@@ -189,6 +189,8 @@ async function getInvitations(req) {
 
             fromUsers.push(user)
         }
+    }catch (err) {
+        
     }
 }
 
