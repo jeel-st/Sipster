@@ -65,10 +65,23 @@ async function getFriendList(req, res) {
         res.status(404).send("Something went wrong " + err)
     }
 }
+async function getFriendRecommendations(req, res) {
+    try {
+        const friendReccommendations = await database.getFriendRecommendations(req)
+        if (friendReccommendations == 0) {
+            res.status(204).send("There are no friend Reccommendations with that input...")
+        }else {
+            res.send(friendReccommendations)
+        }
+    }catch (err) {
+        res.status(404).send("Something went wrong " + err) 
+    }
+}
 
 module.exports = {
     postFriendRequest,
     deleteFriendRequest,
     getFriendNameList,
-    getFriendList
+    getFriendList,
+    getFriendRecommendations
 }
