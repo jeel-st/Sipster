@@ -139,18 +139,21 @@ async function getFriendList(req){
             let i = 0
             for (const friend of friendNameList){
                 friendList.push(await personalInformation.findOne({username: friend}))
-                console.log("Hier bin ich")
                 console.log(friendList[i].username)
                 i++;
             }
 
         }
-
+        console.log("Was ist passiert?")
         return friendList
 
     }catch (error) {
         throw new Error("Something went wrong while getting friend list");
     }
+
+}
+
+async function getFriendRecommendations(req) {
 
 }
 
@@ -160,5 +163,6 @@ module.exports = {
     declineFriendRequest,
     removeFriend,
     getFriendNameList,
-    getFriendList
+    getFriendList,
+    getFriendRecommendations
 }

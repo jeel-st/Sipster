@@ -63,6 +63,10 @@ async function getFriendList(req){
     return await dbFriendSystem.getFriendList(req)
 }
 
+async function getFriendRecommendations(req){
+    return await dbFriendSystem.getFriendRecommendations(req);
+}
+
 async function uploadProfilePicture(req){
     return await dbProfilePicture.uploadProfilePicture(req)
 }
@@ -95,6 +99,7 @@ exports.acceptFriendRequest = acceptFriendRequest
 exports.declineFriendRequest = declineFriendRequest
 exports.removeFriend = removeFriend
 exports.getFriendList = getFriendList
+exports.getFriendRecommendations = getFriendRecommendations
 exports.uploadProfilePicture = uploadProfilePicture
 exports.getUserData = getUserData
 exports.postNewUsername = postNewUsername
