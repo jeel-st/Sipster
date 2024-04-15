@@ -31,7 +31,14 @@ async function uploadProfilePicture(req, res) {
             console.log(filePath)
 
             if (pictureURL != null){
-                fs.unlink(pictureURL)
+                fs.unlink(pictureURL, (err) => {
+                    if (err) {
+                        console.error('Fehler beim Löschen des Bildes aus dem Dateisystem:', err);
+                        return;
+                    }
+                    console.log(`Bild ${pictureURL} erfolgreich gelöscht`);
+                    
+                })
                 await database.deleteProfilePictureURL(username)
             }
 
