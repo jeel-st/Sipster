@@ -7,27 +7,33 @@ const path = require('path');
 
 
 async function uploadProfilePicture(req, res) {
+    let originalFilename 
+    let fileExtension
+    let username
     try {
         
         const form = new Form(uploadOptions)
-        let username
+        
         form.on('field', (name, value)=>{
-            value = username
+            username = value
             console.log(`value: ${value}`)
         })
-        res.send("Success!")
+        
         form.on('file', (name, file) => {
-            if (!usernameSet) {
-                
-                console.log("Waiting for username to be set...")
-                return
-            }
             
+
             console.log(file)
             console.log(name)
 
-            const originalFilename = file.originalFilename;
-            const fileExtension = path.extname(originalFilename);
+            originalFilename = file.originalFilename;
+            fileExtension = path.extname(originalFilename);
+            
+         
+            //uploadedFilename = newFilename;
+        })
+        form.on('error', () => { })
+        form.on('close',async () => {
+            //const uploadPicture = await database.uploadProfilePicture(req);
             const newFilename = `Picture${username}${fileExtension}`;
             
             const filePath = path.join(uploadOptions.uploadDir, newFilename);
@@ -43,16 +49,10 @@ async function uploadProfilePicture(req, res) {
               }
               console.log('Datei erfolgreich umbenannt');
             });
-         
-            //uploadedFilename = newFilename;
-        })
-        form.on('error', () => { })
-        form.on('close',async () => {
-            //const uploadPicture = await database.uploadProfilePicture(req);
-            
+            res.send("Success!")
         })
         form.parse(req)
-
+        
         //const uploadPicture = await database.uploadProfilePicture(req)
 
         
