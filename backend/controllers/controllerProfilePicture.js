@@ -29,7 +29,9 @@ async function uploadProfilePicture(req, res) {
             const filePath = path.join(uploadOptions.uploadDir, newFilename);
             const pictureURL = await database.getProfilePictureURL(username)
             console.log(filePath)
+
             if (pictureURL != null){
+                fs.unlink(pictureURL)
                 await database.deleteProfilePictureURL(username)
             }
 
