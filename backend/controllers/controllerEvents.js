@@ -4,6 +4,9 @@ const log = require("../logging/logger")
 async function getEvents(req, res) {
     try {
         const events = await database.getEvents()
+        if(events == null){
+            res.status(204).send("No events available")
+        }
         res.json(events)
     } catch (error) {
         res.status(500).send('Internal Server Error')

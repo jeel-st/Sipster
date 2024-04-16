@@ -7,15 +7,15 @@ async function postRegister(req, res) {
     if(pushingUser == "Success!"){
         res.json(pushingUser)
     }else if(pushingUser == "Duplicate username") {
-        res.status(400).json(pushingUser)
+        res.status(452).json(pushingUser)
     }else if (pushingUser == "Duplicate Email"){
-        res.status(401).json(pushingUser)
+        res.status(453).json(pushingUser)
     }else if (pushingUser == "Email format false"){
-        res.status(402).json(pushingUser)
+        res.status(454).json(pushingUser)
     }else if (pushingUser == "Password format false"){
-        res.status(403).json(pushingUser)
+        res.status(455).json(pushingUser)
     }else {
-        res.status(404).json(pushingUser)
+        res.status(500).json(pushingUser)
     }
 }
 
