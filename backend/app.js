@@ -35,6 +35,6 @@ app.use('/friends', friendsRouter)
 app.use('/imageUpload', profilePictureRouter)
 app.use('/user', userRouter)
 
-app.use("/static", express.static(__dirname + '/profilePicture'))
+app.use("/static", express.static(__dirname + '/profilePictures'))
 
 app.listen(PORT, () => console.log('Server is listening on PORT 3000...'))
