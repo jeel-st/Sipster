@@ -1,5 +1,6 @@
 const database = require("./databaseMain")
 const log = require("../logging/logger")
+const { checkForFriendsInRecommendations } = require("../utils/friendSystemLogic/FriendsRecommendationLogic")
 
 async function postFriendRequest(req){
     const invitations = await database.getDB().collection("invitations")
@@ -161,16 +162,20 @@ async function getFriendRecommendations(req) {
     try {
     const personalInformation = await database.getDB().collection("personalInformation");
     const input = req.params.input;
+    const username = req.params.username;
 
     const regex = new RegExp(input, "i"); // "i" für Case-Insensitive-Suche
-    friendRecommendations = await personalInformation.find({ username: { $regex: regex } }).limit(15).toArray();
+    friendRecommendations = await personalInformation.find({ username: { $regex: regex } }).limit(20).toArray();
     console.log(friendRecommendations)
+    friendRecommendations = checkForFriendsInRecommendations(friendRecommendations, username)
     } catch (err) {
         console.error("Something went wrong in the Method getFriendReccommendations() " + err)
     }
     console.log(friendRecommendations)
     return friendRecommendations;
 }
+
+
 
 async function getInvitations(req) {
     try {

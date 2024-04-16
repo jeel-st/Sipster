@@ -27,3 +27,4 @@
 {"level":30,"time":1713227708014,"pid":80821,"hostname":"Lorenzs-MBP.fritz.box","msg":"Anfrage erhalten: POST /user/changePassword/Cryptocryxx/psw"}
 {"level":30,"time":1713227743598,"pid":80862,"hostname":"Lorenzs-MBP.fritz.box","msg":"Anfrage erhalten: POST /user/changePassword/Cryptocryxx/psw"}
 {"level":30,"time":1713227785969,"pid":80862,"hostname":"Lorenzs-MBP.fritz.box","msg":"Anfrage erhalten: POST /user/changePassword/Cryptocryxx/psw"}
+{"level":30,"time":1713228809258,"pid":81716,"hostname":"Lorenzs-MBP.fritz.box","msg":"Anfrage erhalten: GET /friends/gamsa/m"}

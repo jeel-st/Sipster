@@ -9,7 +9,7 @@ const friendSystemController = require('../controllers/controllerFriendSystem')
 router.post('/', friendSystemController.postFriendRequest)
 router.delete('/:fromSipsterID/:toSipsterID', friendSystemController.deleteFriendRequest)
 router.get('/:username', friendSystemController.getFriendList)
-router.get('/reccommendations/:input', friendSystemController.getFriendRecommendations)
+router.get('/:username/:input', friendSystemController.getFriendRecommendations)
 router.get('/invitations/:username', friendSystemController.getInvitations)
 
 module.exports = router
