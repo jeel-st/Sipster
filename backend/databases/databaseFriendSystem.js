@@ -201,5 +201,5 @@ module.exports = {
     //getFriendNameList,
     getFriendList,
     getFriendRecommendations,
-    getInvitations
+    //getInvitations
 }
