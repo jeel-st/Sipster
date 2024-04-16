@@ -166,12 +166,11 @@ async function getFriendRecommendations(req) {
 
     const regex = new RegExp(input, "i"); // "i" für Case-Insensitive-Suche
     friendRecommendations = await personalInformation.find({ username: { $regex: regex } }).limit(20).toArray();
-    console.log(friendRecommendations)
-    friendRecommendations = checkForFriendsInRecommendations(friendRecommendations, username)
+    friendRecommendations = await checkForFriendsInRecommendations(friendRecommendations, username)
     } catch (err) {
         console.error("Something went wrong in the Method getFriendReccommendations() " + err)
     }
-    console.log(friendRecommendations)
+    //console.log(friendRecommendations)
     return friendRecommendations;
 }
 

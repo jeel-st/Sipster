@@ -3,8 +3,7 @@
 # dependencies
 node_modules/
 profilePictures/
-app.log
-error.log
+*.log
 
 # Expo
 .expo/

@@ -1,5 +1,5 @@
 const database = require("./databaseMain")
-const { isValidPassword, isValidEmail, encryptPassword, comparePassword, encryptPasswordWithSalt } = require('../utils/registerLogic/registerPatterns')
+const { isValidPassword, isValidEmail, encryptPassword, encryptPasswordWithSalt } = require('../utils/registerLogic/registerPatterns')
 const log = require("../logging/logger")
 
 
