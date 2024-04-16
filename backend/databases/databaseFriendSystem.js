@@ -172,7 +172,7 @@ async function getFriendRecommendations(req) {
     return friendRecommendations;
 }
 
-/*async function getInvitations(req) {
+async function getInvitations(req) {
     try {
         const username = req.params.username;
         const personalInformation = await database.getDB().collection("personalInformation");
@@ -191,7 +191,7 @@ async function getFriendRecommendations(req) {
     }catch (err) {
 
     }
-}*/
+}
 
 module.exports = {
     postFriendRequest,
@@ -201,5 +201,5 @@ module.exports = {
     //getFriendNameList,
     getFriendList,
     getFriendRecommendations,
-    //getInvitations
+    getInvitations
 }
