@@ -9,5 +9,6 @@ const profilePictureController = require("../controllers/controllerProfilePictur
 
 
 router.post("/", profilePictureController.uploadProfilePicture)
+router.get("/:username", profilePictureController.getProfilePicture)
 
 module.exports = router
