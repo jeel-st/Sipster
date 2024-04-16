@@ -1,5 +1,6 @@
 const database = require("./databaseMain")
 const log = require("../logging/logger")
+const { encryptPassword } = require("../utils/registerLogic/registerPatterns")
 
 async function getUserData(req) {
     const username = req.params.username
@@ -23,7 +24,34 @@ async function postNewUsername(req){
 
 }
 
+async function postNewPassword(req){
+    const {username, newPassword} = req.params
+    const encryptedPasswordAndSalt = await encryptPassword(newPassword);
+    const encryptedPassword = encryptedPasswordAndSalt[0]
+    const salt = encryptedPasswordAndSalt[1]
+    const personalInformation = await database.getDB().collection("personalInformation")
+    const filter = {username: username}
+    const update = {$set: {encryptedPassword: encryptedPassword, salt: salt}}
+
+    let result = await personalInformation.updateOne(filter, update)
+    console.log(result)
+
+}
+
+async function postNewEmail(req){
+    const {username, newEmail} = req.params
+    const personalInformation = await database.getDB().collection("personalInformation")
+    const filter = {username: username}
+    const update = {$set: {username: newEmail}}
+
+    await personalInformation.updateOne(filter, update)
+
+}
+
+
 module.exports = {
     getUserData,
-    postNewUsername
+    postNewUsername,
+    postNewPassword,
+    postNewPassword
 }
