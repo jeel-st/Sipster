@@ -1,9 +1,11 @@
-import { useState } from "react";
-import useUser from "../userFetcher";
+import { useEffect, useState } from "react";
+import useUser, { getUser } from "../userFetcher";
 import { events } from "../../constants";
+import { usePathname } from "expo-router";
 
 const useHome = () => {
     const [displayEvent, setDisplayEvent] = useState(events[0]);
+    const [user, setUser] = useState(null)
 
     const handleEventSelection = (selectedEvent) => {
         if (selectedEvent !== displayEvent) {
@@ -11,7 +13,17 @@ const useHome = () => {
         }
     };
 
-    const user = useUser();
+    const path = usePathname()
+
+    useEffect(() => {
+        async function fetchUser() {
+            const userData = await getUser()
+            setUser(userData);
+        }
+        if(path === "/"){
+            fetchUser();
+        }
+    }, [path]);
 
     return {displayEvent, handleEventSelection, user}
 }

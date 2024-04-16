@@ -39,6 +39,22 @@ export async function getUser(){
     }
 }
 
+export async function getUsername(){
+    try {
+        const jsonValue = await AsyncStorage.getItem('user');
+        if (jsonValue !== null) {
+            const value = JSON.parse(jsonValue)
+            console.log("[getUser] loading user successfully")
+
+            return(value.username)
+        }else{
+            console.log("[getUser] User is Null")
+        }
+    } catch (error){
+        console.log("[getUser Error] ",error)
+    }
+}
+
 export default function useUser() {
     const [user, setUser] = useState(null)
 

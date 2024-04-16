@@ -4,6 +4,7 @@ import { classNames } from '../utils'
 import { styles } from '../constants'
 import { formatDate } from '../utils/formDate'
 import TagCard from './TagCard'
+import getProfilePicture from '../utils/accountFetcher'
 
 export default function ProfileCard({ friend }) {
     const tags = [formatDate(friend), "1000" + " sips"]
@@ -16,7 +17,7 @@ export default function ProfileCard({ friend }) {
         )}>
             {/* Profile Image*/}
             <Image
-                source={{ uri: styles.uri }}
+                source={{ uri: `http://85.215.71.124/static/${getProfilePicture(friend)}` }}
                 className={classNames(
                     'mt-[-22.5%]',
                     'w-44 h-44 rounded-full'

@@ -58,7 +58,7 @@ export default function FriendsPage() {
                     <FriendsCategorys selectedTab={selectedTab} onTabChange={handleTabChange} />
 
                     {/* Friends Content*/}
-                    <FriendsContent friends={viewFriends} searchText={searchText} />
+                    <FriendsContent friends={viewFriends} searchText={searchText} user={user}/>
                 </>
             )}
             </SafeAreaView>

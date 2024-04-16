@@ -16,7 +16,8 @@ import ProfileCard from './ProfileCard';
 import Button from './Button';
 import TextField from './TextField';
 import FriendsSkeleton from './skeletons/FriendsSkeleton';
+import FriendsH2Skeleton from './skeletons/FriendsH2Skeleton';
 
 export { Games, GameCard, Friends, FriendCard, Events, EventCard, EventInfoCard,
      TagCard, FriendsCategorys , FriendsTabButton, FriendsContainer, FriendsHeaderButtons,
-      FriendsContent, ProfileHeaderButtons, ProfileCard, Button, TextField, FriendsSkeleton }
+      FriendsContent, ProfileHeaderButtons, ProfileCard, Button, TextField, FriendsSkeleton, FriendsH2Skeleton }

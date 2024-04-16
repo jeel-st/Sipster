@@ -2,6 +2,7 @@ import { View, Text, Image, TouchableOpacity } from 'react-native'
 import { styles } from '../../constants'
 import { router } from 'expo-router'
 import React from 'react'
+import getProfilePicture from '../../utils/accountFetcher'
 
 export default function FriendsContainer({ friend }) {
   return (
@@ -11,7 +12,7 @@ export default function FriendsContainer({ friend }) {
       onPress={() => router.navigate({ pathname: "/routes/ProfilePage", params: friend })}
     >
       <View className="w-20 h-20 rounded-full shadow-md shadow-black">
-        <Image className="w-full h-full rounded-full" source={{ uri: styles.uri }} />
+        <Image className="w-full h-full rounded-full" source={{ uri: `http://85.215.71.124/static/${getProfilePicture(friend)}` }} />
       </View>
       <View className="flex-1 self-center">
         <Text className="text-white font-bold">{friend.firstName + " " + friend.lastName}</Text>

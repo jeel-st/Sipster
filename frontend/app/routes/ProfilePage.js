@@ -5,6 +5,7 @@ import { classNames } from '../utils'
 import { Friends, ProfileCard, ProfileHeaderButtons } from '../components'
 import { styles } from '../constants'
 import { useLocalSearchParams } from 'expo-router'
+import getProfilePicture from '../utils/accountFetcher'
 
 const { width, height } = Dimensions.get('window');
 
@@ -17,11 +18,11 @@ export default function ProfilePage() {
             'bg-secondary',
         )}>
             {/* Header Buttons*/}
-            <ProfileHeaderButtons />
+            <ProfileHeaderButtons friend={friend}/>
 
             {/* Blurred Background */}
             <Image
-                source={{ uri: styles.uri }}
+                source={{ uri: `http://85.215.71.124/static/${getProfilePicture(friend)}` }}
                 style={{ width, height: height * 0.55 }}
                 blurRadius={10} />
 

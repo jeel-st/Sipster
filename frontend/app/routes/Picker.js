@@ -2,10 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { Image, Pressable, Text, View, SafeAreaView, StyleSheet } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { uploadProfilePicture } from '../utils/accountFetcher';
+import useUser from '../utils/userFetcher';
 
 export default function Picker() {
     const [hasPhotoPermission, setPhotoPermission] = useState(null);
     const [image, setImage] = useState(null);
+
+    const user = useUser()
 
     useEffect(() => {
         (async () => {
@@ -24,11 +27,9 @@ export default function Picker() {
                     quality: 1,
                 });
 
-                console.log(result);
-
                 if (!result.cancelled) {
                     setImage(result.assets[0].uri);
-                    await uploadProfilePicture(result.assets[0]);
+                    await uploadProfilePicture(result.assets[0], user.username);
                 }
             } catch (error) {
                 console.log("[pickImageError] ", error);
