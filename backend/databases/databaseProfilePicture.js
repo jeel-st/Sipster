@@ -19,7 +19,9 @@ async function uploadProfilePicture(username, fileExtension){
 }
 
 async function getProfilePictureURL(username){
+    console.log("Name, der in die Datenbank gegeben wird:"+username)
     const result = await database.getDB().collection('personalInformation').findOne({username})
+    console.log(result)
     return result.profilePicture
 }
 
