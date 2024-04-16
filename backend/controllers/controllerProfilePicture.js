@@ -75,7 +75,19 @@ async function uploadProfilePicture(req, res) {
     }
 }
 
+async function getProfilePicture(req, res){
+        const username = req.params.username
+        const pictureURL = await database.getProfilePictureURL(username)
+
+        if (!pictureURL) {
+            return res.status(404).send('Profilbild nicht gefunden');
+        } else {
+            res.sendFile(pictureURL)
+        }
+}
+
 module.exports = {
-    uploadProfilePicture
+    uploadProfilePicture,
+    getProfilePicture
 }
 

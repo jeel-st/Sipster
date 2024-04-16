@@ -39,3 +39,4 @@
 {"level":30,"time":1713231078638,"pid":83106,"hostname":"Lorenzs-MBP.fritz.box","msg":"Anfrage erhalten: GET /friends/gamsa/m"}
 {"level":30,"time":1713231179039,"pid":83176,"hostname":"Lorenzs-MBP.fritz.box","msg":"Anfrage erhalten: GET /friends/gamsa/m"}
 {"level":30,"time":1713231182953,"pid":83176,"hostname":"Lorenzs-MBP.fritz.box","msg":"Anfrage erhalten: GET /friends/gamsa/m"}
+{"level":30,"time":1713269413010,"pid":10716,"hostname":"DESKTOP-NNG1IE3","msg":"Anfrage erhalten: GET /imageUpload/gamsa%20HTTP1.1"}
