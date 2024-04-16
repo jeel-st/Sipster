@@ -6,7 +6,7 @@ router.use(logMiddleware);
 
 const friendSystemController = require('../controllers/controllerFriendSystem')
 
-router.post('/:fromSipsterID/:toSipsterID', friendSystemController.postFriendRequest)
+router.post('/', friendSystemController.postFriendRequest)
 router.delete('/:fromSipsterID/:toSipsterID', friendSystemController.deleteFriendRequest)
 router.get('/:username', friendSystemController.getFriendList)
 router.get('/:username/:input', friendSystemController.getFriendRecommendations)
