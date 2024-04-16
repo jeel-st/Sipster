@@ -83,7 +83,8 @@ async function getProfilePicture(req, res){
         if (!pictureURL) {
             return res.status(404).send('Profilbild nicht gefunden');
         } else {
-            res.sendFile(pictureURL)
+            res.send(pictureURL)
+            console.log(pictureURL)
         }
 }
 
