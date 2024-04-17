@@ -7,7 +7,7 @@ async function postFriendRequest(req, res){
         res.send("Friend request was send successfully!")
     }catch(err){
         log.error("Database request failed! " + err)
-        res.status(404).send("Something went wrong")
+        res.status(500).send("Something went wrong")
     }
 }
 
@@ -35,7 +35,7 @@ async function deleteFriendRequest(req, res){
 
     }catch(err){
         console.error(err)
-        res.status(404).send("Something went wrong " + err)
+        res.status(500).send("Something went wrong " + err)
     }
 }
 
