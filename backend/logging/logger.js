@@ -3,12 +3,15 @@ const fs = require("fs");
 
 const streams = [
   {
-    level: "info", // log info and above
-    stream: fs.createWriteStream("./logging/app.log", { flags: "a" }),
+    level: "debug", // log everything
+    prettyPrint: true,
+    // stream: fs.createWriteStream("./logging/app.log", { flags: "a" }),
+    stream: process.stdout,
   },
   {
     level: "error", // log error and above
-    stream: fs.createWriteStream("./logging/error.log", { flags: "a" }),
+    //stream: fs.createWriteStream("./logging/error.log", { flags: "a" }),
+    stream: process.stderr,
   },
 ];
 
@@ -18,3 +21,4 @@ module.exports = pino(
   },
   pino.multistream(streams)
 );
+

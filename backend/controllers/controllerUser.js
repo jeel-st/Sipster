@@ -23,8 +23,12 @@ async function postNewUsername(req, res) {
 }
 async function postNewPassword(req, res) {
     try{
-        const postNewPassword = await database.postNewPassword(req)
-        res.send("Password was succesfully posted!")
+        const isValidPassword = await database.postNewPassword(req)
+        if(!isValidPassword) {
+            res.status(1001).json("The given password is invalid!")
+        }else {
+            res.send("Password was succesfully posted!")
+        }
     }catch(err){
         console.log(err)
         res.status(404).send("Something went wrong")
@@ -32,8 +36,12 @@ async function postNewPassword(req, res) {
 }
 async function postNewEmail(req, res) {
     try{
-        const postNewEmail = await database.postNewEmail(req)
-        res.send("Email was succesfully posted!")
+        const isValidEmail = await database.postNewEmail(req)
+        if (!isValidEmail){
+            res.status(1001).json("The given email is invalid!")
+        }else {
+            res.send("Email was succesfully posted!")
+        }
     }catch(err){
         console.log(err)
         res.status(404).send("Something went wrong")

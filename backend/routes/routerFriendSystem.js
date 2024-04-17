@@ -6,10 +6,11 @@ router.use(logMiddleware);
 
 const friendSystemController = require('../controllers/controllerFriendSystem')
 
+router.get('/invitations/:username', friendSystemController.getInvitations)
 router.post('/', friendSystemController.postFriendRequest)
 router.delete('/:fromSipsterID/:toSipsterID', friendSystemController.deleteFriendRequest)
 router.get('/:username', friendSystemController.getFriendList)
 router.get('/:username/:input', friendSystemController.getFriendRecommendations)
-router.get('/invitations/:username', friendSystemController.getInvitations)
+
 
 module.exports = router

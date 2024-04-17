@@ -67,6 +67,7 @@ async function getFriendList(req, res) {
     }
 }
 async function getFriendRecommendations(req, res) {
+    log.info("Getting Friend Reccommendations")
     try {
         if (req.params.input.length < 1){
             res.status(204).send("There is not enough input to follow the request")
@@ -85,11 +86,12 @@ async function getFriendRecommendations(req, res) {
 
 async function getInvitations(req, res) {
     try {
+        log.info("Getting invitations...")
         const invitations = await database.getInvitations(req)
         if (invitations == null) {
             res.status(204).send("There are no invitations for that username...")
         }else {
-            res.send(invitations)
+            res.send(invitations);
         }
     }catch (err) {
         res.status(404).send("Something went wrong " + err) 

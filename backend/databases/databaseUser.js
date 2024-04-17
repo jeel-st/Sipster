@@ -1,6 +1,6 @@
 const database = require("./databaseMain")
 const log = require("../logging/logger")
-const { encryptPassword } = require("../utils/registerLogic/registerPatterns")
+const { isValidPassword, isValidEmail, encryptPassword } = require("../utils/registerLogic/registerPatterns")
 
 async function getUserData(req) {
     const username = req.params.username
@@ -33,8 +33,16 @@ async function postNewPassword(req){
     const filter = {username: username}
     const update = {$set: {encryptedPassword: encryptedPassword, salt: salt}}
 
+    if (!isValidPassword(newPassword)) return false;
+
     let result = await personalInformation.updateOne(filter, update)
-    console.log(result)
+    if (result.modifiedCount != 0){
+        log.info(`Email changed to: ${encryptedPassword}`)
+        log.info("You thought you would get the real Password Muhahahahaha!")
+        return true;
+    }else {
+        throw new Error("The update couldn't be completed!")
+    }
 
 }
 
@@ -42,10 +50,17 @@ async function postNewEmail(req){
     const {username, newEmail} = req.params
     const personalInformation = await database.getDB().collection("personalInformation")
     const filter = {username: username}
-    const update = {$set: {username: newEmail}}
+    const update = {$set: {email: newEmail}}
 
-    await personalInformation.updateOne(filter, update)
+    if (!isValidEmail(newEmail)) return false
 
+    let result = await personalInformation.updateOne(filter, update)
+    if (result.modifiedCount != 0){
+        log.info(`Email changed to: ${newEmail}`)
+        return true;
+    }else {
+        throw new Error("The update couldn't be completed!")
+    }
 }
 
 
@@ -53,5 +68,6 @@ module.exports = {
     getUserData,
     postNewUsername,
     postNewPassword,
-    postNewPassword
+    postNewPassword,
+    postNewEmail
 }

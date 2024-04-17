@@ -1,6 +1,7 @@
 const database = require("./databaseMain")
 const log = require("../logging/logger")
 const { checkForFriendsInRecommendations } = require("../utils/friendSystemLogic/FriendsRecommendationLogic")
+const logMiddleware = require("../routes/logMiddleware")
 
 async function postFriendRequest(req){
     const invitations = await database.getDB().collection("invitations")
@@ -179,22 +180,43 @@ async function getFriendRecommendations(req) {
 async function getInvitations(req) {
     try {
         const username = req.params.username;
-        const personalInformation = await database.getDB().collection("personalInformation");
         const invitations = await database.getDB().collection("invitations");
-        const from = invitations.find({fromUsername: username}, {username: 1}).toArray();
-        let fromUsers = [];
-        for (let username in from){
-            user = await personalInformation.findOne({username: username})
 
+        const from = await invitations.find(
+            {toUsername: username})
+            .project({fromUsername: 1})
+            .toArray();
+        let mappedFrom = from.map(user => user.fromUsername)
+        let fromUsers = await getUsers(mappedFrom)
+        
+        const to = await invitations.find(
+            {fromUsername: username})
+            .project({toUsername: 1})
+            .toArray();
+        let mappedTo = to.map(user => user.toUsername)
+        let toUsers = await getUsers(mappedTo)
+
+        return [fromUsers, toUsers]
+        
+    }catch (err) {
+        log.error(`Something went wrong here: ${err}`)
+    }
+}
+
+async function getUsers(usernames) {
+    const personalInformation = await database.getDB().collection("personalInformation");
+    let users = [];
+        for (let usernamee of usernames){
+            let user = await personalInformation.find({username: usernamee}).project({_id: 0, encryptedPassword: 0, salt: 0}).toArray()
             if (user == null){
-                log.info(username + " was not found in the database!")
+                log.warn(`${username} was not found in the database!`)
                 continue;
             }
-            fromUsers.push(user)
+            users.push(user)
+            //log.info(`pushed User: ${user}`)
         }
-    }catch (err) {
 
-    }
+    return users;
 }
 
 module.exports = {
