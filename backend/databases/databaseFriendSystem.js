@@ -212,7 +212,7 @@ async function getUsers(usernames) {
                 log.warn(`${username} was not found in the database!`)
                 continue;
             }
-            users.push(user)
+            users.push(user[0])
             //log.info(`pushed User: ${user}`)
         }
 
