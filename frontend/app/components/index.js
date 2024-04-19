@@ -13,9 +13,9 @@ import FriendsHeaderButtons from './friends/FriendsHeaderButtons';
 import FriendsContent from './friends/FriendsContent';
 import ProfileHeaderButtons from './ProfileHeaderButtons';
 import ProfileCard from './ProfileCard';
-import Button from './Button';
+import SipsterButton from './Button';
 import TextField from './TextField';
 
 export { Games, GameCard, Friends, FriendCard, Events, EventCard, EventInfoCard,
      TagCard, FriendsCategorys , FriendsTabButton, FriendsContainer, FriendsHeaderButtons,
-      FriendsContent, ProfileHeaderButtons, ProfileCard, Button, TextField }
+      FriendsContent, ProfileHeaderButtons, ProfileCard, SipsterButton, TextField }

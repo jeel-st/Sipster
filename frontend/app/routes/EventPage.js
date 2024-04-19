@@ -1,9 +1,8 @@
 import { View, Text, SafeAreaView, StatusBar } from 'react-native';
-import { Events, EventInfoCard } from '../components';
+import { Events, EventInfoCard, SipsterButton  } from '../components';
 import { styles } from '../constants';
 import React from 'react';
 import { useEventDisplay } from '../utils';
-import Button from '../components/Button'
 
 export default function EventPage() {
     const { displayEvent, handleEventSelection } = useEventDisplay();
@@ -30,7 +29,7 @@ export default function EventPage() {
 
                 {/* Button */}
                 <View className="items-center">
-                    <Button title="save the date >>" />
+                    <SipsterButton title="save the date >>" />
                 </View>
             </View>
         </SafeAreaView>

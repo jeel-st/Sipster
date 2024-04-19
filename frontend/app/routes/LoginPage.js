@@ -1,7 +1,7 @@
 import { View, Text, SafeAreaView } from 'react-native'
 import { Colors } from '../constants/styles'
 import React, { useState } from 'react'
-import { Button, TextField, PopUpWindow } from '../components'
+import { SipsterButton, TextField, PopUpWindow } from '../components'
 import { router } from 'expo-router'
 import { styles } from '../constants'
 import { useLogin } from '../utils/loginFetcher';
@@ -47,7 +47,7 @@ export default function LoginPage() {
                 <TextField placeholder="  password" value={password} onChangeText={(text) => { setPassword(text); setLoginError(''); }} hideText={true} />
 
                 {/* Button */}
-                <Button title="let's party" navigation={() => handleLogin()} />
+                <SipsterButton title="let's party" navigation={() => handleLogin()} />
 
                 {/* Sign Up */}
                 <View className={styles.spaceText}>
