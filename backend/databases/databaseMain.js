@@ -103,6 +103,18 @@ function getDB() {
     return db
 }
 
+async function getSipsterID(username) {
+    const personalInformation = await database.getDB().collection("personalInformation")
+
+    let sipsterID = await personalInformation.find({username: username}).project({_id: 1}).toArray()
+    sipsterID = sipsterID.map(id => id._id)
+    if (sipsterID == null) {
+        throw new Error("This username was not found in the database")
+    }
+    console.log(sipsterID[0].toString())
+    return sipsterID[0].toString()
+}
+
 
 
 
@@ -128,3 +140,4 @@ exports.postNewPassword = postNewPassword
 exports.postNewUsername = postNewUsername
 exports.getProfilePictureURL = getProfilePictureURL
 exports.deleteProfilePictureURL = deleteProfilePictureURL
+exports.getSipsterID = getSipsterID
