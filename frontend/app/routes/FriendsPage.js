@@ -5,6 +5,7 @@ import { styles } from '../constants'
 import { FriendsHeaderButtons, FriendsCategorys, FriendsContent } from '../components'
 import React, { useEffect, useState } from 'react';
 import useUser from '../utils/userFetcher'
+import { fetchFriendsInvitations } from '../utils/friendsFetcher'
 
 export default function FriendsPage() {
     const user = useUser();
@@ -17,18 +18,20 @@ export default function FriendsPage() {
         setSearchText(text);
     };
 
-    const handleTabChange = (tabIndex) => {
+    const handleTabChange = async (tabIndex) => {
         setSelectedTab(tabIndex);
+
+        const invitations = await fetchFriendsInvitations(user.username)
 
         switch (tabIndex) {
             case 0:
                 setViewFriends(user.friends)
                 break
             case 1:
-                setViewFriends(user.friends)
+                setViewFriends(invitations[0])
                 break
             case 2:
-                setViewFriends(user.friends)
+                setViewFriends(invitations[1])
         }
     };
 
@@ -58,7 +61,7 @@ export default function FriendsPage() {
                     <FriendsCategorys selectedTab={selectedTab} onTabChange={handleTabChange} />
 
                     {/* Friends Content*/}
-                    <FriendsContent friends={viewFriends} searchText={searchText} user={user}/>
+                    <FriendsContent friends={viewFriends} searchText={searchText} user={user} selectedTab={selectedTab}/>
                 </>
             )}
             </SafeAreaView>

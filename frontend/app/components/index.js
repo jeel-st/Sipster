@@ -9,6 +9,7 @@ import FriendCard from './friends/FriendCard';
 import FriendsCategorys from './friends/FriendsCategorys';
 import FriendsTabButton from './friends/FriendsTabButton';
 import FriendsContainer from './friends/FriendsContainer';
+import FriendsInvitationContainer from './friends/FriendsInvitationContainer';
 import FriendsHeaderButtons from './friends/FriendsHeaderButtons';
 import FriendsContent from './friends/FriendsContent';
 import ProfileHeaderButtons from './ProfileHeaderButtons';
@@ -19,5 +20,5 @@ import FriendsSkeleton from './skeletons/FriendsSkeleton';
 import FriendsH2Skeleton from './skeletons/FriendsH2Skeleton';
 
 export { Games, GameCard, Friends, FriendCard, Events, EventCard, EventInfoCard,
-     TagCard, FriendsCategorys , FriendsTabButton, FriendsContainer, FriendsHeaderButtons,
+     TagCard, FriendsCategorys , FriendsTabButton, FriendsContainer, FriendsInvitationContainer, FriendsHeaderButtons,
       FriendsContent, ProfileHeaderButtons, ProfileCard, Button, TextField, FriendsSkeleton, FriendsH2Skeleton }

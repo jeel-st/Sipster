@@ -7,7 +7,7 @@ import { NativeBaseProvider } from "native-base";
 import FriendsH2Skeleton from '../skeletons/FriendsH2Skeleton';
 import { fetchFriendsData, fetchRecommendationFriendsData } from '../../utils/friendsFetcher';
 
-export default function FriendsContent({ friends, searchText, user }) {
+export default function FriendsContent({ friends, searchText, user, selectedTab }) {
 
     if (!friends) {
         return (
@@ -21,6 +21,7 @@ export default function FriendsContent({ friends, searchText, user }) {
     const [searchFriends, setSearchFriends] = useState([]);
 
     const filteredFriends = friends.filter(friend => {
+        console.log(friend)
         return (
             friend.firstName.toLowerCase().startsWith(searchText.toLowerCase()) ||
             friend.username.toLowerCase().startsWith(searchText.toLowerCase())
@@ -49,15 +50,15 @@ export default function FriendsContent({ friends, searchText, user }) {
 
     const renderFriendContainers = (friends) => {
         return friends.map((friend, index) => (
-            <FriendsContainer friend={friend} key={index} />
+            <FriendsContainer friend={friend} key={index} selectedTab={selectedTab} user={user}/>
         ));
     };
 
     const renderFriendsText = () => {
         if (searchFriendsVisible) {
-            return `Found ${searchFriends.length} recommendations`;
+            return `Found ${searchFriends.length} user`;
         } else {
-            return `You have ${filteredFriends.length} friends`;
+            return `Found ${filteredFriends.length} user`;
         }
     };
 

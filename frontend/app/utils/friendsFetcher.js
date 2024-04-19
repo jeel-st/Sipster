@@ -24,6 +24,17 @@ export async function fetchFriendsData(username) {
     }
 }
 
+export async function fetchFriendsInvitations(username) {
+    try {
+        const response = await axiosInstance.get(`/friends/invitations/${username}`);
+        console.log("[fetchFriendsInvitations] fetch friends invitations successfully");
+
+        return response.data
+    } catch (error) {
+        throw error;
+    }
+}
+
 export async function fetchRecommendationFriendsData(username, inputText) {
     try {
         const response = await axiosInstance.get(`/friends/${username}/${inputText}`);
@@ -49,6 +60,29 @@ export async function sendFriendInvite(username, friendUsername) {
             })
         console.log("[sendFriendInvite] send Friend Invite successfully");
         console.log(response.data)
+    } catch (error) {
+        throw error;
+    }
+}
+
+export async function acceptFriendInvite(fromUsername, toUsername) {
+    console.log(fromUsername, toUsername)
+    try {
+        const response = await axiosInstance.delete(`/friends/${fromUsername}/${toUsername}?status=true`);
+        console.log("[acceptFriendInvite] accept Friend Invite successfully");
+
+        return true
+    } catch (error) {
+        throw error;
+    }
+}
+
+export async function declineFriendInvite(fromUsername, toUsername) {
+    try {
+        const response = await axiosInstance.delete(`/friends/${fromUsername}/${toUsername}?status=false`);
+        console.log("[acceptFriendInvite] accept Friend Invite successfully");
+
+        return false
     } catch (error) {
         throw error;
     }
