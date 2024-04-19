@@ -22,26 +22,26 @@ async function postFriendRequest(req){
 async function acceptFriendRequest(req){
     const personalInformation = await database.getDB().collection("personalInformation")
     const invitations = await database.getDB().collection("invitations")
-    const fromSipsterID = req.params.fromSipsterID
-    const toSipsterID = req.params.toSipsterID
+    const fromUsername = req.params.fromSipsterID
+    const toUsername = req.params.toSipsterID
 
-    const fromUser = await personalInformation.findOne({ username: fromSipsterID });
-    const toUser = await personalInformation.findOne({ username: toSipsterID });
+    const fromUser = await personalInformation.findOne({ username: fromUsername });
+    const toUser = await personalInformation.findOne({ username: toUsername });
     
     if (!fromUser || !toUser) {
         throw new Error("Benutzer nicht gefunden");
     }
 
     await personalInformation.updateOne(
-        { username: fromSipsterID },
+        { username: fromUsername },
         { $addToSet: { friends: toUser.username } }
     );
     
     await personalInformation.updateOne(
-        { username: toSipsterID },
+        { username: toUsername },
         { $addToSet: { friends: fromUser.username } }
     );
-    let result = await invitations.deleteOne({fromSipsterID: fromSipsterID, toSipsterID: toSipsterID})
+    let result = await invitations.deleteOne({fromUsername: fromUsername, toUsername: toUsername})
 
     if (result.deletedCount === 0) {
         throw new Error("Anfrage nicht gefunden")
