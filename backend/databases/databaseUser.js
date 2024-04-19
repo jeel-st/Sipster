@@ -16,12 +16,18 @@ async function getUserData(req) {
 }
 async function postNewUsername(req){
     const {username, newUsername} = req.params
-    const sipsterID = getSipsterID(username);
+    const sipsterID = await database.getSipsterID(username);
     const personalInformation = await database.getDB().collection("personalInformation")
-    const filter = {_id: sipsterID}
+    const filter = {_id: new ObjectID(sipsterID)}
     const update = {$set: {username: newUsername}}
 
-    await personalInformation.updateOne(filter, update)
+    const result = await personalInformation.updateOne(filter, update)
+    console.log(result)
+    if (result.modifiedCount == 0){
+        throw new Error("There was no User found with that id!")
+    }else {
+        return true;
+    }
 
 }
 
@@ -64,24 +70,11 @@ async function postNewEmail(req){
     }
 }
 
-async function getSipsterID(username) {
-    const personalInformation = await database.getDB().collection("personalInformation")
-
-    let sipsterID = await personalInformation.find({username: username}).project({_id: 1}).toArray()
-    sipsterID = sipsterID.map(id => id._id)
-    if (sipsterID == null) {
-        throw new Error("This username was not found in the database")
-    }
-    console.log(sipsterID[0].toString())
-    return sipsterID[0].toString()
-}
-
 
 module.exports = {
     getUserData,
     postNewUsername,
     postNewPassword,
     postNewPassword,
-    postNewEmail,
-    getSipsterID
+    postNewEmail
 }

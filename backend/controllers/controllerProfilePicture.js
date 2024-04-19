@@ -21,14 +21,15 @@ async function uploadProfilePicture(req, res) {
         })
        
         form.on('file', async (name, file) => {
-
+            const userIDObj = await database.getSipsterID(username)
+            const userID = userIDObj.toString()
             const originalFilename = file.originalFilename;
             const fileExtension = path.extname(originalFilename);
             fileExtensionParam = fileExtension;
-            const newFilename = `Picture${username}${fileExtension}`;
+            const newFilename = `Picture${userID}${fileExtension}`;
 
             const filePath = path.join(uploadOptions.uploadDir, newFilename);
-            const pictureURL = await database.getProfilePictureURL(username);
+            const pictureURL = await database.getProfilePictureURL(userIDObj);
             console.log(filePath);
 
             if (pictureURL != null) {
@@ -40,12 +41,12 @@ async function uploadProfilePicture(req, res) {
                     console.log(`Bild ${pictureURL} erfolgreich gelöscht`);
 
                 });
-                const deleteURL = await database.deleteProfilePictureURL(username);
-                const uploadPicture = await database.uploadProfilePicture(username, fileExtensionParam);
+                const deleteURL = await database.deleteProfilePictureURL(userIDObj);
+                const uploadPicture = await database.uploadProfilePicture(userIDObj, fileExtensionParam);
                 console.log("deleteURL:" + deleteURL);
                 console.log("PictureUploadWithDelete:"+uploadPicture)
             }else{
-                const uploadPicture = await database.uploadProfilePicture(username, fileExtensionParam);
+                const uploadPicture = await database.uploadProfilePicture(userIDObj, fileExtensionParam);
                 console.log("PictureUpload:"+uploadPicture)
             }
 
@@ -77,8 +78,9 @@ async function uploadProfilePicture(req, res) {
 
 async function getProfilePicture(req, res){
         const username = req.params.username
+        const userIDObj = await database.getSipsterID(username)
         console.log("Name, der für das Profilbild genommen wird" + username)
-        const pictureURL = await database.getProfilePictureURL(username)
+        const pictureURL = await database.getProfilePictureURL(userIDObj)
         console.log("url:"+ pictureURL)
         if (!pictureURL) {
             return res.status(404).send('Profilbild nicht gefunden');
