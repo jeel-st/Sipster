@@ -5,7 +5,7 @@ const log = require("../logging/logger")
 
 async function postUser(req){
     const { username, password, email, firstName, lastName} = req.body
-    const friends = null
+    const friends = []
     const timestamp = Date.now()
     const registerDate = new Date(timestamp).toISOString();
     const profilePicture = null

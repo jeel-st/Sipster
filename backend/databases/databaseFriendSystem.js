@@ -6,11 +6,13 @@ const logMiddleware = require("../routes/logMiddleware")
 async function postFriendRequest(req){
     const invitations = await database.getDB().collection("invitations")
     const {fromSipsterID, toSipsterID} = req.body
+    const fromID = await database.getSipsterID(fromSipsterID)
+    const toID = await database.getSipsterID(toSipsterID)
     const timestamp = Date.now(); 
     const sendAt = new Date(timestamp).toISOString();
 
 
-    const userData = {fromSipsterID, toSipsterID, sendAt}
+    const userData = {fromID, toID, sendAt}
 
     try{
         await invitations.insertOne(userData)
@@ -22,26 +24,29 @@ async function postFriendRequest(req){
 async function acceptFriendRequest(req){
     const personalInformation = await database.getDB().collection("personalInformation")
     const invitations = await database.getDB().collection("invitations")
-    const fromSipsterID = req.params.fromSipsterID
-    const toSipsterID = req.params.toSipsterID
+    const fromUsername = req.params.fromSipsterID
+    const toUsername = req.params.toSipsterID
 
-    const fromUser = await personalInformation.findOne({ username: fromSipsterID });
-    const toUser = await personalInformation.findOne({ username: toSipsterID });
-    
+    const fromSipsterID = await database.getSipsterID(fromUsername)
+    const toSipsterID = await database.getSipsterID(toUsername)
+
+    const fromUser = await personalInformation.findOne({ _id: fromSipsterID });
+    const toUser = await personalInformation.findOne({ _id: toSipsterID });
+    console.log("FromUserString: "+fromUser.toString())
     if (!fromUser || !toUser) {
         throw new Error("Benutzer nicht gefunden");
     }
 
     await personalInformation.updateOne(
-        { username: fromSipsterID },
-        { $addToSet: { friends: toUser.username } }
+        { _id: fromUser._id },
+        { $addToSet: { friends: toUser._id } }
     );
     
     await personalInformation.updateOne(
-        { username: toSipsterID },
-        { $addToSet: { friends: fromUser.username } }
+        { _id: toUser._id },
+        { $addToSet: { friends: fromUser._id } }
     );
-    let result = await invitations.deleteOne({fromSipsterID: fromSipsterID, toSipsterID: toSipsterID})
+    let result = await invitations.deleteOne({fromID: fromSipsterID, toID: toSipsterID})
 
     if (result.deletedCount === 0) {
         throw new Error("Anfrage nicht gefunden")
@@ -55,17 +60,20 @@ async function declineFriendRequest(req){
     const invitations = await database.getDB().collection("invitations")
     const personalInformation = await database.getDB().collection("personalInformation")
 
-    const fromSipsterID = req.params.fromSipsterID
-    const toSipsterID = req.params.toSipsterID
+    const fromUsername = req.params.fromSipsterID
+    const toUsername = req.params.toSipsterID
 
-    const fromUser = await personalInformation.findOne({ username: fromSipsterID });
-    const toUser = await personalInformation.findOne({ username: toSipsterID });
+    const fromSipsterID = await database.getSipsterID(fromUsername)
+    const toSipsterID = await database.getSipsterID(toUsername)
+
+    const fromUser = await personalInformation.findOne({ _id: fromSipsterID });
+    const toUser = await personalInformation.findOne({ _id: toSipsterID });
     
     if (!fromUser || !toUser) {
         throw new Error("Benutzer nicht gefunden");
     }
 
-    let result = await invitations.deleteOne({fromSipsterID: fromSipsterID, toSipsterID: toSipsterID})
+    let result = await invitations.deleteOne({fromID: fromSipsterID, toID: toSipsterID})
 
     if (result.deletedCount === 0) {
         throw new Error("Anfrage nicht gefunden")
@@ -76,17 +84,23 @@ async function declineFriendRequest(req){
 }
 
 async function removeFriend(req){
+    
+
     const personalInformation = await database.getDB().collection("personalInformation")
     try {
-        const { fromSipsterID, toSipsterID } = req.params;
+        const fromUsername = req.params.fromSipsterID
+        const toUsername = req.params.toSipsterID
 
+        const fromSipsterID = await database.getSipsterID(fromUsername)
+        const toSipsterID = await database.getSipsterID(toUsername)
+        
         await personalInformation.updateOne(
-            { username: fromSipsterID },
+            { _id: fromSipsterID },
             { $pull: { friends: toSipsterID } }
         )
 
         await personalInformation.updateOne(
-            { username: toSipsterID },
+            { _id: toSipsterID },
             { $pull: { friends: fromSipsterID } }
         )
 
@@ -133,20 +147,20 @@ async function getFriendList(req){
             throw new Error("Benutzer nicht gefunden");
         }
 
-        const friendNameList = user.friends;
+        const friendIDs = user.friends
 
-        if (!friendNameList){
-            return [];
+        if (!friendIDs || friendIDs.length === 0) {
+            return friendList; // Wenn die Freundesliste leer ist, geben wir ein leeres Array zurück
         }else {
-            let i = 0
-            for (const friend of friendNameList){
-                let currentFriend = await personalInformation.findOne({username: friend})
-                if (currentFriend == null) {
+            
+            for (const friendID of friendIDs){
+                const friend = await personalInformation.findOne({ _id: friendID });
+                if (friend == null) {
                     continue;
                 }
-                friendList.push(currentFriend)
-                console.log(friendList[i].username)
-                i++;
+
+                friendList.push(friend)
+                
             }
 
         }
@@ -182,7 +196,15 @@ async function getInvitations(req) {
         const username = req.params.username;
         const invitations = await database.getDB().collection("invitations");
 
-        const from = await invitations.find(
+        const userID = await database.getSipsterID(username)
+
+        const receivedInvitations = await invitations.find({ toID: userID }).toArray();
+
+        const sentInvitations = await invitations.find({ fromID: userID }).toArray();
+        const receivedFromUsers = await getReceivedInvitations(receivedInvitations);
+        const sentToUsers = await getSentInvitations(sentInvitations);
+
+/*        const from = await invitations.find(
             {toUsername: username})
             .project({fromUsername: 1})
             .toArray();
@@ -197,12 +219,30 @@ async function getInvitations(req) {
         let toUsers = await getUsers(mappedTo)
 
         return [fromUsers, toUsers]
-        
+*/ 
+        return [receivedFromUsers, sentToUsers];
+
     }catch (err) {
         log.error(`Something went wrong here: ${err}`)
     }
 }
 
+async function getReceivedInvitations(invitations) {
+    const personalInformation = await database.getDB().collection("personalInformation")
+    const userIds = invitations.map(invitation => invitation.fromID)
+
+    const users = await personalInformation.find({ _id: { $in: userIds } }).toArray()
+    return users
+}
+
+async function getSentInvitations(invitations) {
+    const personalInformation = await database.getDB().collection("personalInformation")
+    const userIds = invitations.map(invitation => invitation.toID)
+
+    const users = await personalInformation.find({ _id: { $in: userIds } }).toArray()
+    return users
+}
+/*
 async function getUsers(usernames) {
     const personalInformation = await database.getDB().collection("personalInformation");
     let users = [];
@@ -218,6 +258,7 @@ async function getUsers(usernames) {
 
     return users;
 }
+*/
 
 module.exports = {
     postFriendRequest,
