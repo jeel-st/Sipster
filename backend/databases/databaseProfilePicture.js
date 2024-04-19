@@ -1,13 +1,13 @@
 const database = require("./databaseMain")
 const log = require("../logging/logger")
 
-async function uploadProfilePicture(username, fileExtension){
+async function uploadProfilePicture(userIDObj, fileExtension){
     try{
-
-        const imagePath = `/home/sipster/sipster/backend/profilePictures/Picture${username}${fileExtension}`
+        userID = userIDObj.toString()
+        const imagePath = `/home/sipster/sipster/backend/profilePictures/Picture${userID}${fileExtension}`
         console.log(imagePath)
         const result = await database.getDB().collection('personalInformation').updateOne(
-            {username: username},
+            {_id: userIDObj},
             { $set: { profilePicture: imagePath } }
         )
 
@@ -18,25 +18,25 @@ async function uploadProfilePicture(username, fileExtension){
     }
 }
 
-async function getProfilePictureURL(username){
-    console.log("Name, der in die Datenbank gegeben wird:"+username)
-    const result = await database.getDB().collection('personalInformation').findOne({username})
+async function getProfilePictureURL(userIDObj){
+    console.log("ID, die in die Datenbank gegeben wird:"+userIDObj)
+    const result = await database.getDB().collection('personalInformation').findOne({_id: userIDObj})
     console.log(result)
     return result.profilePicture
 }
 
-async function deleteProfilePictureURL(username){
+async function deleteProfilePictureURL(userIDObj){
     try {
         const result = await database.getDB().collection('personalInformation').updateOne(
-            { username: username }, 
+            { _id: userIDObj }, 
             { $set: { profilePicture: null } }
         )
         
         if (result.modifiedCount === 1) {
-            console.log(`Profilbild für Benutzer ${username} erfolgreich gelöscht.`)
+            console.log(`Profilbild für Benutzer ${userIDObj} erfolgreich gelöscht.`)
             return "Success"
         } else {
-            console.log(`Profilbild für Benutzer ${username} nicht gefunden.`)
+            console.log(`Profilbild für Benutzer ${userIDObj} nicht gefunden.`)
             return "User not found"
         }
     } catch (error) {
