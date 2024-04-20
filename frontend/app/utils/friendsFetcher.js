@@ -80,7 +80,7 @@ export async function acceptFriendInvite(fromUsername, toUsername) {
 export async function declineFriendInvite(fromUsername, toUsername) {
     try {
         const response = await axiosInstance.delete(`/friends/${fromUsername}/${toUsername}?status=false`);
-        console.log("[acceptFriendInvite] accept Friend Invite successfully");
+        console.log("[declineFriendInvite] decline Friend Invite successfully");
 
         return false
     } catch (error) {

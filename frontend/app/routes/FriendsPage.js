@@ -13,9 +13,19 @@ export default function FriendsPage() {
     const [searchText, setSearchText] = useState('');
     const [selectedTab, setSelectedTab] = useState(0)
     const [viewFriends, setViewFriends] = useState(null)
+    const [viewCategorys, setViewCategorys] = useState(true)
 
     const handleSearchTextChange = (text) => {
         setSearchText(text);
+
+        if (text.trim() === "") {
+            setViewCategorys(true)
+            setViewFriends(user.friends)
+        }
+        else {
+            setViewCategorys(false)
+            setSelectedTab(0)
+        }
     };
 
     const handleTabChange = async (tabIndex) => {
@@ -48,22 +58,22 @@ export default function FriendsPage() {
                 'bg-primary',
             )}>
                 {user && (
-                <>
-                    {/* Header Buttons*/}
-                    <FriendsHeaderButtons onSearchTextChange={handleSearchTextChange} />
+                    <>
+                        {/* Header Buttons*/}
+                        <FriendsHeaderButtons onSearchTextChange={handleSearchTextChange} />
 
-                    {/* Heading Text*/}
-                    <View className={classNames('px-4 pt-4')}>
-                        <Text className={styles.brandingText}>Friends</Text>
-                    </View>
+                        {/* Heading Text*/}
+                        <View className={classNames('px-4 pt-4')}>
+                            <Text className={styles.brandingText}>Friends</Text>
+                        </View>
 
-                    {/* Friends Categorys*/}
-                    <FriendsCategorys selectedTab={selectedTab} onTabChange={handleTabChange} />
+                        {/* Friends Categorys*/}
+                        {viewCategorys && <FriendsCategorys selectedTab={selectedTab} onTabChange={handleTabChange} />}
 
-                    {/* Friends Content*/}
-                    <FriendsContent friends={viewFriends} searchText={searchText} user={user} selectedTab={selectedTab}/>
-                </>
-            )}
+                        {/* Friends Content*/}
+                        <FriendsContent friends={viewFriends} searchText={searchText} user={user} selectedTab={selectedTab} />
+                    </>
+                )}
             </SafeAreaView>
         </TouchableWithoutFeedback>
     )

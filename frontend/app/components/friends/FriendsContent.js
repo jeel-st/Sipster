@@ -21,7 +21,6 @@ export default function FriendsContent({ friends, searchText, user, selectedTab 
     const [searchFriends, setSearchFriends] = useState([]);
 
     const filteredFriends = friends.filter(friend => {
-        console.log(friend)
         return (
             friend.firstName.toLowerCase().startsWith(searchText.toLowerCase()) ||
             friend.username.toLowerCase().startsWith(searchText.toLowerCase())
