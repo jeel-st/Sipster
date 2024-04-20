@@ -10,6 +10,7 @@ import { NativeBaseProvider, View } from "native-base";
 export default function AccountPage() {
 
     const user = useUser();
+    console.log(user)
 
     return (
         <NativeBaseProvider>
@@ -20,11 +21,30 @@ export default function AccountPage() {
                     {/* Header */}
                     <View style={{ height: StatusBar.currentHeight }} />
 
-                    {/* Hello User */}
+                    {/* Branding */}
                     <View className={styles.spaceText}>
-                        <Text className={styles.brandingText}>Hello {user.firstName}</Text>
+                        <Text className={styles.brandingText}>sipster</Text>
                     </View>
 
+                    {/* Hello User */}
+                    <View className={styles.spaceText}>
+                        <Text className={styles.categoryText}>Hello {user.firstName} !</Text>
+                    </View>
+
+                    {/* Informations */}
+                    <View className="h-40 m-1 mx-6 rounded-3xl shadow-md shadow-black mt-5 bg-yellow">
+                        <Text className="text-center text-4xl font-bold">1000 sips!</Text>
+                    </View>
+
+                    <View className="flex-row mx-6">
+                        <View className="h-40 w-40 rounded-3xl shadow-md shadow-black mt-3 bg-purple" >
+
+                        </View>
+
+                        <View className="h-40 w-40 mx-5 rounded-3xl shadow-md shadow-black mt-3 bg-secondary" >
+
+                        </View>
+                    </View>
 
 
                     {/* Friends */}
@@ -39,6 +59,6 @@ export default function AccountPage() {
                     }
                 </View>
             </SafeAreaView>
-        </NativeBaseProvider>
+        </NativeBaseProvider >
     )
 }
