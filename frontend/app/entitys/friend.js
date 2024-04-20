@@ -1,10 +1,10 @@
 class Friend {
-    constructor(firstName, lastName, registerDate, username, profilbild) {
+    constructor(firstName, lastName, registerDate, username, profilePicture) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.registerDate = registerDate;
         this.username = username;
-        this.profilbild = profilbild;
+        this.profilePicture = profilePicture;
     }
 
     present() {
