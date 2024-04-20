@@ -53,20 +53,20 @@ export default function RegisterPage() {
                     <View className="flex-row">
                         <SmallTextField
                             className="w-28"
-                            placeholder="   first name"
+                            placeholder="first name"
                             value={firstName}
                             onChangeText={(text) => { setFirstName(text); setRegisterError(''); }}
                         />
                         <SmallTextField
-                            placeholder="   last name"
+                            placeholder="last name"
                             value={lastName}
                             onChangeText={(text) => { setLastName(text); setRegisterError(''); }}
                         />
                     </View>
 
-                    <TextField placeholder="  username" value={username} onChangeText={(text) => { setUsername(text); setRegisterError('') }} />
+                    <TextField placeholder="username" value={username} onChangeText={(text) => { setUsername(text); setRegisterError('') }} />
 
-                    <TextField placeholder="  email" value={email} onChangeText={(text) => { setEmail(text); setRegisterError('') }} />
+                    <TextField placeholder="email" value={email} onChangeText={(text) => { setEmail(text); setRegisterError('') }} />
 
                     {/*InfoButton*/}
                     <View className="items-end w-64">
@@ -88,9 +88,9 @@ export default function RegisterPage() {
                         </Popover>
                     </View>
 
-                    <TextField placeholder="  password" value={password} onChangeText={(text) => { setPassword(text); setRegisterError(''); }} hideText={true} />
+                    <TextField placeholder="password" value={password} onChangeText={(text) => { setPassword(text); setRegisterError(''); }} hideText={true} />
 
-                    <TextField placeholder="  confirm password" value={confirmPassword} onChangeText={(text) => { setConfirmedPassword(text); setRegisterError(''); }} hideText={true} />
+                    <TextField placeholder="confirm password" value={confirmPassword} onChangeText={(text) => { setConfirmedPassword(text); setRegisterError(''); }} hideText={true} />
 
                     {/* Button */}
                     <SipsterButton title="welcome to sipster!" navigation={() => handleRegister()} />

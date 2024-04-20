@@ -42,9 +42,9 @@ export default function LoginPage() {
                 </View>
 
                 {/* input fields */}
-                <TextField placeholder="  username" value={username} onChangeText={(text) => { setUsername(text); setLoginError('') }} />
+                <TextField placeholder="username" value={username} onChangeText={(text) => { setUsername(text); setLoginError('') }} />
 
-                <TextField placeholder="  password" value={password} onChangeText={(text) => { setPassword(text); setLoginError(''); }} hideText={true} />
+                <TextField placeholder="password" value={password} onChangeText={(text) => { setPassword(text); setLoginError(''); }} hideText={true} />
 
                 {/* Button */}
                 <SipsterButton title="let's party" navigation={() => handleLogin()} />
