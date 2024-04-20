@@ -14,11 +14,10 @@ import FriendsHeaderButtons from './friends/FriendsHeaderButtons';
 import FriendsContent from './friends/FriendsContent';
 import ProfileHeaderButtons from './ProfileHeaderButtons';
 import ProfileCard from './ProfileCard';
-import Button from './Button';
+import SipsterButton from './Button';
 import TextField from './TextField';
 import FriendsSkeleton from './skeletons/FriendsSkeleton';
 import FriendsH2Skeleton from './skeletons/FriendsH2Skeleton';
 
-export { Games, GameCard, Friends, FriendCard, Events, EventCard, EventInfoCard,
-     TagCard, FriendsCategorys , FriendsTabButton, FriendsContainer, FriendsInvitationContainer, FriendsHeaderButtons,
-      FriendsContent, ProfileHeaderButtons, ProfileCard, Button, TextField, FriendsSkeleton, FriendsH2Skeleton }
+export { Games, GameCard, Friends, FriendCard, Events, EventCard, EventInfoCard, TagCard, FriendsCategorys , FriendsTabButton,      FriendsContainer, FriendsInvitationContainer, FriendsHeaderButtons,    
+      FriendsContent, ProfileHeaderButtons, ProfileCard, Button, TextField, FriendsSkeleton, SipsterButton, FriendsH2Skeleton } 
