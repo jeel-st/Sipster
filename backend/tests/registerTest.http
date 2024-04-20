@@ -34,11 +34,11 @@ POST {{host}}/register HTTP/1.1
 Content-Type: application/json
 
 {
-    "username": "Crypto",
-    "password": "crYpT123!!!",
-    "email": "lb486@hdm-stuttgart.de",
-    "firstName": "Lars",
-    "lastName": "Bauscher",
+    "username": "Maike",
+    "password": "Sipster!24",
+    "email": "mk486@hdm-stuttgart.de",
+    "firstName": "Maike",
+    "lastName": "König",
     "friends": null
 }
 

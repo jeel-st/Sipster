@@ -5,12 +5,11 @@ import{Colors} from "../constants/styles"
 import{styles} from "../constants"
 import TextFieldConst from '../components/TextFieldConst'
 import TextField from '../components/TextField'
-import Friends from '../components/Friends'
 
 export default function WoPStart(){
   return(
-    <SafeAreaView 
-      className="flex-1 items-left" 
+    <SafeAreaView
+      className="flex-1 items-left"
       style={{ backgroundColor: Colors.primary }}>
           {/* Header */}
           <View className="flex-row items-center mb-5 mx-2 ">
@@ -36,7 +35,6 @@ export default function WoPStart(){
             <Text className={styles.categoryText}>
               Freundesliste
             </Text>
-            <Friends/>
           </View>
     </SafeAreaView>
   )

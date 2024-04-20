@@ -6,7 +6,7 @@ export default function ({ placeholder, onChangeText, value, hideText }) {
     return (
         <View>
             <TextInput
-                className="h-10 m-1 rounded-xl shadow-md shadow-black w-64 text-white"
+                className="h-10 m-1 rounded-xl shadow-md shadow-black w-64 text-white pl-2"
                 style={{ backgroundColor: styles.Colors.secondary }}
                 placeholder={placeholder}
                 onChangeText={onChangeText}
