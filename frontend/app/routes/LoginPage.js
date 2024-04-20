@@ -21,7 +21,8 @@ export default function LoginPage() {
             return;
         } else {
             console.log("Login details have been entered.")
-            login(username, password, setLoginError, () => {
+            login(username, password, setLoginError, async () => {
+                await storeUser(username)
                 router.navigate('(tabs)')
                 console.log("Login successful.")
                 setLoginError('')

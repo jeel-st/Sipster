@@ -1,8 +1,8 @@
 import { View, Text } from 'react-native';
-import HomePage from '../routes/HomePage';
+import { Home } from '../routes';
 
 export default function Tab() {
   return (
-    <HomePage/>
+    <Home/>
   );
 }
