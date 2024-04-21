@@ -1,7 +1,7 @@
 import { View, Text } from 'react-native'
-import { styles } from '../constants'
+import { styles } from '../../constants'
 import React from 'react'
-import TagCard from './TagCard'
+import TagCard from '../layout/TagCard'
 
 export default function EventInfoCard({ event }) {
     return (

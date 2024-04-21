@@ -1,6 +1,6 @@
 import React from 'react';
 import { TouchableOpacity, Text } from 'react-native';
-import { Colors } from '../constants/styles';
+import { Colors } from '../../constants/styles';
 
 export default function SipsterButton({ title, navigation }) {
     return (

@@ -1,9 +1,9 @@
 import { ScrollView } from 'react-native'
-import { useEvents } from '../utils/eventsFetcher';
+import { useEvents } from '../../utils/eventsFetcher';
 import EventCard from './EventCard'
 import React from 'react'
 import PropTypes from 'prop-types'
-import { styles } from '../constants'
+import { styles } from '../../constants'
 
 export default function Events({ onSelectEvent, selectedEvent }) {
     const handleEventClick = (event) => {

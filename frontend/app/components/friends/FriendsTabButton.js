@@ -10,8 +10,9 @@ export default function FriendsTabButton({ title, isSelected, onClick }) {
         >
             <Text
                 className="text-center font-semibold text-white"
-                style={{ color: isSelected ? styles.Colors.black : styles.Colors.white}}>
-                {title}</Text>
+                style={{ color: isSelected ? styles.Colors.black : styles.Colors.white }}>
+                {title}
+            </Text>
         </TouchableOpacity>
     )
 }

@@ -2,7 +2,7 @@ import { View, Text, TouchableWithoutFeedback, Keyboard } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { classNames } from '../utils'
 import { styles } from '../constants'
-import { FriendsHeaderButtons, FriendsCategorys, FriendsContent } from '../components'
+import { FriendsHeaderButtons, FriendsCategorys, FriendsContainer } from '../components'
 import React, { useEffect, useState } from 'react';
 import useUser from '../utils/userFetcher'
 import { fetchFriendsInvitations } from '../utils/friendsFetcher'
@@ -30,6 +30,8 @@ export default function FriendsPage() {
 
     const handleTabChange = async (tabIndex) => {
         setSelectedTab(tabIndex);
+        // preventing ghost user
+        setViewFriends([])
 
         const invitations = await fetchFriendsInvitations(user.username)
 
@@ -71,7 +73,7 @@ export default function FriendsPage() {
                         {viewCategorys && <FriendsCategorys selectedTab={selectedTab} onTabChange={handleTabChange} />}
 
                         {/* Friends Content*/}
-                        <FriendsContent friends={viewFriends} searchText={searchText} user={user} selectedTab={selectedTab} />
+                        <FriendsContainer friends={viewFriends} searchText={searchText} user={user} selectedTab={selectedTab} />
                     </>
                 )}
             </SafeAreaView>

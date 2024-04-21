@@ -1,7 +1,7 @@
 import { Pressable, Image } from 'react-native'
 import { router } from 'expo-router'
 import React from 'react'
-import { classNames } from '../utils'
+import { classNames } from '../../utils'
 
 export default function GameCard({ game }) {
     return (

@@ -1,11 +1,11 @@
 import { View, Text, SafeAreaView } from 'react-native'
 import { Colors } from '../constants/styles'
 import React, { useState } from 'react'
-import { SipsterButton, TextField, PopUpWindow } from '../components'
 import { router } from 'expo-router'
 import { styles } from '../constants'
 import { useLogin } from '../utils/loginFetcher';
 import { storeUser } from '../utils/userFetcher'
+import { TextField, SipsterButton } from '../components/'
 
 export default function LoginPage() {
 

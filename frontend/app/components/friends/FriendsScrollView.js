@@ -1,10 +1,10 @@
 import {ScrollView, Dimensions } from 'react-native'
-import FriendCard from './FriendCard'
+import FriendCard from './FriendBtn'
 import React, { useEffect, useState } from 'react'
 
 const screenWidth = Dimensions.get('window').width;
 
-export default function Friends({ friends, user }) {
+export default function FriendsScrollView({ friends, user }) {
     const [scrollEnable, setScrollEnable] = useState(false);
 
     useEffect(() => {

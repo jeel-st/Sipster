@@ -1,5 +1,5 @@
 import { View, TextInput } from 'react-native'
-import { styles } from '../constants';
+import { styles } from '../../constants';
 
 const TextField = ({ placeholder }) => {
     return (
