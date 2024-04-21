@@ -23,6 +23,7 @@ import SmallTextField from './layout/SmallTextField';
 import TagCard from './layout/TagCard';
 import TextField from './layout/TextField';
 import TextFieldConst from './layout/TextFieldConst';
+import GameOverview from './layout/GameOverview';
 
 // Profile imports
 import ProfileCard from './profile/ProfileCard';
@@ -44,7 +45,7 @@ export {
     GameCard, Games,
 
     // Layout
-    BackButton, SipsterButton, SmallTextField, TagCard, TextField, TextFieldConst,
+    BackButton, SipsterButton, SmallTextField, TagCard, TextField, TextFieldConst, GameOverview,
 
     // Profile
     ProfileCard, ProfileHeaderButtons,

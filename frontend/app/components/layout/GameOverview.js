@@ -1,8 +1,8 @@
-import { Pressable, View } from 'react-native'
-import { styles } from '../constants'
+import { Pressable, Text, View } from 'react-native'
+import { styles } from '../../constants'
 import { router } from 'expo-router'
 import React from 'react'
-import { GameCard } from '../components'
+import { GameCard } from '../games/GameCard'
 
 export default function GameOverview() {
     return (

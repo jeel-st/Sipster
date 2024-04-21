@@ -4,7 +4,7 @@ import { FontAwesome } from '@expo/vector-icons'
 import { router, useLocalSearchParams } from 'expo-router'
 import { LinearGradient } from 'expo-linear-gradient'
 import React from 'react'
-import Button from '../components/Button'
+import { SipsterButton } from '../components'
 
 
 const { width, height } = Dimensions.get('window');
@@ -50,7 +50,7 @@ export default function GamePage() {
                     {game.desc}
                 </Text>
                 {/*Schauen wie ich das mit gsme.start allgemein machen kann für alle spiele*/}
-                <Button title="Test" navigation={() => router.navigate('routes/WoPStart')} />
+                <SipsterButton title="Test" navigation={() => router.navigate('routes/WoPStart')} />
             </View>
         </ScrollView>
     )

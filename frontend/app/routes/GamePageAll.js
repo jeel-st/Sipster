@@ -1,6 +1,6 @@
 import { ScrollView,SafeAreaView } from 'react-native'
-import GameOverview from '../components/GameOverview';
 import { router, useLocalSearchParams } from 'expo-router'
+import { GameOverview } from '../components';
 
 export default function GamePageAll(){
     const game = useLocalSearchParams();
