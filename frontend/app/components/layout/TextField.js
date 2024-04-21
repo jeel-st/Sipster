@@ -1,12 +1,12 @@
 import { View, TextInput } from 'react-native'
-import { styles } from '../constants';
+import React from 'react'
+import { styles } from '../../constants'
 
-export default function ({ placeholder, onChangeText, value, hideText }) {
-
+export default function TextField({ placeholder, onChangeText, value, hideText }) {
     return (
         <View>
             <TextInput
-                className="h-10 m-1 rounded-xl shadow-md shadow-black text-white w-[122px] pl-2"
+                className="h-10 m-1 rounded-xl shadow-md shadow-black w-64 text-white pl-2"
                 style={{ backgroundColor: styles.Colors.secondary }}
                 placeholder={placeholder}
                 onChangeText={onChangeText}

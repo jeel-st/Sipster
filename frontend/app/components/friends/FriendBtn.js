@@ -4,7 +4,7 @@ import { router } from 'expo-router'
 import React from 'react'
 import getProfilePicture from '../../utils/accountFetcher';
 
-export default function FriendCard({ friend, user }) {
+export default function FriendBtn({ friend, user }) {
     return ( friend &&
         <Pressable className="mx-1 w-20 items-center"
             onPress={() => router.navigate({ pathname: "/routes/ProfilePage", params: friend})}>

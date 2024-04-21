@@ -1,5 +1,5 @@
 import { ScrollView, View } from 'react-native'
-import { games } from '../constants'
+import { games } from '../../constants'
 import GameCard from './GameCard'
 import React, { useEffect, useState } from 'react'
 

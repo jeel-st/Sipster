@@ -2,10 +2,10 @@ import { View, TouchableOpacity, Text } from 'react-native'
 import { Entypo, FontAwesome, AntDesign, MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons'
 import { router } from 'expo-router'
 import React, { useEffect, useState } from 'react'
-import { classNames } from '../utils'
+import { classNames } from '../../utils'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { declineFriendInvite, fetchFriendsInvitations, removeFriend, sendFriendInvite } from '../utils/friendsFetcher'
-import useUser from '../utils/userFetcher'
+import { declineFriendInvite, fetchFriendsInvitations, removeFriend, sendFriendInvite } from '../../utils/friendsFetcher'
+import useUser from '../../utils/userFetcher'
 import { Box, Center, HStack, Icon, IconButton, Stagger, useDisclose } from 'native-base'
 
 export default function ProfileHeaderButtons({ friend }) {

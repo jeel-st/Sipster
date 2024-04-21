@@ -1,10 +1,8 @@
 import { View, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import BackButton from "../components/BackButton";
+import { BackButton, TextField, TextFieldConst } from "../components";
 import{Colors} from "../constants/styles"
 import{styles} from "../constants"
-import TextFieldConst from '../components/TextFieldConst'
-import TextField from '../components/TextField'
 
 export default function WoPStart(){
   return(

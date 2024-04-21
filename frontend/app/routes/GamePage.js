@@ -4,7 +4,7 @@ import { FontAwesome } from '@expo/vector-icons'
 import { router, useLocalSearchParams } from 'expo-router'
 import { LinearGradient } from 'expo-linear-gradient'
 import React from 'react'
-import SipsterButton from '../components/Button'
+import { SipsterButton } from '../components'
 
 
 const { width, height } = Dimensions.get('window');

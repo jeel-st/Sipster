@@ -1,13 +1,11 @@
 import { View, Text, SafeAreaView, Pressable } from 'react-native'
 import { Colors } from '../constants/styles'
 import React, { useState } from 'react'
-import TextField from '../components/TextField'
 import { router } from 'expo-router';
 import { styles } from '../constants';
 import { useRegister } from '../utils/registerFetcher'
-import SmallTextField from '../components/smallTextField'
-import { Popover, NativeBaseProvider, Button } from "native-base";
-import SipsterButton from '../components/Button'
+import { Popover, NativeBaseProvider } from "native-base";
+import { SipsterButton, SmallTextField, TextField } from '../components';
 
 
 export default function RegisterPage() {

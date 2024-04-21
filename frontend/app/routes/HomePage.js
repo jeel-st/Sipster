@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { classNames } from '../utils'
 import { styles } from '../constants'
-import { Events, Friends, Games } from '../components'
+import { Events, FriendsScrollView, Games } from '../components'
 import { router } from 'expo-router'
 import { NativeBaseProvider } from 'native-base'
 import FriendsSkeleton from '../components/skeletons/FriendsSkeleton';
@@ -42,7 +42,7 @@ export default function HomePage({ displayEvent, handleEventSelection, user }) {
                     </Pressable>
 
                     {
-                        user && user.friends.length > 0 && (<Friends friends={user.friends} user={user}/>)
+                        user && user.friends.length > 0 && (<FriendsScrollView friends={user.friends} user={user}/>)
                     }
                     {
                         user && user.friends.length == 0 && FriendsSkeleton()

@@ -1,10 +1,10 @@
 import { View, Text, Image } from 'react-native'
 import React from 'react'
-import { classNames } from '../utils'
-import { styles } from '../constants'
-import { formatDate } from '../utils/formDate'
-import TagCard from './TagCard'
-import getProfilePicture from '../utils/accountFetcher'
+import { classNames } from '../../utils'
+import { styles } from '../../constants'
+import { formatDate } from '../../utils/formDate'
+import TagCard from '../layout/TagCard'
+import getProfilePicture from '../../utils/accountFetcher'
 
 export default function ProfileCard({ friend }) {
     const tags = [formatDate(friend), "1000" + " sips"]
