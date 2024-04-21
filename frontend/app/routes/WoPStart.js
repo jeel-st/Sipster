@@ -5,7 +5,7 @@ import{Colors} from "../constants/styles"
 import{styles} from "../constants"
 import TextFieldConst from '../components/TextFieldConst'
 import TextField from '../components/TextField'
-import Friends from '../components/Friends'
+
 
 export default function WoPStart(){
   return(
@@ -36,7 +36,7 @@ export default function WoPStart(){
             <Text className={styles.categoryText}>
               Freundesliste
             </Text>
-            <Friends/>
+            
           </View>
     </SafeAreaView>
   )
