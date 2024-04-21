@@ -15,6 +15,7 @@ export default function AppLayout() {
             <Stack.Screen name='routes/ProfilePage' options={{ headerShown: false, animation: 'fade_from_bottom' }} />
             <Stack.Screen name='routes/FriendsPage' options={{ headerShown: false, animation: 'fade_from_bottom' }} />
             <Stack.Screen name='routes/AccountPage' options={{ headerShown: false, animation: 'fade_from_bottom' }} />
+            <Stack.Screen name='routes/SettingsPage' options={{ animation: 'fade_from_bottom' }} />
         </Stack>
     )
 }

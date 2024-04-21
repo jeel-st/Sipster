@@ -6,9 +6,11 @@ import RegisterPage from "./RegisterPage";
 import FriendsPage from "./FriendsPage";
 import { withHook } from "../utils/withHook";
 import useHome from "../utils/hooks/useHome";
+import SettingsPage from "./SettingsPage";
+import AccountPage from "./AccountPage";
 
 const Home = withHook(useHome, HomePage)
 
-import AccountPage from "./AccountPage";
 
-export { GamePage, EventPage, Home, LoginPage, RegisterPage, FriendsPage }
+
+export { GamePage, EventPage, Home, LoginPage, RegisterPage, FriendsPage, AccountPage, SettingsPage }
