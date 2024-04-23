@@ -1,20 +1,30 @@
-import { Pressable, Text, View } from 'react-native'
-import { styles } from '../../constants'
-import { router } from 'expo-router'
+import { View, Text } from 'react-native'
 import React from 'react'
-import { GameCard } from '../games/GameCard'
+import GameCard from '../games/GameCard'
+import { games, styles } from '../../constants'
+import { classNames } from '../../utils'
+import GameInfo from '../games/GameInfo'
 
 export default function GameOverview() {
     return (
-        <Pressable
-            className="mx-4 mb-5 rounded-3xl shadow-md shadow-black flex1-row alignItem-center"
-            style={{ backgroundColor: styles.Colors.secondary }}
-            onPress={() => router.navigate({ pathname: "/routes/Gamepage"})}
-            >
-            <GameCard />
-            <View>
-                <Text>Test</Text>
+      <View style={{ backgroundColor: 'primary', flexDirection: 'row', justifyContent: 'space-between' }}>
+
+        <View>
+            {games.map((game, index) => (
+            <View key={index} style={{ marginTop: 5, marginBottom: 5 }}>
+                <GameCard game={game} />
             </View>
-        </Pressable>
-    )
-}
+            ))}
+      </View>
+
+        <View >
+           {games.map((game, index) => (
+            <View key={index} style={{ marginTop: 5, marginBottom: 5 }}>
+                <GameInfo game={game} />
+            </View>
+           ))}
+        </View>
+
+      </View>
+    );
+  }
