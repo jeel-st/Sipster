@@ -4,7 +4,7 @@
     "slug": "sipsterReactNative",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./app/assets/images/icon.png",
+    "icon": "./app/assets/images/Icon.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "splash": {
