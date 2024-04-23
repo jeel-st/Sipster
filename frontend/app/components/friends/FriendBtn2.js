@@ -13,7 +13,7 @@ export default function FriendBtn2({ friend, selectedTab, user }) {
       onPress={() => router.navigate({ pathname: "/routes/ProfilePage", params: friend })}
     >
       <View className="w-20 h-20 rounded-full shadow-md shadow-black">
-        <Image className="w-full h-full rounded-full" source={{ uri: `http://85.215.71.124/static/${getProfilePicture(friend)}` }} />
+        <Image className="w-full h-full rounded-full" source={{ uri: `http://85.215.71.124/static/${getProfilePicture(friend)}`, key: new Date()}} />
       </View>
       <View className="flex-1 self-center">
         <Text className="text-white font-bold">{friend.firstName + " " + friend.lastName}</Text>

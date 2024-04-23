@@ -4,7 +4,6 @@ async function uploadProfilePicture(username, fileExtension){
     try{
 
         const imagePath = `/home/sipster/sipster/backend/profilePictures/Picture${username}${fileExtension}`
-        console.log(imagePath)
         const result = await database.getDB().collection('personalInformation').updateOne(
             {username: username},
             { $set: { profilePicture: imagePath } }
@@ -25,10 +24,10 @@ async function getProfilePictureURL(username){
 async function deleteProfilePictureURL(username){
     try {
         const result = await database.getDB().collection('personalInformation').updateOne(
-            { username: username }, 
+            { username: username },
             { $set: { profilePicture: null } }
         )
-        
+
         if (result.modifiedCount === 1) {
             console.log(`Profilbild für Benutzer ${username} erfolgreich gelöscht.`)
             return "Success"
