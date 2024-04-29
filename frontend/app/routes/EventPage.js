@@ -1,5 +1,5 @@
 import { View, Text, SafeAreaView, StatusBar } from 'react-native';
-import { Events, EventInfoCard, SipsterButton  } from '../components';
+import { Events, EventInfoCard, SipsterButton } from '../components';
 import { styles } from '../constants';
 import React from 'react';
 import { useEventDisplay } from '../utils';
