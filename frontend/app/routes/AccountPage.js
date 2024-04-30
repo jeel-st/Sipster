@@ -1,4 +1,4 @@
-import { SafeAreaView, Pressable, Text, StatusBar } from "react-native"
+import { SafeAreaView, Pressable, Text, StatusBar, Image } from "react-native"
 import FriendsSkeleton from '../components/skeletons/FriendsSkeleton';
 import { styles } from '../constants';
 import React from 'react';
@@ -27,13 +27,13 @@ export default function AccountPage() {
                         <Text className={styles.brandingText}>sipster</Text>
 
                         <Pressable onPress={() => router.navigate('routes/SettingsPage')}>
-                            <AntDesign name="setting" size={24} color={styles.Colors.yellow}/>
+                            <AntDesign name="setting" size={24} color={styles.Colors.yellow} />
                         </Pressable>
                     </View>
 
                     {/* Hello User */}
                     <View className={styles.spaceText}>
-                        <Text className={styles.categoryText}>Hello {user.firstName}!</Text>
+                        <Text className={styles.categoryText}>Hello {user && user.firstName}!</Text>
                     </View>
 
                     {/* Informations */}
@@ -46,7 +46,7 @@ export default function AccountPage() {
 
                         {/* Profile Picture */}
                         <View className="h-40 w-40 mx-5 rounded-3xl shadow-md shadow-black mt-3 bg-secondary" >
-
+                            <Image/>
                         </View>
                     </View>
 
