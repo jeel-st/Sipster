@@ -7,6 +7,7 @@ import useUser from '../utils/userFetcher';
 import { NativeBaseProvider, View } from "native-base";
 import { FriendsScrollView } from "../components";
 import { AntDesign } from '@expo/vector-icons';
+import getProfilePicture from '../utils/accountFetcher'
 
 export default function AccountPage() {
 
@@ -27,7 +28,9 @@ export default function AccountPage() {
                         <Text className={styles.brandingText}>sipster</Text>
 
                         <Pressable onPress={() => router.navigate('routes/SettingsPage')}>
-                            <AntDesign name="setting" size={24} color={styles.Colors.yellow} />
+                            <View className="justify-center items-center w-10 h-10 rounded-xl bg-secondary">
+                                <AntDesign name="setting" size={24} color="white" />
+                            </View>
                         </Pressable>
                     </View>
 
@@ -46,7 +49,7 @@ export default function AccountPage() {
 
                         {/* Profile Picture */}
                         <View className="h-40 w-40 mx-5 rounded-3xl shadow-md shadow-black mt-3 bg-secondary" >
-                            <Image/>
+                            <Image source={{ uri: user && user.profilePicture }} className="w-40 h-40" />
                         </View>
                     </View>
 

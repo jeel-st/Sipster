@@ -8,6 +8,7 @@ export const Colors = {
     purple: "#C0C1FF"
 }
 
+
 // H3 Überschriften: z.B: events, friends, games
 export const H3Text = "text-white font-bold text-l"
 // H2 Überschriften: z.B: events, friends, games
