@@ -15,6 +15,11 @@ import FriendsTabButton from './friends/FriendsTabButton';
 // Games imports
 import GameCard from './games/GameCard';
 import Games from './games/Games';
+import GamePicture from './games/GamePicture';
+import GameOverview from './games/GameOverview';
+import Category from './games/Category';
+import CategoryCard from './games/CategoryCard';
+
 
 // Layout imports
 import BackButton from './layout/BackButton';
@@ -23,7 +28,6 @@ import SmallTextField from './layout/SmallTextField';
 import TagCard from './layout/TagCard';
 import TextField from './layout/TextField';
 import TextFieldConst from './layout/TextFieldConst';
-import GameOverview from './layout/GameOverview';
 
 // Profile imports
 import ProfileCard from './profile/ProfileCard';
@@ -42,10 +46,10 @@ export {
     FriendBtn, FriendBtn2, FriendsCategorys, FriendsContainer, FriendsHeaderButtons, FriendsScrollView, FriendsTabButton,
 
     // Games
-    GameCard, Games,
+    GameCard, Games, GameOverview, GamePicture, Category, CategoryCard,
 
     // Layout
-    BackButton, SipsterButton, SmallTextField, TagCard, TextField, TextFieldConst, GameOverview,
+    BackButton, SipsterButton, SmallTextField, TagCard, TextField, TextFieldConst, 
 
     // Profile
     ProfileCard, ProfileHeaderButtons,
