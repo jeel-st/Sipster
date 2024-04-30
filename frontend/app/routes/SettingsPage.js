@@ -1,5 +1,5 @@
 import { SafeAreaView, Text, StatusBar, View, TouchableOpacity } from "react-native"
-import { RedButton } from '../components/'
+import { RedButton, SettingsButton } from '../components/'
 import { styles } from '../constants'
 import { router } from 'expo-router'
 import { FontAwesome } from '@expo/vector-icons'
@@ -25,10 +25,21 @@ export default function SettingsPage() {
                 <View className="mt-6">
                     <Text className={styles.brandingText}>your settings</Text>
                 </View>
+
+                {/* Change Buttons */}
+                <View className="mt-6">
+                    <SettingsButton title="change username" />
+                    <SettingsButton title="change password" />
+                    <SettingsButton title="change firstname" />
+                    <SettingsButton title="change lastname" />
+                    <SettingsButton title="change email" />
+                    <SettingsButton title="change profile picture" />
+                </View>
+
             </View>
 
             {/* Logout Button*/}
-            <View className="mt-5 mx-6 items-center">
+            <View className="mt-6 mx-6 items-center">
                 <RedButton title="Logout" navigation={() => router.navigate('routes/LoginPage')} />
             </View>
 

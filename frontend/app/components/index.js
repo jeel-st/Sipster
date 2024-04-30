@@ -24,6 +24,7 @@ import SmallTextField from './layout/SmallTextField';
 import TagCard from './layout/TagCard';
 import TextField from './layout/TextField';
 import TextFieldConst from './layout/TextFieldConst';
+import SettingsButton from './layout/SettingsButton';
 
 // Profile imports
 import ProfileCard from './profile/ProfileCard';
@@ -45,7 +46,7 @@ export {
     GameCard, Games,
 
     // Layout
-    BackButton, SipsterButton, SmallTextField, TagCard, TextField, TextFieldConst, RedButton,
+    BackButton, SipsterButton, SmallTextField, TagCard, TextField, TextFieldConst, RedButton, SettingsButton,
 
     // Profile
     ProfileCard, ProfileHeaderButtons,

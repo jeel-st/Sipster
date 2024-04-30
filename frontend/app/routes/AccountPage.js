@@ -1,13 +1,11 @@
 import { SafeAreaView, Pressable, Text, StatusBar, Image } from "react-native"
-import FriendsSkeleton from '../components/skeletons/FriendsSkeleton';
 import { styles } from '../constants';
 import React from 'react';
 import { router } from 'expo-router'
 import useUser from '../utils/userFetcher';
 import { NativeBaseProvider, View } from "native-base";
-import { FriendsScrollView } from "../components";
+import { FriendsScrollView,  FriendsSkeleton} from "../components";
 import { AntDesign } from '@expo/vector-icons';
-import getProfilePicture from '../utils/accountFetcher'
 
 export default function AccountPage() {
 
