@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView } from 'react-native'
+import { View, Text, SafeAreaView, Image } from 'react-native'
 import { Colors } from '../constants/styles'
 import React, { useState } from 'react'
 import { router } from 'expo-router'
@@ -35,11 +35,11 @@ export default function LoginPage() {
             <View className="mx-6 items-center">
 
                 {/* Distance */}
-                <View className="h-20 mt-20" />
+                <View className="h-20 mt-16" />
 
                 {/* Branding */}
                 <View className="mt-20 mb-5">
-                    <Text className="text-white font-bold text-4xl tracking-widest text-center">sipster</Text>
+                    <Image source={require('../../assets/images/logo.png')} />
                 </View>
 
                 {/* input fields */}

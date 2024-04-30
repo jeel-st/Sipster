@@ -1,4 +1,4 @@
-import { View, Text, Pressable } from 'react-native'
+import { View, Text, Pressable, Image } from 'react-native'
 import React, { useEffect } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { classNames } from '../utils'
@@ -18,7 +18,7 @@ export default function HomePage({ displayEvent, handleEventSelection, user }) {
                 <View>
                     {/* Branding */}
                     <View className={styles.spaceText}>
-                        <Text className={styles.brandingText}>sipster</Text>
+                        <Image source={require('../../assets/images/logo-small.png')} />
                     </View>
 
                     {/* Games */}
@@ -42,7 +42,7 @@ export default function HomePage({ displayEvent, handleEventSelection, user }) {
                     </Pressable>
 
                     {
-                        user && user.friends.length > 0 && (<FriendsScrollView friends={user.friends} user={user}/>)
+                        user && user.friends.length > 0 && (<FriendsScrollView friends={user.friends} user={user} />)
                     }
                     {
                         user && user.friends.length == 0 && FriendsSkeleton()

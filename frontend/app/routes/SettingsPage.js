@@ -1,5 +1,5 @@
 import { SafeAreaView, Text, StatusBar, View, TouchableOpacity } from "react-native"
-import { RedButton, SettingsButton } from '../components/'
+import { SettingsButton, SipsterButton } from '../components/'
 import { styles } from '../constants'
 import { router } from 'expo-router'
 import { FontAwesome } from '@expo/vector-icons'
@@ -40,7 +40,7 @@ export default function SettingsPage() {
 
             {/* Logout Button*/}
             <View className="mt-6 mx-6 items-center">
-                <RedButton title="Logout" navigation={() => router.navigate('routes/LoginPage')} />
+                <SipsterButton title="Logout" navigation={() => router.navigate('routes/LoginPage')} />
             </View>
 
         </SafeAreaView >

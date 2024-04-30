@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, Pressable } from 'react-native'
+import { View, Text, SafeAreaView, Pressable, Image } from 'react-native'
 import { Colors } from '../constants/styles'
 import React, { useState } from 'react'
 import { router } from 'expo-router';
@@ -40,11 +40,11 @@ export default function RegisterPage() {
                 <View className="mx-6 items-center">
 
                     {/* Distance */}
-                    <View className="h-4 mt-20" />
+                    <View className="h-4 mt-10" />
 
                     {/* Branding */}
                     <View className="mt-20 mb-5">
-                        <Text className="text-white font-bold text-4xl tracking-widest text-center">sipster</Text>
+                        <Image source={require('../../assets/images/logo.png')} />
                     </View>
 
                     {/* input fields */}

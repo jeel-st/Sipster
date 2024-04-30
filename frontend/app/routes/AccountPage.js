@@ -4,7 +4,7 @@ import React from 'react';
 import { router } from 'expo-router'
 import useUser from '../utils/userFetcher';
 import { NativeBaseProvider, View } from "native-base";
-import { FriendsScrollView,  FriendsSkeleton} from "../components";
+import { FriendsScrollView, FriendsSkeleton } from "../components";
 import { AntDesign } from '@expo/vector-icons';
 
 export default function AccountPage() {
@@ -23,7 +23,7 @@ export default function AccountPage() {
 
                     {/* Branding & Settings */}
                     <View className="flex-row mt-4 mx-6 items-center justify-between" >
-                        <Text className={styles.brandingText}>sipster</Text>
+                        <Image source={require('../../assets/images/logo-small.png')} />
 
                         <Pressable onPress={() => router.navigate('routes/SettingsPage')}>
                             <View className="justify-center items-center w-10 h-10 rounded-xl bg-secondary">

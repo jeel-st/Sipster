@@ -18,7 +18,6 @@ import Games from './games/Games';
 
 // Layout imports
 import BackButton from './layout/BackButton';
-import RedButton from './layout/RedButton';
 import SipsterButton from './layout/SipsterButton';
 import SmallTextField from './layout/SmallTextField';
 import TagCard from './layout/TagCard';
@@ -36,21 +35,21 @@ import FriendsSkeleton from './skeletons/FriendsSkeleton';
 
 
 export {
-    // Events
-    EventCard, EventInfoCard, Events,
+  // Events
+  EventCard, EventInfoCard, Events,
 
-    // Friends
-    FriendBtn, FriendBtn2, FriendsCategorys, FriendsContainer, FriendsHeaderButtons, FriendsScrollView, FriendsTabButton,
+  // Friends
+  FriendBtn, FriendBtn2, FriendsCategorys, FriendsContainer, FriendsHeaderButtons, FriendsScrollView, FriendsTabButton,
 
-    // Games
-    GameCard, Games,
+  // Games
+  GameCard, Games,
 
-    // Layout
-    BackButton, SipsterButton, SmallTextField, TagCard, TextField, TextFieldConst, RedButton, SettingsButton,
+  // Layout
+  BackButton, SipsterButton, SmallTextField, TagCard, TextField, TextFieldConst, SettingsButton,
 
-    // Profile
-    ProfileCard, ProfileHeaderButtons,
+  // Profile
+  ProfileCard, ProfileHeaderButtons,
 
-    // Skeletons
-    FriendsH2Skeleton, FriendsSkeleton
-  };
+  // Skeletons
+  FriendsH2Skeleton, FriendsSkeleton
+};
