@@ -30,3 +30,11 @@ export const games = [
     }
     
 ]
+
+
+
+export const categorys = [
+   {category: "Q&A"},
+   {category: "Kartenspiel"},
+   {category: "DingDong"}
+]
