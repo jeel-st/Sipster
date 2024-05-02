@@ -9,6 +9,7 @@ module.exports = {
             "./app/components/layout/*.{js,jsx,ts,tsx}",
             "./app/components/profile/*.{js,jsx,ts,tsx}",
             "./app/components/skeletons/*.{js,jsx,ts,tsx}",
+            "./app/components/image/*.{js,jsx,ts,tsx}",
             "./app/routes/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {

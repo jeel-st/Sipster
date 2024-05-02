@@ -32,6 +32,13 @@ import ProfileHeaderButtons from './profile/ProfileHeaderButtons';
 import FriendsH2Skeleton from './skeletons/FriendsH2Skeleton';
 import FriendsSkeleton from './skeletons/FriendsSkeleton';
 
+// Image Imports
+import ImageContainer from './image/ImageContainer';
+import ImageCard from './image/ImageCard';
+import ImageCard2 from './image/ImageCard2';
+import ImageFriendsScrollView from './image/ImageFriendsScrollView';
+import ImageFriendBtn from './image/ImageFriendBtn';
+
 
 export {
     // Events
@@ -50,5 +57,8 @@ export {
     ProfileCard, ProfileHeaderButtons,
 
     // Skeletons
-    FriendsH2Skeleton, FriendsSkeleton
+    FriendsH2Skeleton, FriendsSkeleton,
+
+    // Image
+    ImageContainer, ImageCard, ImageCard2, ImageFriendsScrollView, ImageFriendBtn
   };

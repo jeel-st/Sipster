@@ -1,8 +1,8 @@
 import { View, Text } from 'react-native';
-import { Home } from '../routes';
+import { Image } from '../routes';
 
 export default function Tab() {
   return (
-    <Home/>
+    <Image/>
   );
 }
