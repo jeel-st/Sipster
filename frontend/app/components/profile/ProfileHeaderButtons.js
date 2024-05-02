@@ -155,9 +155,9 @@ export default function ProfileHeaderButtons({ friend }) {
     };
 
     return (
-        <View>
+        <View className={classNames('z-20')}>
             <SafeAreaView className={classNames(
-                'absolute z-20 flex-row justify-between items-center',
+                'absolute flex-row justify-between items-center',
                 'px-4',
                 'w-full mt-[-16px]',
             )}>
