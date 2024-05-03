@@ -11,6 +11,7 @@ export default function ImageCard2({ friend }) {
             'h-[600px]',
             'rounded-2xl bg-secondary border-purple border-4'
         )}>
+            {/* Friend Acivity Image */}
             <Image
                 className={classNames(
                     'h-full',
@@ -21,6 +22,7 @@ export default function ImageCard2({ friend }) {
                     key: new Date()
                 }} />
 
+            {/* Username and Date */}
             <View className={classNames(
                 'absolute z-20',
                 'px-2 space-x-2',
@@ -51,6 +53,7 @@ export default function ImageCard2({ friend }) {
                 </View>
             </View>
 
+            {/* Activity Indicator */}
             <View className={classNames(
                 'absolute z-20 bottom-2',
                 'px-4 space-x-2',
@@ -62,8 +65,8 @@ export default function ImageCard2({ friend }) {
                     'rounded-full border-purple border-2'
                 )}>
                     <Text className={classNames(
-                            'absolute text-white font-bold'
-                        )}>Beer Pong</Text>
+                        'absolute text-white font-bold'
+                    )}>Beer Pong</Text>
 
                     <View className={classNames(
                         'w-full h-full',

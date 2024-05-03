@@ -1,12 +1,10 @@
-import { View, Text, Image, Pressable } from 'react-native'
-import { styles } from '../../constants';
-import { router } from 'expo-router'
+import { View, Image, Pressable } from 'react-native'
 import React from 'react'
 import getProfilePicture from '../../utils/accountFetcher';
 import { classNames } from '../../utils';
 
 export default function ImageFriendBtn({ friend, displayFriend, handleFriendSelection, friendId }) {
-    return (friend &&
+    return (
         <Pressable
             className={classNames(
                 'items-center',
@@ -15,6 +13,7 @@ export default function ImageFriendBtn({ friend, displayFriend, handleFriendSele
             )}
             onPress={() => handleFriendSelection(friendId)}
         >
+            {/* Container for the friend image */}
             <View className={classNames(
                 'justify-center items-center',
                 'h-16 w-16',
