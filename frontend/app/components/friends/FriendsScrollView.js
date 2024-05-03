@@ -8,9 +8,8 @@ export default function FriendsScrollView({ friends, user }) {
     const [scrollEnable, setScrollEnable] = useState(false);
 
     useEffect(() => {
-        if (friends.length > 5) setScrollEnable(true)
-        else setScrollEnable(false)
-    }, friends)
+        setScrollEnable(friends.length > 5);
+    }, [friends.length])
 
     const FRIEND_CARD_WIDTH = 91
     const contentWidth = Math.max(screenWidth, friends.length * FRIEND_CARD_WIDTH)

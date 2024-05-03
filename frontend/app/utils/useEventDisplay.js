@@ -10,5 +10,5 @@ export function useEventDisplay() {
         }
     };
 
-    return { displayEvent, handleEventSelection };
+    return { displayEvent, handleEventSelection }
 }

@@ -1,13 +1,40 @@
 import { View, Text, Image } from 'react-native'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { classNames } from '../../utils'
 import { styles } from '../../constants'
 import { formatDate } from '../../utils/formDate'
 import TagCard from '../layout/TagCard'
 import getProfilePicture from '../../utils/accountFetcher'
+import useUser from '../../utils/userFetcher'
+import { fetchFriendsInvitations } from '../../utils/friendsFetcher'
 
 export default function ProfileCard({ friend }) {
     const tags = [formatDate(friend), "1000" + " sips"]
+    const [isFriend, setIsFriend] = useState(false)
+    const [isInvited, setIsInvited] = useState(false)
+
+    const user = useUser();
+
+    const handleIsFriend = async () => {
+        const isfriend = user.friends.find((elemenent) => elemenent.username == friend.username)
+        const invites = await fetchFriendsInvitations(user.username)
+        inviteReceived = invites[0].find((elemenent) => elemenent.username == friend.username)
+        sentReceived = invites[1].find((elemenent) => elemenent.username == friend.username)
+        if (isfriend) {
+            setIsFriend(true)
+        } else if (inviteReceived || sentReceived) {
+            setIsInvited(true)
+        } else {
+            setIsFriend(false)
+            setIsInvited(false)
+        }
+    }
+
+    useEffect(() => {
+        if (user) {
+            handleIsFriend();
+        }
+    }, [user]);
 
     return (
         <View className={classNames(
@@ -17,7 +44,7 @@ export default function ProfileCard({ friend }) {
         )}>
             {/* Profile Image*/}
             <Image
-                source={{ uri: `http://85.215.71.124/static/${getProfilePicture(friend)}` }}
+                source={{ uri: `http://85.215.71.124/static/${getProfilePicture(friend)}`, key: new Date() }}
                 className={classNames(
                     'mt-[-22.5%]',
                     'w-44 h-44 rounded-full'
@@ -36,6 +63,10 @@ export default function ProfileCard({ friend }) {
             )}>
                 @{friend.username}
             </Text>
+
+            { user && isInvited && <Text className="inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mt-2">Pending</Text> }
+            { user && isFriend && <Text className="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20 mt-2">Friend</Text>}
+            { user && !isInvited && !isFriend && <Text className="inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/10 mt-2">Not Friend</Text>}
 
             {/* Profile Tags*/}
             <View className="flex-1 flex-row">

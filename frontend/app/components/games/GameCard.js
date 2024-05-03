@@ -13,7 +13,7 @@ export default function GameCard({ game }) {
             )}
             onPress={() => router.navigate({ pathname: "/routes/GamePage", params: { name: game.name, profile: game.profile, desc: game.desc, playtime: game.playtime } })}
         >
-            <Image className="w-full h-full rounded-3xl" source={{ uri: game.profile }} />
+            <Image className="w-full h-full rounded-3xl" source={{ uri: game.profile, key: new Date()}} />
         </Pressable>
     )
 }
