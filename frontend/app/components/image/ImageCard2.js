@@ -8,8 +8,8 @@ export default function ImageCard2({ friend }) {
     return (
         <View className={classNames(
             'mx-0.5 mb-4 mt-2 space-y-2',
-            'h-[575px]',
-            'rounded-2xl bg-secondary border-purple border-2'
+            'h-[600px]',
+            'rounded-2xl bg-secondary border-purple border-4'
         )}>
             <Image
                 className={classNames(

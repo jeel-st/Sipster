@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { getUser } from "../userFetcher";
-import { events } from "../../constants";
+import { events, friends } from "../../constants";
 import { usePathname } from "expo-router";
 
 const useImage = () => {
     const [user, setUser] = useState(null)
+    const [displayFriend, setDisplayFriend] = useState(0)
 
     const path = usePathname()
 
@@ -13,12 +14,18 @@ const useImage = () => {
             const userData = await getUser()
             setUser(userData);
         }
-        if(path === "/"){
+        if (path === "/") {
             fetchUser();
         }
     }, [path]);
 
-    return {user}
+    const handleFriendSelection = (selectedFriend) => {
+        if (selectedFriend !== displayFriend) {
+            setDisplayFriend(selectedFriend);
+        }
+    };
+
+    return { user, displayFriend, handleFriendSelection }
 }
 
 export default useImage;

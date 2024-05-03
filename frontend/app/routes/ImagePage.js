@@ -5,7 +5,7 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { styles } from '../constants'
 import ImageContainer from '../components/image/ImageContainer'
 
-export default function ImagePage({user}) {
+export default function ImagePage({user, displayFriend, handleFriendSelection}) {
   return (
     <SafeAreaView className={classNames(
         'flex-1',
@@ -20,7 +20,7 @@ export default function ImagePage({user}) {
             </View>
 
             {/* Image Container */}
-            {user && <ImageContainer user={user}/>}
+            {user && <ImageContainer user={user} displayFriend={displayFriend} handleFriendSelection={handleFriendSelection}/>}
         </View>
     </SafeAreaView>
   )

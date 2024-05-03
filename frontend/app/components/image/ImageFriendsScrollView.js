@@ -5,7 +5,7 @@ import ImageFriendBtn from './ImageFriendBtn';
 
 const screenWidth = Dimensions.get('window').width;
 
-export default function ImageFriendsScrollView({ user }) {
+export default function ImageFriendsScrollView({ user, displayFriend, handleFriendSelection }) {
     const [scrollEnable, setScrollEnable] = useState(false);
 
     useEffect(() => {
@@ -18,14 +18,14 @@ export default function ImageFriendsScrollView({ user }) {
     return (
         <ScrollView
             className={classNames(
-                'mt-4 px-0.5'
+                'mt-4 px-1'
             )}
             horizontal
             showsHorizontalScrollIndicator={false}
             contentContainerStyle={{ width: contentWidth }}
             scrollEnabled={scrollEnable}>
             {
-                user.friends.map((friend, index) => <ImageFriendBtn friend={friend} key={index} />)
+                user.friends.map((friend, index) => <ImageFriendBtn friend={friend} displayFriend={displayFriend} handleFriendSelection={handleFriendSelection} friendId={index} key={index} />)
             }
         </ScrollView >
     )
