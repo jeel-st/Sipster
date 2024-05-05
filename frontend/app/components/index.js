@@ -29,6 +29,9 @@ import SettingsButton from './layout/SettingsButton';
 import ProfileCard from './profile/ProfileCard';
 import ProfileHeaderButtons from './profile/ProfileHeaderButtons';
 
+// Settings imports
+import changeUsername from './settings/changeUsername';
+
 // Skeletons imports
 import FriendsH2Skeleton from './skeletons/FriendsH2Skeleton';
 import FriendsSkeleton from './skeletons/FriendsSkeleton';
@@ -49,6 +52,9 @@ export {
 
   // Profile
   ProfileCard, ProfileHeaderButtons,
+
+  // Settings
+  changeUsername,
 
   // Skeletons
   FriendsH2Skeleton, FriendsSkeleton
