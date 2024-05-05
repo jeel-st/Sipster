@@ -2,6 +2,7 @@ import { View, TextInput } from 'react-native'
 import React from 'react'
 import { styles } from '../../constants'
 
+/* Frontend Component für das SmallTextField - Kann individuell genutzt werden da placeholder, onChangeText, value und hideText variabel */
 export default function SmallTextField({ placeholder, onChangeText, value, hideText }) {
   return (
     <View>

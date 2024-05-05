@@ -1,7 +1,9 @@
+/* Imports */
 import React from 'react';
 import { TouchableOpacity, View, Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
+/* Frontend Component für den SettingsButton - Kann individuell genutzt werden da titel und icon variabel */
 export default function SettingsButton({ title, icon }) {
     return (
         <TouchableOpacity className="shadow-md shadow-black w-[340px] rounded-xl bg-secondary mt-3">

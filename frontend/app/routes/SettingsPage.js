@@ -1,14 +1,15 @@
+/* Imports */
 import { SafeAreaView, Text, StatusBar, View, TouchableOpacity } from "react-native"
 import { SettingsButton, SipsterButton } from '../components/'
 import { styles } from '../constants'
 import { router } from 'expo-router'
 import { FontAwesome } from '@expo/vector-icons'
 
+/* Frontend der LoginPage */
 export default function SettingsPage() {
 
     return (
         <SafeAreaView className="flex-1 bg-primary">
-
 
             <View className={styles.spaceText}>
                 {/* Header */}
@@ -21,7 +22,7 @@ export default function SettingsPage() {
                     </View>
                 </TouchableOpacity>
 
-                {/* Titel */}
+                {/* Title */}
                 <View className="mt-6">
                     <Text className={styles.brandingText}>your settings</Text>
                 </View>

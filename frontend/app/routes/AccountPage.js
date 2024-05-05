@@ -1,3 +1,4 @@
+/* Imports */
 import { SafeAreaView, Pressable, Text, StatusBar, Image } from "react-native"
 import { styles } from '../constants';
 import React from 'react';
@@ -7,10 +8,11 @@ import { NativeBaseProvider, View } from "native-base";
 import { FriendsScrollView, FriendsSkeleton } from "../components";
 import { AntDesign } from '@expo/vector-icons';
 
+/* Frontend der AccountPage */
 export default function AccountPage() {
 
+    /* Eingeloggter User wird aufgerufen */
     const user = useUser();
-    console.log("user: " + user)
 
     return (
         <NativeBaseProvider>
@@ -51,6 +53,7 @@ export default function AccountPage() {
                         </View>
                     </View>
 
+                    {/* Map */}
                     <View className="h-40 m-1 mx-6 flex items-center justify-center rounded-3xl shadow-md shadow-black mt-5 bg-purple">
                         <Text className="text-center text-4xl font-bold">Map</Text>
                     </View>
@@ -59,7 +62,6 @@ export default function AccountPage() {
                     <View className={styles.spaceText}>
                         <Text className={styles.categoryText}>saved events</Text>
                     </View>
-
 
                     {/* Friends */}
                     <Pressable className={styles.spaceText}
