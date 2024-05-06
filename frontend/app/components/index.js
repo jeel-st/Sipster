@@ -24,13 +24,11 @@ import TagCard from './layout/TagCard';
 import TextField from './layout/TextField';
 import TextFieldConst from './layout/TextFieldConst';
 import SettingsButton from './layout/SettingsButton';
+import CheckButton from './layout/CheckButton';
 
 // Profile imports
 import ProfileCard from './profile/ProfileCard';
 import ProfileHeaderButtons from './profile/ProfileHeaderButtons';
-
-// Settings imports
-import changeUsername from './settings/changeUsername';
 
 // Skeletons imports
 import FriendsH2Skeleton from './skeletons/FriendsH2Skeleton';
@@ -48,13 +46,10 @@ export {
   GameCard, Games,
 
   // Layout
-  BackButton, SipsterButton, SmallTextField, TagCard, TextField, TextFieldConst, SettingsButton,
+  BackButton, SipsterButton, SmallTextField, TagCard, TextField, TextFieldConst, SettingsButton, CheckButton,
 
   // Profile
   ProfileCard, ProfileHeaderButtons,
-
-  // Settings
-  changeUsername,
 
   // Skeletons
   FriendsH2Skeleton, FriendsSkeleton
