@@ -6,9 +6,9 @@ async function uploadProfilePicture(userIDObj, fileExtension){
     try{
         userID = userIDObj.toString()
         const imagePath = `/home/sipster/sipster/backend/profilePictures/Picture${userID}${fileExtension}`
-        console.log(imagePath)
+        console.log("imagePath "+imagePath)
         const compressedImagePath = `/home/sipster/sipster/backend/profilePictures/compressed/Picture${userID}${fileExtension}`;
-
+        console.log("compressedImagePath" + compressedImagePath)
         const result = await database.getDB().collection('personalInformation').updateOne(
             {_id: userIDObj},
             { $set: { profilePicture: imagePath } }
@@ -17,6 +17,8 @@ async function uploadProfilePicture(userIDObj, fileExtension){
             {_id: userIDObj},
             { $set: { profilePictureC: compressedImagePath } }
         )
+        console.log("result "+ result)
+        console.log("resultC "+ resultC)
 
         await sharp(imagePath).resize(200).toFile(compressedImagePath);
 

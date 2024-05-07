@@ -29,11 +29,12 @@ async function uploadProfilePicture(req, res) {
             const newFilename = `Picture${userID}${fileExtension}`;
 
             const filePath = path.join(uploadOptions.uploadDir, newFilename);
-            const filePathCompressed = path.join(uploadOptions.uploadDirCom, newFilename)
+            
             const pictureURL = await database.getProfilePictureURL(userIDObj);
+            console.log("pictureURL"+pictureURL)
             console.log(filePath);
 
-            if (pictureURL != null) {
+            if (pictureURL != null){
                 fs.unlink(pictureURL, (err) => {
                     if (err) {
                         console.error('Fehler beim Löschen des Bildes aus dem Dateisystem:', err);
@@ -42,7 +43,9 @@ async function uploadProfilePicture(req, res) {
                     console.log(`Bild ${pictureURL} erfolgreich gelöscht`);
 
                 });
+
             const pictureURLCompressed = await database.getProfilePictureURLCompressed(userIDObj)
+            console.log("pictureURLCompressed "+ pictureURLCompressed)
             if (pictureURLCompressed != null) {
                 fs.unlink(pictureURLCompressed, (err) => {
                     if (err) {
@@ -50,10 +53,10 @@ async function uploadProfilePicture(req, res) {
                         return;
                     }
                     console.log(`Bild ${pictureURL} erfolgreich gelöscht`);
-
-                });
+                })
+            }
+                
                 const deleteURL = await database.deleteProfilePictureURL(userIDObj);
-                const deleteURLCompressed = await database.deleteProfilePictureURLCompressed(userIDObj)
                 const uploadPicture = await database.uploadProfilePicture(userIDObj, fileExtensionParam);
                 console.log("deleteURL:" + deleteURL);
                 console.log("PictureUploadWithDelete:"+uploadPicture)
@@ -71,7 +74,7 @@ async function uploadProfilePicture(req, res) {
             });
 
             //uploadedFilename = newFilename;
-        }})
+             })
         form.on('error', () => { })
         form.on('close',async () => {
 
