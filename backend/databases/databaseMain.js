@@ -72,8 +72,8 @@ async function getInvitations(req){
     return await dbFriendSystem.getInvitations(req);
 }
 
-async function uploadProfilePicture(username, fileExtension){
-    return await dbProfilePicture.uploadProfilePicture(username, fileExtension)
+async function uploadProfilePicture(username, fileExtension, filePathOriginal){
+    return await dbProfilePicture.uploadProfilePicture(username, fileExtension, filePathOriginal)
 }
 
 async function getUserData(req){
