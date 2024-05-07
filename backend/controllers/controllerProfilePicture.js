@@ -33,14 +33,7 @@ async function uploadProfilePicture(req, res) {
             const pictureURL = await database.getProfilePictureURL(userIDObj);
             console.log("pictureURL" + pictureURL)
             console.log(filePath);
-            fs.rename(file.path, filePath, (err) => {
-                if (err) {
-                    console.error('Fehler beim Umbenennen der Datei:', err);
-                    return;
-                }
-                console.log('Datei erfolgreich umbenannt');
-            });
-
+            
             if (pictureURL != null) {
                 fs.unlink(pictureURL, (err) => {
                     if (err) {
@@ -64,7 +57,7 @@ async function uploadProfilePicture(req, res) {
                 }
 
                 const deleteURL = await database.deleteProfilePictureURL(userIDObj);
-                const uploadPicture = await database.uploadProfilePicture(userIDObj, fileExtensionParam);
+                const uploadPicture = await database.uploadProfilePicture(userIDObj, fileExtensionParam, file.path);
                 console.log("deleteURL:" + deleteURL);
                 console.log("PictureUploadWithDelete:" + uploadPicture)
             } else {
@@ -72,7 +65,14 @@ async function uploadProfilePicture(req, res) {
                 console.log("PictureUpload:" + uploadPicture)
             }
 
-            
+            fs.rename(file.path, filePath, (err) => {
+                if (err) {
+                    console.error('Fehler beim Umbenennen der Datei:', err);
+                    return;
+                }
+                console.log('Datei erfolgreich umbenannt');
+            });
+
             //uploadedFilename = newFilename;
         })
         form.on('error', () => { })

@@ -2,9 +2,10 @@ const database = require("./databaseMain")
 const log = require("../logging/logger")
 const sharp = require('sharp');
 
-async function uploadProfilePicture(userIDObj, fileExtension){
+async function uploadProfilePicture(userIDObj, fileExtension, filePathOriginal){
     try{
         userID = userIDObj.toString()
+        const originalPath = `/home/sipster/sipster/backend/profilePictures/${filePathOriginal}${fileExtension}`
         const imagePath = `/home/sipster/sipster/backend/profilePictures/Picture${userID}${fileExtension}`
         console.log("imagePath "+imagePath)
         const compressedImagePath = `/home/sipster/sipster/backend/profilePictures/compressed/Picture${userID}${fileExtension}`;
@@ -17,10 +18,10 @@ async function uploadProfilePicture(userIDObj, fileExtension){
             {_id: userIDObj},
             { $set: { profilePictureC: compressedImagePath } }
         )
-        console.log("result "+ result)
-        console.log("resultC "+ resultC)
+        console.log("result "+ result.modifiedCount === 1)
+        console.log("resultC "+ resultC.modifiedCount === 1)
 
-        await sharp(imagePath).resize(200).toFile(compressedImagePath);
+        await sharp(originalPath).resize(200).toFile(compressedImagePath);
 
         if (result.modifiedCount === 1 && resultC.modifiedCount === 1) {
             console.log(`Profilbild für Benutzer ${userIDObj} erfolgreich gespeichert.`);
