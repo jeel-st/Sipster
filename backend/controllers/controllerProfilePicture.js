@@ -95,12 +95,12 @@ async function uploadProfilePicture(req, res) {
 async function getProfilePicture(req, res){
         const username = req.params.username
 
-        const compressed = req.query.compressed
+        const original = req.query.original
 
         const userIDObj = await database.getSipsterID(username)
 
         console.log("Name, der für das Profilbild genommen wird" + username)
-        const pictureURL = await database.getProfilePictureURL(userIDObj, compressed)
+        const pictureURL = await database.getProfilePictureURL(userIDObj, original)
         console.log("url: "+ pictureURL)
         if (!pictureURL) {
             res.status(404).send('Profilbild nicht gefunden');

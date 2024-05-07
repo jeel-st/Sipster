@@ -92,8 +92,8 @@ async function postNewEmail(req) {
     return await dbUser.postNewEmail(req)
 }
 
-async function getProfilePictureURL(username, compressed){
-    return await dbProfilePicture.getProfilePictureURL(username, compressed)
+async function getProfilePictureURL(username, original){
+    return await dbProfilePicture.getProfilePictureURL(username, original)
 }
 
 async function getProfilePictureURLCompressed(username){
