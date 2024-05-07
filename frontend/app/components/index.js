@@ -39,6 +39,12 @@ import ImageCard2 from './image/ImageCard2';
 import ImageFriendsScrollView from './image/ImageFriendsScrollView';
 import ImageFriendBtn from './image/ImageFriendBtn';
 
+// Home Imports
+import HomeFriends from './home/HomeFriends';
+import HomeActivityCard from './home/HomeActivityCard';
+import HomeActivityCard2 from './home/HomeActivityCard2';
+import HomeReactionCard from './home/HomeReactionCard';
+
 
 export {
     // Events
@@ -60,5 +66,8 @@ export {
     FriendsH2Skeleton, FriendsSkeleton,
 
     // Image
-    ImageContainer, ImageCard, ImageCard2, ImageFriendsScrollView, ImageFriendBtn
+    ImageContainer, ImageCard, ImageCard2, ImageFriendsScrollView, ImageFriendBtn,
+
+    // Home
+    HomeFriends, HomeActivityCard, HomeActivityCard2, HomeReactionCard
   };

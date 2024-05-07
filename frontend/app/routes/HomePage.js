@@ -1,54 +1,55 @@
-import { View, Text, Pressable } from 'react-native'
+import { View, Text, TouchableOpacity, ScrollView } from 'react-native'
 import React, { useEffect } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { classNames } from '../utils'
 import { styles } from '../constants'
-import { Events, FriendsScrollView, Games } from '../components'
-import { router } from 'expo-router'
-import { NativeBaseProvider } from 'native-base'
-import FriendsSkeleton from '../components/skeletons/FriendsSkeleton';
+import { navigateToFriendsPage } from '../utils/navigator'
+import { FontAwesome5 } from '@expo/vector-icons'
+import { HomeActivityCard, HomeActivityCard2, HomeFriends } from '../components'
 
-export default function HomePage({ displayEvent, handleEventSelection, user }) {
+export default function HomePage({ user, displayFriend, handleFriendSelection }) {
     return (
-        <NativeBaseProvider>
-            <SafeAreaView className={classNames(
-                'flex-1',
-                'bg-primary',
-            )}>
-                <View>
-                    {/* Branding */}
-                    <View className={styles.spaceText}>
-                        <Text className={styles.brandingText}>sipster</Text>
-                    </View>
+        <SafeAreaView className={classNames(
+            'flex-1',
+            'bg-primary',
+        )}>
+            <View className={classNames('')}>
+                {/* Header */}
+                <View className={classNames(
+                    'flex-row justify-between',
+                    'mt-4 mx-6'
+                )}>
+                    <Text className={styles.brandingText}>sipster</Text>
 
-                    {/* Games */}
-                    <View className={styles.spaceText}>
-                        <Text className={styles.categoryText}>games</Text>
-                    </View>
-                    <Games />
-
-                    {/* Events */}
-                    <View className={styles.spaceText}>
-                        <Text className={styles.categoryText}>events</Text>
-                    </View>
-                    <Events onSelectEvent={handleEventSelection} selectedEvent={displayEvent} />
-
-                    {/* Friends */}
-                    <Pressable className={styles.spaceText}
-                        onPress={() => router.navigate({
-                            pathname: "/routes/FriendsPage"
-                        })}>
-                        <Text className={styles.categoryText}>friends</Text>
-                    </Pressable>
-
-                    {
-                        user && user.friends.length > 0 && (<FriendsScrollView friends={user.friends} user={user}/>)
-                    }
-                    {
-                        user && user.friends.length == 0 && FriendsSkeleton()
-                    }
+                    {/* Friendsmenu Button */}
+                    <TouchableOpacity
+                        onPress={navigateToFriendsPage}
+                        className={classNames(
+                            'justify-center items-center'
+                        )}>
+                        <FontAwesome5 name="user-friends" size={24} color="white" />
+                    </TouchableOpacity>
                 </View>
-            </SafeAreaView>
-        </NativeBaseProvider>
+
+                {
+                    user &&
+                    <>
+                        {/* Friend controller tab bar */}
+                        <HomeFriends user={user} displayFriend={displayFriend} handleFriendSelection={handleFriendSelection} />
+
+                        {/* Separation line */}
+                        <View className={classNames('w-full h-[2px] bg-secondary')} />
+
+                        {/* Content ScrollView */}
+                        <ScrollView showsHorizontalScrollIndicator={false} contentContainerStyle={{ flexGrow: 1, paddingBottom: 200 }}>
+                            <HomeActivityCard friend={user.friends[0]} />
+                            <HomeActivityCard friend={user.friends[1]} />
+                            <HomeActivityCard friend={user.friends[2]} />
+                        </ScrollView>
+                    </>
+                }
+
+            </View>
+        </SafeAreaView>
     )
 }
