@@ -15,10 +15,12 @@ async function getUserData(req) {
     return userData;
 }
 async function postNewUsername(req){
-    const {username, newUsername} = req.params
+    const {username, newUsername} = req.body
+    log.info(username + " + " + newUsername)
     const sipsterID = await database.getSipsterID(username);
+    log.info(sipsterID)
     const personalInformation = await database.getDB().collection("personalInformation")
-    const filter = {_id: new ObjectID(sipsterID)}
+    const filter = {_id: sipsterID}
     const update = {$set: {username: newUsername}}
 
     const result = await personalInformation.updateOne(filter, update)
@@ -32,19 +34,20 @@ async function postNewUsername(req){
 }
 
 async function postNewPassword(req){
-    const {username, newPassword} = req.params
+    const {username, newPassword} = req.body
+    const sipsterID = await database.getSipsterID(username)
     const encryptedPasswordAndSalt = await encryptPassword(newPassword);
     const encryptedPassword = encryptedPasswordAndSalt[0]
     const salt = encryptedPasswordAndSalt[1]
     const personalInformation = await database.getDB().collection("personalInformation")
-    const filter = {username: username}
+    const filter = {_id: sipsterID}
     const update = {$set: {encryptedPassword: encryptedPassword, salt: salt}}
 
     if (!isValidPassword(newPassword)) return false;
 
     let result = await personalInformation.updateOne(filter, update)
     if (result.modifiedCount != 0){
-        log.info(`Email changed to: ${encryptedPassword}`)
+        log.info(`Password changed to: ${encryptedPassword}`)
         log.info("You thought you would get the real Password Muhahahahaha!")
         return true;
     }else {
@@ -54,9 +57,10 @@ async function postNewPassword(req){
 }
 
 async function postNewEmail(req){
-    const {username, newEmail} = req.params
+    const {username, newEmail} = req.body
     const personalInformation = await database.getDB().collection("personalInformation")
-    const filter = {username: username}
+    const sipsterID = await database.getSipsterID(username);
+    const filter = {_id: sipsterID}
     const update = {$set: {email: newEmail}}
 
     if (!isValidEmail(newEmail)) return false
