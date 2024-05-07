@@ -14,6 +14,7 @@ async function getUserData(req, res) {
 
 async function postNewUsername(req, res) {
     try{
+        log.info("In Controller User!")
         const postNewUsername = await database.postNewUsername(req)
         res.send("Username was succesfully posted!")
     }catch(err){
