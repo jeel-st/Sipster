@@ -96,9 +96,6 @@ async function getProfilePictureURL(username, original){
     return await dbProfilePicture.getProfilePictureURL(username, original)
 }
 
-async function getProfilePictureURLCompressed(username){
-    return await dbProfilePicture.getProfilePictureURLCompressed(username)
-}
 async function deleteProfilePictureURL(username){
     return await dbProfilePicture.deleteProfilePictureURL(username)
 }
@@ -143,6 +140,5 @@ exports.postNewEmail = postNewEmail
 exports.postNewPassword = postNewPassword
 exports.postNewUsername = postNewUsername
 exports.getProfilePictureURL = getProfilePictureURL
-exports.getProfilePictureURLCompressed = getProfilePictureURLCompressed
 exports.deleteProfilePictureURL = deleteProfilePictureURL
 exports.getSipsterID = getSipsterID
