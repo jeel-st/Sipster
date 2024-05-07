@@ -31,14 +31,113 @@ export const games = [
         desc: "Einer kniet sich hin und macht Vogelbewegungen, der andere spuckt ihm die mische in den Mund",
         category: "Q&A",
         sips: "100",
-    }
+    },
+
+
+
+
+
+
+
+    {
+        name: "Wahrheit oder Pflicht Deluxe",
+        profile: "https://images.example.com/wahrheit-oder-pflicht-deluxe.jpg",
+        playtime: "unbegrenzt",
+        desc: "Die ultimative Version des beliebten Partyspiels mit noch verrückteren Fragen und Aufgaben",
+        start: "'routes/LoginPage'",
+        category: "Party Game",
+        sips: "200"
+    },
     
+    {
+        name: "Wahrheit oder Pflicht Extreme",
+        profile: "https://images.example.com/wahrheit-oder-pflicht-extreme.jpg",
+        playtime: "30 Minuten pro Runde",
+        desc: "Eine Hardcore-Version des Spiels mit extrem peinlichen Fragen und herausfordernden Aufgaben",
+        start: "'routes/HomePage'",
+        category: "Adult Game",
+        sips: "300"
+    },
+
+
+
+
+
+
+    {
+        name: "Kings Cup",
+        profile: "https://images.example.com/kings-cup.jpg",
+        playtime: "variabel",
+        desc: "Ein klassisches Trinkspiel, bei dem Karten gezogen werden und je nach Karte eine Aktion ausgeführt werden muss",
+        start: "'routes/GamePage'",
+        category: "Kartenspiel",
+        sips: "150"
+        },
+        {
+        name: "Never Have I Ever",
+        profile: "https://images.example.com/never-have-i-ever.jpg",
+        playtime: "30 Minuten pro Runde",
+        desc: "Ein Spiel, bei dem die Spieler reihum Aussagen machen und diejenigen trinken müssen, die diese Aussage schon einmal erlebt haben",
+        start: "'routes/ProfilePage'",
+        category: "Party Game",
+        sips: "100"
+        },
+        {
+        name: "Flip Cup",
+        profile: "https://images.example.com/flip-cup.jpg",
+        playtime: "kurz und intensiv",
+        desc: "Ein Wettkampf-Trinkspiel, bei dem Teams gegeneinander antreten und versuchen, Becher umzudrehen und auszutrinken",
+        start: "'routes/LeaderboardPage'",
+        category: "Team Game",
+        sips: "200"
+        },
+
+        {
+            name: "Beer Pong",
+            profile: "https://images.example.com/beer-pong.jpg",
+            playtime: "variabel",
+            desc: "Ein beliebtes Partyspiel, bei dem Teams versuchen, Ping-Pong-Bälle in Becher auf der gegenüberliegenden Seite des Tisches zu werfen",
+            start: "'routes/GamePage'",
+            category: "Team Game",
+            sips: "250"
+            },
+            {
+            name: "Power Hour",
+            profile: "https://images.example.com/power-hour.jpg",
+            playtime: "1 Stunde",
+            desc: "Ein Trinkspiel, bei dem alle 60 Sekunden ein Shot Bier getrunken wird, bis eine Stunde vergangen ist",
+            start: "'routes/TimerPage'",
+            category: "Adult Game",
+            sips: "300"
+            },
+            {
+            name: "Drunk Jenga",
+            profile: "https://images.example.com/drunk-jenga.jpg",
+            playtime: "variabel",
+            desc: "Eine Variation des klassischen Jenga-Spiels, bei dem auf den Bausteinen Aufgaben oder Regeln stehen, die ausgeführt werden müssen",
+            start: "'routes/GamePage'",
+            category: "Skill Game",
+            sips: "200"
+            },
+            {
+            name: "Quarters",
+            profile: "https://images.example.com/quarters.jpg",
+            playtime: "variabel",
+            desc: "Ein einfaches Trinkspiel, bei dem versucht wird, einen Vierteldollar in ein Glas zu werfen und dann zu trinken",
+            start: "'routes/GamePage'",
+            category: "Skill Game",
+            sips: "150"
+            }
+
 ]
 
 
 
 export const categorys = [
-   {category: "Q&A"},
-   {category: "Kartenspiel"},
-   {category: "DingDong"}
+   "Q&A",
+   "Kartenspiel",
+   "Team Game",
+   "Party Game",
+   "Adult Game",
+   "Skill Game"
 ]

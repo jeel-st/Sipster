@@ -1,27 +1,23 @@
-import { View, Text, } from 'react-native'
+import { View, Text, ScrollView, } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { GamePicture, Category } from '../components'
-import { classNames } from '../utils'
-import { styles} from '../constants'
+import { GamesPerCategory } from '../components'
+
 
 export default function GamePageAll(){
 
-    return (
-        <SafeAreaView className={classNames('bg-primary')}>
-            {/* Header */}
-            <View>
-                <Text className={`${styles.brandingText} mt-4 px-2`} >Games</Text>
-            </View>
-
-            {/* Category */}
-            <View>
-                <Text className={`${styles.categoryText } mt-4 px-2`}>Kategorie</Text>
-            </View>
-            <Category/>
+    return (    
+        <SafeAreaView className='bg-primary h-full'>
             
-            {/* Alle Games */}
-            <GamePicture />
+            <View>
+                <Text className='text-white font-bold text-3xl tracking-widest'> Sipster </Text>
+            </View>
+            
 
+            <ScrollView>
+                {/* games */}
+                <GamesPerCategory/>
+            </ScrollView>
+            
         </SafeAreaView>
-    )
+    );
 }
