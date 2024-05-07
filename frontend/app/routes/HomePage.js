@@ -2,10 +2,10 @@ import { View, Text, TouchableOpacity, ScrollView } from 'react-native'
 import React, { useEffect } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { classNames } from '../utils'
-import { styles } from '../constants'
+import { events, styles } from '../constants'
 import { navigateToFriendsPage } from '../utils/navigator'
 import { FontAwesome5 } from '@expo/vector-icons'
-import { HomeActivityCard, HomeActivityCard2, HomeFriends } from '../components'
+import { EventInfoCard, Events, HomeActivityCard, HomeActivityCard2, HomeFriends } from '../components'
 
 export default function HomePage({ user, displayFriend, handleFriendSelection }) {
     return (
@@ -42,9 +42,22 @@ export default function HomePage({ user, displayFriend, handleFriendSelection })
 
                         {/* Content ScrollView */}
                         <ScrollView showsHorizontalScrollIndicator={false} contentContainerStyle={{ flexGrow: 1, paddingBottom: 200 }}>
-                            <HomeActivityCard friend={user.friends[0]} />
-                            <HomeActivityCard friend={user.friends[1]} />
-                            <HomeActivityCard friend={user.friends[2]} />
+                            {
+                                user.friends.map((friend, index) => (
+                                    [
+                                        <HomeActivityCard friend={friend} key={`friend-${index}`} />,
+
+                                        // Separation line
+                                        < View className = { classNames('w-full h-[2px] mt-4 bg-secondary') } />,
+                                        // Füge die EventInfoCard und Events abwechselnd ein
+                                        index % 2 ?
+                                            <Events onSelectEvent={() => { }} selectedEvent={events[index]} key={`events-${index}`} />
+                                            : <EventInfoCard event={events[index]} key={`event-info-${index}`} />,
+                                        // Füge die Separation Line hinzu, außer beim letzten Element
+                                        index !== user.friends.length - 1 && <View className={classNames('w-full h-[2px] mt-4 bg-secondary')} key={`separator-${index}`} />
+                                    ]
+                                ))
+                            }
                         </ScrollView>
                     </>
                 }
