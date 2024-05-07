@@ -5,22 +5,18 @@ const sharp = require('sharp');
 async function uploadProfilePicture(userIDObj, fileExtension, filePathOriginal){
     try{
         userID = userIDObj.toString()
-      //  const originalPath = `/home/sipster/sipster/backend/profilePictures/${filePathOriginal}${fileExtension}`
+
         const imagePath = `/home/sipster/sipster/backend/profilePictures/Picture${userID}${fileExtension}`
-        console.log("imagePath "+imagePath)
         const compressedImagePath = `/home/sipster/sipster/backend/profilePictures/compressed/Picture${userID}${fileExtension}`;
-        console.log("compressedImagePath" + compressedImagePath)
         const result = await database.getDB().collection('personalInformation').updateOne(
             {_id: userIDObj},
             { $set: { profilePicture: imagePath } }
         )
         const resultC = await database.getDB().collection('personalInformation').updateOne(
             {_id: userIDObj},
-            { $set: { profilePictureC: compressedImagePath } }
+            { $set: { profilPictureC: compressedImagePath } }
         )
-        console.log("result "+ result.modifiedCount === 1)
-        console.log("resultC "+ resultC.modifiedCount === 1)
-
+        
         await sharp(filePathOriginal).resize(200).toFile(compressedImagePath);
 
         if (result.modifiedCount === 1 && resultC.modifiedCount === 1) {
@@ -37,19 +33,17 @@ async function uploadProfilePicture(userIDObj, fileExtension, filePathOriginal){
     }
 }
 
-async function getProfilePictureURL(userIDObj){
+async function getProfilePictureURL(userIDObj, compressed){
     console.log("ID, die in die Datenbank gegeben wird:"+userIDObj)
     const result = await database.getDB().collection('personalInformation').findOne({_id: userIDObj})
     console.log(result)
-    return result.profilePicture
+    if(compressed == true){
+        return result.profilePicture
+    }else{
+        return result.profilePictureC
+    }
 }
 
-async function getProfilePictureURLCompressed(userIDObj){
-    console.log("ID, die in die Datenbank gegeben wird:"+userIDObj)
-    const result = await database.getDB().collection('personalInformation').findOne({_id: userIDObj})
-    console.log(result)
-    return result.profilePictureC
-}
 
 async function deleteProfilePictureURL(userIDObj){
     try {

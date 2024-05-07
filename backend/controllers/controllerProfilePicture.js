@@ -35,8 +35,7 @@ async function uploadProfilePicture(req, res) {
             const filePath = path.join(uploadOptions.uploadDir, newFilename);
 
             const pictureURL = await database.getProfilePictureURL(userIDObj);
-            console.log("pictureURL " + pictureURL)
-            console.log(filePath);
+
             
             if (pictureURL != null) {
                 fs.unlink(pictureURL, (err) => {
@@ -49,7 +48,6 @@ async function uploadProfilePicture(req, res) {
                 });
 
                 const pictureURLCompressed = await database.getProfilePictureURLCompressed(userIDObj)
-                console.log("pictureURLCompressed " + pictureURLCompressed)
                 if (pictureURLCompressed != null) {
                     fs.unlink(pictureURLCompressed, (err) => {
                         if (err) {
@@ -62,8 +60,7 @@ async function uploadProfilePicture(req, res) {
 
                 const deleteURL = await database.deleteProfilePictureURL(userIDObj);
                 const uploadPicture = await database.uploadProfilePicture(userIDObj, fileExtensionParam, file.path);
-                console.log("deleteURL:" + deleteURL);
-                console.log("PictureUploadWithDelete:" + uploadPicture)
+
             } else {
                 const uploadPicture = await database.uploadProfilePicture(userIDObj, fileExtensionParam, file.path);
                 console.log("PictureUpload:" + uploadPicture)
@@ -97,12 +94,16 @@ async function uploadProfilePicture(req, res) {
 
 async function getProfilePicture(req, res){
         const username = req.params.username
+
+        const compressed = req.query.compressed
+
         const userIDObj = await database.getSipsterID(username)
+
         console.log("Name, der für das Profilbild genommen wird" + username)
-        const pictureURL = await database.getProfilePictureURL(userIDObj)
-        console.log("url:"+ pictureURL)
+        const pictureURL = await database.getProfilePictureURL(userIDObj, compressed)
+        console.log("url: "+ pictureURL)
         if (!pictureURL) {
-            return res.status(404).send('Profilbild nicht gefunden');
+            res.status(404).send('Profilbild nicht gefunden');
         } else {
             res.send(pictureURL)
             console.log(pictureURL)
