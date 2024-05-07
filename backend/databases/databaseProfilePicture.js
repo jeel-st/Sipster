@@ -1,16 +1,27 @@
 const database = require("./databaseMain")
 const log = require("../logging/logger")
+const sharp = require('sharp');
+
 
 async function uploadProfilePicture(userIDObj, fileExtension){
     try{
         userID = userIDObj.toString()
         const imagePath = `/home/sipster/sipster/backend/profilePictures/Picture${userID}${fileExtension}`
         console.log(imagePath)
+        const compressedImagePath = `/home/sipster/sipster/backend/profilePictures/compressed/Picture${userID}${fileExtension}`;
+        console.log('Komprimiertes Bild Pfad:', compressedImagePath);
         const result = await database.getDB().collection('personalInformation').updateOne(
             {_id: userIDObj},
             { $set: { profilePicture: imagePath } }
         )
-
+        await sharp(imagePath).resize(200).toFile(compressedImagePath);
+        if (result.modifiedCount === 1) {
+            console.log(`Profilbild für Benutzer ${userIDObj} erfolgreich gespeichert.`);
+            return "Success";
+        } else {
+            console.log(`Profilbild für Benutzer ${userIDObj} nicht gefunden.`);
+            return "User not found";
+        }
 
     }catch(err){
         console.error('Fehler beim Hochladen des Profilbildes:', err);
@@ -31,7 +42,10 @@ async function deleteProfilePictureURL(userIDObj){
             { _id: userIDObj }, 
             { $set: { profilePicture: null } }
         )
-        
+        const result2 = await database.getDB().collection('personalInformation').updateOne(
+            { _id: userIDObj }, 
+            { $set: { profilePicture: null } }
+        )
         if (result.modifiedCount === 1) {
             console.log(`Profilbild für Benutzer ${userIDObj} erfolgreich gelöscht.`)
             return "Success"

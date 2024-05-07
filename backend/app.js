@@ -9,7 +9,7 @@ app.use(express.urlencoded({ limit: "50mb", extended: true }));
 
 const PORT = 3000
 
-const { uploadDir } = require('./utils/uploadLogic/config')
+const { uploadDir, uploadDirCom } = require('./utils/uploadLogic/config')
 
 try {
     fs.mkdirSync(uploadDir)
@@ -17,7 +17,14 @@ try {
 
     if (e.code !== 'EEXIST') throw e
   }
+  try {
+    fs.mkdirSync(uploadDirCom)
+  } catch (e) {
 
+    if (e.code !== 'EEXIST') throw e
+  }
+
+  
 const loginRouter = require('./routes/routerLogin')
 const registerRouter = require('./routes/routerRegister')
 const eventsRouter = require('./routes/routerEvents')

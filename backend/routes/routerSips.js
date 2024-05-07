@@ -4,7 +4,7 @@ const logMiddleware = require("./logMiddleware");
 
 router.use(logMiddleware);
 
-const sipsController = require("../Controllers/controllerSips")
+const sipsController = require("../controllers/controllerSips")
 
 
 router.put("/friends", sipsController.changeSipsForFriends)
