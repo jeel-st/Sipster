@@ -65,7 +65,7 @@ async function uploadProfilePicture(req, res) {
                 console.log("deleteURL:" + deleteURL);
                 console.log("PictureUploadWithDelete:" + uploadPicture)
             } else {
-                const uploadPicture = await database.uploadProfilePicture(userIDObj, fileExtensionParam);
+                const uploadPicture = await database.uploadProfilePicture(userIDObj, fileExtensionParam, originalFilename);
                 console.log("PictureUpload:" + uploadPicture)
             }
 
