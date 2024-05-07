@@ -23,15 +23,19 @@ async function uploadProfilePicture(req, res) {
         form.on('file', async (name, file) => {
             const userIDObj = await database.getSipsterID(username)
             const userID = userIDObj.toString()
+
             const originalFilename = file.originalFilename;
+
             const fileExtension = path.extname(originalFilename);
+
             fileExtensionParam = fileExtension;
+
             const newFilename = `Picture${userID}${fileExtension}`;
 
             const filePath = path.join(uploadOptions.uploadDir, newFilename);
 
             const pictureURL = await database.getProfilePictureURL(userIDObj);
-            console.log("pictureURL" + pictureURL)
+            console.log("pictureURL " + pictureURL)
             console.log(filePath);
             
             if (pictureURL != null) {
@@ -57,7 +61,7 @@ async function uploadProfilePicture(req, res) {
                 }
 
                 const deleteURL = await database.deleteProfilePictureURL(userIDObj);
-                const uploadPicture = await database.uploadProfilePicture(userIDObj, fileExtensionParam, file.path);
+                const uploadPicture = await database.uploadProfilePicture(userIDObj, fileExtensionParam, originalFilename);
                 console.log("deleteURL:" + deleteURL);
                 console.log("PictureUploadWithDelete:" + uploadPicture)
             } else {
