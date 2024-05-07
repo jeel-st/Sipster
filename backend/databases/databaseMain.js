@@ -5,6 +5,7 @@ const dbRegister = require("../databases/databaseRegister")
 const dbFriendSystem = require("../databases/databaseFriendSystem")
 const dbProfilePicture = require("../databases/databaseProfilePicture")
 const dbUser = require("../databases/databaseUser")
+const dbSips = require("../databases/databaseSips")
 const log = require("../logging/logger")
 
 let db = null;
@@ -99,6 +100,14 @@ async function getProfilePictureURL(username){
 async function deleteProfilePictureURL(username){
     return await dbProfilePicture.deleteProfilePictureURL(username)
 }
+
+async function getSips(username){
+    return await dbSips.getSips(username)
+}
+
+async function changeSips(username, sipsNew){
+    return await dbSips.changeSips(username, sipsNew)
+}
 function getDB() {
     return db
 }
@@ -141,3 +150,5 @@ exports.postNewUsername = postNewUsername
 exports.getProfilePictureURL = getProfilePictureURL
 exports.deleteProfilePictureURL = deleteProfilePictureURL
 exports.getSipsterID = getSipsterID
+exports.getSips = getSips
+exports.changeSips = changeSips

@@ -1,0 +1,48 @@
+@host = http://localhost:3000
+
+
+###
+
+GET {{host}}/sips/adf/ HTTP/1.1
+
+
+###
+
+PUT {{host}}/sips/gamsa/ HTTP/1.1
+Content-Type: application/json
+
+{
+    "sips": null
+}
+
+###
+
+PUT {{host}}/sips/friends/ HTTP/1.1
+Content-Type: application/json
+
+{
+    "sips": 200,
+    "friends": ["jeel", "Crypto"]
+}
+
+###
+
+PUT {{host}}/sips/friends/ HTTP/1.1
+Content-Type: application/json
+
+{
+    "sips": 200,
+    "friends": null
+}
+
+###
+
+PUT {{host}}/sips/friends/ HTTP/1.1
+Content-Type: application/json
+
+{
+    "sips": 200,
+    "friends": ["jeel", null]
+}
+
+###
