@@ -8,16 +8,18 @@ async function uploadProfilePicture(userIDObj, fileExtension, filePathOriginal){
 
         const imagePath = `/home/sipster/sipster/backend/profilePictures/Picture${userID}${fileExtension}`
         const compressedImagePath = `/home/sipster/sipster/backend/profilePictures/compressed/Picture${userID}${fileExtension}`;
-        const result = await database.getDB().collection('personalInformation').updateOne(
+
+        const result = await database.getDB().collection('personalInformation').updateOne(  //-> Datenbank- Update mit neuem Pfad
             {_id: userIDObj},
             { $set: { profilePicture: imagePath } }
         )
+
         const resultC = await database.getDB().collection('personalInformation').updateOne(
             {_id: userIDObj},
             { $set: { profilPictureC: compressedImagePath } }
         )
         
-        await sharp(filePathOriginal).resize(200).toFile(compressedImagePath);
+        await sharp(filePathOriginal).resize(200).toFile(compressedImagePath);      //-> Komprimieren des Bild+ speichern in einem zweiten Ordner
 
         if (result.modifiedCount === 1 && resultC.modifiedCount === 1) {
             console.log(`Profilbild für Benutzer ${userIDObj} erfolgreich gespeichert.`);

@@ -109,7 +109,7 @@ async function getSipsterID(username) {
 
     let sipsterID = await personalInformation.find({username: username}).project({_id: 1}).toArray()
     sipsterID = sipsterID.map(id => id._id)
-    if (sipsterID == null) {
+    if (!sipsterID) {
         throw new Error("This username was not found in the database")
     }
     console.log(sipsterID[0])
