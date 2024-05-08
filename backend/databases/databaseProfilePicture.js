@@ -40,7 +40,7 @@ async function getProfilePictureURL(userIDObj, original){
     const result = await database.getDB().collection('personalInformation').findOne({_id: userIDObj})
     console.log(original)
     console.log(result)
-    if(original == true){
+    if(original == "true"){
         return result.profilePicture
     }else{
         return result.profilePictureC
