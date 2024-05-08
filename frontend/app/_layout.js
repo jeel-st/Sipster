@@ -1,5 +1,6 @@
 import { Stack } from 'expo-router/stack'
 import { NativeWindStyleSheet } from "nativewind";
+import 'react-native-reanimated';
 
 NativeWindStyleSheet.setOutput({
     default: "native",
