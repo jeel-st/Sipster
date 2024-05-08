@@ -30,7 +30,7 @@ export default function ImageFriendBtn({ friend, displayFriend, handleFriendSele
                             'w-[90%] h-[90%]',
                             'rounded-full'
                         )}
-                        source={{ uri: `http://85.215.71.124/static/${getProfilePicture(friend)}`, key: new Date() }}
+                        source={{ uri: `http://85.215.71.124/static/profilePictures/compressed/${getProfilePicture(friend)}?${new Date().getDate()}` }}
                     />
                 </View>
             </View>

@@ -44,7 +44,7 @@ export default function ProfileCard({ friend }) {
         )}>
             {/* Profile Image*/}
             <Image
-                source={{ uri: `http://85.215.71.124/static/${getProfilePicture(friend)}`, key: new Date() }}
+                source={{ uri: `http://85.215.71.124/static/profilePictures/${getProfilePicture(friend)}?${new Date().getDate()}` }}
                 className={classNames(
                     'mt-[-22.5%]',
                     'w-44 h-44 rounded-full'

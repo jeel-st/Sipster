@@ -25,8 +25,7 @@ export default function ImageCard({ friend }) {
                             'rounded-full'
                         )}
                         source={{
-                            uri: `http://85.215.71.124/static/${getProfilePicture(friend)}`,
-                            key: new Date()
+                            uri: `http://85.215.71.124/static/profilePictures/compressed/${getProfilePicture(friend)}?${new Date().getDate()}`
                         }} />
                 </View>
                 <View>
@@ -49,8 +48,7 @@ export default function ImageCard({ friend }) {
                         'rounded-2xl'
                     )}
                     source={{
-                        uri: `http://85.215.71.124/static/${getProfilePicture(friend)}`,
-                        key: new Date()
+                        uri: `http://85.215.71.124/static/profilePictures/${getProfilePicture(friend)}?${new Date().getDate()}`
                     }} />
             </View>
         </View>

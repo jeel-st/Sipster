@@ -27,8 +27,8 @@ export default function FriendBtn2({ friend, selectedTab, user, handleReloadFrie
       style={{ backgroundColor: styles.Colors.secondary }}
       onPress={() => router.navigate({ pathname: "/routes/ProfilePage", params: friend })}
     >
-      <View className="w-20 h-20 rounded-full shadow-md shadow-black">
-        <Image className="w-full h-full rounded-full" source={{ uri: `http://85.215.71.124/static/${getProfilePicture(friend)}`, key: new Date() }} />
+      <View className="w-20 h-20 rounded-full bg-primary">
+        <Image className="w-full h-full rounded-full" source={{ uri: `http://85.215.71.124/static/profilePictures/compressed/${getProfilePicture(friend)}?${new Date().getDate()}` }} />
       </View>
       <View className="flex-1 self-center">
         <Text className="text-white font-bold">{friend.firstName + " " + friend.lastName}</Text>

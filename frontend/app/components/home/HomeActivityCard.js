@@ -30,7 +30,7 @@ export default function HomeActivityCard({ friend }) {
             )}>
                 <View className={classNames(
                     'w-12 h-12',
-                    'rounded-full shadow-md shadow-black border-yellow border-[1px]'
+                    'rounded-full border-yellow border-[1px]'
                 )}>
                     <Image
                         className={classNames(
@@ -38,7 +38,7 @@ export default function HomeActivityCard({ friend }) {
                             'rounded-full'
                         )}
                         source={{
-                            uri: `http://85.215.71.124/static/${getProfilePicture(friend)}`,
+                            uri: `http://85.215.71.124/static/profilePictures/compressed/${getProfilePicture(friend)}?${new Date().getDate()}`,
                             key: new Date()
                         }} />
                 </View>
@@ -80,7 +80,7 @@ export default function HomeActivityCard({ friend }) {
                             className={classNames(
                                 'rounded-2xl'
                             )}
-                            source={{ uri: `http://85.215.71.124/static/${getProfilePicture(friend)}` }}
+                            source={{ uri: `http://85.215.71.124/static/profilePictures/${getProfilePicture(friend)}?${new Date().getDate()}` }}
                         />
                     ))}
                 </ScrollView>
