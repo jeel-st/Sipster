@@ -72,8 +72,8 @@ async function getInvitations(req){
     return await dbFriendSystem.getInvitations(req);
 }
 
-async function uploadProfilePicture(username, fileExtension){
-    return await dbProfilePicture.uploadProfilePicture(username, fileExtension)
+async function uploadProfilePicture(username, fileExtension, filePathOriginal){
+    return await dbProfilePicture.uploadProfilePicture(username, fileExtension, filePathOriginal)
 }
 
 async function getUserData(req){
@@ -92,13 +92,14 @@ async function postNewEmail(req) {
     return await dbUser.postNewEmail(req)
 }
 
-async function getProfilePictureURL(username){
-    return await dbProfilePicture.getProfilePictureURL(username)
+async function getProfilePictureURL(username, original){
+    return await dbProfilePicture.getProfilePictureURL(username, original)
 }
 
 async function deleteProfilePictureURL(username){
     return await dbProfilePicture.deleteProfilePictureURL(username)
 }
+
 function getDB() {
     return db
 }
@@ -108,7 +109,7 @@ async function getSipsterID(username) {
 
     let sipsterID = await personalInformation.find({username: username}).project({_id: 1}).toArray()
     sipsterID = sipsterID.map(id => id._id)
-    if (sipsterID == null) {
+    if (!sipsterID) {
         throw new Error("This username was not found in the database")
     }
     console.log(sipsterID[0])
