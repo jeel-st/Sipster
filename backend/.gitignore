@@ -2,7 +2,7 @@
 
 # dependencies
 node_modules/
-profilePictures/
+static/
 *.log
 */log
 

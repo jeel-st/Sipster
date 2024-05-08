@@ -6,8 +6,8 @@ async function uploadProfilePicture(userIDObj, fileExtension, filePathOriginal){
     try{
         userID = userIDObj.toString()
 
-        const imagePath = `/home/sipster/sipster/backend/profilePictures/Picture${userID}${fileExtension}`
-        const compressedImagePath = `/home/sipster/sipster/backend/profilePictures/compressed/Picture${userID}${fileExtension}`;
+        const imagePath = `/home/sipster/sipster/backend/static/profilePictures/Picture${userID}${fileExtension}`
+        const compressedImagePath = `/home/sipster/sipster/backend/static/profilePictures/compressed/Picture${userID}${fileExtension}`;
 
         const result = await database.getDB().collection('personalInformation').updateOne(  //-> Datenbank- Update mit neuem Pfad
             {_id: userIDObj},
