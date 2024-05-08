@@ -38,7 +38,9 @@ async function uploadProfilePicture(userIDObj, fileExtension, filePathOriginal){
 async function getProfilePictureURL(userIDObj, original){
     console.log("ID, die in die Datenbank gegeben wird:"+userIDObj)
     const result = await database.getDB().collection('personalInformation').findOne({_id: userIDObj})
-    console.log(original)
+    console.log("original "+ original)
+    console.log("originaltyp "+ typeof original)
+
     console.log(result)
     if(original == "true"){
         return result.profilePicture
