@@ -16,7 +16,7 @@ async function uploadProfilePicture(userIDObj, fileExtension, filePathOriginal){
 
         const resultC = await database.getDB().collection('personalInformation').updateOne(
             {_id: userIDObj},
-            { $set: { profilPictureC: compressedImagePath } }
+            { $set: { profilePictureC: compressedImagePath } }
         )
         
         await sharp(filePathOriginal).resize(200).toFile(compressedImagePath);      //-> Komprimieren des Bild+ speichern in einem zweiten Ordner
