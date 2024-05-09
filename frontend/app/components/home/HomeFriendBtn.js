@@ -3,7 +3,7 @@ import React from 'react'
 import getProfilePicture from '../../utils/accountFetcher';
 import { classNames } from '../../utils';
 
-export default function ImageFriendBtn({ friend, displayFriend, handleFriendSelection, friendId }) {
+export default function HomeFriendBtn({ friend, displayFriend, handleFriendSelection, friendId }) {
     return (
         <Pressable
             className={classNames(
