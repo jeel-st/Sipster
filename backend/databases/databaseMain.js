@@ -110,15 +110,26 @@ function getDB() {
 }
 
 async function getSipsterID(username) {
-    const personalInformation = await getDB().collection("personalInformation")
-
+    const personalInformation = (await initializeCollections()).personalInformation
+    console.log(personalInformation)
     let sipsterID = await personalInformation.find({username: username}).project({_id: 1}).toArray()
     sipsterID = sipsterID.map(id => id._id)
     if (!sipsterID) {
-        throw new Error("This username was not found in the database")
+        throw new UsernameNotFoundError("This username was not found in the database")
     }
-    //log.info(sipsterID[0])
+    console.log(sipsterID[0])
     return sipsterID[0]
+}
+
+async function initializeCollections() {
+    const personalInformation = db.collection("personalInformation");
+    const invitations = db.collection("invitations");
+    const events = db.collection("events");
+    return {
+        personalInformation: personalInformation,
+        invitations: invitations,
+        events: events
+    };
 }
 
 class UsernameNotFoundError extends Error {
@@ -155,3 +166,5 @@ exports.postNewUsername = postNewUsername
 exports.getProfilePictureURL = getProfilePictureURL
 exports.deleteProfilePictureURL = deleteProfilePictureURL
 exports.getSipsterID = getSipsterID
+exports.initializeCollections = initializeCollections;
+exports.UsernameNotFoundError = UsernameNotFoundError;

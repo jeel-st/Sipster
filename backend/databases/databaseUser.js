@@ -3,9 +3,9 @@ const log = require("../logging/logger")
 const { isValidPassword, isValidEmail, encryptPassword } = require("../utils/registerLogic/registerPatterns")
 
 async function getUserData(req) {
+    const personalInformation = (await database.initializeCollections()).personalInformation;
     const username = req.params.username
     const sipsterID = await database.getSipsterID(username)
-    const personalInformation = await database.getDB().collection("personalInformation")
     const userData = await personalInformation.findOne({_id: sipsterID})
 
     log.info(userData)
@@ -15,8 +15,7 @@ async function getUserData(req) {
 async function getEventsData(req) {
     const username = req.params.username
     const sipsterID = await database.getSipsterID(username)
-    const personalInformation = await database.getDB().collection("personalInformation")
-
+    const personalInformation = (await database.initializeCollections()).personalInformation;
     const userData = await personalInformation.findOne({_id: sipsterID})
 
     log.info(userData.events)
@@ -28,7 +27,7 @@ async function postNewUsername(req){
     const {username, newUsername} = req.body
     log.info(username + " + " + newUsername)
     const sipsterID = await database.getSipsterID(username);
-    const personalInformation = await database.getDB().collection("personalInformation")
+    const personalInformation = (await database.initializeCollections()).personalInformation;
     const filter = {_id: sipsterID}
     const update = {$set: {username: newUsername}}
 
@@ -48,7 +47,7 @@ async function postNewPassword(req){
     const encryptedPasswordAndSalt = await encryptPassword(newPassword);
     const encryptedPassword = encryptedPasswordAndSalt[0]
     const salt = encryptedPasswordAndSalt[1]
-    const personalInformation = await database.getDB().collection("personalInformation")
+    const personalInformation = (await database.initializeCollections()).personalInformation;
     const filter = {_id: sipsterID}
     const update = {$set: {encryptedPassword: encryptedPassword, salt: salt}}
 
@@ -67,7 +66,7 @@ async function postNewPassword(req){
 
 async function postNewEmail(req){
     const {username, newEmail} = req.body
-    const personalInformation = await database.getDB().collection("personalInformation")
+    const personalInformation = (await database.initializeCollections()).personalInformation;
     const sipsterID = await database.getSipsterID(username);
     const filter = {_id: sipsterID}
     const update = {$set: {email: newEmail}}
@@ -85,7 +84,7 @@ async function postNewEmail(req){
 
 async function addEvent(req){
     const {username, eventID} = req.body
-    const personalInformation = await database.getDB().collection("personalInformation")
+    const personalInformation = (await database.initializeCollections()).personalInformation;
     const sipsterID = await database.getSipsterID(username)
     const filter = {_id: sipsterID}
     const update =  {$addToSet: { events: eventID }}

@@ -10,7 +10,7 @@ GET {{host}}/user/Crypto/events HTTP/1.1
 
 ###
 
-POST {{host}}/user/Cryptocryxx/Crypto HTTP/1.1
+POST {{host}}/user/Crypto/Cryptoooo HTTP/1.1
 
 ###
 
