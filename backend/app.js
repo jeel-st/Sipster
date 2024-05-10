@@ -19,9 +19,6 @@ try {
 
     if (e.code !== 'EEXIST') throw e
   }
-  try {
-    fs.mkdirSync(uploadDirCom)
-  } catch (e) {
 
 
 const loginRouter = require('./routes/routerLogin')
