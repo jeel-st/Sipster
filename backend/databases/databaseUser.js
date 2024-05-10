@@ -4,21 +4,30 @@ const { isValidPassword, isValidEmail, encryptPassword } = require("../utils/reg
 
 async function getUserData(req) {
     const username = req.params.username
+    const sipsterID = await database.getSipsterID(username)
     const personalInformation = await database.getDB().collection("personalInformation")
+    const userData = await personalInformation.findOne({_id: sipsterID})
 
-    const userData = await personalInformation.findOne({username})
-
-    if (!userData){
-        console.log("An error occured" )
-        throw new Error("There was no User found with that username!")
-    }
+    log.info(userData)
     return userData;
 }
+
+async function getEventsData(req) {
+    const username = req.params.username
+    const sipsterID = await database.getSipsterID(username)
+    const personalInformation = await database.getDB().collection("personalInformation")
+
+    const userData = await personalInformation.findOne({_id: sipsterID})
+
+    log.info(userData.events)
+    return userData.events;
+    
+}
+
 async function postNewUsername(req){
     const {username, newUsername} = req.body
     log.info(username + " + " + newUsername)
     const sipsterID = await database.getSipsterID(username);
-    log.info(sipsterID)
     const personalInformation = await database.getDB().collection("personalInformation")
     const filter = {_id: sipsterID}
     const update = {$set: {username: newUsername}}
@@ -74,11 +83,31 @@ async function postNewEmail(req){
     }
 }
 
+async function addEvent(req){
+    const {username, eventID} = req.body
+    const personalInformation = await database.getDB().collection("personalInformation")
+    const sipsterID = await database.getSipsterID(username)
+    const filter = {_id: sipsterID}
+    const update =  {$addToSet: { events: eventID }}
+
+    const addingData = await personalInformation.updateOne(filter, update)
+
+    if (addingData != 0){
+        log.info(`Event with ${eventID} added to User ${username}`)
+        return true;
+    }else {
+        return false;
+    }
+
+}
+
 
 module.exports = {
     getUserData,
     postNewUsername,
     postNewPassword,
     postNewPassword,
-    postNewEmail
+    postNewEmail,
+    addEvent,
+    getEventsData
 }

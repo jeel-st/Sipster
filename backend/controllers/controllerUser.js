@@ -7,19 +7,39 @@ async function getUserData(req, res) {
         const userData = await database.getUserData(req)
         res.send(userData)
     }catch (err){
-        console.error(err)
-        res.status(404).send("User not found");
+        if (err instanceof database.UsernameNotFoundError) {
+            res.status(400).send(err.message)
+        }else {
+            res.status(404).send("Something went horribly wrong!")
+        }
     }
+}
+
+async function getEvents(req, res) {
+    try {
+        log.info("in Controller")
+        const eventData = await database.getEventsData(req)
+        res.send(eventData)
+    }catch (err){
+        if (err instanceof database.UsernameNotFoundError) {
+            res.status(400).send(err.message)
+        }else {
+            res.status(404).send("Something went horribly wrong!")
+        }
+    }
+
 }
 
 async function postNewUsername(req, res) {
     try{
-        log.info("In Controller User!")
         const postNewUsername = await database.postNewUsername(req)
         res.send("Username was succesfully posted!")
     }catch(err){
-        console.log(err)
-        res.status(404).send("Something went wrong")
+        if (err instanceof database.UsernameNotFoundError) {
+            res.status(400).send(err.message)
+        }else {
+            res.status(404).send("Something went horribly wrong!")
+        }
     }
 }
 async function postNewPassword(req, res) {
@@ -31,8 +51,11 @@ async function postNewPassword(req, res) {
             res.send("Password was succesfully posted!")
         }
     }catch(err){
-        console.log(err)
-        res.status(404).send("Something went wrong")
+        if (err instanceof database.UsernameNotFoundError) {
+            res.status(400).send(err.message)
+        }else {
+            res.status(404).send("Something went horribly wrong!")
+        }
     }
 }
 async function postNewEmail(req, res) {
@@ -44,8 +67,29 @@ async function postNewEmail(req, res) {
             res.send("Email was succesfully posted!")
         }
     }catch(err){
-        console.log(err)
-        res.status(404).send("Something went wrong")
+        if (err instanceof database.UsernameNotFoundError) {
+            res.status(400).send(err.message)
+        }else {
+            res.status(404).send("Something went horribly wrong!")
+        }
+    }
+}
+
+async function addEvent(req, res) {
+    try {
+        log.info("in controller")
+        const addingData = await database.addEvent(req)
+        if (addingData){
+            res.send("Added Event succesfully to User!")
+        }else {
+            res.status(404).send("Something went wrong!")
+        }
+    }catch(err){
+        if (err instanceof database.UsernameNotFoundError) {
+            res.status(400).send(err.message)
+        }else {
+            res.status(404).send("Something went horribly wrong!")
+        }
     }
 }
 
@@ -53,5 +97,7 @@ module.exports = {
     getUserData,
     postNewUsername,
     postNewPassword,
-    postNewEmail
+    postNewEmail,
+    addEvent,
+    getEvents
 }

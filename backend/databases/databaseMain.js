@@ -81,6 +81,10 @@ async function getUserData(req){
     return await dbUser.getUserData(req)
 }
 
+async function getEventsData(req){
+    return await dbUser.getEventsData(req)
+}
+
 async function postNewUsername(req){
     return await dbUser.postNewUsername(req)
 }
@@ -91,6 +95,10 @@ async function postNewPassword(req) {
 
 async function postNewEmail(req) {
     return await dbUser.postNewEmail(req)
+}
+
+async function addEvent(req) {
+    return await dbUser.addEvent(req)
 }
 
 async function getProfilePictureURL(username){
@@ -117,11 +125,19 @@ async function getSipsterID(username) {
 
     let sipsterID = await personalInformation.find({username: username}).project({_id: 1}).toArray()
     sipsterID = sipsterID.map(id => id._id)
-    if (sipsterID == null) {
-        throw new Error("This username was not found in the database")
+    log.info(sipsterID)
+    if (sipsterID[0] == undefined || sipsterID[0] == null) {
+        throw new UsernameNotFoundError("This username was not found in the database")
     }
-    console.log(sipsterID[0])
+    //log.info(sipsterID[0])
     return sipsterID[0]
+}
+
+class UsernameNotFoundError extends Error {
+    constructor(message) {
+        super(message);
+        this.name = this.constructor.name;
+    }
 }
 
 
@@ -144,6 +160,7 @@ exports.getFriendRecommendations = getFriendRecommendations
 exports.getInvitations = getInvitations
 exports.uploadProfilePicture = uploadProfilePicture
 exports.getUserData = getUserData
+exports.getEventsData = getEventsData
 exports.postNewEmail = postNewEmail
 exports.postNewPassword = postNewPassword
 exports.postNewUsername = postNewUsername
@@ -152,3 +169,5 @@ exports.deleteProfilePictureURL = deleteProfilePictureURL
 exports.getSipsterID = getSipsterID
 exports.getSips = getSips
 exports.changeSips = changeSips
+exports.addEvent = addEvent
+exports.UsernameNotFoundError = UsernameNotFoundError
