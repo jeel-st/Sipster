@@ -2,7 +2,7 @@ import { View, Text, Pressable } from 'react-native'
 import { styles } from '../../constants'
 import React from 'react'
 
-export default function EventCard({ event, onClick, isSelected }) {
+export default function EventBtn({ event, onClick, isSelected }) {
     return (
         <Pressable onPress={onClick} className="h-10 m-1 rounded-xl shadow-sm shadow-black overflow-visible mx-5 justify-center" style={[
             {

@@ -1,9 +1,9 @@
 import { ScrollView } from 'react-native'
 import { useEvents } from '../../utils/eventsFetcher';
-import EventCard from './EventCard'
 import React from 'react'
 import PropTypes from 'prop-types'
 import { styles } from '../../constants'
+import EventBtn from './EventBtn';
 
 export default function Events({ onSelectEvent, selectedEvent }) {
     const handleEventClick = (event) => {
@@ -14,7 +14,7 @@ export default function Events({ onSelectEvent, selectedEvent }) {
     return (
         <ScrollView className="mt-4 max-h-48" showsVerticalScrollIndicator={false} style={{ backgroundColor: styles.Colors.primary }}>
             {
-                events.map((event, index) => <EventCard
+                events.map((event, index) => <EventBtn
                     event={event}
                     key={index}
                     onClick={() => handleEventClick(event)}

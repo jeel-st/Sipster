@@ -24,7 +24,7 @@ export default function ProfilePage() {
 
                 {/* Blurred Background */}
                 <Image
-                    source={{ uri: `http://85.215.71.124/static/${getProfilePicture(friend)}` }}
+                    source={{ uri: `http://85.215.71.124/static/profilePictures/${getProfilePicture(friend)}?${new Date().getDate()}` }}
                     style={{ width, height: height * 0.55 }}
                     blurRadius={10} />
 

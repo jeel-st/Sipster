@@ -11,5 +11,4 @@ import useFriends from "../utils/hooks/useFriends";
 const Home = withHook(useHome, HomePage)
 const Friends = withHook(useFriends, FriendsPage)
 
-
 export { GamePage, EventPage, Home, LoginPage, RegisterPage, Friends }

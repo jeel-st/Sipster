@@ -1,5 +1,5 @@
 // Events imports
-import EventCard from './events/EventCard';
+import EventBtn from './events/EventBtn';
 import EventInfoCard from './events/EventInfoCard';
 import Events from './events/Events';
 
@@ -32,10 +32,17 @@ import ProfileHeaderButtons from './profile/ProfileHeaderButtons';
 import FriendsH2Skeleton from './skeletons/FriendsH2Skeleton';
 import FriendsSkeleton from './skeletons/FriendsSkeleton';
 
+// Home Imports
+import HomeFriends from './home/HomeFriends';
+import HomeActivityCard from './home/HomeActivityCard';
+import HomeActivityCard2 from './home/HomeActivityCard2';
+import HomeReactionCard from './home/HomeReactionCard';
+import HomeFriendBtn from './home/HomeFriendBtn';
+
 
 export {
     // Events
-    EventCard, EventInfoCard, Events,
+    EventBtn, EventInfoCard, Events,
 
     // Friends
     FriendBtn, FriendBtn2, FriendsCategorys, FriendsContainer, FriendsHeaderButtons, FriendsScrollView, FriendsTabButton,
@@ -50,5 +57,8 @@ export {
     ProfileCard, ProfileHeaderButtons,
 
     // Skeletons
-    FriendsH2Skeleton, FriendsSkeleton
+    FriendsH2Skeleton, FriendsSkeleton,
+
+    // Home
+    HomeFriends, HomeActivityCard, HomeActivityCard2, HomeReactionCard, HomeFriendBtn
   };
