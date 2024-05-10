@@ -73,8 +73,8 @@ async function getInvitations(req){
     return await dbFriendSystem.getInvitations(req);
 }
 
-async function uploadProfilePicture(username, fileExtension){
-    return await dbProfilePicture.uploadProfilePicture(username, fileExtension)
+async function uploadProfilePicture(username, fileExtension, filePathOriginal){
+    return await dbProfilePicture.uploadProfilePicture(username, fileExtension, filePathOriginal)
 }
 
 async function getUserData(req){
@@ -97,25 +97,14 @@ async function postNewEmail(req) {
     return await dbUser.postNewEmail(req)
 }
 
-async function addEvent(req) {
-    return await dbUser.addEvent(req)
-}
-
-async function getProfilePictureURL(username){
-    return await dbProfilePicture.getProfilePictureURL(username)
+async function getProfilePictureURL(username, original){
+    return await dbProfilePicture.getProfilePictureURL(username, original)
 }
 
 async function deleteProfilePictureURL(username){
     return await dbProfilePicture.deleteProfilePictureURL(username)
 }
 
-async function getSips(username){
-    return await dbSips.getSips(username)
-}
-
-async function changeSips(username, sipsNew){
-    return await dbSips.changeSips(username, sipsNew)
-}
 function getDB() {
     return db
 }
@@ -125,9 +114,8 @@ async function getSipsterID(username) {
 
     let sipsterID = await personalInformation.find({username: username}).project({_id: 1}).toArray()
     sipsterID = sipsterID.map(id => id._id)
-    log.info(sipsterID)
-    if (sipsterID[0] == undefined || sipsterID[0] == null) {
-        throw new UsernameNotFoundError("This username was not found in the database")
+    if (!sipsterID) {
+        throw new Error("This username was not found in the database")
     }
     //log.info(sipsterID[0])
     return sipsterID[0]
@@ -167,7 +155,3 @@ exports.postNewUsername = postNewUsername
 exports.getProfilePictureURL = getProfilePictureURL
 exports.deleteProfilePictureURL = deleteProfilePictureURL
 exports.getSipsterID = getSipsterID
-exports.getSips = getSips
-exports.changeSips = changeSips
-exports.addEvent = addEvent
-exports.UsernameNotFoundError = UsernameNotFoundError
