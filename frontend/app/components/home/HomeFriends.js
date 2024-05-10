@@ -1,7 +1,7 @@
 import {ScrollView, Dimensions } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import ImageFriendBtn from '../image/ImageFriendBtn';
 import { classNames } from '../../utils';
+import HomeFriendBtn from './HomeFriendBtn';
 
 // Getting the width of the screen
 const screenWidth = Dimensions.get('window').width;
@@ -28,7 +28,7 @@ export default function HomeFriends({ user, displayFriend, handleFriendSelection
             contentContainerStyle={{ width: contentWidth }}
             scrollEnabled={scrollEnable}>
             {
-                user.friends.map((friend, index) => <ImageFriendBtn friend={friend} displayFriend={displayFriend} handleFriendSelection={handleFriendSelection} friendId={index} key={index} />)
+                user.friends.map((friend, index) => <HomeFriendBtn friend={friend} displayFriend={displayFriend} handleFriendSelection={handleFriendSelection} friendId={index} key={index} />)
             }
         </ScrollView >
     )
