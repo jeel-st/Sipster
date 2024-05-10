@@ -89,16 +89,6 @@ async function removeFriend(req){
 
     const personalInformation = await database.getDB().collection("personalInformation")
 
-    personalInformation.updateMany(
-        { }, // Filter, um alle Dokumente in der Collection auszuwählen
-        { $addToSet: { "friends": new ObjectId("663bd3b7969fc6302facf1ee") } }
-     )
-
-    personalInformation.updateMany(
-        { }, // Filter, um alle Dokumente in der Collection auszuwählen
-       { $push: { "friends": { $each: [new ObjectId("663bd3b7969fc6302facf1ee")], $position: 0 } } }
-     )
-
     try {
         const fromUsername = req.params.fromUsername
         const toUsername = req.params.toUsername
