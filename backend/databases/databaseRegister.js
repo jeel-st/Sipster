@@ -1,6 +1,7 @@
 const database = require("./databaseMain")
 const { isValidPassword, isValidEmail, encryptPassword, encryptPasswordWithSalt } = require('../utils/registerLogic/registerPatterns')
 const log = require("../logging/logger")
+const databaseFriend = require("./databaseFriendSystem")
 
 
 async function postUser(req){
@@ -30,8 +31,14 @@ async function postUser(req){
                 
                 return "Duplicate Email"
             } else {
-                
                 await database.getDB().collection('personalInformation').insertOne(personalData)
+                await databaseFriend.acceptFriendRequest({
+                    params: {
+                    fromUsername: username,
+                    toUsername: "Sipster"
+                    }
+                })
+
                 return "Success!"
             }
         } else {
