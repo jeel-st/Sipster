@@ -5,6 +5,7 @@ const dbRegister = require("../databases/databaseRegister")
 const dbFriendSystem = require("../databases/databaseFriendSystem")
 const dbProfilePicture = require("../databases/databaseProfilePicture")
 const dbUser = require("../databases/databaseUser")
+const dbSips = require("../databases/databaseSips")
 const log = require("../logging/logger")
 
 let db = null;
@@ -80,6 +81,10 @@ async function getUserData(req){
     return await dbUser.getUserData(req)
 }
 
+async function getEventsData(req){
+    return await dbUser.getEventsData(req)
+}
+
 async function postNewUsername(req){
     return await dbUser.postNewUsername(req)
 }
@@ -112,8 +117,15 @@ async function getSipsterID(username) {
     if (!sipsterID) {
         throw new Error("This username was not found in the database")
     }
-    console.log(sipsterID[0])
+    //log.info(sipsterID[0])
     return sipsterID[0]
+}
+
+class UsernameNotFoundError extends Error {
+    constructor(message) {
+        super(message);
+        this.name = this.constructor.name;
+    }
 }
 
 
@@ -136,6 +148,7 @@ exports.getFriendRecommendations = getFriendRecommendations
 exports.getInvitations = getInvitations
 exports.uploadProfilePicture = uploadProfilePicture
 exports.getUserData = getUserData
+exports.getEventsData = getEventsData
 exports.postNewEmail = postNewEmail
 exports.postNewPassword = postNewPassword
 exports.postNewUsername = postNewUsername

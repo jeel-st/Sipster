@@ -112,28 +112,6 @@ async function removeFriend(req){
     }
 }
 
-/*async function getFriendNameList(req){
-    const personalInformation = await database.getDB().collection("personalInformation")
-    const username = req.params.username
-
-    try {
-        
-        const user = await personalInformation.findOne({ username });
-
-        if (!user) {
-            throw new Error("Benutzer nicht gefunden");
-        }
-
-        const friendList = user.friends || [];
-
-        return friendList;
-    } catch (error) {
-        
-        console.error(error);
-        throw new Error("Something went wrong while getting friend list");
-    }
-}*/
-
 async function getFriendList(req){
     const personalInformation = await database.getDB().collection("personalInformation")
     const username = req.params.username;
@@ -203,23 +181,6 @@ async function getInvitations(req) {
         const sentInvitations = await invitations.find({ fromID: userID }).toArray();
         const receivedFromUsers = await getReceivedInvitations(receivedInvitations);
         const sentToUsers = await getSentInvitations(sentInvitations);
-
-/*        const from = await invitations.find(
-            {toUsername: username})
-            .project({fromUsername: 1})
-            .toArray();
-        let mappedFrom = from.map(user => user.fromUsername)
-        let fromUsers = await getUsers(mappedFrom)
-        
-        const to = await invitations.find(
-            {fromUsername: username})
-            .project({toUsername: 1})
-            .toArray();
-        let mappedTo = to.map(user => user.toUsername)
-        let toUsers = await getUsers(mappedTo)
-
-        return [fromUsers, toUsers]
-*/ 
         return [receivedFromUsers, sentToUsers];
 
     }catch (err) {

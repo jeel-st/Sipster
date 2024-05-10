@@ -4,21 +4,32 @@ const { isValidPassword, isValidEmail, encryptPassword } = require("../utils/reg
 
 async function getUserData(req) {
     const username = req.params.username
+    const sipsterID = await database.getSipsterID(username)
     const personalInformation = await database.getDB().collection("personalInformation")
+    const userData = await personalInformation.findOne({_id: sipsterID})
 
-    const userData = await personalInformation.findOne({username})
-
-    if (!userData){
-        console.log("An error occured" )
-        throw new Error("There was no User found with that username!")
-    }
+    log.info(userData)
     return userData;
 }
+
+async function getEventsData(req) {
+    const username = req.params.username
+    const sipsterID = await database.getSipsterID(username)
+    const personalInformation = await database.getDB().collection("personalInformation")
+
+    const userData = await personalInformation.findOne({_id: sipsterID})
+
+    log.info(userData.events)
+    return userData.events;
+    
+}
+
 async function postNewUsername(req){
-    const {username, newUsername} = req.params
+    const {username, newUsername} = req.body
+    log.info(username + " + " + newUsername)
     const sipsterID = await database.getSipsterID(username);
     const personalInformation = await database.getDB().collection("personalInformation")
-    const filter = {_id: new ObjectID(sipsterID)}
+    const filter = {_id: sipsterID}
     const update = {$set: {username: newUsername}}
 
     const result = await personalInformation.updateOne(filter, update)
@@ -32,19 +43,20 @@ async function postNewUsername(req){
 }
 
 async function postNewPassword(req){
-    const {username, newPassword} = req.params
+    const {username, newPassword} = req.body
+    const sipsterID = await database.getSipsterID(username)
     const encryptedPasswordAndSalt = await encryptPassword(newPassword);
     const encryptedPassword = encryptedPasswordAndSalt[0]
     const salt = encryptedPasswordAndSalt[1]
     const personalInformation = await database.getDB().collection("personalInformation")
-    const filter = {username: username}
+    const filter = {_id: sipsterID}
     const update = {$set: {encryptedPassword: encryptedPassword, salt: salt}}
 
     if (!isValidPassword(newPassword)) return false;
 
     let result = await personalInformation.updateOne(filter, update)
     if (result.modifiedCount != 0){
-        log.info(`Email changed to: ${encryptedPassword}`)
+        log.info(`Password changed to: ${encryptedPassword}`)
         log.info("You thought you would get the real Password Muhahahahaha!")
         return true;
     }else {
@@ -54,9 +66,10 @@ async function postNewPassword(req){
 }
 
 async function postNewEmail(req){
-    const {username, newEmail} = req.params
+    const {username, newEmail} = req.body
     const personalInformation = await database.getDB().collection("personalInformation")
-    const filter = {username: username}
+    const sipsterID = await database.getSipsterID(username);
+    const filter = {_id: sipsterID}
     const update = {$set: {email: newEmail}}
 
     if (!isValidEmail(newEmail)) return false
@@ -70,11 +83,31 @@ async function postNewEmail(req){
     }
 }
 
+async function addEvent(req){
+    const {username, eventID} = req.body
+    const personalInformation = await database.getDB().collection("personalInformation")
+    const sipsterID = await database.getSipsterID(username)
+    const filter = {_id: sipsterID}
+    const update =  {$addToSet: { events: eventID }}
+
+    const addingData = await personalInformation.updateOne(filter, update)
+
+    if (addingData != 0){
+        log.info(`Event with ${eventID} added to User ${username}`)
+        return true;
+    }else {
+        return false;
+    }
+
+}
+
 
 module.exports = {
     getUserData,
     postNewUsername,
     postNewPassword,
     postNewPassword,
-    postNewEmail
+    postNewEmail,
+    addEvent,
+    getEventsData
 }
