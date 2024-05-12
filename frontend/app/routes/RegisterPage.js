@@ -1,4 +1,5 @@
-import { View, Text, SafeAreaView, Pressable } from 'react-native'
+/* Imports */
+import { View, Text, SafeAreaView, Pressable, Image } from 'react-native'
 import { Colors } from '../constants/styles'
 import React, { useState } from 'react'
 import { router } from 'expo-router';
@@ -6,33 +7,29 @@ import { styles } from '../constants';
 import { useRegister } from '../utils/registerFetcher'
 import { Popover, NativeBaseProvider } from "native-base";
 import { SipsterButton, SmallTextField, TextField } from '../components';
+import { useRegisterLogic } from '../utils/hooks/useRegister/'
 
-
+/* Frontend der RegisterPage */
 export default function RegisterPage() {
 
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [username, setUsername] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmedPassword] = useState('');
-    const [registerError, setRegisterError] = useState('');
-    const { register } = useRegister();
-
-    const handleRegister = async () => {
-        if (username === '' || email === '' || password === '' || confirmPassword === '') {
-            setRegisterError('Please enter your username, email, and password.');
-            return;
-        } else if (password !== confirmPassword) {
-            setRegisterError('The passwords do not match.');
-            return;
-        }
-
-        register(firstName, lastName, username, email, password, () => {
-            console.log("Registration successful.");
-            router.navigate('routes/LoginPage');
-        });
-    };
+    /* Import der Logik für die RegisterPage aus useRegister.js */
+    const {
+        firstName,
+        setFirstName,
+        lastName,
+        setLastName,
+        username,
+        setUsername,
+        email,
+        setEmail,
+        password,
+        setPassword,
+        confirmPassword,
+        setConfirmedPassword,
+        registerError,
+        setRegisterError,
+        handleRegister
+    } = useRegisterLogic();
 
     return (
         <NativeBaseProvider>
@@ -40,11 +37,11 @@ export default function RegisterPage() {
                 <View className="mx-6 items-center">
 
                     {/* Distance */}
-                    <View className="h-4 mt-20" />
+                    <View className="h-4 mt-10" />
 
                     {/* Branding */}
                     <View className="mt-20 mb-5">
-                        <Text className="text-white font-bold text-4xl tracking-widest text-center">sipster</Text>
+                        <Image source={require('../../assets/images/logo.png')} />
                     </View>
 
                     {/* input fields */}

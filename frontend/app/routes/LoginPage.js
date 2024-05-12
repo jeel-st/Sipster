@@ -1,45 +1,29 @@
-import { View, Text, SafeAreaView } from 'react-native'
+/* Imports */
+import { View, Text, SafeAreaView, Image } from 'react-native'
 import { Colors } from '../constants/styles'
-import React, { useState } from 'react'
+import React from 'react'
 import { router } from 'expo-router'
 import { styles } from '../constants'
-import { useLogin } from '../utils/loginFetcher';
-import { storeUser } from '../utils/userFetcher'
 import { TextField, SipsterButton } from '../components/'
+import { useLoginLogic } from '../utils/hooks/useLogin';
 
+/* Frontend der LoginPage */
 export default function LoginPage() {
 
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [loginError, setLoginError] = useState('');
-    const { login, isLoggedIn, token } = useLogin();
-
-    const handleLogin = () => {
-
-        if (username === '' || password === '') {
-            setLoginError('Please enter your username and password.')
-            return;
-        } else {
-            console.log("Login details have been entered.")
-            login(username, password, setLoginError, async () => {
-                await storeUser(username)
-                router.navigate('(tabs)')
-                console.log("Login successful.")
-                setLoginError('')
-            });
-        }
-    };
-
+    /* Import der Logik für die LoginPage aus useLogin.js */
+    const { username, setUsername, password, setPassword, loginError, setLoginError, handleLogin } = useLoginLogic();
+    
+    
     return (
         <SafeAreaView className="flex-1 items-center" style={{ backgroundColor: Colors.primary }}>
             <View className="mx-6 items-center">
 
                 {/* Distance */}
-                <View className="h-20 mt-20" />
+                <View className="h-20 mt-16" />
 
                 {/* Branding */}
                 <View className="mt-20 mb-5">
-                    <Text className="text-white font-bold text-4xl tracking-widest text-center">sipster</Text>
+                    <Image source={require('../../assets/images/logo.png')} />
                 </View>
 
                 {/* input fields */}

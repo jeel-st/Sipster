@@ -1,11 +1,12 @@
- class User {
-    constructor(firstName, lastName, registerDate, username, email, friends) {
+class User {
+    constructor(firstName, lastName, registerDate, username, email, friends, profilePicture) {
         {/* User Information */ }
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
         this.email = email;
         this.registerDate = registerDate;
+        this.profilePicture = profilePicture;
 
         {/* Friends */ }
         this.friends = friends;

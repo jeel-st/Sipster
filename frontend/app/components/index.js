@@ -23,6 +23,8 @@ import SmallTextField from './layout/SmallTextField';
 import TagCard from './layout/TagCard';
 import TextField from './layout/TextField';
 import TextFieldConst from './layout/TextFieldConst';
+import SettingsButton from './layout/SettingsButton';
+import CheckButton from './layout/CheckButton';
 
 // Profile imports
 import ProfileCard from './profile/ProfileCard';
@@ -44,17 +46,17 @@ export {
     // Events
     EventBtn, EventInfoCard, Events,
 
-    // Friends
-    FriendBtn, FriendBtn2, FriendsCategorys, FriendsContainer, FriendsHeaderButtons, FriendsScrollView, FriendsTabButton,
+  // Friends
+  FriendBtn, FriendBtn2, FriendsCategorys, FriendsContainer, FriendsHeaderButtons, FriendsScrollView, FriendsTabButton,
 
-    // Games
-    GameCard, Games,
+  // Games
+  GameCard, Games,
 
-    // Layout
-    BackButton, SipsterButton, SmallTextField, TagCard, TextField, TextFieldConst,
+  // Layout
+  BackButton, SipsterButton, SmallTextField, TagCard, TextField, TextFieldConst, SettingsButton, CheckButton,
 
-    // Profile
-    ProfileCard, ProfileHeaderButtons,
+  // Profile
+  ProfileCard, ProfileHeaderButtons,
 
     // Skeletons
     FriendsH2Skeleton, FriendsSkeleton,

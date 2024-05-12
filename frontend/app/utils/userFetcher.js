@@ -70,6 +70,6 @@ export default function useUser() {
 }
 
 function createUser(userData, friends) {
-    const user = new User(userData.firstName, userData.lastName, userData.registerDate, userData.username, userData.email, friends)
+    const user = new User(userData.firstName, userData.lastName, userData.registerDate, userData.username, userData.email, friends, userData.profilePicture)
     return user
 }

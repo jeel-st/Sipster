@@ -1,7 +1,8 @@
+/* Imports */
 import { useState } from 'react'
 import axios from 'axios';
 
-
+/* Datenbankrequest um neuen User anzulegen */
 export function useRegister() {
     const [registerError, setRegisterError] = useState('');
 
