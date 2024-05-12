@@ -11,6 +11,7 @@ import { ScrollView, NativeBaseProvider } from "native-base"
 /* Frontend der LoginPage */
 export default function SettingsPage() {
 
+    // useState() -> Hook-Funktion von React um Zustände zu handeln
     const [isChangeUsernameVisible, setChangeUsernameVisible] = useState(false);
     const [isChangePasswordVisible, setChangePasswordVisible] = useState(false);
     const [isChangeFirstnameVisible, setChangeFirstnameVisible] = useState(false);
