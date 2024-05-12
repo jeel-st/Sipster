@@ -1,7 +1,7 @@
 const database = require("./databaseMain")
 const log = require("../logging/logger")
+const { ObjectId } = require('mongodb');
 const { checkForFriendsInRecommendations } = require("../utils/friendSystemLogic/FriendsRecommendationLogic")
-const logMiddleware = require("../routes/logMiddleware")
 
 async function postFriendRequest(req){
     const invitations = await database.getDB().collection("invitations")
@@ -22,17 +22,16 @@ async function postFriendRequest(req){
 }
 
 async function acceptFriendRequest(req){
-    const personalInformation = await database.getDB().collection("personalInformation")
-    const invitations = await database.getDB().collection("invitations")
-    const fromUsername = req.params.fromSipsterID
-    const toUsername = req.params.toSipsterID
+    const personalInformation = (await database.initializeCollections()).personalInformation
+    const invitations = (await database.initializeCollections()).invitations
+    const fromUsername = req.params.fromUsername
+    const toUsername = req.params.toUsername
 
     const fromSipsterID = await database.getSipsterID(fromUsername)
     const toSipsterID = await database.getSipsterID(toUsername)
 
     const fromUser = await personalInformation.findOne({ _id: fromSipsterID });
     const toUser = await personalInformation.findOne({ _id: toSipsterID });
-    console.log("FromUserString: "+fromUser.toString())
     if (!fromUser || !toUser) {
         throw new Error("Benutzer nicht gefunden");
     }
@@ -46,13 +45,15 @@ async function acceptFriendRequest(req){
         { _id: toUser._id },
         { $addToSet: { friends: fromUser._id } }
     );
-    let result = await invitations.deleteOne({fromID: fromSipsterID, toID: toSipsterID})
+    if (req.params.toUsername != "Sipster"){
+        let result = await invitations.deleteOne({fromID: fromSipsterID, toID: toSipsterID})
 
-    if (result.deletedCount === 0) {
-        throw new Error("Anfrage nicht gefunden")
-    } else {
+        if (result.deletedCount === 0) {
+            throw new Error("Anfrage nicht gefunden")
+        } else {
 
-        return("Anfrage erfolgreich gelöscht")
+            return("Anfrage erfolgreich gelöscht")
+        }
     }
 }
 
@@ -60,8 +61,8 @@ async function declineFriendRequest(req){
     const invitations = await database.getDB().collection("invitations")
     const personalInformation = await database.getDB().collection("personalInformation")
 
-    const fromUsername = req.params.fromSipsterID
-    const toUsername = req.params.toSipsterID
+    const fromUsername = req.params.fromUsername
+    const toUsername = req.params.toUsername
 
     const fromSipsterID = await database.getSipsterID(fromUsername)
     const toSipsterID = await database.getSipsterID(toUsername)
@@ -87,9 +88,14 @@ async function removeFriend(req){
     
 
     const personalInformation = await database.getDB().collection("personalInformation")
+
     try {
-        const fromUsername = req.params.fromSipsterID
-        const toUsername = req.params.toSipsterID
+        const fromUsername = req.params.fromUsername
+        const toUsername = req.params.toUsername
+
+        if (toUsername == "Sipster" || fromUsername == "Sipster"){
+            return false
+        }
 
         const fromSipsterID = await database.getSipsterID(fromUsername)
         const toSipsterID = await database.getSipsterID(toUsername)
@@ -104,7 +110,7 @@ async function removeFriend(req){
             { $pull: { friends: fromSipsterID } }
         )
 
-        return "Friend removed successfully"
+        return true
     } catch (error) {
         
         console.error(error);

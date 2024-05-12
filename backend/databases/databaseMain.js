@@ -111,13 +111,11 @@ function getDB() {
 
 async function getSipsterID(username) {
     const personalInformation = (await initializeCollections()).personalInformation
-    console.log(personalInformation)
     let sipsterID = await personalInformation.find({username: username}).project({_id: 1}).toArray()
     sipsterID = sipsterID.map(id => id._id)
     if (!sipsterID) {
         throw new UsernameNotFoundError("This username was not found in the database")
     }
-    console.log(sipsterID[0])
     return sipsterID[0]
 }
 

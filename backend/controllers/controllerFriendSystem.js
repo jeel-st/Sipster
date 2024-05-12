@@ -30,7 +30,11 @@ async function deleteFriendRequest(req, res){
 
         if(req.query.remove == "true"){
             const friendRequestDel = await database.removeFriend(req)
-            res.send("Friend was removed")
+            if (friendRequestDel == false) {
+                res.status(400).send("Sipster can't be removed as a friend")
+            }else {
+                res.send("Friend was removed")
+            }
         }
 
     }catch(err){
