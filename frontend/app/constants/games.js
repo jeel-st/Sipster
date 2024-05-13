@@ -55,7 +55,7 @@ export const games = [
         playtime: "30 Minuten pro Runde",
         desc: "Eine Hardcore-Version des Spiels mit extrem peinlichen Fragen und herausfordernden Aufgaben",
         start: "'routes/HomePage'",
-        category: "Adult Game",
+        category: "Q&A",
         sips: "300"
     },
 
@@ -116,7 +116,7 @@ export const games = [
             playtime: "variabel",
             desc: "Eine Variation des klassischen Jenga-Spiels, bei dem auf den Bausteinen Aufgaben oder Regeln stehen, die ausgeführt werden müssen",
             start: "'routes/GamePage'",
-            category: "Skill Game",
+            category: "Q&A",
             sips: "200"
             },
             {
