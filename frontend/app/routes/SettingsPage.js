@@ -17,6 +17,8 @@ export default function SettingsPage() {
     const [isChangePasswordVisible, setChangePasswordVisible] = useState(false);
     const [isChangeFirstnameVisible, setChangeFirstnameVisible] = useState(false);
     const [isChangeLastnameVisible, setChangeLastnameVisible] = useState(false);
+    const [isHelpVisible, setHelpVisible] = useState(false);
+    const [isInfoVisible, setInfoVisible] = useState(false);
     const [isChangeEmailVisible, setChangeEmailVisible] = useState(false);
 
     /* Import der Logik für die changeUsername-Komponente aus changeSettingsLogic.js */
@@ -103,23 +105,75 @@ export default function SettingsPage() {
                         <SettingsButton title="change profile picture" />
 
 
-
-
                         {/*Help*/}
                         <View className="flex-row items-center mt-10">
                             <Ionicons name="help-circle-outline" size={25} color="white" style={{ marginRight: 10 }} />
-                            <TouchableOpacity>
-                                <Text className={styles.H3Text}>Help</Text>
+                            <TouchableOpacity onPress={() => setHelpVisible(!isHelpVisible)}>
+                                <Text className={styles.H3Text}>Help & FAQs</Text>
                             </TouchableOpacity>
                         </View>
+                        {isHelpVisible && (
+                            <View className="mt-6 mb-6 ml-3">
+                                <Text className={styles.H3Text}>
+                                    How do I log in to the application?
+                                </Text>
+
+                                <Text className="text-white text-l">
+                                    To log in, navigate to the login page and enter your login credentials (username and password). Then, click on the "let's party" button to access your account.
+                                </Text>
+
+                                <Text className="text-white font-bold text-l mt-4">
+                                    How can I collect sips?
+                                </Text>
+
+                                <Text className="text-white text-l">
+                                    Each time you participate in games or events, you can earn Sips. Each event or game indicates how many Sips you will receive for successfully completing it.
+                                </Text>
+
+                                <Text className="text-white font-bold text-l mt-4">
+                                    How can I get help or support if I encounter an issue?
+                                </Text>
+
+                                <Text className="text-white text-l">
+                                    If you need help or support, you can read the frequently asked questions (FAQs) or contact our support team directly by sending an email to info@sipster.com.
+                                </Text>
+                            </View>
+                        )}
 
                         {/*Info*/}
                         <View className="flex-row mt-2 items-center">
                             <Ionicons name="information-circle-outline" size={25} color="white" style={{ marginRight: 10 }} />
-                            <TouchableOpacity>
-                                <Text className={styles.H3Text}>Info</Text>
+                            <TouchableOpacity onPress={() => setInfoVisible(!isInfoVisible)}>
+                                <Text className={styles.H3Text}>About us</Text>
                             </TouchableOpacity>
                         </View>
+                        {isInfoVisible && (
+                            <View className="mt-6 mb-6 ml-3">
+                                <Text className={styles.H3Text}>
+                                    Impressum
+                                </Text>
+
+                                <Text className="text-white text-l">
+                                    {`sipster ist eine Unternehmung der \nsipster UG \nNobelstraße 10 \n70569 Stuttgart \n \nVertreten durch Lorenz Bauscher, Julia Ebert, Lars Gerigk, Maike König, Joel Starkov`}
+                                </Text>
+
+                                <Text className="text-white font-bold text-l mt-4">
+                                    Datenschutzerklärung
+                                </Text>
+
+                                <Text className="text-white text-l">
+                                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+                                </Text>
+
+                                <Text className="text-white font-bold text-l mt-4">
+                                    AGB
+                                </Text>
+
+                                <Text className="text-white text-l">
+                                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+                                </Text>
+                            </View>
+                        )}
 
                         {/*Delete Account*/}
                         <View className="flex-row mt-2 items-center">
