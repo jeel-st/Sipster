@@ -7,6 +7,7 @@ export function useSettings() {
     const [newPassword, setNewPassword] = useState('');
     const [oldPassword, setOldPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const [email, setEmail] = useState('');
     const [settingsError, setSettingsError] = useState('');
     const { changeUsername, changePassword } = settingsFetcher();
 
@@ -33,10 +34,23 @@ export function useSettings() {
             setSettingsError('The passwords do not match.');
             return;
         } else {
-            /* Wenn das Textfeld ausgefüllt ist, dann wird der neue Username gespeichert */
+            /* Wenn das Textfeld ausgefüllt ist, dann wird das neue Passwort gespeichert */
             console.log("changePassword details have been entered.")
 
             changePassword(newPassword);
+        }
+    }
+
+    const handleChangeEmail = async () => {
+        if (email == '') {
+            /* Es wird geprüft, ob das Textfeld ausgefüllt sind */
+            setSettingsError('Please enter your new email.')
+            return;
+        } else {
+            /* Wenn das Textfeld ausgefüllt ist, dann wird der neue Email gespeichert */
+            console.log("changeEmail details have been entered.")
+
+            changeUsername(email);
         }
     }
 
@@ -45,13 +59,16 @@ export function useSettings() {
         newPassword,
         oldPassword,
         confirmPassword,
+        email,
         setUsername,
         setNewPassword,
         setOldPassword,
         setConfirmPassword,
+        setEmail,
         settingsError,
         setSettingsError,
         handleChangeUsername,
-        handleChangePassword
+        handleChangePassword,
+        handleChangeEmail
     };
 }

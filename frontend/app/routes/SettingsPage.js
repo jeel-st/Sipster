@@ -22,7 +22,7 @@ export default function SettingsPage() {
     const [isChangeEmailVisible, setChangeEmailVisible] = useState(false);
 
     /* Import der Logik für die changeUsername-Komponente aus changeSettingsLogic.js */
-    const { username, newPassword, oldPassword, confirmPassword, setUsername, setNewPassword, setOldPassword, setConfirmPassword, settingsError, setSettingsError, handleChangeUsername, handleChangePassword } = useSettings();
+    const { username, newPassword, oldPassword, confirmPassword, email, setUsername, setNewPassword, setOldPassword, setConfirmPassword, setEmail, settingsError, setSettingsError, handleChangeUsername, handleChangePassword, handleChangeEmail } = useSettings();
 
     return (
         <NativeBaseProvider>
@@ -96,8 +96,8 @@ export default function SettingsPage() {
                         {/* Aufklappbares Element für die Änderung des Vornamens */}
                         {isChangeEmailVisible && (
                             <View className="flex-row mt-6 mb-6 ml-3 items-center">
-                                <TextField placeholder="new email" value={username} onChangeText={(text) => { setUsername(text); setSettingsError('') }} />
-                                <CheckButton change={() => handleChangeUsername()} />
+                                <TextField placeholder="new email" value={email} onChangeText={(text) => { setEmail(text); setSettingsError('') }} />
+                                <CheckButton change={() => handleChangeEmail()} />
                             </View>
                         )}
 

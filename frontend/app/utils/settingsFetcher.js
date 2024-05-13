@@ -1,16 +1,20 @@
 /* Imports */
 import { useState } from 'react'
 import axios from 'axios';
+import useUser from '../utils/userFetcher';
 
 /* Datenbankrequest um neuen User anzulegen */
 export function settingsFetcher() {
+
+    user = useUser()
     const [settingsError, setSettingsError] = useState('');
 
     const changeUsername = (username) => {
 
-        axios.post('http://85.215.71.124/changeUsername',
+        axios.post('http://85.215.71.124/user/changeUsername',
             {
-                "username": username
+                "username": user.username,
+                "newUsername": username
             },
             {
                 headers: {
@@ -32,11 +36,12 @@ export function settingsFetcher() {
             });
     };
 
-    const changePassword = (newPassword) => {
+    const changePassword = (password) => {
 
-        axios.post('http://85.215.71.124/changePassword',
+        axios.post('http://85.215.71.124/user/changePassword',
             {
-                "password": newPassword
+                "username": user.username,
+                "newPassword": password
             },
             {
                 headers: {
@@ -58,5 +63,32 @@ export function settingsFetcher() {
             });
     };
 
-    return { changeUsername, changePassword, settingsError, setSettingsError };
+    const changeEmail = (email) => {
+
+        axios.post('http://85.215.71.124/user/changeEmail',
+            {
+                "username": user.username,
+                "newEmail": email
+            },
+            {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => {
+                console.log("The new email has been successfully changed.", response.data);
+                setSettingsError('');
+            })
+            .catch(error => {
+                console.error("Error changing the email:", error);
+                console.log(error)
+                if (error.response && error.response.status === "404") {
+                    setSettingsError('This email already exists.');
+                } else {
+                    setSettingsError('Changing email failed. Please check your email.');
+                }
+            });
+    };
+
+    return { changeUsername, changePassword, changeEmail, settingsError, setSettingsError };
 }
