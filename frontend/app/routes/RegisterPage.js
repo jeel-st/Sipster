@@ -41,7 +41,7 @@ export default function RegisterPage() {
 
                     {/* Branding */}
                     <View className="mt-20 mb-5">
-                        <Image source={require('../../assets/images/logo.png')} />
+                        <Image source={require('../assets/images/logo.png')} />
                     </View>
 
                     {/* input fields */}
