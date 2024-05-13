@@ -25,7 +25,7 @@ export default function AccountPage() {
 
                     {/* Branding & Settings */}
                     <View className="flex-row mt-4 mx-6 items-center justify-between" >
-                        <Image source={require('../../assets/images/logo-small.png')} />
+                        <Image source={require('../assets/images/logo-small.png')} />
 
                         <Pressable onPress={() => router.navigate('routes/SettingsPage')}>
                             <View className="justify-center items-center w-10 h-10 rounded-xl bg-secondary">

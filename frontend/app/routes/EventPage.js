@@ -15,7 +15,7 @@ export default function EventPage() {
 
                 {/* Branding */}
                 <View className={styles.spaceText}>
-                    <Image source={require('../../assets/images/logo-small.png')} />
+                    <Image source={require('../assets/images/logo-small.png')} />
                 </View>
 
                 {/* Event Info */}
