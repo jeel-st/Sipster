@@ -41,6 +41,9 @@ import HomeActivityCard2 from './home/HomeActivityCard2';
 import HomeReactionCard from './home/HomeReactionCard';
 import HomeFriendBtn from './home/HomeFriendBtn';
 
+// Provider
+import { UserProvider } from './UserProvider';
+
 
 export {
     // Events
@@ -62,5 +65,8 @@ export {
     FriendsH2Skeleton, FriendsSkeleton,
 
     // Home
-    HomeFriends, HomeActivityCard, HomeActivityCard2, HomeReactionCard, HomeFriendBtn
+    HomeFriends, HomeActivityCard, HomeActivityCard2, HomeReactionCard, HomeFriendBtn,
+
+    // Provider
+    UserProvider
   };

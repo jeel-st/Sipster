@@ -1,12 +1,12 @@
-import axios from "axios";
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import User from "../entitys/user";
-import { fetchFriendsData } from "./friendsFetcher";
 import { useEffect, useState } from "react";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import User from "../../entitys/user";
+import { fetchFriendsData } from "../database/friendsFetcher";
+import axiosInstance from "./axiosConfig";
 
 export async function storeUser(username){
     try {
-        const response = await axios.get(`http://85.215.71.124/user/${username}`)
+        const response = await axiosInstance.get(`/user/${username}`)
         console.log("[storeUser] store user successfully")
         try{
             const jsonValue = JSON.stringify(response.data);

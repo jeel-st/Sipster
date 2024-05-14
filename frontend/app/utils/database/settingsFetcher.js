@@ -1,17 +1,15 @@
-/* Imports */
-import { useState } from 'react'
-import axios from 'axios';
-import useUser from '../utils/userFetcher';
+import { useState } from 'react';
+import useUser from '../database/userFetcher';
+import axiosInstance from './axiosConfig';
 
-/* Datenbankrequest um neuen User anzulegen */
 export function settingsFetcher() {
 
-    user = useUser()
+    const user = useUser();
     const [settingsError, setSettingsError] = useState('');
 
     const changeUsername = (username) => {
 
-        axios.post('http://85.215.71.124/user/changeUsername',
+        axiosInstance.post('/user/changeUsername',
             {
                 "username": user.username,
                 "newUsername": username
@@ -38,7 +36,7 @@ export function settingsFetcher() {
 
     const changePassword = (password) => {
 
-        axios.post('http://85.215.71.124/user/changePassword',
+        axiosInstance.post('/user/changePassword',
             {
                 "username": user.username,
                 "newPassword": password
@@ -56,7 +54,7 @@ export function settingsFetcher() {
                 console.error("Error changing the password:", error);
                 console.log(error)
                 if (error.response && error.response.status === "404") {
-                    setSettingsError('This password already exists.'); // notwendig? 
+                    setSettingsError('This password already exists.'); // notwendig?
                 } else {
                     setSettingsError('Changing password failed. Please check your password information.');
                 }
@@ -65,7 +63,7 @@ export function settingsFetcher() {
 
     const changeEmail = (email) => {
 
-        axios.post('http://85.215.71.124/user/changeEmail',
+        axiosInstance.post('/user/changeEmail',
             {
                 "username": user.username,
                 "newEmail": email

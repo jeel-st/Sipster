@@ -3,7 +3,7 @@ import { SafeAreaView, Pressable, Text, StatusBar, Image } from "react-native"
 import { styles } from '../constants';
 import React from 'react';
 import { router } from 'expo-router'
-import useUser from '../utils/userFetcher';
+import useUser from '../utils/database/userFetcher';
 import { NativeBaseProvider, View } from "native-base";
 import { FriendsScrollView, FriendsSkeleton } from "../components";
 import { AntDesign } from '@expo/vector-icons';

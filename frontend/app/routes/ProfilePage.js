@@ -2,10 +2,9 @@ import { Image, Dimensions } from 'react-native'
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { classNames } from '../utils'
-import { Friends, ProfileCard, ProfileHeaderButtons } from '../components'
-import { styles } from '../constants'
+import { ProfileCard, ProfileHeaderButtons } from '../components'
 import { useLocalSearchParams } from 'expo-router'
-import getProfilePicture from '../utils/accountFetcher'
+import getProfilePicture from '../utils/database/accountFetcher'
 import { NativeBaseProvider } from 'native-base'
 
 const { width, height } = Dimensions.get('window');

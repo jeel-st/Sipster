@@ -1,14 +1,12 @@
-/* Imports */
-import { useState } from 'react'
-import axios from 'axios';
+import { useState } from 'react';
+import axiosInstance from './axiosConfig';
 
-/* Datenbankrequest um neuen User anzulegen */
 export function useRegister() {
     const [registerError, setRegisterError] = useState('');
 
     const register = (firstName, lastName, username, email, password, onRegisterSuccess) => {
 
-        axios.post('http://85.215.71.124/register',
+        axiosInstance.post('/register',
             {
                 "username": username,
                 "email": email,

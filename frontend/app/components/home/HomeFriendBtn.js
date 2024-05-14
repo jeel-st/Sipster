@@ -1,6 +1,6 @@
 import { View, Image, Pressable } from 'react-native'
 import React from 'react'
-import getProfilePicture from '../../utils/accountFetcher';
+import getProfilePicture from '../../utils/database/accountFetcher';
 import { classNames } from '../../utils';
 
 export default function HomeFriendBtn({ friend, displayFriend, handleFriendSelection, friendId }) {

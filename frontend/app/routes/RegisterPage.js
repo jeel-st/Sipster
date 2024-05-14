@@ -1,10 +1,9 @@
 /* Imports */
 import { View, Text, SafeAreaView, Pressable, Image } from 'react-native'
 import { Colors } from '../constants/styles'
-import React, { useState } from 'react'
+import React from 'react'
 import { router } from 'expo-router';
 import { styles } from '../constants';
-import { useRegister } from '../utils/registerFetcher'
 import { Popover, NativeBaseProvider } from "native-base";
 import { SipsterButton, SmallTextField, TextField } from '../components';
 import { useRegisterLogic } from '../utils/hooks/useRegister/'

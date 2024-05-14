@@ -1,7 +1,7 @@
 /* Imports  */
 import { useState } from 'react';
-import { useLogin } from '../loginFetcher';
-import { storeUser } from '../userFetcher';
+import { useLogin } from '../database/loginFetcher';
+import { storeUser } from '../database/userFetcher';
 import { router } from 'expo-router'
 
 /* Logik für die LoginPage um die Eingabe zu prüfen  */

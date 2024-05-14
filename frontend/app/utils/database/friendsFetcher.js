@@ -1,17 +1,5 @@
-import axios from "axios"
-import Friend from "../entitys/friend"
-
-const axiosInstance = axios.create({
-    baseURL: "http://85.215.71.124"
-});
-
-axiosInstance.interceptors.response.use(
-    response => response,
-    error => {
-        console.error("Request failed:", error);
-        throw error;
-    }
-);
+import Friend from "../../entitys/friend"
+import axiosInstance from "./axiosConfig"
 
 export async function fetchFriendsData(username) {
     try {
@@ -59,7 +47,6 @@ export async function sendFriendInvite(username, friendUsername) {
                 }
             })
         console.log("[sendFriendInvite] send Friend Invite successfully");
-        console.log(response.data)
     } catch (error) {
         throw error;
     }
@@ -92,7 +79,6 @@ export async function removeFriend(username, friendUsername) {
     try {
         const response = await axiosInstance.delete(`/friends/${username}/${friendUsername}?remove=true`);
         console.log("[removeFriend] remove Friend successfully");
-        console.log(response.data)
     } catch (error) {
         throw error;
     }

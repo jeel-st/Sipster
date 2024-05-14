@@ -1,7 +1,7 @@
 import { View, Text, Image, Dimensions, ScrollView, findNodeHandle } from 'react-native'
 import React, { useRef, useState, useEffect } from 'react'
 import { classNames } from '../../utils'
-import getProfilePicture from '../../utils/accountFetcher'
+import getProfilePicture from '../../utils/database/accountFetcher'
 import HomeReactionCard from './HomeReactionCard'
 
 const windowWidth = Dimensions.get('window').width

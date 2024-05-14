@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { settingsFetcher } from '../settingsFetcher'
+import { settingsFetcher } from '../database/settingsFetcher'
 
 export function useSettings() {
 
