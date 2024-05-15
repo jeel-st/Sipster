@@ -1,7 +1,7 @@
 /* Imports */
 import { useState } from 'react'
 import axios from 'axios';
-import useUser from '../utils/userFetcher';
+import useUser, { storeUser } from '../utils/userFetcher';
 
 /* Datenbankrequest um neuen User anzulegen */
 export function settingsFetcher() {
@@ -9,12 +9,12 @@ export function settingsFetcher() {
     user = useUser()
     const [settingsError, setSettingsError] = useState('');
 
-    const changeUsername = (username) => {
+    const changeUsername = (newUsername) => {
 
         axios.post('http://85.215.71.124/user/changeUsername',
             {
                 "username": user.username,
-                "newUsername": username
+                "newUsername": newUsername
             },
             {
                 headers: {
@@ -24,6 +24,7 @@ export function settingsFetcher() {
             .then(response => {
                 console.log("The new username has been successfully changed.", response.data);
                 setSettingsError('');
+                user.username = newUsername;
             })
             .catch(error => {
                 console.error("Error changing the username:", error);
@@ -78,6 +79,7 @@ export function settingsFetcher() {
             .then(response => {
                 console.log("The new email has been successfully changed.", response.data);
                 setSettingsError('');
+                user.email = email;
             })
             .catch(error => {
                 console.error("Error changing the email:", error);

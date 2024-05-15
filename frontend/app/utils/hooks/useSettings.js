@@ -9,7 +9,8 @@ export function useSettings() {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [email, setEmail] = useState('');
     const [settingsError, setSettingsError] = useState('');
-    const { changeUsername, changePassword } = settingsFetcher();
+    const { changeUsername, changePassword, changeEmail } = settingsFetcher();
+
 
     const handleChangeUsername = async () => {
         if (username == '') {
@@ -20,7 +21,8 @@ export function useSettings() {
             /* Wenn das Textfeld ausgefüllt ist, dann wird der neue Username gespeichert */
             console.log("changeUsername details have been entered.")
 
-            changeUsername(username);
+            changeUsername(username)
+            
         }
     }
 
@@ -37,7 +39,7 @@ export function useSettings() {
             /* Wenn das Textfeld ausgefüllt ist, dann wird das neue Passwort gespeichert */
             console.log("changePassword details have been entered.")
 
-            changePassword(newPassword);
+            changePassword(newPassword)
         }
     }
 
@@ -50,7 +52,7 @@ export function useSettings() {
             /* Wenn das Textfeld ausgefüllt ist, dann wird der neue Email gespeichert */
             console.log("changeEmail details have been entered.")
 
-            changeUsername(email);
+            changeEmail(email);
         }
     }
 

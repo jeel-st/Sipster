@@ -5,7 +5,7 @@ import React from 'react';
 import { router } from 'expo-router'
 import useUser from '../utils/userFetcher';
 import { NativeBaseProvider, View } from "native-base";
-import { FriendsScrollView, FriendsSkeleton } from "../components";
+import { FriendsScrollView, FriendsSkeleton, IconButton } from "../components";
 import { AntDesign } from '@expo/vector-icons';
 
 /* Frontend der AccountPage */
@@ -27,11 +27,7 @@ export default function AccountPage() {
                     <View className="flex-row mt-4 mx-6 items-center justify-between" >
                         <Image source={require('../assets/images/logo-small.png')} />
 
-                        <Pressable onPress={() => router.navigate('routes/SettingsPage')}>
-                            <View className="justify-center items-center w-10 h-10 rounded-xl bg-secondary">
-                                <AntDesign name="setting" size={24} color="white" />
-                            </View>
-                        </Pressable>
+                        <IconButton icon="gear" navigation={() => router.navigate('routes/SettingsPage')}/>
                     </View>
 
                     {/* Hello User */}
