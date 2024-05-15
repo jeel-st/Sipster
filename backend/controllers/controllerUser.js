@@ -93,11 +93,56 @@ async function addEvent(req, res) {
     }
 }
 
+async function changeFirstName(req, res) {
+    try {
+        const userID = req.body.userID
+        const newName = req.body.newName
+
+        if (!userID || !newName) {
+            res.status(400).send("UserID and new first Name are required.")
+        } else {
+
+            const result = await database.changeFirstName(userID, newName)
+            if (result == true) {
+                res.send("First Name changed successfully!")
+            } else {
+                res.status(404).send("User not found")
+            }
+        }
+    } catch (error) {
+        log.error(error)
+        res.status(500).send("Something went wrong.")
+    }
+}
+
+async function changeLastName(req, res) {
+    try {
+        const userID = req.body.userID
+        const newName = req.body.newName
+
+        if (!userID || !newName) {
+            res.status(400).send("UserID and new last Name are required.")
+        } else {
+
+            const result = await database.changeLastName(userID, newName)
+            if (result == true) {
+                res.send("Last Name changed successfully!")
+            } else {
+                res.status(404).send("User not found")
+            }
+        }
+    } catch (error) {
+        log.error(error)
+        res.status(500).send("Something went wrong.")
+    }
+}
 module.exports = {
     getUserData,
     postNewUsername,
     postNewPassword,
     postNewEmail,
     addEvent,
-    getEvents
+    getEvents,
+    changeFirstName,
+    changeLastName
 }

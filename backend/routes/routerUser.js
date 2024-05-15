@@ -9,6 +9,8 @@ const registerController = require('../controllers/controllerRegister')
 
 router.get('/:username', userController.getUserData)
 router.get('/:username/events', userController.getEvents)
+router.put('/changeFirstName', userController.changeFirstName)
+router.put('/changeLastName', userController.changeLastName)
 router.post('/changeUsername', userController.postNewUsername)
 router.post('/changePassword', userController.postNewPassword)
 router.post('/changeEmail', userController.postNewEmail)

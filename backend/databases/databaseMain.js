@@ -105,6 +105,21 @@ async function deleteProfilePictureURL(username){
     return await dbProfilePicture.deleteProfilePictureURL(username)
 }
 
+async function getSips(username){
+    return await dbSips.getSips(username)
+}
+
+async function changeSips(username, sipsNew){
+    return await dbSips.changeSips(username, sipsNew)
+}
+
+async function changeFirstName(userID, newName){
+    return await dbUser.changeFirstName(userID, newName)
+}
+
+async function changeLastName(userID, newName){
+    return await dbUser.changeLastName(userID, newName)
+}
 function getDB() {
     return db
 }
@@ -165,4 +180,8 @@ exports.getProfilePictureURL = getProfilePictureURL
 exports.deleteProfilePictureURL = deleteProfilePictureURL
 exports.getSipsterID = getSipsterID
 exports.initializeCollections = initializeCollections;
+exports.getSips = getSips
+exports.changeSips = changeSips
+exports.changeFirstName = changeFirstName
+exports.changeLastName = changeLastName
 exports.UsernameNotFoundError = UsernameNotFoundError;

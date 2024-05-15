@@ -99,7 +99,30 @@ async function addEvent(req){
     }
 
 }
+async function changeFirstName(userID, newName){
+    const personalInformation = (await database.initializeCollections()).personalInformation
+    const filter = {_id: userID}
+    const update = {$set: {"firstName": newName}}
 
+    const postName = await personalInformation.updateOne(filter, update)
+    if(postName.modifiedCount === 1){
+        return true
+    }else{
+        return false
+    }
+}
+async function changeLastName(userID, newName){
+    const personalInformation = (await database.initializeCollections()).personalInformation
+    const filter = {_id: userID}
+    const update = {$set: {"lastName": newName}}
+
+    const postName = await personalInformation.updateOne(filter, update)
+    if(postName.modifiedCount === 1){
+        return true
+    }else{
+        return false
+    }
+}
 
 module.exports = {
     getUserData,
@@ -108,5 +131,7 @@ module.exports = {
     postNewPassword,
     postNewEmail,
     addEvent,
-    getEventsData
+    getEventsData,
+    changeFirstName,
+    changeLastName
 }
