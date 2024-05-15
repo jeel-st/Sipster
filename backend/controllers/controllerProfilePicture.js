@@ -40,7 +40,7 @@ async function uploadProfilePicture(req, res) {
 
             const filePath = path.join(uploadOptions.uploadDir, newFilename);   //-> neuer Filename wird erstellt
 
-            const pictureURL = await database.getProfilePictureURL(userIDObj);
+            const pictureURL = await database.getProfilePictureURL(userIDObj, true);
 
             
             if (pictureURL != null) {
@@ -53,7 +53,7 @@ async function uploadProfilePicture(req, res) {
 
                 });
 
-                const pictureURLCompressed = await database.getProfilePictureURLCompressed(userIDObj)
+                const pictureURLCompressed = await database.getProfilePictureURL(userIDObj, false)
                 if (pictureURLCompressed != null) {         //-> Falls ein Bildpfad bereits in der Datenbank existiert, wird das ursprüngliche Bild aus dem Server gelöscht
                     fs.unlink(pictureURLCompressed, (err) => {
                         if (err) {
