@@ -15,6 +15,8 @@ import FriendsTabButton from './friends/FriendsTabButton';
 // Games imports
 import GameCard from './games/GameCard';
 import Games from './games/Games';
+import GamesPerCategory from './games/GamesPerCategory';
+
 
 // Layout imports
 import BackButton from './layout/BackButton';
@@ -49,8 +51,8 @@ export {
   // Friends
   FriendBtn, FriendBtn2, FriendsCategorys, FriendsContainer, FriendsHeaderButtons, FriendsScrollView, FriendsTabButton,
 
-  // Games
-  GameCard, Games,
+    // Games
+    GameCard, Games,  GamesPerCategory, 
 
   // Layout
   BackButton, SipsterButton, SmallTextField, TagCard, TextField, TextFieldConst, SettingsButton, CheckButton,
