@@ -1,5 +1,7 @@
 const database = require("./databaseMain")
 const log = require("../logging/logger")
+const { ObjectId } = require('mongodb');
+
 const { isValidPassword, isValidEmail, encryptPassword } = require("../utils/registerLogic/registerPatterns")
 
 async function getUserData(req) {
