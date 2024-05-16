@@ -1,5 +1,6 @@
 const database = require('../databases/databaseMain')
 const log = require("../logging/logger")
+const { ObjectId } = require('mongodb');
 
 async function getUserData(req, res) {
     try {
@@ -124,8 +125,8 @@ async function changeLastName(req, res) {
         if (!userID || !newName) {
             res.status(400).send("UserID and new last Name are required.")
         } else {
-           
-            const result = await database.changeLastName(userID, newName)
+            const objectId = new ObjectId(userID);
+            const result = await database.changeLastName(objectId, newName)
             if (result == true) {
                 res.send("Last Name changed successfully!")
             } else {
