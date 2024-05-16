@@ -27,6 +27,7 @@ import TextFieldConst from './layout/TextFieldConst';
 // Settings Import
 import SettingsButton from './settings/SettingsButton';
 import CheckButton from './settings/CheckButton';
+import AboutUs from './settings/AboutUs';
 
 // Profile imports
 import ProfileCard from './profile/ProfileCard';
@@ -58,7 +59,7 @@ export {
   IconButton, SipsterButton, SmallTextField, TagCard, TextField, TextFieldConst,
 
   // Settings
-  SettingsButton, CheckButton,
+  SettingsButton, CheckButton, AboutUs,
 
   // Profile
   ProfileCard, ProfileHeaderButtons,

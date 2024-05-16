@@ -1,6 +1,6 @@
 /* Imports */
 import { SafeAreaView, Text, StatusBar, View, TouchableOpacity } from "react-native"
-import { SettingsButton, SipsterButton, CheckButton, TextField, IconButton } from '../components/'
+import { SettingsButton, SipsterButton, CheckButton, TextField, IconButton, AboutUs } from '../components/'
 import { styles, settings } from '../constants'
 import { router } from 'expo-router'
 import { useSettings } from '../utils/hooks/useSettings';
@@ -17,7 +17,6 @@ export default function SettingsPage() {
     const [isChangeFirstnameVisible, setChangeFirstnameVisible] = useState(false);
     const [isChangeLastnameVisible, setChangeLastnameVisible] = useState(false);
     const [isHelpVisible, setHelpVisible] = useState(false);
-    const [isInfoVisible, setInfoVisible] = useState(false);
     const [isChangeEmailVisible, setChangeEmailVisible] = useState(false);
 
     /* Import der Logik für die changeUsername-Komponente aus changeSettingsLogic.js */
@@ -31,8 +30,8 @@ export default function SettingsPage() {
                     {/* Header */}
                     <View style={{ height: StatusBar.currentHeight }} />
 
-                    {/* Back Button*/}
-                    <IconButton icon="chevron-left" navigation={() => router.back()}/>
+                    {/* Back Button */}
+                    <IconButton icon="chevron-left" navigation={() => router.back()} />
 
                     {/* Title */}
                     <View className="mt-6">
@@ -121,25 +120,7 @@ export default function SettingsPage() {
                         )}
 
                         {/*About us*/}
-                        <View className="flex-row mt-2 items-center">
-                            <Ionicons name="information-circle-outline" size={25} color="white" style={{ marginRight: 10 }} />
-                            <TouchableOpacity onPress={() => setInfoVisible(!isInfoVisible)}>
-                                <Text className={styles.H3Text}>About us</Text>
-                            </TouchableOpacity>
-                        </View>
-                        {isInfoVisible && (
-                            <View className="mt-6 mb-6 ml-3">
-
-                                <Text className="text-yellow font-bold text-l">Impressum</Text>
-                                <Text className="text-white text-l">{settings.impressum}</Text>
-
-                                <Text className="text-yellow font-bold text-l mt-4">Datenschutzerklärung</Text>
-                                <Text className="text-white text-l">{settings.datenschutz}</Text>
-
-                                <Text className="text-yellow font-bold text-l mt-4">AGB</Text>
-                                <Text className="block text-white text-l">{settings.AGB}</Text>
-                            </View>
-                        )}
+                        <AboutUs />
 
                         {/*Delete Account*/}
                         <View className="flex-row mt-2 items-center">
