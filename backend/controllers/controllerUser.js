@@ -119,7 +119,10 @@ async function changeLastName(req, res) {
     try {
         const userID = req.body.userID
         const newName = req.body.newName
-
+        console.log("userID:" + userID)
+            console.log("Klasse der ID: "+ typeof userID)
+            log.info("newName "+newName)
+            log.info("userID " + userID)
         if (!userID || !newName) {
             res.status(400).send("UserID and new last Name are required.")
         } else {
