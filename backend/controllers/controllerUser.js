@@ -101,8 +101,8 @@ async function changeFirstName(req, res) {
         if (!userID || !newName) {
             res.status(400).send("UserID and new first Name are required.")
         } else {
-
-            const result = await database.changeFirstName(userID, newName)
+            const objectId = new ObjectId(userID);
+            const result = await database.changeFirstName(objectId, newName)
             if (result == true) {
                 res.send("First Name changed successfully!")
             } else {
@@ -119,8 +119,7 @@ async function changeLastName(req, res) {
     try {
         const userID = req.body.userID
         const newName = req.body.newName
-        console.log("userID:" + userID)
-        console.log("Klasse der ID: "+ typeof userID)
+
 
         if (!userID || !newName) {
             res.status(400).send("UserID and new last Name are required.")
