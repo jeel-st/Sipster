@@ -10,6 +10,7 @@ module.exports = {
             "./app/components/profile/*.{js,jsx,ts,tsx}",
             "./app/components/skeletons/*.{js,jsx,ts,tsx}",
             "./app/components/image/*.{js,jsx,ts,tsx}",
+            "./app/components/settings/*.{js,jsx,ts,tsx}",
             "./app/components/home/*.{js,jsx,ts,tsx}",
             "./app/routes/*.{js,jsx,ts,tsx}"],
   theme: {
