@@ -36,10 +36,10 @@ export function settingsFetcher() {
     };
 
     const changeLastname = (lastName) => {
-
-        axios.post('http://85.215.71.124/user/changeLastName',
+        console.log(user.userID)
+        axiosInstance.post('/user/changeLastName',
             {
-                "userID": user._id,
+                "userID": user.userID,
                 "newName": lastName
             },
             {
