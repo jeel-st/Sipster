@@ -120,8 +120,8 @@ async function changeFirstName(userID, newName){
 async function changeLastName(userID, newName){
     return await dbUser.changeLastName(userID, newName)
 }
-function getDB() {
-    return db
+ function getDB(){
+    return  db
 }
 
 async function getSipsterID(username) {
@@ -152,9 +152,39 @@ class UsernameNotFoundError extends Error {
     }
 }
 
+Object.assign(exports, {  
+    connectToDB,
+    getDB,
+    postEvents,
+    deleteEvents,
+getEvents,
+getLoginData,
+postUser,
+deleteUser,
+postFriendRequest,
+acceptFriendRequest,
+declineFriendRequest,
+removeFriend,
+getFriendList,
+ getFriendRecommendations,
+getInvitations,
+uploadProfilePicture,
+getUserData,
+getEventsData,
+postNewEmail,
+postNewPassword,
+postNewUsername,
+getProfilePictureURL,
+deleteProfilePictureURL,
+getSipsterID,
+initializeCollections,
+getSips,
+changeSips,
+changeFirstName,
+changeLastName,
+UsernameNotFoundError})
 
-
-
+/*
 exports.connectToDB = connectToDB
 exports.getDB = getDB
 exports.postEvents = postEvents
@@ -185,3 +215,4 @@ exports.changeSips = changeSips
 exports.changeFirstName = changeFirstName
 exports.changeLastName = changeLastName
 exports.UsernameNotFoundError = UsernameNotFoundError;
+*/
