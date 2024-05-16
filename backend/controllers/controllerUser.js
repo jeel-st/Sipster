@@ -1,7 +1,6 @@
 const database = require('../databases/databaseMain')
 const log = require("../logging/logger")
 
-
 async function getUserData(req, res) {
     try {
         const userData = await database.getUserData(req)
@@ -120,14 +119,12 @@ async function changeLastName(req, res) {
         const userID = req.body.userID
         const newName = req.body.newName
         console.log("userID:" + userID)
-            console.log("Klasse der ID: "+ typeof userID)
-            log.info("newName "+newName)
-            log.info("userID " + userID)
+        console.log("Klasse der ID: "+ typeof userID)
+
         if (!userID || !newName) {
             res.status(400).send("UserID and new last Name are required.")
         } else {
-            console.log("userID:" + userID)
-            console.log("Klasse der ID: "+ typeof userID)
+           
             const result = await database.changeLastName(userID, newName)
             if (result == true) {
                 res.send("Last Name changed successfully!")

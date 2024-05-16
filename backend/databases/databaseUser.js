@@ -101,7 +101,7 @@ async function addEvent(req){
 }
 async function changeFirstName(userID, newName){
     const personalInformation = (await database.initializeCollections()).personalInformation
-    const filter = {_id: userID}
+    const filter = {_id: ObjectId(userID)}
     const update = {$set: {"firstName": newName}}
 
     const postName = await personalInformation.updateOne(filter, update)
@@ -113,7 +113,7 @@ async function changeFirstName(userID, newName){
 }
 async function changeLastName(userID, newName){
     const personalInformation = (await database.initializeCollections()).personalInformation
-    const filter = {_id: userID}
+    const filter = {_id: ObjectId(userID)}
     const update = {$set: {"lastName": newName}}
 
     const postName = await personalInformation.updateOne(filter, update)
