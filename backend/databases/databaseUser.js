@@ -1,6 +1,5 @@
 const database = require("./databaseMain")
 const log = require("../logging/logger")
-const { ObjectId } = require('mongodb');
 
 const { isValidPassword, isValidEmail, encryptPassword } = require("../utils/registerLogic/registerPatterns")
 
@@ -115,7 +114,7 @@ async function changeFirstName(userID, newName){
 }
 async function changeLastName(userID, newName){
     const personalInformation = (await database.initializeCollections()).personalInformation
-    const filter = {_id: ObjectId(userID)}
+    const filter = {_id: { $toObjectId: userID}}
     const update = {$set: {"lastName": newName}}
 
     const postName = await personalInformation.updateOne(filter, update)
