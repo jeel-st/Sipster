@@ -1,5 +1,5 @@
 import { ScrollView } from 'react-native'
-import { useEvents } from '../../utils/eventsFetcher';
+import { useEvents } from '../../utils/database/eventsFetcher';
 import React from 'react'
 import PropTypes from 'prop-types'
 import { styles } from '../../constants'

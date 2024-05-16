@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Image, Pressable, Text, View, SafeAreaView, StyleSheet } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
-import { uploadProfilePicture } from '../utils/accountFetcher';
-import useUser from '../utils/userFetcher';
+import { uploadProfilePicture } from '../utils/database/accountFetcher';
+import useUser from '../utils/database/userFetcher';
 
 export default function Picker() {
     const [hasPhotoPermission, setPhotoPermission] = useState(null);

@@ -2,8 +2,8 @@ import { View, Text, Image, TouchableOpacity } from 'react-native'
 import { styles } from '../../constants'
 import { router } from 'expo-router'
 import React from 'react'
-import getProfilePicture from '../../utils/accountFetcher'
-import { acceptFriendInvite, declineFriendInvite } from '../../utils/friendsFetcher'
+import getProfilePicture from '../../utils/database/accountFetcher'
+import { acceptFriendInvite, declineFriendInvite } from '../../utils/database/friendsFetcher'
 
 export default function FriendBtn2({ friend, selectedTab, user, handleReloadFriends }) {
   const handleAcceptInvite = async () => {

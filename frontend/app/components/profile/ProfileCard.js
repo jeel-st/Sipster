@@ -1,12 +1,11 @@
 import { View, Text, Image } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { classNames } from '../../utils'
-import { styles } from '../../constants'
 import { formatDate } from '../../utils/formDate'
 import TagCard from '../layout/TagCard'
-import getProfilePicture from '../../utils/accountFetcher'
-import useUser from '../../utils/userFetcher'
-import { fetchFriendsInvitations } from '../../utils/friendsFetcher'
+import getProfilePicture from '../../utils/database/accountFetcher'
+import useUser from '../../utils/database/userFetcher'
+import { fetchFriendsInvitations } from '../../utils/database/friendsFetcher'
 
 export default function ProfileCard({ friend }) {
     const tags = [formatDate(friend), "1000" + " sips"]

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { settingsFetcher } from '../settingsFetcher'
+import { settingsFetcher } from '../database/settingsFetcher'
 
 export function useSettings() {
 
@@ -8,8 +8,10 @@ export function useSettings() {
     const [oldPassword, setOldPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [email, setEmail] = useState('');
+    const [lastName, setLastName] = useState('');
     const [settingsError, setSettingsError] = useState('');
-    const { changeUsername, changePassword } = settingsFetcher();
+    const { changeUsername, changePassword, changeEmail, changeLastname } = settingsFetcher();
+
 
     const handleChangeUsername = async () => {
         if (username == '') {
@@ -20,7 +22,22 @@ export function useSettings() {
             /* Wenn das Textfeld ausgefüllt ist, dann wird der neue Username gespeichert */
             console.log("changeUsername details have been entered.")
 
-            changeUsername(username);
+            changeUsername(username)
+
+        }
+    }
+
+    const handleChangeLastname = async () => {
+        if (lastName == '') {
+            /* Es wird geprüft, ob das Textfeld ausgefüllt sind */
+            setSettingsError('Please enter your new lastname.')
+            return;
+        } else {
+            /* Wenn das Textfeld ausgefüllt ist, dann wird der neue Username gespeichert */
+            console.log("changeLastname details have been entered.")
+
+            changeLastname(lastName)
+
         }
     }
 
@@ -37,7 +54,7 @@ export function useSettings() {
             /* Wenn das Textfeld ausgefüllt ist, dann wird das neue Passwort gespeichert */
             console.log("changePassword details have been entered.")
 
-            changePassword(newPassword);
+            changePassword(newPassword)
         }
     }
 
@@ -50,17 +67,19 @@ export function useSettings() {
             /* Wenn das Textfeld ausgefüllt ist, dann wird der neue Email gespeichert */
             console.log("changeEmail details have been entered.")
 
-            changeUsername(email);
+            changeEmail(email);
         }
     }
 
     return {
         username,
+        lastName,
         newPassword,
         oldPassword,
         confirmPassword,
         email,
         setUsername,
+        setLastName,
         setNewPassword,
         setOldPassword,
         setConfirmPassword,
@@ -69,6 +88,7 @@ export function useSettings() {
         setSettingsError,
         handleChangeUsername,
         handleChangePassword,
-        handleChangeEmail
+        handleChangeEmail,
+        handleChangeLastname
     };
 }

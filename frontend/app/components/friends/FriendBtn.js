@@ -2,7 +2,7 @@ import { View, Text, Image, Pressable } from 'react-native'
 import { styles } from '../../constants';
 import { router } from 'expo-router'
 import React from 'react'
-import getProfilePicture from '../../utils/accountFetcher';
+import getProfilePicture from '../../utils/database/accountFetcher';
 
 export default function FriendBtn({ friend, user }) {
     return ( friend &&

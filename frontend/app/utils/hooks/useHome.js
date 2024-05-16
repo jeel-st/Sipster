@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getUser } from "../userFetcher";
+import { getUser } from "../database/userFetcher";
 import { usePathname } from "expo-router";
 
 const useHome = () => {

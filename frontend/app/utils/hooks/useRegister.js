@@ -1,6 +1,6 @@
 /* Imports  */
 import { useState } from 'react';
-import { useRegister } from '../registerFetcher';
+import { useRegister } from '../database/registerFetcher';
 import { router } from 'expo-router'
 
 /* Logik für die RegisterPage um die Eingabe zu prüfen  */

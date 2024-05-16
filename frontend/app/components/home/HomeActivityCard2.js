@@ -1,7 +1,7 @@
 import { View, Text, Image } from 'react-native'
 import React from 'react'
 import { classNames } from '../../utils'
-import getProfilePicture from '../../utils/accountFetcher'
+import getProfilePicture from '../../utils/database/accountFetcher'
 
 export default function HomeActivityCard2({ friend }) {
     return (

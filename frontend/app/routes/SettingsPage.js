@@ -1,9 +1,8 @@
 /* Imports */
 import { SafeAreaView, Text, StatusBar, View, TouchableOpacity } from "react-native"
-import { SettingsButton, SipsterButton, CheckButton, TextField } from '../components/'
-import { styles } from '../constants'
+import { SettingsButton, SipsterButton, CheckButton, TextField, IconButton, AboutUs } from '../components/'
+import { styles, settings } from '../constants'
 import { router } from 'expo-router'
-import { FontAwesome } from '@expo/vector-icons'
 import { useSettings } from '../utils/hooks/useSettings';
 import React, { useState } from 'react';
 import { ScrollView, NativeBaseProvider } from "native-base"
@@ -18,11 +17,10 @@ export default function SettingsPage() {
     const [isChangeFirstnameVisible, setChangeFirstnameVisible] = useState(false);
     const [isChangeLastnameVisible, setChangeLastnameVisible] = useState(false);
     const [isHelpVisible, setHelpVisible] = useState(false);
-    const [isInfoVisible, setInfoVisible] = useState(false);
     const [isChangeEmailVisible, setChangeEmailVisible] = useState(false);
 
     /* Import der Logik für die changeUsername-Komponente aus changeSettingsLogic.js */
-    const { username, newPassword, oldPassword, confirmPassword, email, setUsername, setNewPassword, setOldPassword, setConfirmPassword, setEmail, settingsError, setSettingsError, handleChangeUsername, handleChangePassword, handleChangeEmail } = useSettings();
+    const { username, lastName, newPassword, oldPassword, confirmPassword, email, setLastName, setUsername, setNewPassword, setOldPassword, setConfirmPassword, setEmail, settingsError, setSettingsError, handleChangeUsername, handleChangePassword, handleChangeEmail, handleChangeLastname } = useSettings();
 
     return (
         <NativeBaseProvider>
@@ -32,12 +30,8 @@ export default function SettingsPage() {
                     {/* Header */}
                     <View style={{ height: StatusBar.currentHeight }} />
 
-                    {/* Back Button*/}
-                    <TouchableOpacity onPress={() => router.back()}>
-                        <View className="justify-center items-center pr-1 w-10 h-10 rounded-xl bg-secondary">
-                            <FontAwesome name="chevron-left" size={24} color="white" />
-                        </View>
-                    </TouchableOpacity>
+                    {/* Back Button */}
+                    <IconButton icon="chevron-left" navigation={() => router.back()} />
 
                     {/* Title */}
                     <View className="mt-6">
@@ -53,7 +47,7 @@ export default function SettingsPage() {
                         {isChangeUsernameVisible && (
                             <View className="flex-row mt-6 mb-6 ml-3 items-center">
                                 <TextField placeholder="new username" value={username} onChangeText={(text) => { setUsername(text); setSettingsError('') }} />
-                                <CheckButton change={() => handleChangeUsername()} />
+                                <CheckButton change={() => handleChangeUsername().then(() => setChangeUsernameVisible(!isChangeUsernameVisible))} />
                             </View>
                         )}
 
@@ -67,7 +61,7 @@ export default function SettingsPage() {
                                     <TextField placeholder="new password" value={newPassword} onChangeText={(text) => { setNewPassword(text); setSettingsError('') }} />
                                     <TextField placeholder="confirm new password" value={confirmPassword} onChangeText={(text) => { setConfirmPassword(text); setSettingsError('') }} />
                                 </View>
-                                <CheckButton change={() => handleChangePassword()} />
+                                <CheckButton change={() => handleChangePassword().then(() => setChangePasswordVisible(!isChangePasswordVisible))} />
                             </View>
                         )}
 
@@ -76,28 +70,28 @@ export default function SettingsPage() {
                         {/* Aufklappbares Element für die Änderung des Vornamens */}
                         {isChangeFirstnameVisible && (
                             <View className="flex-row mt-6 mb-6 ml-3 items-center">
-                                <TextField placeholder="new firstname" value={username} onChangeText={(text) => { setUsername(text); setSettingsError('') }} />
-                                <CheckButton change={() => handleChangeUsername()} />
+                                <TextField placeholder="new firstname" value={firstname} onChangeText={(text) => { setFirstname(text); setSettingsError('') }} />
+                                <CheckButton change={() => handleChangeFirstname()} />
                             </View>
                         )}
 
                         {/* Change Lastname*/}
                         <SettingsButton title="change lastname" onPress={() => setChangeLastnameVisible(!isChangeLastnameVisible)} />
-                        {/* Aufklappbares Element für die Änderung des Vornamens */}
+                        {/* Aufklappbares Element für die Änderung des Nachnamens */}
                         {isChangeLastnameVisible && (
                             <View className="flex-row mt-6 mb-6 ml-3 items-center">
-                                <TextField placeholder="new lastname" value={username} onChangeText={(text) => { setUsername(text); setSettingsError('') }} />
-                                <CheckButton change={() => handleChangeUsername()} />
+                                <TextField placeholder="new lastname" value={lastName} onChangeText={(text) => { setLastName(text); setSettingsError('') }} />
+                                <CheckButton change={() => handleChangeLastname()} />
                             </View>
                         )}
 
                         {/* Change Email*/}
                         <SettingsButton title="change email" onPress={() => setChangeEmailVisible(!isChangeEmailVisible)} />
-                        {/* Aufklappbares Element für die Änderung des Vornamens */}
+                        {/* Aufklappbares Element für die Änderung der Email */}
                         {isChangeEmailVisible && (
                             <View className="flex-row mt-6 mb-6 ml-3 items-center">
                                 <TextField placeholder="new email" value={email} onChangeText={(text) => { setEmail(text); setSettingsError('') }} />
-                                <CheckButton change={() => handleChangeEmail()} />
+                                <CheckButton change={() => handleChangeEmail().then(() => setChangeEmailVisible(!isChangeEmailVisible))} />
                             </View>
                         )}
 
@@ -114,66 +108,19 @@ export default function SettingsPage() {
                         </View>
                         {isHelpVisible && (
                             <View className="mt-6 mb-6 ml-3">
-                                <Text className={styles.H3Text}>
-                                    How do I log in to the application?
-                                </Text>
+                                <Text className="text-yellow font-bold text-l">How do I log in to the application?</Text>
+                                <Text className="text-white text-l">{settings.questions1}</Text>
 
-                                <Text className="text-white text-l">
-                                    To log in, navigate to the login page and enter your login credentials (username and password). Then, click on the "let's party" button to access your account.
-                                </Text>
+                                <Text className="text-yellow font-bold text-l mt-4">How can I collect sips?</Text>
+                                <Text className="text-white text-l">{settings.questions2}</Text>
 
-                                <Text className="text-white font-bold text-l mt-4">
-                                    How can I collect sips?
-                                </Text>
-
-                                <Text className="text-white text-l">
-                                    Each time you participate in games or events, you can earn Sips. Each event or game indicates how many Sips you will receive for successfully completing it.
-                                </Text>
-
-                                <Text className="text-white font-bold text-l mt-4">
-                                    How can I get help or support if I encounter an issue?
-                                </Text>
-
-                                <Text className="text-white text-l">
-                                    If you need help or support, you can read the frequently asked questions (FAQs) or contact our support team directly by sending an email to info@sipster.com.
-                                </Text>
+                                <Text className="text-yellow font-bold text-l mt-4">How can I get help or support if I encounter an issue?</Text>
+                                <Text className="text-white text-l">{settings.questions3}</Text>
                             </View>
                         )}
 
-                        {/*Info*/}
-                        <View className="flex-row mt-2 items-center">
-                            <Ionicons name="information-circle-outline" size={25} color="white" style={{ marginRight: 10 }} />
-                            <TouchableOpacity onPress={() => setInfoVisible(!isInfoVisible)}>
-                                <Text className={styles.H3Text}>About us</Text>
-                            </TouchableOpacity>
-                        </View>
-                        {isInfoVisible && (
-                            <View className="mt-6 mb-6 ml-3">
-                                <Text className={styles.H3Text}>
-                                    Impressum
-                                </Text>
-
-                                <Text className="text-white text-l">
-                                    {`sipster ist eine Unternehmung der \nsipster UG \nNobelstraße 10 \n70569 Stuttgart \n \nVertreten durch Lorenz Bauscher, Julia Ebert, Lars Gerigk, Maike König, Joel Starkov`}
-                                </Text>
-
-                                <Text className="text-white font-bold text-l mt-4">
-                                    Datenschutzerklärung
-                                </Text>
-
-                                <Text className="text-white text-l">
-                                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-                                </Text>
-
-                                <Text className="text-white font-bold text-l mt-4">
-                                    AGB
-                                </Text>
-
-                                <Text className="text-white text-l">
-                                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-                                </Text>
-                            </View>
-                        )}
+                        {/*About us*/}
+                        <AboutUs />
 
                         {/*Delete Account*/}
                         <View className="flex-row mt-2 items-center">

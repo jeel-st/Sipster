@@ -1,12 +1,11 @@
-import axios from "axios";
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import User from "../entitys/user";
-import { fetchFriendsData } from "./friendsFetcher";
 import { useEffect, useState } from "react";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import User from "../../entitys/user";
+import axiosInstance from "./axiosConfig";
 
 export async function storeUser(username){
     try {
-        const response = await axios.get(`http://85.215.71.124/user/${username}`)
+        const response = await axiosInstance.get(`/user/${username}`)
         console.log("[storeUser] store user successfully")
         try{
             const jsonValue = JSON.stringify(response.data);
@@ -23,12 +22,11 @@ export async function getUser(){
     try {
         const jsonValue = await AsyncStorage.getItem('user');
         if (jsonValue !== null) {
-            const value = JSON.parse(jsonValue)
+            const userData = JSON.parse(jsonValue)
             console.log("[getUser] loading user successfully")
 
-            const friendsData = await fetchFriendsData(value.username)
-
-            const user = createUser(value, friendsData)
+            const user = new User(userData)
+            await user.initializeFriends()
 
             return(user)
         }else{
@@ -67,9 +65,4 @@ export default function useUser() {
     }, []);
 
     return user;
-}
-
-function createUser(userData, friends) {
-    const user = new User(userData.firstName, userData.lastName, userData.registerDate, userData.username, userData.email, friends, userData.profilePicture)
-    return user
 }

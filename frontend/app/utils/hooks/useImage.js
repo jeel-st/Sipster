@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getUser } from "../userFetcher";
+import { getUser } from "../database/userFetcher";
 import { router } from 'expo-router'
 import { usePathname } from "expo-router";
 

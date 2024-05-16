@@ -17,14 +17,18 @@ import GameCard from './games/GameCard';
 import Games from './games/Games';
 
 // Layout imports
-import BackButton from './layout/BackButton';
+import IconButton from './layout/IconButton';
 import SipsterButton from './layout/SipsterButton';
 import SmallTextField from './layout/SmallTextField';
 import TagCard from './layout/TagCard';
 import TextField from './layout/TextField';
 import TextFieldConst from './layout/TextFieldConst';
-import SettingsButton from './layout/SettingsButton';
-import CheckButton from './layout/CheckButton';
+
+// Settings Import
+import SettingsButton from './settings/SettingsButton';
+import CheckButton from './settings/CheckButton';
+import AboutUs from './settings/AboutUs';
+import TextButton from './settings/TextButton';
 
 // Profile imports
 import ProfileCard from './profile/ProfileCard';
@@ -41,10 +45,13 @@ import HomeActivityCard2 from './home/HomeActivityCard2';
 import HomeReactionCard from './home/HomeReactionCard';
 import HomeFriendBtn from './home/HomeFriendBtn';
 
+// Provider
+import { UserProvider } from './UserProvider';
+
 
 export {
-    // Events
-    EventBtn, EventInfoCard, Events,
+  // Events
+  EventBtn, EventInfoCard, Events,
 
   // Friends
   FriendBtn, FriendBtn2, FriendsCategorys, FriendsContainer, FriendsHeaderButtons, FriendsScrollView, FriendsTabButton,
@@ -53,14 +60,20 @@ export {
   GameCard, Games,
 
   // Layout
-  BackButton, SipsterButton, SmallTextField, TagCard, TextField, TextFieldConst, SettingsButton, CheckButton,
+  IconButton, SipsterButton, SmallTextField, TagCard, TextField, TextFieldConst,
+
+  // Settings
+  SettingsButton, CheckButton, AboutUs, TextButton,
 
   // Profile
   ProfileCard, ProfileHeaderButtons,
 
-    // Skeletons
-    FriendsH2Skeleton, FriendsSkeleton,
+  // Skeletons
+  FriendsH2Skeleton, FriendsSkeleton,
 
     // Home
-    HomeFriends, HomeActivityCard, HomeActivityCard2, HomeReactionCard, HomeFriendBtn
+    HomeFriends, HomeActivityCard, HomeActivityCard2, HomeReactionCard, HomeFriendBtn,
+
+    // Provider
+    UserProvider
   };
