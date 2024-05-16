@@ -1,14 +1,17 @@
 class Friend {
-    constructor(firstName, lastName, registerDate, username, profilePicture) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.registerDate = registerDate;
-        this.username = username;
-        this.profilePicture = profilePicture;
+    constructor(friend) {
+        this.userID = friend._id;
+        this.firstName = friend.firstName;
+        this.lastName = friend.lastName;
+        this.fullName = `${friend.firstName} ${friend.lastName}`;
+        this.registerDate = friend.registerDate;
+        this.username = friend.username;
+        this.profilePicture = friend.profilePicture;
     }
 
     present() {
-        return `Name: ${this.firstName} ${this.lastName}\n` +
+        return `User ID: ${this.userID}\n` +
+            `Name: ${this.firstName} ${this.lastName}\n` +
             `Username: ${this.username}\n` +
             `Register Date: ${this.registerDate}`;
     }

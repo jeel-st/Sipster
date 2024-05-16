@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import User from "../../entitys/user";
-import { fetchFriendsData } from "../database/friendsFetcher";
 import axiosInstance from "./axiosConfig";
 
 export async function storeUser(username){
@@ -23,12 +22,11 @@ export async function getUser(){
     try {
         const jsonValue = await AsyncStorage.getItem('user');
         if (jsonValue !== null) {
-            const value = JSON.parse(jsonValue)
+            const userData = JSON.parse(jsonValue)
             console.log("[getUser] loading user successfully")
 
-            const friendsData = await fetchFriendsData(value.username)
-
-            const user = createUser(value, friendsData)
+            const user = new User(userData)
+            await user.initializeFriends()
 
             return(user)
         }else{
@@ -67,9 +65,4 @@ export default function useUser() {
     }, []);
 
     return user;
-}
-
-function createUser(userData, friends) {
-    const user = new User(userData.firstName, userData.lastName, userData.registerDate, userData.username, userData.email, friends, userData.profilePicture)
-    return user
 }

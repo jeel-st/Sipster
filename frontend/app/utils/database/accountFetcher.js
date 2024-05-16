@@ -15,7 +15,7 @@ export async function uploadProfilePicture(file, username) {
                 'Content-Type': `multipart/form-data`,
             }
         })
-        // handle success
+
         console.log("[uploadProfilePicture] upload profile picture successfully")
 
         return response.data

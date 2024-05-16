@@ -88,7 +88,7 @@ function createFriends(friendsData) {
     //friendsData = friendMultiplier(friendsData)
 
     if (friendsData.length > 0) {
-        return friendsData.map(friend => new Friend(friend.firstName, friend.lastName, friend.registerDate, friend.username, friend.profilePicture));
+        return friendsData.map(friend => new Friend(friend));
     } else {
         return [];
     }
