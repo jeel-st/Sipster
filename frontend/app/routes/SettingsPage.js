@@ -20,7 +20,7 @@ export default function SettingsPage() {
     const [isChangeEmailVisible, setChangeEmailVisible] = useState(false);
 
     /* Import der Logik für die changeUsername-Komponente aus changeSettingsLogic.js */
-    const { username, newPassword, oldPassword, confirmPassword, email, setUsername, setNewPassword, setOldPassword, setConfirmPassword, setEmail, settingsError, setSettingsError, handleChangeUsername, handleChangePassword, handleChangeEmail } = useSettings();
+    const { username, lastName, newPassword, oldPassword, confirmPassword, email, setLastName, setUsername, setNewPassword, setOldPassword, setConfirmPassword, setEmail, settingsError, setSettingsError, handleChangeUsername, handleChangePassword, handleChangeEmail, handleChangeLastname } = useSettings();
 
     return (
         <NativeBaseProvider>
@@ -70,7 +70,7 @@ export default function SettingsPage() {
                         {/* Aufklappbares Element für die Änderung des Vornamens */}
                         {isChangeFirstnameVisible && (
                             <View className="flex-row mt-6 mb-6 ml-3 items-center">
-                                <TextField placeholder="new firstname" value={username} onChangeText={(text) => { setUsername(text); setSettingsError('') }} />
+                                <TextField placeholder="new firstname" value={firstname} onChangeText={(text) => { setFirstname(text); setSettingsError('') }} />
                                 <CheckButton change={() => handleChangeFirstname()} />
                             </View>
                         )}
@@ -80,7 +80,7 @@ export default function SettingsPage() {
                         {/* Aufklappbares Element für die Änderung des Nachnamens */}
                         {isChangeLastnameVisible && (
                             <View className="flex-row mt-6 mb-6 ml-3 items-center">
-                                <TextField placeholder="new lastname" value={username} onChangeText={(text) => { setUsername(text); setSettingsError('') }} />
+                                <TextField placeholder="new lastname" value={lastName} onChangeText={(text) => { setLastName(text); setSettingsError('') }} />
                                 <CheckButton change={() => handleChangeLastname()} />
                             </View>
                         )}

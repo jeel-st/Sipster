@@ -8,8 +8,9 @@ export function useSettings() {
     const [oldPassword, setOldPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [email, setEmail] = useState('');
+    const [lastName, setLastName] = useState('');
     const [settingsError, setSettingsError] = useState('');
-    const { changeUsername, changePassword, changeEmail } = settingsFetcher();
+    const { changeUsername, changePassword, changeEmail, changeLastname } = settingsFetcher();
 
 
     const handleChangeUsername = async () => {
@@ -22,7 +23,21 @@ export function useSettings() {
             console.log("changeUsername details have been entered.")
 
             changeUsername(username)
-            
+
+        }
+    }
+
+    const handleChangeLastname = async () => {
+        if (lastName == '') {
+            /* Es wird geprüft, ob das Textfeld ausgefüllt sind */
+            setSettingsError('Please enter your new lastname.')
+            return;
+        } else {
+            /* Wenn das Textfeld ausgefüllt ist, dann wird der neue Username gespeichert */
+            console.log("changeLastname details have been entered.")
+
+            changeLastname(lastName)
+
         }
     }
 
@@ -58,11 +73,13 @@ export function useSettings() {
 
     return {
         username,
+        lastName,
         newPassword,
         oldPassword,
         confirmPassword,
         email,
         setUsername,
+        setLastName,
         setNewPassword,
         setOldPassword,
         setConfirmPassword,
@@ -71,6 +88,7 @@ export function useSettings() {
         setSettingsError,
         handleChangeUsername,
         handleChangePassword,
-        handleChangeEmail
+        handleChangeEmail,
+        handleChangeLastname
     };
 }

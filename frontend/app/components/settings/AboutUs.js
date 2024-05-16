@@ -1,8 +1,8 @@
 // Imports
-import { Ionicons } from '@expo/vector-icons';
-import { Text, View, TouchableOpacity } from "react-native"
+import { Text, View, TouchableOpacity } from "react-native";
 import React, { useState } from 'react';
-import { styles, settings } from '../../constants'
+import { settings } from '../../constants';
+import TextButton from './TextButton';
 
 // This component renders the AboutUs information 
 export default function AboutUs() {
@@ -13,12 +13,8 @@ export default function AboutUs() {
     //
     return (
         <View>
-            <View className="flex-row mt-2 items-center">
-                <Ionicons name="information-circle-outline" size={25} color="white" style={{ marginRight: 10 }} />
-                <TouchableOpacity onPress={() => setInfoVisible(!isInfoVisible)}>
-                    <Text className={styles.H3Text}>About us</Text>
-                </TouchableOpacity>
-            </View>
+
+            <TextButton title="About us" icon="information-circle-outline" color="white" content={() => setInfoVisible(!isInfoVisible)} />
 
             {isInfoVisible && (
                 <View className="mt-6 mb-6">

@@ -37,6 +37,34 @@ export function settingsFetcher() {
             });
     };
 
+    const changeLastname = (lastName) => {
+
+        axios.post('http://85.215.71.124/user/changeLastName',
+            {
+                "userID": user._id,
+                "newName": lastName
+            },
+            {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => {
+                console.log("The new lastname has been successfully changed.", response.data);
+                setSettingsError('');
+                user.lastName = lastName;
+            })
+            .catch(error => {
+                console.error("Error changing the lastname:", error);
+                console.log(error)
+                if (error.response && error.response.status === "404") {
+                    setSettingsError('This lastname already exists.');
+                } else {
+                    setSettingsError('Changing lastname failed. Please check your lastname information.');
+                }
+            });
+    };
+
     const changePassword = (password) => {
 
         axios.post('http://85.215.71.124/user/changePassword',
@@ -92,5 +120,5 @@ export function settingsFetcher() {
             });
     };
 
-    return { changeUsername, changePassword, changeEmail, settingsError, setSettingsError };
+    return { changeUsername, changePassword, changeEmail, changeLastname, settingsError, setSettingsError };
 }
