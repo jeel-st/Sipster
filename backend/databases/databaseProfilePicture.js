@@ -54,12 +54,9 @@ async function deleteProfilePictureURL(userIDObj){
     try {
         const result = await database.getDB().collection('personalInformation').updateOne(
             { _id: userIDObj }, 
-            { $set: { profilePicture: null, profilePictureK: null  } }
+            { $set: { profilePicture: null, profilePictureC: null  } }
         )
-        const result2 = await database.getDB().collection('personalInformation').updateOne(
-            { _id: userIDObj }, 
-            { $set: { profilePicture: null } }
-        )
+        
         if (result.modifiedCount === 1) {
             console.log(`Profilbild für Benutzer ${userIDObj} erfolgreich gelöscht.`)
             return "Success"
