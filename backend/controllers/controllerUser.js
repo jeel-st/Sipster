@@ -1,6 +1,6 @@
 const database = require('../databases/databaseMain')
 const log = require("../logging/logger")
-
+const { ObjectId } = require('mongodb');
 
 async function getUserData(req, res) {
     try {
@@ -93,11 +93,57 @@ async function addEvent(req, res) {
     }
 }
 
+async function changeFirstName(req, res) {
+    try {
+        const userID = req.body.userID
+        const newName = req.body.newName
+
+        if (!userID || !newName) {
+            res.status(400).send("UserID and new first Name are required.")
+        } else {
+            const objectId = new ObjectId(userID);
+            const result = await database.changeFirstName(objectId, newName)
+            if (result == true) {
+                res.send("First Name changed successfully!")
+            } else {
+                res.status(404).send("User not found")
+            }
+        }
+    } catch (error) {
+        log.error(error)
+        res.status(500).send("Something went wrong.")
+    }
+}
+
+async function changeLastName(req, res) {
+    try {
+        const userID = req.body.userID
+        const newName = req.body.newName
+
+
+        if (!userID || !newName) {
+            res.status(400).send("UserID and new last Name are required.")
+        } else {
+            const objectId = new ObjectId(userID);
+            const result = await database.changeLastName(objectId, newName)
+            if (result == true) {
+                res.send("Last Name changed successfully!")
+            } else {
+                res.status(404).send("User not found")
+            }
+        }
+    } catch (error) {
+        log.error(error)
+        res.status(500).send("Something went wrong.")
+    }
+}
 module.exports = {
     getUserData,
     postNewUsername,
     postNewPassword,
     postNewEmail,
     addEvent,
-    getEvents
+    getEvents,
+    changeFirstName,
+    changeLastName
 }
