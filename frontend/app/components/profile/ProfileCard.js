@@ -3,9 +3,9 @@ import React, { useEffect, useState } from 'react'
 import { classNames } from '../../utils'
 import { formatDate } from '../../utils/formDate'
 import TagCard from '../layout/TagCard'
-import getProfilePicture from '../../utils/database/accountFetcher'
 import useUser from '../../utils/database/userFetcher'
 import { fetchFriendsInvitations } from '../../utils/database/friendsFetcher'
+import { fetchProfilePicture } from '../../utils/database/imageFetcher'
 
 export default function ProfileCard({ friend }) {
     const tags = [formatDate(friend), "1000" + " sips"]
@@ -43,7 +43,7 @@ export default function ProfileCard({ friend }) {
         )}>
             {/* Profile Image*/}
             <Image
-                source={{ uri: `http://85.215.71.124/static/profilePictures/${getProfilePicture(friend)}?${new Date().getDate()}` }}
+                source={{ uri: fetchProfilePicture(friend) }}
                 className={classNames(
                     'mt-[-22.5%]',
                     'w-44 h-44 rounded-full'

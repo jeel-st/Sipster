@@ -1,26 +1,12 @@
-import { useEffect, useState } from "react";
-import { getUser } from "../database/userFetcher";
-import { usePathname } from "expo-router";
+import { useCallback, useContext, useState } from "react";
+import { UserContext } from "../../components/provider/UserProvider";
 
 const useHome = () => {
     const [displayFriend, setDisplayFriend] = useState(0);
-    const [user, setUser] = useState(null)
+    const [refreshing, setRefreshing] = useState(false);
+    const [refreshDate, setRefreshDate] = useState(new Date());
 
-    const path = usePathname()
-
-    // useEffect to fetch user data when page is focused
-    useEffect(() => {
-        async function fetchUser() {
-            const userData = await getUser()
-            // Set user data in state
-            setUser(userData);
-        }
-        // Fetch user data only when loading page
-        // Preventing fetch user data when leaving the site
-        if (path === "/") {
-            fetchUser()
-        }
-    }, [path])
+    const user = useContext(UserContext)
 
     // Function to handle friend selection
     const handleFriendSelection = (selectedFriend) => {
@@ -30,7 +16,15 @@ const useHome = () => {
         }
     }
 
-    return {user, displayFriend, handleFriendSelection}
+    const onRefresh = useCallback(() => {
+        setRefreshing(true);
+        setRefreshDate(new Date());
+        setTimeout(() => {
+          setRefreshing(false);
+        }, 2000);
+      }, []);
+
+    return {user, displayFriend, handleFriendSelection, onRefresh, refreshing, refreshDate}
 }
 
 export default useHome;

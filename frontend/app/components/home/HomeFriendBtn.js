@@ -1,7 +1,7 @@
 import { View, Image, Pressable } from 'react-native'
 import React from 'react'
-import getProfilePicture from '../../utils/database/accountFetcher';
 import { classNames } from '../../utils';
+import { fetchProfilePictureCompressed } from '../../utils/database/imageFetcher';
 
 export default function HomeFriendBtn({ friend, displayFriend, handleFriendSelection, friendId }) {
     return (
@@ -30,7 +30,7 @@ export default function HomeFriendBtn({ friend, displayFriend, handleFriendSelec
                             'w-[90%] h-[90%]',
                             'rounded-full'
                         )}
-                        source={{ uri: `http://85.215.71.124/static/profilePictures/compressed/${getProfilePicture(friend)}?${new Date().getDate()}` }}
+                        source={{ uri: fetchProfilePictureCompressed(friend) }}
                     />
                 </View>
             </View>

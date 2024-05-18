@@ -1,7 +1,9 @@
 import axios from "axios";
 
+export const HOST = "http://85.215.71.124"
+
 const axiosInstance = axios.create({
-    baseURL: "http://85.215.71.124"
+    baseURL: HOST
 });
 
 axiosInstance.interceptors.response.use(

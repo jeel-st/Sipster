@@ -41,12 +41,13 @@ import FriendsSkeleton from './skeletons/FriendsSkeleton';
 // Home Imports
 import HomeFriends from './home/HomeFriends';
 import HomeActivityCard from './home/HomeActivityCard';
-import HomeActivityCard2 from './home/HomeActivityCard2';
 import HomeReactionCard from './home/HomeReactionCard';
 import HomeFriendBtn from './home/HomeFriendBtn';
+import HomeActivityImage from './home/HomeAcitivityImage';
 
-// Provider
-import { UserProvider } from './UserProvider';
+// Provider Imports
+import { UserProvider } from './provider/UserProvider';
+import { RefreshContext } from './provider/RefreshProvider';
 
 
 export {
@@ -71,9 +72,9 @@ export {
   // Skeletons
   FriendsH2Skeleton, FriendsSkeleton,
 
-    // Home
-    HomeFriends, HomeActivityCard, HomeActivityCard2, HomeReactionCard, HomeFriendBtn,
+  // Home
+  HomeFriends, HomeActivityCard, HomeReactionCard, HomeFriendBtn, HomeActivityImage,
 
-    // Provider
-    UserProvider
-  };
+  // Provider
+  UserProvider, RefreshContext
+};

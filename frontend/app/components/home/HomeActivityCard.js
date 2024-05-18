@@ -1,15 +1,17 @@
-import { View, Text, Image, Dimensions, ScrollView, findNodeHandle } from 'react-native'
-import React, { useRef, useState, useEffect } from 'react'
+import { View, Text, Image, ScrollView } from 'react-native'
+import React, { useContext, useRef, useState } from 'react'
 import { classNames } from '../../utils'
-import getProfilePicture from '../../utils/database/accountFetcher'
 import HomeReactionCard from './HomeReactionCard'
-
-const windowWidth = Dimensions.get('window').width
+import HomeActivityImage from './HomeAcitivityImage'
+import { fetchProfilePictureCompressed } from '../../utils/database/imageFetcher'
+import { RefreshContext } from '../provider/RefreshProvider'
 
 export default function HomeActivityCard({ friend }) {
     const emojis = ['🍻', '😍', '🤮', '🥳']
     const scrollViewRef = useRef(null)
     const [visibleIndex, setVisibleIndex] = useState(0)
+
+    const refreshDate = useContext(RefreshContext)
 
     const handleScroll = (event) => {
         const { contentOffset, layoutMeasurement } = event.nativeEvent
@@ -37,10 +39,7 @@ export default function HomeActivityCard({ friend }) {
                             'w-full h-full',
                             'rounded-full'
                         )}
-                        source={{
-                            uri: `http://85.215.71.124/static/profilePictures/compressed/${getProfilePicture(friend)}?${new Date().getDate()}`,
-                            key: new Date()
-                        }} />
+                        source={{ uri: fetchProfilePictureCompressed(friend, refreshDate) }} />
                 </View>
 
                 <View>
@@ -68,21 +67,7 @@ export default function HomeActivityCard({ friend }) {
                         overflow: 'hidden'
                     }}
                     onScroll={handleScroll}>
-                    {[...Array(2)].map((_, index) => (
-                        <Image
-                            key={index}
-                            style={{
-                                height: '100%',
-                                // windowWidth without margin border
-                                width: windowWidth - 48,
-                                resizeMode: 'cover',
-                            }}
-                            className={classNames(
-                                'rounded-2xl'
-                            )}
-                            source={{ uri: `http://85.215.71.124/static/profilePictures/${getProfilePicture(friend)}?${new Date().getDate()}` }}
-                        />
-                    ))}
+                    {[...Array(2)].map((value, index) => ( <HomeActivityImage key={index} friend={friend}/> ))}
                 </ScrollView>
 
                 <View className={classNames(

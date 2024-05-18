@@ -4,8 +4,8 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { classNames } from '../utils'
 import { ProfileCard, ProfileHeaderButtons } from '../components'
 import { useLocalSearchParams } from 'expo-router'
-import getProfilePicture from '../utils/database/accountFetcher'
 import { NativeBaseProvider } from 'native-base'
+import { fetchProfilePicture } from '../utils/database/imageFetcher'
 
 const { width, height } = Dimensions.get('window');
 
@@ -23,7 +23,7 @@ export default function ProfilePage() {
 
                 {/* Blurred Background */}
                 <Image
-                    source={{ uri: `http://85.215.71.124/static/profilePictures/${getProfilePicture(friend)}?${new Date().getDate()}` }}
+                    source={{ uri: fetchProfilePicture(friend) }}
                     style={{ width, height: height * 0.55 }}
                     blurRadius={10} />
 

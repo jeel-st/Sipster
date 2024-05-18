@@ -2,8 +2,8 @@ import { View, Text, Image, TouchableOpacity } from 'react-native'
 import { styles } from '../../constants'
 import { router } from 'expo-router'
 import React from 'react'
-import getProfilePicture from '../../utils/database/accountFetcher'
 import { acceptFriendInvite, declineFriendInvite } from '../../utils/database/friendsFetcher'
+import { fetchProfilePictureCompressed } from '../../utils/database/imageFetcher'
 
 export default function FriendBtn2({ friend, selectedTab, user, handleReloadFriends }) {
   const handleAcceptInvite = async () => {
@@ -28,7 +28,7 @@ export default function FriendBtn2({ friend, selectedTab, user, handleReloadFrie
       onPress={() => router.navigate({ pathname: "/routes/ProfilePage", params: friend })}
     >
       <View className="w-20 h-20 rounded-full bg-primary">
-        <Image className="w-full h-full rounded-full" source={{ uri: `http://85.215.71.124/static/profilePictures/compressed/${getProfilePicture(friend)}?${new Date().getDate()}` }} />
+        <Image className="w-full h-full rounded-full" source={{ uri: fetchProfilePictureCompressed(friend) }} />
       </View>
       <View className="flex-1 self-center">
         <Text className="text-white font-bold">{friend.firstName + " " + friend.lastName}</Text>
