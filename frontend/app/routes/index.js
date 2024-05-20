@@ -6,7 +6,6 @@ import RegisterPage from "./RegisterPage";
 import FriendsPage from "./FriendsPage";
 import SettingsPage from "./SettingsPage";
 import AccountPage from "./AccountPage";
-import PartyPage from "./PartyPage";
 
 
-export { GamePage, EventPage, LoginPage, RegisterPage, AccountPage, SettingsPage, PartyPage, HomePage, FriendsPage }
+export { GamePage, EventPage, LoginPage, RegisterPage, AccountPage, SettingsPage, HomePage, FriendsPage }

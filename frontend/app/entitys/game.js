@@ -15,3 +15,5 @@ class Game{
                     `\nPlaytime: ${this.playtime}`);
     }
 }
+
+module.exports = Game;

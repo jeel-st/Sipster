@@ -15,6 +15,7 @@ import FriendsTabButton from './friends/FriendsTabButton';
 // Games imports
 import GameCard from './games/GameCard';
 import Games from './games/Games';
+import GameFriendBtn from './games/GameFriendBtn';
 
 // Layout imports
 import IconButton from './layout/IconButton';
@@ -33,6 +34,8 @@ import TextButton from './settings/TextButton';
 // Profile imports
 import ProfileCard from './profile/ProfileCard';
 import ProfileHeaderButtons from './profile/ProfileHeaderButtons';
+import ProfileStagger from './profile/ProfileStagger';
+import ProfileInviteBtn from './profile/ProfileInviteBtn';
 
 // Skeletons imports
 import FriendsH2Skeleton from './skeletons/FriendsH2Skeleton';
@@ -58,7 +61,7 @@ export {
   FriendBtn, FriendBtn2, FriendsCategorys, FriendsContainer, FriendsHeaderButtons, FriendsScrollView, FriendsTabButton,
 
   // Games
-  GameCard, Games,
+  GameCard, Games, GameFriendBtn,
 
   // Layout
   IconButton, SipsterButton, SmallTextField, TagCard, TextField, TextFieldConst,
@@ -67,7 +70,7 @@ export {
   SettingsButton, CheckButton, AboutUs, TextButton,
 
   // Profile
-  ProfileCard, ProfileHeaderButtons,
+  ProfileCard, ProfileHeaderButtons, ProfileStagger, ProfileInviteBtn,
 
   // Skeletons
   FriendsH2Skeleton, FriendsSkeleton,

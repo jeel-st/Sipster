@@ -2,14 +2,17 @@ import { ScrollView, View } from 'react-native'
 import { games } from '../../constants'
 import GameCard from './GameCard'
 import React, { useEffect, useState } from 'react'
+import Game from '../../entitys/game';
 
 export default function Games() {
     const [scrollEnable, setScrollEnable] = useState(false);
 
+    const gameList = games.map((game) => new Game(game))
+
     useEffect(() => {
-        if (games.length > 2) setScrollEnable(true)
+        if (gameList.length > 2) setScrollEnable(true)
         else setScrollEnable(false)
-    }, games)
+    }, gameList)
 
     return (
         <View>
@@ -19,7 +22,7 @@ export default function Games() {
                 showsHorizontalScrollIndicator={false}
                 scrollEnabled={scrollEnable}>
                 {
-                    games.map((game, index) => <GameCard game={game} key={index} />)
+                    gameList.map((game, index) => <GameCard game={game} key={index} />)
                 }
             </ScrollView>
         </View>
