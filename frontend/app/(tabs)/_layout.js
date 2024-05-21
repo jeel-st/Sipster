@@ -1,6 +1,5 @@
 import React from 'react';
-import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { Entypo } from '@expo/vector-icons';
+import { Entypo, FontAwesome } from '@expo/vector-icons';
 import { Tabs } from 'expo-router';
 import { styles } from '../constants';
 
@@ -8,39 +7,40 @@ export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
+        tabBarInactiveTintColor: styles.Colors.tertiary,
         tabBarActiveTintColor: styles.Colors.yellow, headerShown: false,
-        tabBarStyle: { backgroundColor: styles.Colors.primary, flexDirection: 'row', justifyContent: 'space-around', paddingBottom: 3, },
-        tabBarLabelStyle: { fontSize: 0 }
+        tabBarStyle: { backgroundColor: styles.Colors.secondary, flexDirection: 'row', justifyContent: 'space-around', paddingBottom: 5, paddingTop: 5, height: 55, borderTopWidth: 0},
+        tabBarLabelStyle: { fontSize: 12 },
       }}
     >
       <Tabs.Screen
         name="index"
         options={{
-          title: '',
-          tabBarIcon: ({ color }) => <FontAwesome size={28} name="home" color={color} />,
+          title: 'Home',
+          tabBarIcon: ({ color }) => <Entypo size={24} name="home" color={color} />,
         }}
       />
       <Tabs.Screen
         name="events"
         options={{
-          title: '',
-          tabBarIcon: ({ color }) => <Entypo size={28} name="calendar" color={color} />,
+          title: 'Events',
+          tabBarIcon: ({ color }) => <Entypo size={24} name="calendar" color={color} />,
           href: '/events',
         }}
       />
       <Tabs.Screen
         name="games"
         options={{
-          title: '',
-          tabBarIcon: ({ color }) => <Entypo size={28} name="game-controller" color={color} />,
+          title: 'Games',
+          tabBarIcon: ({ color }) => <Entypo size={24} name="game-controller" color={color} />,
           href: '/games',
         }}
       />
       <Tabs.Screen
         name="account"
         options={{
-          title: '',
-          tabBarIcon: ({ color }) => <FontAwesome size={28} name="user" color={color} />,
+          title: 'Account',
+          tabBarIcon: ({ color }) => <FontAwesome size={24} name="user" color={color} />,
           href: '/account',
         }}
       />

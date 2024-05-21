@@ -1,12 +1,13 @@
 class Activity {
-    constructor(ID, beforeImagePath, afterImagePath, emojis, comment, gameID, creatorID) {
+    constructor(ID, beforeImagePath, afterImagePath, emojis, comment, gameID, creator, taggedFriends) {
         this.ID = ID;
         this.beforeImagePath = beforeImagePath;
         this.afterImagePath = afterImagePath;
         this.emojis = emojis;
         this.comment = comment;
         this.gameID = gameID;
-        this.creatorID = creatorID;
+        this.creator = creator;
+        this.taggedFriends = taggedFriends;
     }
 
     present() {
@@ -19,3 +20,5 @@ class Activity {
             `\nCreator ID: ${this.creatorID}`
     }
 }
+
+module.exports = Activity;

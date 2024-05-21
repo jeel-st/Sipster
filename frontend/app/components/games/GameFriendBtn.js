@@ -4,7 +4,7 @@ import { classNames } from '../../utils'
 import { fetchProfilePictureCompressed } from '../../utils/database/imageFetcher'
 import { AntDesign } from '@expo/vector-icons'
 
-export default function GameFriendBtn({ friend }) {
+export default function GameFriendBtn({ friend, handleTaggedFriends, isTagged}) {
     return (
         <View className={classNames(
             'flex-row justify-between items-center',
@@ -25,9 +25,14 @@ export default function GameFriendBtn({ friend }) {
                     <Text className="text-neutral-400 font-thin">{friend.username}</Text>
                 </View>
 
-                <TouchableOpacity>
-                    <AntDesign name="pluscircleo" size={24} color="white" />
+                { !isTagged ?
+                <TouchableOpacity onPress={handleTaggedFriends}>
+                    <AntDesign name="pluscircleo" size={30} color="#86efac" />
+                </TouchableOpacity> :
+                <TouchableOpacity onPress={handleTaggedFriends}>
+                    <AntDesign name="minuscircle" size={30} color="#ef4444" />
                 </TouchableOpacity>
+                }
             </View>
         </View>
     )

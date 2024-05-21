@@ -1,7 +1,8 @@
 // CI Farben von Sipster
 export const Colors = {
-    primary: "#242424",
-    secondary: "#343434", //grey
+    primary: "#1A1B16",
+    secondary: "#272727",
+    tertiary: "#CDCDCD",
     yellow: "#DFFA54",
     white: "#FFFFFF",
     black: "#000000",

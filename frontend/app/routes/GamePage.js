@@ -2,24 +2,21 @@ import { View, Text, Image, TouchableOpacity, ScrollView } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { classNames } from '../utils'
 import { navigateToFriendsPage } from '../utils/navigator'
-import { Feather, FontAwesome } from '@expo/vector-icons'
+import { FontAwesome, FontAwesome5 } from '@expo/vector-icons'
 import { LinearGradient } from 'expo-linear-gradient'
-import useUser from '../utils/database/userFetcher'
-import { router, useLocalSearchParams } from 'expo-router'
-import { useState } from 'react'
-import { GameFriendBtn } from '../components'
+import { router } from 'expo-router'
+import { GameActivity, GameFriendBtn } from '../components'
+import { useGame } from '../utils/hooks/useGame'
 
 export default function GamePage() {
-    const game = useLocalSearchParams();
-    const user = useUser()
-
-    const [taggedFriends, setTaggedFriends] = useState([])
+    const { user, game, friends, handleTaggedFriends, isTagged, isPressed, handlePress } = useGame()
 
     return (
         <SafeAreaView className={classNames(
             'flex-1',
             'bg-primary'
         )}>
+            {isPressed && <GameActivity user={user} />}
             {/* Blurred Background with Gradient*/}
             <Image
                 source={{ uri: game.thumbnail }}
@@ -61,7 +58,13 @@ export default function GamePage() {
                         className={classNames(
                             'w-full'
                         )}>
-                        {user && user.friends.map((friend, index) => { return <GameFriendBtn key={index} friend={friend} /> })}
+                        {friends && friends.map((friend, index) => {
+                            return <GameFriendBtn
+                                key={index}
+                                friend={friend}
+                                handleTaggedFriends={() => handleTaggedFriends(friend)}
+                                isTagged={isTagged(friend)} />
+                        })}
                     </ScrollView>
                 </View>
 
@@ -70,12 +73,14 @@ export default function GamePage() {
                     'w-full h-[2px]',
                     'bg-secondary')} />
 
-                <TouchableOpacity className={classNames(
-                    'justify-center items-center',
-                    'mt-8',
-                    'h-24 w-[80%]',
-                    'bg-yellow rounded-2xl shadow-md shadow-black'
-                )}>
+                <TouchableOpacity
+                    onPress={handlePress}
+                    className={classNames(
+                        'justify-center items-center',
+                        'mt-8',
+                        'h-24 w-[80%]',
+                        'bg-yellow rounded-2xl shadow-md shadow-black'
+                    )}>
                     <Text className={classNames('text-black text-xl font-bold')}>Go</Text>
                 </TouchableOpacity>
             </View>
@@ -132,7 +137,7 @@ export default function GamePage() {
                     className={classNames(
                         'justify-center items-center')}>
 
-                    <Feather name="info" size={30} color="white" />
+                    <FontAwesome5 name="user-friends" size={30} color="white" />
                 </TouchableOpacity>
             </View>
         </>
