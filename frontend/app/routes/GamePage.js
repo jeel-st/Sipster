@@ -26,7 +26,7 @@ export default function GamePage() {
                     'w-full h-[55%]'
                 )} />
             <LinearGradient
-                colors={['transparent', 'rgba(36,36,36,0.9)', 'rgba(36,36,36, 1)']}
+                colors={['transparent', 'rgba(26,27,22,0.9)', 'rgba(26,27,22, 1)']}
                 start={{ x: 0.5, y: 0.2 }}
                 end={{ x: 0.5, y: 1 }}
                 className={classNames(
