@@ -9,82 +9,75 @@ import { GameActivity, GameFriendBtn } from '../components'
 import { useGame } from '../utils/hooks/useGame'
 
 export default function GamePage() {
-    const { user, game, friends, handleTaggedFriends, isTagged, isPressed, handlePress } = useGame()
+    const { user, game, friends, taggedFriends, handleTaggedFriends, isTagged, isPressed, handlePress } = useGame()
 
     return (
-        <SafeAreaView className={classNames(
+        <View className={classNames(
             'flex-1',
             'bg-primary'
         )}>
-            {isPressed && <GameActivity user={user} />}
-            {/* Blurred Background with Gradient*/}
-            <Image
-                source={{ uri: game.thumbnail }}
-                blurRadius={10}
-                className={classNames(
-                    'absolute top-0 left-0',
-                    'w-full h-[55%]'
-                )} />
-            <LinearGradient
-                colors={['transparent', 'rgba(26,27,22,0.9)', 'rgba(26,27,22, 1)']}
-                start={{ x: 0.5, y: 0.2 }}
-                end={{ x: 0.5, y: 1 }}
-                className={classNames(
-                    'absolute top-0 left-0',
-                    'w-full h-[55%]'
-                )} />
+            {isPressed && <GameActivity user={user} game={game} taggedFriends={taggedFriends}/>}
+            <SafeAreaView className={classNames('flex-1')}>
 
-            {/* Header Text and Info Button */}
-            {Header()}
-
-            <View className={classNames(
-                'flex-1 justify-between items-center',
-                'mt-28 mb-10',
-            )}>
-
-                {GameInfo()}
-
-                {/* Separation line */}
-                <View className={classNames(
-                    'w-full h-[2px]',
-                    'bg-secondary')} />
-
-                <View className={classNames(
-                    'flex-1 justify-center items-center',
-                    'w-[90%]',
-                )}>
-                    <ScrollView
-                        showsVerticalScrollIndicator={false}
-                        className={classNames(
-                            'w-full'
-                        )}>
-                        {friends && friends.map((friend, index) => {
-                            return <GameFriendBtn
-                                key={index}
-                                friend={friend}
-                                handleTaggedFriends={() => handleTaggedFriends(friend)}
-                                isTagged={isTagged(friend)} />
-                        })}
-                    </ScrollView>
-                </View>
-
-                {/* Separation line */}
-                <View className={classNames(
-                    'w-full h-[2px]',
-                    'bg-secondary')} />
-
-                <TouchableOpacity
-                    onPress={handlePress}
+                {/* Blurred Background with Gradient*/}
+                <Image
+                    source={{ uri: game.thumbnail }}
+                    blurRadius={10}
                     className={classNames(
-                        'justify-center items-center',
-                        'mt-8',
-                        'h-24 w-[80%]',
-                        'bg-yellow rounded-2xl shadow-md shadow-black'
+                        'absolute top-0 left-0',
+                        'w-full h-[55%]'
+                    )} />
+                <LinearGradient
+                    colors={['transparent', 'rgba(26,27,22,0.9)', 'rgba(26,27,22, 1)']}
+                    start={{ x: 0.5, y: 0.2 }}
+                    end={{ x: 0.5, y: 1 }}
+                    className={classNames(
+                        'absolute top-0 left-0',
+                        'w-full h-[55%]'
+                    )} />
+
+                {/* Header Text and Info Button */}
+                {Header()}
+
+                <View className={classNames(
+                    'flex-1 justify-between items-center',
+                    'mt-28 mb-10',
+                )}>
+
+                    {GameInfo()}
+
+                    <View className={classNames(
+                        'flex-1 justify-center items-center',
+                        'w-[90%]',
                     )}>
-                    <Text className={classNames('text-black text-xl font-bold')}>Go</Text>
-                </TouchableOpacity>
-            </View>
-        </SafeAreaView>
+                        <ScrollView
+                            showsVerticalScrollIndicator={false}
+                            className={classNames(
+                                'w-full'
+                            )}>
+                            {friends && friends.map((friend, index) => {
+                                return <GameFriendBtn
+                                    key={index}
+                                    friend={friend}
+                                    handleTaggedFriends={() => handleTaggedFriends(friend)}
+                                    isTagged={isTagged(friend)} />
+                            })}
+                        </ScrollView>
+                    </View>
+
+                    <TouchableOpacity
+                        onPress={handlePress}
+                        className={classNames(
+                            'justify-center items-center',
+                            'mt-8',
+                            'h-24 w-[80%]',
+                            'bg-yellow rounded-2xl shadow-md shadow-black'
+                        )}>
+                        <Text className={classNames('text-black text-xl font-bold')}>Go</Text>
+                    </TouchableOpacity>
+                </View>
+            </SafeAreaView>
+        </View>
     )
 
     function GameInfo() {

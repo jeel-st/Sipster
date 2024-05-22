@@ -18,6 +18,7 @@ import Games from './games/Games';
 import GameFriendBtn from './games/GameFriendBtn';
 import GameActivity from './games/GameActivity';
 import GamesPerCategory from './games/GamesPerCategory';
+import GameCameraBtn from './games/GameCameraBtn';
 
 
 // Layout imports
@@ -64,7 +65,7 @@ export {
   FriendBtn, FriendBtn2, FriendsCategorys, FriendsContainer, FriendsHeaderButtons, FriendsScrollView, FriendsTabButton,
 
   // Games
-  GameCard, Games, GameFriendBtn, GameActivity,  GamesPerCategory,
+  GameCard, Games, GameFriendBtn, GameActivity,  GamesPerCategory, GameCameraBtn,
 
   // Layout
   IconButton, SipsterButton, SmallTextField, TagCard, TextField, TextFieldConst,

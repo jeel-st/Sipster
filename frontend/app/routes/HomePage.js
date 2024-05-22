@@ -56,10 +56,8 @@ export default function HomePage() {
                             <RefreshControl
                                 refreshing={refreshing}
                                 onRefresh={onRefresh}
-                                progressViewOffset={200}
                                 progressBackgroundColor={'#DFFA54'}
                             />}
-                        ListHeaderComponent={<Header />}
                         ListFooterComponent={renderFooter}
                         onEndReachedThreshold={0.1}
                         onEndReached={loadMoreData}
@@ -77,11 +75,9 @@ export default function HomePage() {
                             <RefreshControl
                                 refreshing={refreshing}
                                 onRefresh={onRefresh}
-                                progressViewOffset={200}
                                 progressBackgroundColor={'#DFFA54'}
                             />}
-                        ListHeaderComponent={<Header />}
-                        ListFooterComponent={renderFooter}
+                        ListFooterComponent={<View className={classNames('pb-6')}/>}
                     />
                 </RefreshContext.Provider>
             );
@@ -135,6 +131,7 @@ export default function HomePage() {
             'flex-1',
             'bg-primary')}>
 
+            <Header />
             <Content />
         </SafeAreaView>
     );
