@@ -4,13 +4,19 @@ import React, { useState } from 'react';
 import { settings } from '../../constants';
 import TextButton from './TextButton';
 
-// This component renders the AboutUs information 
+/* 
+This component renders the AboutUs information
+Typ: Component from settings 
+*/
 export default function AboutUs() {
 
-    // 
+    /* 
+    When the AboutUs component first renders, isInfoVisible is false. This means the detailed information 
+    (like Impressum, Datenschutzerklärung, and AGB) is not displayed. The useState hook initializes the state.
+    When the button is pressed, it toggles the value of isInfoVisible between true and false.
+    */
     const [isInfoVisible, setInfoVisible] = useState(false);
 
-    //
     return (
         <View>
 

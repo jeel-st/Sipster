@@ -1,6 +1,6 @@
 /* Imports */
-import { SafeAreaView, Text, StatusBar, View, TouchableOpacity } from "react-native"
-import { SettingsButton, SipsterButton, CheckButton, TextField, IconButton, AboutUs } from '../components/'
+import { SafeAreaView, Text, StatusBar, View } from "react-native"
+import { SettingsButton, SipsterButton, CheckButton, TextField, IconButton, AboutUs, TextButton, Help } from '../components/'
 import { styles, settings } from '../constants'
 import { router } from 'expo-router'
 import { useSettings } from '../utils/hooks/useSettings';
@@ -16,7 +16,6 @@ export default function SettingsPage() {
     const [isChangePasswordVisible, setChangePasswordVisible] = useState(false);
     const [isChangeFirstnameVisible, setChangeFirstnameVisible] = useState(false);
     const [isChangeLastnameVisible, setChangeLastnameVisible] = useState(false);
-    const [isHelpVisible, setHelpVisible] = useState(false);
     const [isChangeEmailVisible, setChangeEmailVisible] = useState(false);
 
     /* Import der Logik für die changeUsername-Komponente aus changeSettingsLogic.js */
@@ -71,7 +70,7 @@ export default function SettingsPage() {
                         {isChangeFirstnameVisible && (
                             <View className="flex-row mt-6 mb-6 ml-3 items-center">
                                 <TextField placeholder="new firstname" value={firstname} onChangeText={(text) => { setFirstname(text); setSettingsError('') }} />
-                                <CheckButton change={() => handleChangeFirstname()} />
+                                <CheckButton change={() => handleChangeFirstname().then(() => setChangeFirstnameVisible(!isChangeFirstnameVisible))} />
                             </View>
                         )}
 
@@ -81,7 +80,7 @@ export default function SettingsPage() {
                         {isChangeLastnameVisible && (
                             <View className="flex-row mt-6 mb-6 ml-3 items-center">
                                 <TextField placeholder="new lastname" value={lastName} onChangeText={(text) => { setLastName(text); setSettingsError('') }} />
-                                <CheckButton change={() => handleChangeLastname()} />
+                                <CheckButton change={() => handleChangeLastname().then(() => setChangeLastnameVisible(!isChangeLastnameVisible))} />
                             </View>
                         )}
 
@@ -98,37 +97,14 @@ export default function SettingsPage() {
                         {/* Change ProfilPicture*/}
                         <SettingsButton title="change profile picture" />
 
-
                         {/*Help*/}
-                        <View className="flex-row items-center mt-10">
-                            <Ionicons name="help-circle-outline" size={25} color="white" style={{ marginRight: 10 }} />
-                            <TouchableOpacity onPress={() => setHelpVisible(!isHelpVisible)}>
-                                <Text className={styles.H3Text}>Help & FAQs</Text>
-                            </TouchableOpacity>
-                        </View>
-                        {isHelpVisible && (
-                            <View className="mt-6 mb-6 ml-3">
-                                <Text className="text-yellow font-bold text-l">How do I log in to the application?</Text>
-                                <Text className="text-white text-l">{settings.questions1}</Text>
-
-                                <Text className="text-yellow font-bold text-l mt-4">How can I collect sips?</Text>
-                                <Text className="text-white text-l">{settings.questions2}</Text>
-
-                                <Text className="text-yellow font-bold text-l mt-4">How can I get help or support if I encounter an issue?</Text>
-                                <Text className="text-white text-l">{settings.questions3}</Text>
-                            </View>
-                        )}
+                        <Help />
 
                         {/*About us*/}
                         <AboutUs />
 
                         {/*Delete Account*/}
-                        <View className="flex-row mt-2 items-center">
-                            <Ionicons name="warning-outline" size={25} color="red" style={{ marginRight: 10 }} />
-                            <TouchableOpacity>
-                                <Text className="text-red-500 font-bold text-l">Delete account</Text>
-                            </TouchableOpacity>
-                        </View>
+                        <TextButton title="Delete account" icon="warning-outline" color="red" />
 
                         {/* Logout Button*/}
                         <View className="items-center">
