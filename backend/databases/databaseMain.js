@@ -6,6 +6,7 @@ const dbFriendSystem = require("../databases/databaseFriendSystem")
 const dbProfilePicture = require("../databases/databaseProfilePicture")
 const dbUser = require("../databases/databaseUser")
 const dbSips = require("../databases/databaseSips")
+const dbActivities = require("../databases/databaseActivities")
 const log = require("../logging/logger")
 
 let db = null;
@@ -105,6 +106,14 @@ async function deleteProfilePictureURL(username){
     return await dbProfilePicture.deleteProfilePictureURL(username)
 }
 
+async function postActivity(req) {
+    return await dbActivities.postActivity(req)
+}
+
+async function getActivities(req) {
+    return await dbActivities.getActivities(req)
+}
+
 function getDB() {
     return db
 }
@@ -123,10 +132,13 @@ async function initializeCollections() {
     const personalInformation = db.collection("personalInformation");
     const invitations = db.collection("invitations");
     const events = db.collection("events");
+    const activites = db.collection("activities");
+
     return {
         personalInformation: personalInformation,
         invitations: invitations,
-        events: events
+        events: events,
+        activites: activites
     };
 }
 
@@ -163,6 +175,8 @@ exports.postNewPassword = postNewPassword
 exports.postNewUsername = postNewUsername
 exports.getProfilePictureURL = getProfilePictureURL
 exports.deleteProfilePictureURL = deleteProfilePictureURL
+exports.postActivity = postActivity;
+exports.getActivities = getActivities;
 exports.getSipsterID = getSipsterID
 exports.initializeCollections = initializeCollections;
 exports.UsernameNotFoundError = UsernameNotFoundError;

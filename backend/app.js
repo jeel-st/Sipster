@@ -28,6 +28,7 @@ const friendsRouter = require('./routes/routerFriendSystem')
 const profilePictureRouter = require("./routes/routerProfilePicture")
 const userRouter = require("./routes/routerUser")
 const sipsRouter = require("./routes/routerSips")
+const activitiesRouter = require("./routes/routerActivities")
 
 const { connectToDB } = require('./databases/databaseMain')
 connectToDB()
@@ -39,6 +40,7 @@ app.use('/friends', friendsRouter)
 app.use('/imageUpload', profilePictureRouter)
 app.use('/user', userRouter)
 app.use("/sips", sipsRouter)
+app.use("/activities", activitiesRouter)
 
 app.use("/static", express.static(__dirname + '/static'))
 

@@ -77,7 +77,6 @@ async function postNewEmail(req, res) {
 
 async function addEvent(req, res) {
     try {
-        log.info("in controller")
         const addingData = await database.addEvent(req)
         if (addingData){
             res.send("Added Event succesfully to User!")
