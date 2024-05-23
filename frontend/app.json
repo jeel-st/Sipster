@@ -10,7 +10,7 @@
     "splash": {
       "image": "./app/assets/images/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#1A1B16"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -48,7 +48,8 @@
           "microphonePermission": "Allow $(PRODUCT_NAME) to access your microphone",
           "recordAudioAndroid": true
         }
-      ]
+      ],
+      "expo-asset"
     ],
     "experiments": {
       "typedRoutes": true
