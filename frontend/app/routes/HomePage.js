@@ -1,15 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, TouchableOpacity, FlatList, Image, RefreshControl, ActivityIndicator } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { classNames } from '../utils';
-import { events } from '../constants';
+import { events, styles } from '../constants';
 import { navigateToFriendsPage } from '../utils/navigator';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { EventInfoCard, Events, HomeActivityCard, HomeFriends, RefreshContext } from '../components';
 import useHome from '../utils/hooks/useHome';
+import { setBackgroundColorAsync } from 'expo-navigation-bar';
+import { useIsFocused } from '@react-navigation/native';
 
 export default function HomePage() {
     const { user, displayFriend, handleFriendSelection, onRefresh, refreshing, refreshDate } = useHome();
+
+    const isFocused = useIsFocused();
+    useEffect(() => {
+        setBackgroundColorAsync(styles.Colors.secondary);
+    }, [isFocused]);
 
     const Header = () => {
         return (

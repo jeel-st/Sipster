@@ -7,10 +7,11 @@ import useUser from '../utils/database/userFetcher';
 import { NativeBaseProvider, View } from "native-base";
 import { FriendsScrollView, FriendsSkeleton, IconButton } from "../components";
 import { AntDesign } from '@expo/vector-icons';
+import { setBackgroundColorAsync } from "expo-navigation-bar";
 
 /* Frontend der AccountPage */
 export default function AccountPage() {
-
+    setBackgroundColorAsync(styles.Colors.secondary);
     /* Eingeloggter User wird aufgerufen */
     const user = useUser();
 

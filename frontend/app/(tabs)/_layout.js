@@ -1,7 +1,8 @@
 import React from 'react';
-import { Entypo, FontAwesome } from '@expo/vector-icons';
+import { AntDesign, Entypo, FontAwesome } from '@expo/vector-icons';
 import { Tabs } from 'expo-router';
 import { styles } from '../constants';
+import { View } from 'react-native';
 
 export default function TabLayout() {
   return (
@@ -9,8 +10,14 @@ export default function TabLayout() {
       screenOptions={{
         tabBarInactiveTintColor: styles.Colors.tertiary,
         tabBarActiveTintColor: styles.Colors.yellow, headerShown: false,
-        tabBarStyle: { backgroundColor: styles.Colors.secondary, flexDirection: 'row', justifyContent: 'space-around', paddingBottom: 5, paddingTop: 5, height: 55, borderTopWidth: 0},
-        tabBarLabelStyle: { fontSize: 12 },
+        tabBarStyle: {
+          backgroundColor: styles.Colors.secondary,
+          flexDirection: 'row',
+          justifyContent: 'space-around',
+          height: 60,
+          borderTopWidth: 0
+        },
+        tabBarLabelStyle: { fontSize: 0 },
       }}
       sceneContainerStyle={{ backgroundColor: styles.Colors.primary }}
     >
@@ -18,22 +25,46 @@ export default function TabLayout() {
         name="index"
         options={{
           title: 'Home',
-          tabBarIcon: ({ color }) => <Entypo size={24} name="home" color={color} />,
+          tabBarIcon: ({ color, focused }) => (
+            <TabIcon focused={focused}>
+              <Entypo size={24} name="home" color={color} />
+            </TabIcon>
+          ),
         }}
       />
       <Tabs.Screen
         name="events"
         options={{
           title: 'Events',
-          tabBarIcon: ({ color }) => <Entypo size={24} name="calendar" color={color} />,
+          tabBarIcon: ({ color, focused }) => (
+            <TabIcon focused={focused}>
+              <Entypo size={24} name="calendar" color={color} />
+            </TabIcon>
+          ),
           href: '/events',
+        }}
+      />
+      <Tabs.Screen
+        name="post"
+        options={{
+          title: 'Post',
+          tabBarIcon: ({ color, focused }) => (
+            <TabIcon focused={focused}>
+              <AntDesign name="plus" size={24} color={color} />
+            </TabIcon>
+          ),
+          href: '/post',
         }}
       />
       <Tabs.Screen
         name="games"
         options={{
           title: 'Games',
-          tabBarIcon: ({ color }) => <Entypo size={24} name="game-controller" color={color} />,
+          tabBarIcon: ({ color, focused }) => (
+            <TabIcon focused={focused}>
+              <Entypo size={24} name="game-controller" color={color} />
+            </TabIcon>
+          ),
           href: '/games',
         }}
       />
@@ -41,10 +72,34 @@ export default function TabLayout() {
         name="account"
         options={{
           title: 'Account',
-          tabBarIcon: ({ color }) => <FontAwesome size={24} name="user" color={color} />,
+          tabBarIcon: ({ color, focused }) => (
+            <TabIcon focused={focused}>
+              <FontAwesome size={24} name="user" color={color} />
+            </TabIcon>
+          ),
           href: '/account',
         }}
       />
     </Tabs>
   );
 }
+
+const TabIcon = ({ children, focused }) => (
+  <View style={[styling.tabIconContainer, focused && styling.activeTabIcon]}>
+    {children}
+  </View>
+);
+
+export const styling = {
+  tabIconContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 45,
+    height: 45,
+    borderRadius: 15,
+    backgroundColor: 'transparent',
+  },
+  activeTabIcon: {
+    backgroundColor: 'rgba(223,250,84,0.2)',
+  },
+};

@@ -5,10 +5,11 @@ import { styles } from '../constants'
 import { FriendsHeaderButtons, FriendsCategorys, FriendsContainer } from '../components'
 import React from 'react';
 import { useFriends } from '../utils/hooks/useFriends'
+import { setBackgroundColorAsync } from 'expo-navigation-bar'
 
 export default function FriendsPage() {
     const {user, searchText, selectedTab, viewFriends, viewCategorys, handleSearchTextChange, handleTabChange, handleReloadFriends} = useFriends();
-
+    setBackgroundColorAsync(styles.Colors.primary);
     return (
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <SafeAreaView className={classNames(

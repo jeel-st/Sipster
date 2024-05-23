@@ -7,9 +7,11 @@ import { useSettings } from '../utils/hooks/useSettings';
 import React, { useState } from 'react';
 import { ScrollView, NativeBaseProvider } from "native-base"
 import { Ionicons } from '@expo/vector-icons';
+import { setBackgroundColorAsync } from "expo-navigation-bar";
 
 /* Frontend der LoginPage */
 export default function SettingsPage() {
+    setBackgroundColorAsync(styles.Colors.primary);
 
     // useState() -> Hook-Funktion von React um Zustände zu handeln
     const [isChangeUsernameVisible, setChangeUsernameVisible] = useState(false);

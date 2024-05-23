@@ -2,9 +2,17 @@ import { View, Text, ScrollView, Image } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { GamesPerCategory } from '../components'
 import { classNames } from '../utils';
+import { setBackgroundColorAsync } from 'expo-navigation-bar';
+import { styles } from '../constants';
+import { useIsFocused } from '@react-navigation/native';
+import { useEffect } from 'react';
 
 
 export default function GamePageAll(){
+    const isFocused = useIsFocused();
+    useEffect(() => {
+        setBackgroundColorAsync(styles.Colors.secondary);
+    }, [isFocused]);
 
     return (
         <SafeAreaView className='flex-1 bg-primary h-full'>

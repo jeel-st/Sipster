@@ -6,12 +6,13 @@ import { ProfileCard, ProfileHeaderButtons } from '../components'
 import { useLocalSearchParams } from 'expo-router'
 import { NativeBaseProvider } from 'native-base'
 import { fetchProfilePicture } from '../utils/database/imageFetcher'
+import { setBackgroundColorAsync } from 'expo-navigation-bar'
+import { styles } from '../constants'
 
 const { width, height } = Dimensions.get('window');
 
 export default function ProfilePage() {
     const friend = useLocalSearchParams()
-
     return (
         <NativeBaseProvider>
             <SafeAreaView className={classNames(

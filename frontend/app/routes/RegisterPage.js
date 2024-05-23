@@ -1,15 +1,21 @@
 /* Imports */
 import { View, Text, SafeAreaView, Pressable, Image } from 'react-native'
 import { Colors } from '../constants/styles'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { router } from 'expo-router';
 import { styles } from '../constants';
 import { Popover, NativeBaseProvider } from "native-base";
 import { SipsterButton, SmallTextField, TextField } from '../components';
 import { useRegisterLogic } from '../utils/hooks/useRegister/'
+import { setBackgroundColorAsync } from 'expo-navigation-bar';
+import { useIsFocused } from '@react-navigation/native';
 
 /* Frontend der RegisterPage */
 export default function RegisterPage() {
+    const isFocused = useIsFocused();
+    useEffect(() => {
+        setBackgroundColorAsync(styles.Colors.primary);
+    }, [isFocused]);
 
     /* Import der Logik für die RegisterPage aus useRegister.js */
     const {

@@ -3,10 +3,11 @@ import { Events, EventInfoCard, SipsterButton } from '../components';
 import { styles } from '../constants';
 import React from 'react';
 import { useEventDisplay } from '../utils';
+import { setBackgroundColorAsync } from 'expo-navigation-bar';
 
 export default function EventPage() {
     const { displayEvent, handleEventSelection } = useEventDisplay();
-
+    setBackgroundColorAsync(styles.Colors.secondary);
     return (
         <SafeAreaView className="flex-1" style={{ backgroundColor: styles.Colors.primary }}>
             <View>

@@ -7,10 +7,12 @@ import { LinearGradient } from 'expo-linear-gradient'
 import { router } from 'expo-router'
 import { GameActivity, GameFriendBtn } from '../components'
 import { useGame } from '../utils/hooks/useGame'
+import { styles } from '../constants'
+import { setBackgroundColorAsync } from 'expo-navigation-bar'
 
 export default function GamePage() {
     const { user, game, friends, taggedFriends, handleTaggedFriends, isTagged, isPressed, handlePress } = useGame()
-
+    setBackgroundColorAsync(styles.Colors.primary);
     return (
         <View className={classNames(
             'flex-1',
