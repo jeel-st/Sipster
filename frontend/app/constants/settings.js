@@ -1,35 +1,39 @@
-// settings.js sammelt alle Konstanten wie Texte in einer zentralen js-Datei. Somit wird der eigentliche Code nicht unübersichtlich. 
+/* 
+settings.js collects all constants such as texts in a central js file. 
+This means that the actual code does not become confusing. 
+Typ: Constant from settings 
+*/
 
-// Texte für die Einstellungen 
+// texts for the settings
 export const AGB = 
-`Willkommen bei unserer Trinkspiel-App! Bitte lies die folgenden Allgemeinen Geschäftsbedingungen sorgfältig durch, bevor du unsere App nutzt.
-\nNutzungsbedingungen: Durch die Nutzung unserer Trinkspiel-App stimmst du diesen Allgemeinen Geschäftsbedingungen zu. Du bist dafür verantwortlich, die örtlichen Gesetze und Vorschriften zu beachten, während du die App nutzt.
-\nVerantwortungsbewusstes Trinken: Wir fördern verantwortungsbewusstes Trinken. Benutze unsere App bitte nur, wenn du das gesetzliche Mindestalter für Alkoholkonsum in deinem Land erreicht hast. Trinke verantwortungsvoll und kenne deine Grenzen.
-\nHaftungsausschluss: Die Nutzung unserer Trinkspiel-App erfolgt auf eigene Gefahr. Wir übernehmen keine Verantwortung für die Handlungen unserer Benutzer während des Trinkens oder anderer Aktivitäten, die mit der Nutzung der App verbunden sind.
-\nGeistiges Eigentum: Alle Inhalte, einschließlich Texte, Grafiken, Logos und Software, die in unserer App enthalten sind, sind urheberrechtlich geschützt. Du darfst diese Inhalte nicht ohne unsere ausdrückliche Genehmigung reproduzieren, modifizieren oder verteilen.
-\nÄnderungen der AGB: Wir behalten uns das Recht vor, diese Allgemeinen Geschäftsbedingungen jederzeit zu ändern oder zu aktualisieren. Bitte überprüfe regelmäßig unsere AGB, um auf dem neuesten Stand zu bleiben.
-\nKontakt: Wenn du Fragen oder Bedenken bezüglich unserer Trinkspiel-App oder dieser AGB hast, kontaktiere uns bitte über info@SipsterButton.de\n\nVielen Dank, dass du unsere Trinkspiel-App nutzt! Viel Spaß und trinke verantwortungsbewusst`;
+`Welcome to our drinking game app! Please read the following terms and conditions carefully before using our app.
+\nTerms of use: By using our drinking game app, you agree to these Terms and Conditions. You are responsible for complying with local laws and regulations while using the app.
+\nResponsible Drinking: We encourage responsible drinking. Please only use our app if you are of legal drinking age in your country. Drink responsibly and know your limits.
+\nDisclaimer: The use of our drinking game app is at your own risk. We assume no responsibility for the actions of our users while drinking or other activities associated with the use of the app.
+\Intellectual property: All content, including text, graphics, logos and software contained in our app are protected by copyright. You may not reproduce, modify or distribute this content without our express permission.
+\nChanges to the GTC: We reserve the right to change or update these Terms and Conditions at any time. Please check our Terms and Conditions regularly to stay up to date.
+\nContact us:If you have any questions or concerns about our drinking game app or these terms and conditions, please contact us at info@SipsterButton.de\n\nThank you for using our drinking game app! Have fun and drink responsibly`;
 
 export const impressum = 
-`sipster ist eine Unternehmung der 
+`sipster is a company of the
 sipster UG 
 Nobelstraße 10 
 70569 Stuttgart 
-\nVertreten durch Lorenz Bauscher, Julia Ebert, Lars Gerigk, Maike König, Joel Starkov`;
+\nRepresented by Lorenz Bauscher, Julia Ebert, Lars Gerigk, Maike König, Joel Starkov`;
 
 export const datenschutz = 
-`Diese Datenschutzerklärung beschreibt, wie wir personenbezogene Daten erfassen, verwenden und schützen, wenn du unsere Trinkspiel-App nutzt.
-\nDatenerfassung: Wir erfassen personenbezogene Daten, die du uns bereitstellst, wenn du unsere Trinkspiel-App nutzt, einschließlich deines Benutzernamens, deiner E-Mail-Adresse und anderer Informationen, die du uns freiwillig zur Verfügung stellst.
-\nNutzung von Daten: Wir verwenden deine personenbezogenen Daten, um deine Erfahrung mit unserer Trinkspiel-App zu verbessern und um dich über Aktualisierungen oder andere relevante Informationen zu informieren. Wir geben deine Daten nicht an Dritte weiter, es sei denn, dies ist gesetzlich vorgeschrieben oder für die Erfüllung unserer Dienstleistungen erforderlich.
-\nDatenschutz: Wir setzen angemessene Sicherheitsmaßnahmen ein, um deine personenbezogenen Daten zu schützen und unbefugten Zugriff, Nutzung oder Offenlegung zu verhindern.
-\nCookies und Analytik: Wir verwenden möglicherweise Cookies und ähnliche Tracking-Technologien, um Informationen darüber zu sammeln, wie unsere Trinkspiel-App genutzt wird, um die Benutzererfahrung zu verbessern und Analysen durchzuführen.
-\nÄnderungen der Datenschutzerklärung: Wir behalten uns das Recht vor, diese Datenschutzerklärung jederzeit zu ändern oder zu aktualisieren. Bitte überprüfe regelmäßig unsere Datenschutzerklärung, um über Änderungen informiert zu bleiben.
-\nKontakt: Wenn du Fragen oder Bedenken bezüglich unserer Datenschutzerklärung oder der Verwendung deiner personenbezogenen Daten hast, kontaktiere uns bitte über info@sipster.de.
-\nIndem du unsere Trinkspiel-App nutzt, stimmst du dieser Datenschutzerklärung zu. Vielen Dank, dass du unsere App nutzt!`;
+`This Privacy Policy describes how we collect, use and protect personal data when you use our drinking game app.
+\nData collection: We collect personal data that you provide to us when you use our drinking game app, including your username, email address and other information that you voluntarily provide to us.
+\nUse of data: We use your personal data to improve your experience with our drinking game app and to inform you about updates or other relevant information. We do not share your data with third parties unless required by law or necessary for the fulfilment of our services.
+\nPrivacy: We use appropriate security measures to protect your personal data and prevent unauthorised access, use or disclosure.
+\nCookies and analytics: We may use cookies and similar tracking technologies to collect information about how our drinking game app is used in order to improve the user experience and perform analytics.
+\nChanges to the privacy policy: We reserve the right to change or update this privacy policy at any time. Please check our privacy policy regularly to stay informed about changes.
+\nContact us:If you have any questions or concerns about our Privacy Policy or the use of your personal information, please contact us at info@sipster.de.
+\nBy using our drinking game app, you agree to this privacy policy. Thank you for using our app!`;
 
 export const questions1 = "To log in, navigate to the login page and enter your login credentials (username and password). Then, click on the 'let's party' button to access your account.";
 export const questions2 = "Each time you participate in games or events, you can earn Sips. Each event or game indicates how many Sips you will receive for successfully completing it."
 export const questions3 = "If you need help or support, you can read the frequently asked questions (FAQs) or contact our support team directly by sending an email to info@sipster.com."
 
-// Gebündelter Export der einzelnen String-Variablen
+// bundled export of the individual string variables
 export const settings = { questions1, questions2, questions3, impressum, datenschutz, AGB }

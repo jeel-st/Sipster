@@ -1,7 +1,7 @@
 // Imports
-import { View, TextInput } from 'react-native'
-import React from 'react'
-import { styles } from '../../constants'
+import { View, TextInput } from 'react-native';
+import React from 'react';
+import { styles } from '../../constants';
 
 /* 
 This is a normal text field.

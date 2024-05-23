@@ -1,9 +1,16 @@
-/* Imports */
+// Imports
 import { useState } from 'react'
 import axios from 'axios';
 
-/* Datenbankrequest um neuen User anzulegen */
+/* 
+Database request to query user in database
+Typ: utils from register
+
+@ register
+*/
 export function useRegister() {
+
+    // useState() -> Hook function of React to trade states
     const [registerError, setRegisterError] = useState('');
 
     const register = (firstName, lastName, username, email, password, onRegisterSuccess) => {

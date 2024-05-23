@@ -1,24 +1,26 @@
-/* Imports */
-import { SafeAreaView, Text, StatusBar, View } from "react-native"
-import { SettingsButton, SipsterButton, CheckButton, TextField, IconButton, AboutUs, TextButton, Help } from '../components/'
-import { styles, settings } from '../constants'
-import { router } from 'expo-router'
+// Imports
+import { SafeAreaView, Text, StatusBar, View } from "react-native";
+import { SettingsButton, SipsterButton, CheckButton, TextField, IconButton, AboutUs, TextButton, Help } from '../components/';
+import styles from '../constants';
+import { router } from 'expo-router';
 import { useSettings } from '../utils/hooks/useSettings';
 import React, { useState } from 'react';
-import { ScrollView, NativeBaseProvider } from "native-base"
-import { Ionicons } from '@expo/vector-icons';
+import { ScrollView, NativeBaseProvider } from "native-base";
 
-/* Frontend der LoginPage */
+/* 
+Front end of the SettingsPage. 
+Typ: Page/route
+*/
 export default function SettingsPage() {
 
-    // useState() -> Hook-Funktion von React um Zustände zu handeln
+    // useState() -> Hook function of React to trade states
     const [isChangeUsernameVisible, setChangeUsernameVisible] = useState(false);
     const [isChangePasswordVisible, setChangePasswordVisible] = useState(false);
     const [isChangeFirstnameVisible, setChangeFirstnameVisible] = useState(false);
     const [isChangeLastnameVisible, setChangeLastnameVisible] = useState(false);
     const [isChangeEmailVisible, setChangeEmailVisible] = useState(false);
 
-    /* Import der Logik für die changeUsername-Komponente aus changeSettingsLogic.js */
+    // Import the logic for the changeUsername component from changeSettingsLogic.js
     const { username, lastName, newPassword, oldPassword, confirmPassword, email, setLastName, setUsername, setNewPassword, setOldPassword, setConfirmPassword, setEmail, settingsError, setSettingsError, handleChangeUsername, handleChangePassword, handleChangeEmail, handleChangeLastname } = useSettings();
 
     return (
@@ -42,7 +44,7 @@ export default function SettingsPage() {
 
                         {/* Change Username */}
                         <SettingsButton title="change username" onPress={() => setChangeUsernameVisible(!isChangeUsernameVisible)} />
-                        {/* Aufklappbares Element für die Änderung des Benutzernamens */}
+                        {/* Expandable element for changing the username */}
                         {isChangeUsernameVisible && (
                             <View className="flex-row mt-6 mb-6 ml-3 items-center">
                                 <TextField placeholder="new username" value={username} onChangeText={(text) => { setUsername(text); setSettingsError('') }} />
@@ -52,7 +54,7 @@ export default function SettingsPage() {
 
                         {/* Change Password */}
                         <SettingsButton title="change password" onPress={() => setChangePasswordVisible(!isChangePasswordVisible)} />
-                        {/* Aufklappbares Element für die Änderung des Passwortes */}
+                        {/* Expandable element for changing the password */}
                         {isChangePasswordVisible && (
                             <View className="flex-row mt-6 mb-6 ml-3 items-center">
                                 <View>
@@ -66,7 +68,7 @@ export default function SettingsPage() {
 
                         {/* Change Firstname*/}
                         <SettingsButton title="change firstname" onPress={() => setChangeFirstnameVisible(!isChangeFirstnameVisible)} />
-                        {/* Aufklappbares Element für die Änderung des Vornamens */}
+                        {/* Expandable element for changing the firstname */}
                         {isChangeFirstnameVisible && (
                             <View className="flex-row mt-6 mb-6 ml-3 items-center">
                                 <TextField placeholder="new firstname" value={firstname} onChangeText={(text) => { setFirstname(text); setSettingsError('') }} />
@@ -76,7 +78,7 @@ export default function SettingsPage() {
 
                         {/* Change Lastname*/}
                         <SettingsButton title="change lastname" onPress={() => setChangeLastnameVisible(!isChangeLastnameVisible)} />
-                        {/* Aufklappbares Element für die Änderung des Nachnamens */}
+                        {/* Expandable element for changing the lastname */}
                         {isChangeLastnameVisible && (
                             <View className="flex-row mt-6 mb-6 ml-3 items-center">
                                 <TextField placeholder="new lastname" value={lastName} onChangeText={(text) => { setLastName(text); setSettingsError('') }} />
@@ -86,7 +88,7 @@ export default function SettingsPage() {
 
                         {/* Change Email*/}
                         <SettingsButton title="change email" onPress={() => setChangeEmailVisible(!isChangeEmailVisible)} />
-                        {/* Aufklappbares Element für die Änderung der Email */}
+                        {/* Expandable element for changing the email */}
                         {isChangeEmailVisible && (
                             <View className="flex-row mt-6 mb-6 ml-3 items-center">
                                 <TextField placeholder="new email" value={email} onChangeText={(text) => { setEmail(text); setSettingsError('') }} />

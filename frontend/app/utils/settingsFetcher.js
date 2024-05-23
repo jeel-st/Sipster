@@ -1,12 +1,23 @@
-/* Imports */
+// Imports 
 import { useState } from 'react'
 import axios from 'axios';
 import useUser, { storeUser } from '../utils/userFetcher';
 
-/* Datenbankrequest um neuen User anzulegen */
+/* 
+Database request to query user in database
+Typ: utils from settings
+
+@ changeUsername
+@ changeFirstname
+@ changeLastname
+@ changePassword
+@ changeEmail
+*/
 export function settingsFetcher() {
 
     user = useUser()
+
+    // useState() -> Hook function of React to trade states
     const [settingsError, setSettingsError] = useState('');
 
     const changeUsername = (newUsername) => {

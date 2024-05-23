@@ -1,4 +1,4 @@
-/* Imports */
+// Imports 
 import { View, Text, SafeAreaView, Pressable, Image } from 'react-native'
 import { Colors } from '../constants/styles'
 import React, { useState } from 'react'
@@ -9,10 +9,13 @@ import { Popover, NativeBaseProvider } from "native-base";
 import { SipsterButton, SmallTextField, TextField } from '../components';
 import { useRegisterLogic } from '../utils/hooks/useRegister/'
 
-/* Frontend der RegisterPage */
+/* 
+Front end of the RegisterPage. 
+Typ: Page/route
+*/
 export default function RegisterPage() {
 
-    /* Import der Logik für die RegisterPage aus useRegister.js */
+    // Import the logic for the RegisterPage from useRegister.js
     const {
         firstName,
         setFirstName,

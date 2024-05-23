@@ -2,7 +2,6 @@
 import React from 'react';
 import { TouchableOpacity, View, Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { styles } from '../../constants'
 
 /* 
 This component displays the general Settingsbutton where you can change specific information such as the username.

@@ -1,25 +1,34 @@
-/* Imports  */
+// Imports
 import { useState } from 'react';
 import { useLogin } from '../loginFetcher';
 import { storeUser } from '../userFetcher';
-import { router } from 'expo-router'
+import { router } from 'expo-router';
 
-/* Logik für die LoginPage um die Eingabe zu prüfen  */
+/* 
+The logic of the loginPage is processed here and forwarded to the backend
+Typ: utils from login
+
+@ handleLogin       
+*/
 export function useLoginLogic() {
+
+    // useState() -> Hook function of React to trade states
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [loginError, setLoginError] = useState('');
+
+    // Import of fetcher functions
     const { login } = useLogin();
 
     const handleLogin = () => {
 
         if (username === '' || password === '') {
-            /* Es wird geprüft, ob Textfelder ausgefüllt sind */
+            /* The system checks whether text fields have been filled in */
             setLoginError('Please enter your username and password.')
             return;
 
         } else {
-            /* Wenn Textfelder ausgefüllt, dann wird geprüft ob es einen passenden User gibt  */
+            /* If text fields are filled in, the system checks whether there is a matching user */
             console.log("Login details have been entered.")
             login(username, password, setLoginError, async () => {
                 await storeUser(username)
