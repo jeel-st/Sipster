@@ -12,6 +12,7 @@ export default function TabLayout() {
         tabBarStyle: { backgroundColor: styles.Colors.secondary, flexDirection: 'row', justifyContent: 'space-around', paddingBottom: 5, paddingTop: 5, height: 55, borderTopWidth: 0},
         tabBarLabelStyle: { fontSize: 12 },
       }}
+      sceneContainerStyle={{ backgroundColor: styles.Colors.primary }}
     >
       <Tabs.Screen
         name="index"

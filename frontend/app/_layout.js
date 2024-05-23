@@ -9,9 +9,9 @@ NativeWindStyleSheet.setOutput({
 export default function AppLayout() {
     return (
         <Stack>
-            <Stack.Screen name='routes/LoginPage' options={{ headerShown: false }} />
-            <Stack.Screen name='routes/RegisterPage' options={{ headerShown: false }} />
-            <Stack.Screen name='(tabs)' options={{ headerShown: false }} />
+            <Stack.Screen name='routes/LoginPage' options={{ headerShown: false, animation: 'fade_from_bottom' }} />
+            <Stack.Screen name='routes/RegisterPage' options={{ headerShown: false, animation: 'fade_from_bottom' }} />
+            <Stack.Screen name='(tabs)' options={{ headerShown: false, animation: 'fade_from_bottom' }} />
             <Stack.Screen name='routes/GamePage' options={{ headerShown: false, animation: 'fade_from_bottom' }} />
             <Stack.Screen name='routes/ProfilePage' options={{ headerShown: false, animation: 'fade_from_bottom' }} />
             <Stack.Screen name='routes/FriendsPage' options={{ headerShown: false, animation: 'fade_from_bottom' }} />
