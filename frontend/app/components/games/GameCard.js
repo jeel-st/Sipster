@@ -7,7 +7,7 @@ export default function GameCard({ game }) {
     return (
         <Pressable
             className={classNames(
-                'mx-4',
+                'mr-4',
                 'w-40 h-40',
                 'rounded-3xl shadow-md shadow-black bg-secondary'
             )}

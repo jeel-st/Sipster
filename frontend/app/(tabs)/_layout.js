@@ -1,5 +1,5 @@
 import React from 'react';
-import { AntDesign, Entypo, FontAwesome } from '@expo/vector-icons';
+import { AntDesign, Entypo, FontAwesome, Ionicons, SimpleLineIcons } from '@expo/vector-icons';
 import { Tabs } from 'expo-router';
 import { styles } from '../constants';
 import { View } from 'react-native';
@@ -27,7 +27,7 @@ export default function TabLayout() {
           title: 'Home',
           tabBarIcon: ({ color, focused }) => (
             <TabIcon focused={focused}>
-              <Entypo size={24} name="home" color={color} />
+              <AntDesign size={24} name="home" color={color} />
             </TabIcon>
           ),
         }}
@@ -38,7 +38,7 @@ export default function TabLayout() {
           title: 'Events',
           tabBarIcon: ({ color, focused }) => (
             <TabIcon focused={focused}>
-              <Entypo size={24} name="calendar" color={color} />
+              <SimpleLineIcons size={24} name="event" color={color} />
             </TabIcon>
           ),
           href: '/events',
@@ -62,7 +62,7 @@ export default function TabLayout() {
           title: 'Games',
           tabBarIcon: ({ color, focused }) => (
             <TabIcon focused={focused}>
-              <Entypo size={24} name="game-controller" color={color} />
+              <SimpleLineIcons size={24} name="game-controller" color={color} />
             </TabIcon>
           ),
           href: '/games',
@@ -74,7 +74,7 @@ export default function TabLayout() {
           title: 'Account',
           tabBarIcon: ({ color, focused }) => (
             <TabIcon focused={focused}>
-              <FontAwesome size={24} name="user" color={color} />
+              <AntDesign size={24} name="user" color={color} />
             </TabIcon>
           ),
           href: '/account',

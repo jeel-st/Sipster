@@ -11,19 +11,19 @@ export default function GamesPerCategory() {
         <View>
             {
                 categorys.map(category => (
-                    <View key={category} >
+                    <View key={category} className='mt-4'>
                         <Text className='text-white font-bold text-xl tracking-widest'> {category} </Text>
 
 
-                        <ScrollView className="mt-4 px-2 mb-6 " horizontal showsHorizontalScrollIndicator={false}>
+                        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
                             <View className="flex-column">
-                                <View className="mt-4 px-2 pr-4 flex-row" >
+                                <View className="mt-4 flex-row" >
                                     {
                                         gameList.filter(game => game.category === category).map((game, index) => (
                                             index % 2 === 0 && <GameCard game={game} key={index} />
                                         ))}
                                 </View>
-                                <View className="mt-4 px-2 pr-4 flex-row">
+                                <View className="mt-4 flex-row">
                                     {
                                         gameList.filter(game => game.category === category).map((game, index) => (
                                             index % 2 !== 0 && <GameCard game={game} key={index} />
