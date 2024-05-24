@@ -6,7 +6,7 @@ import { classNames } from '../utils';
 
 const loadGameComponent = (game) => {
     switch (game) {
-        case 'Bierpong':
+        case 'Bomb Party':
             return lazy(() => import('../games/bombparty/BombPartyGame'));
         case 'gameB':
             return lazy(() => import('../games/bombparty/BombPartyGame'));
