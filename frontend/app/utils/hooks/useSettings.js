@@ -21,10 +21,11 @@ export function useSettings() {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [email, setEmail] = useState('');
     const [lastName, setLastName] = useState('');
+    const [firstName, setFirstName] = useState('');
     const [settingsError, setSettingsError] = useState('');
 
     // Import of fetcher functions
-    const { changeUsername, changePassword, changeEmail, changeLastname } = settingsFetcher();
+    const { changeUsername, changePassword, changeEmail, changeLastName, changeFirstName } = settingsFetcher();
 
     // Changing the username
     const handleChangeUsername = async () => {
@@ -42,18 +43,31 @@ export function useSettings() {
     }
 
     // Changing the firstname
+    const handleChangeFirstName = async () => {
+        if (firstName == '') {
+            /* The system checks whether the text field has been filled in */
+            setSettingsError('Please enter your new firstname.')
+            return;
+        } else {
+            /* If the text field is filled in, the new lastname is saved */
+            console.log("changeFirstName details have been entered.")
+
+            changeFirstName(firstName)
+
+        }
+    }
 
     // Changing the lastname
-    const handleChangeLastname = async () => {
+    const handleChangeLastName = async () => {
         if (lastName == '') {
             /* The system checks whether the text field has been filled in */
             setSettingsError('Please enter your new lastname.')
             return;
         } else {
             /* If the text field is filled in, the new lastname is saved */
-            console.log("changeLastname details have been entered.")
+            console.log("changeLastName details have been entered.")
 
-            changeLastname(lastName)
+            changeLastName(lastName)
 
         }
     }
@@ -93,12 +107,14 @@ export function useSettings() {
     return {
         username,
         lastName,
+        firstName,
         newPassword,
         oldPassword,
         confirmPassword,
         email,
         setUsername,
         setLastName,
+        setFirstName,
         setNewPassword,
         setOldPassword,
         setConfirmPassword,
@@ -108,6 +124,7 @@ export function useSettings() {
         handleChangeUsername,
         handleChangePassword,
         handleChangeEmail,
-        handleChangeLastname
+        handleChangeLastName,
+        handleChangeFirstName
     };
 }

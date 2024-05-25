@@ -1,7 +1,7 @@
 // Imports 
 import { useState } from 'react'
 import axios from 'axios';
-import useUser, { storeUser } from '../utils/userFetcher';
+import useUser from '../utils/userFetcher';
 
 /* 
 Database request to query user in database
@@ -48,7 +48,35 @@ export function settingsFetcher() {
             });
     };
 
-    const changeLastname = (lastName) => {
+    const changeFirstName = (firstName) => {
+
+        axios.post('http://85.215.71.124/user/changeFirstName',
+            {
+                "userID": user._id,
+                "newName": firstName
+            },
+            {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => {
+                console.log("The new firstname has been successfully changed.", response.data);
+                setSettingsError('');
+                user.firstName = firstName;
+            })
+            .catch(error => {
+                console.error("Error changing the firstname:", error);
+                console.log(error)
+                if (error.response && error.response.status === "404") {
+                    setSettingsError('This firstname already exists.');
+                } else {
+                    setSettingsError('Changing firstname failed. Please check your firstname information.');
+                }
+            });
+    };
+
+    const changeLastName = (lastName) => {
 
         axios.post('http://85.215.71.124/user/changeLastName',
             {
@@ -131,5 +159,5 @@ export function settingsFetcher() {
             });
     };
 
-    return { changeUsername, changePassword, changeEmail, changeLastname, settingsError, setSettingsError };
+    return { changeUsername, changePassword, changeEmail, changeLastName, changeFirstName, settingsError, setSettingsError };
 }

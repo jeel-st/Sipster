@@ -1,7 +1,7 @@
 // Imports
 import { SafeAreaView, Text, StatusBar, View } from "react-native";
 import { SettingsButton, SipsterButton, CheckButton, TextField, IconButton, AboutUs, TextButton, Help } from '../components/';
-import styles from '../constants';
+import { styles } from '../constants';
 import { router } from 'expo-router';
 import { useSettings } from '../utils/hooks/useSettings';
 import React, { useState } from 'react';
@@ -16,12 +16,34 @@ export default function SettingsPage() {
     // useState() -> Hook function of React to trade states
     const [isChangeUsernameVisible, setChangeUsernameVisible] = useState(false);
     const [isChangePasswordVisible, setChangePasswordVisible] = useState(false);
-    const [isChangeFirstnameVisible, setChangeFirstnameVisible] = useState(false);
-    const [isChangeLastnameVisible, setChangeLastnameVisible] = useState(false);
+    const [isChangeFirstNameVisible, setChangeFirstNameVisible] = useState(false);
+    const [isChangeLastNameVisible, setChangeLastNameVisible] = useState(false);
     const [isChangeEmailVisible, setChangeEmailVisible] = useState(false);
 
     // Import the logic for the changeUsername component from changeSettingsLogic.js
-    const { username, lastName, newPassword, oldPassword, confirmPassword, email, setLastName, setUsername, setNewPassword, setOldPassword, setConfirmPassword, setEmail, settingsError, setSettingsError, handleChangeUsername, handleChangePassword, handleChangeEmail, handleChangeLastname } = useSettings();
+    const {
+        username,
+        firstName,
+        lastName,
+        newPassword,
+        oldPassword,
+        confirmPassword,
+        email,
+        setLastName,
+        setUsername,
+        setNewPassword,
+        setOldPassword,
+        setConfirmPassword,
+        setEmail,
+        setFirstName,
+        settingsError,
+        setSettingsError,
+        handleChangeUsername,
+        handleChangePassword,
+        handleChangeEmail,
+        handleChangeLastName,
+        handleChangeFirstName
+    } = useSettings();
 
     return (
         <NativeBaseProvider>
@@ -67,22 +89,22 @@ export default function SettingsPage() {
                         )}
 
                         {/* Change Firstname*/}
-                        <SettingsButton title="change firstname" onPress={() => setChangeFirstnameVisible(!isChangeFirstnameVisible)} />
+                        <SettingsButton title="change firstname" onPress={() => setChangeFirstNameVisible(!isChangeFirstNameVisible)} />
                         {/* Expandable element for changing the firstname */}
-                        {isChangeFirstnameVisible && (
+                        {isChangeFirstNameVisible && (
                             <View className="flex-row mt-6 mb-6 ml-3 items-center">
-                                <TextField placeholder="new firstname" value={firstname} onChangeText={(text) => { setFirstname(text); setSettingsError('') }} />
-                                <CheckButton change={() => handleChangeFirstname().then(() => setChangeFirstnameVisible(!isChangeFirstnameVisible))} />
+                                <TextField placeholder="new firstname" value={firstName} onChangeText={(text) => { setFirstName(text); setSettingsError('') }} />
+                                <CheckButton change={() => handleChangeFirstName().then(() => setChangeFirstNameVisible(!isChangeFirstNameVisible))} />
                             </View>
                         )}
 
                         {/* Change Lastname*/}
-                        <SettingsButton title="change lastname" onPress={() => setChangeLastnameVisible(!isChangeLastnameVisible)} />
+                        <SettingsButton title="change lastname" onPress={() => setChangeLastNameVisible(!isChangeLastNameVisible)} />
                         {/* Expandable element for changing the lastname */}
-                        {isChangeLastnameVisible && (
+                        {isChangeLastNameVisible && (
                             <View className="flex-row mt-6 mb-6 ml-3 items-center">
                                 <TextField placeholder="new lastname" value={lastName} onChangeText={(text) => { setLastName(text); setSettingsError('') }} />
-                                <CheckButton change={() => handleChangeLastname().then(() => setChangeLastnameVisible(!isChangeLastnameVisible))} />
+                                <CheckButton change={() => handleChangeLastName().then(() => setChangeLastNameVisible(!isChangeLastNameVisible))} />
                             </View>
                         )}
 
@@ -99,14 +121,16 @@ export default function SettingsPage() {
                         {/* Change ProfilPicture*/}
                         <SettingsButton title="change profile picture" />
 
-                        {/*Help*/}
-                        <Help />
+                        <View className="mt-6">
+                            {/*Help*/}
+                            <Help />
 
-                        {/*About us*/}
-                        <AboutUs />
+                            {/*About us*/}
+                            <AboutUs />
 
-                        {/*Delete Account*/}
-                        <TextButton title="Delete account" icon="warning-outline" color="red" />
+                            {/*Delete Account*/}
+                            <TextButton title="Delete account" icon="warning-outline" color="red" />
+                        </View>
 
                         {/* Logout Button*/}
                         <View className="items-center">
