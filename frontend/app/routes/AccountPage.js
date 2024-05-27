@@ -1,12 +1,11 @@
 // Imports
-import { SafeAreaView, Pressable, Text, StatusBar, Image } from "react-native";
+import { SafeAreaView, Pressable, Text, StatusBar, Image, Platform } from "react-native";
 import { styles } from '../constants';
 import React from 'react';
 import { router } from 'expo-router'
 import useUser from '../utils/database/userFetcher';
 import { NativeBaseProvider, View } from "native-base";
 import { FriendsScrollView, FriendsSkeleton, IconButton } from "../components";
-import { AntDesign } from '@expo/vector-icons';
 import { setBackgroundColorAsync } from "expo-navigation-bar";
 
 /*
@@ -15,7 +14,9 @@ All user information is displayed and managed here.
 Typ: Page/route
 */
 export default function AccountPage() {
-    setBackgroundColorAsync(styles.Colors.secondary);
+    if (Platform.OS === 'android') {
+        setBackgroundColorAsync(styles.Colors.secondary);
+    }
 
     // logged in user is called
     const user = useUser();
@@ -33,7 +34,7 @@ export default function AccountPage() {
                     <View className="flex-row mt-4 mx-6 items-center justify-between" >
                         <Image source={require('../assets/images/logo-small.png')} />
 
-                        <IconButton icon="gear" navigation={() => router.navigate('routes/SettingsPage')}/>
+                        <IconButton icon="gear" navigation={() => router.navigate('routes/SettingsPage')} />
                     </View>
 
                     {/* Hello User */}

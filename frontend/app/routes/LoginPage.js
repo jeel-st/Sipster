@@ -1,5 +1,5 @@
 // Imports
-import { View, Text, SafeAreaView, Image } from 'react-native';
+import { View, Text, SafeAreaView, Image, Platform } from 'react-native';
 import { Colors } from '../constants/styles';
 import React, { useEffect } from 'react';
 import { router } from 'expo-router';
@@ -28,7 +28,9 @@ export default function LoginPage() {
 
     const isFocused = useIsFocused();
     useEffect(() => {
-        setBackgroundColorAsync(styles.Colors.primary);
+        if (Platform.OS === 'android') {
+            setBackgroundColorAsync(styles.Colors.primary);
+        }
     }, [isFocused]);
 
     return (

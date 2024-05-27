@@ -1,5 +1,5 @@
 // Imports
-import { SafeAreaView, Text, StatusBar, View } from "react-native";
+import { SafeAreaView, Text, StatusBar, View, Platform } from "react-native";
 import { SettingsButton, SipsterButton, CheckButton, TextField, IconButton, AboutUs, Help, Picker, DeleteAccount } from '../components/';
 import { styles } from '../constants';
 import { router } from 'expo-router';
@@ -14,7 +14,9 @@ Front end of the SettingsPage.
 Typ: Page/route
 */
 export default function SettingsPage() {
-    setBackgroundColorAsync(styles.Colors.primary);
+    if (Platform.OS === 'android') {
+        setBackgroundColorAsync(styles.Colors.primary);
+    }
 
     // CSS properties of the ChangeButtons
     const design = classNames(
@@ -144,7 +146,7 @@ export default function SettingsPage() {
                             <AboutUs />
 
                             {/*Delete Account*/}
-                            <DeleteAccount/>
+                            <DeleteAccount />
                         </View>
 
                         {/* Logout Button*/}

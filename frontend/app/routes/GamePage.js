@@ -1,4 +1,4 @@
-import { View, Text, Image, TouchableOpacity, ScrollView } from 'react-native'
+import { View, Text, Image, TouchableOpacity, ScrollView, Platform } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { classNames } from '../utils'
 import { navigateToFriendsPage } from '../utils/navigator'
@@ -12,13 +12,17 @@ import { setBackgroundColorAsync } from 'expo-navigation-bar'
 
 export default function GamePage() {
     const { user, game, friends, taggedFriends, handleTaggedFriends, isTagged, isPressed, handlePress } = useGame()
-    setBackgroundColorAsync(styles.Colors.primary);
+
+    if (Platform.OS === 'android') {
+        setBackgroundColorAsync(styles.Colors.primary);
+    }
+
     return (
         <View className={classNames(
             'flex-1',
             'bg-primary'
         )}>
-            {isPressed && <GameActivity user={user} game={game} taggedFriends={taggedFriends}/>}
+            {isPressed && <GameActivity user={user} game={game} taggedFriends={taggedFriends} />}
             <SafeAreaView className={classNames('flex-1')}>
 
                 {/* Blurred Background with Gradient*/}

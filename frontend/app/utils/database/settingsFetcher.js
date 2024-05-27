@@ -22,7 +22,7 @@ export function settingsFetcher() {
 
     const changeUsername = (newUsername) => {
 
-        axiosInstance.post('/user/changeUsername',
+        axiosInstance.put('/user/changeUsername',
             {
                 "username": user.username,
                 "newUsername": newUsername
@@ -50,9 +50,9 @@ export function settingsFetcher() {
 
     const changeFirstName = (firstName) => {
 
-        axiosInstance.post('/user/changeFirstName',
+        axiosInstance.put('/user/changeFirstName',
             {
-                "userID": user._id,
+                "userID": user.userID,
                 "newName": firstName
             },
             {
@@ -78,7 +78,7 @@ export function settingsFetcher() {
 
     const changeLastName = (lastName) => {
 
-        axiosInstance.post('/user/changeLastName',
+        axiosInstance.put('/user/changeLastName',
             {
                 "userID": user.userID,
                 "newName": lastName
@@ -106,7 +106,7 @@ export function settingsFetcher() {
 
     const changePassword = (password) => {
 
-        axiosInstance.post('/user/changePassword',
+        axiosInstance.put('/user/changePassword',
             {
                 "username": user.username,
                 "newPassword": password
@@ -133,7 +133,7 @@ export function settingsFetcher() {
 
     const changeEmail = (email) => {
 
-        axiosInstance.post('/user/changeEmail',
+        axiosInstance.put('/user/changeEmail',
             {
                 "username": user.username,
                 "newEmail": email

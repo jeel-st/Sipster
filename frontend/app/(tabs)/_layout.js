@@ -14,10 +14,10 @@ export default function TabLayout() {
           backgroundColor: styles.Colors.secondary,
           flexDirection: 'row',
           justifyContent: 'space-around',
-          height: 60,
-          borderTopWidth: 0
+          alignItems: 'top',
+          borderTopWidth: 0,
         },
-        tabBarLabelStyle: { fontSize: 0 },
+        tabBarShowLabel: false,
       }}
       sceneContainerStyle={{ backgroundColor: styles.Colors.primary }}
     >

@@ -1,4 +1,4 @@
-import { View, Text, TouchableWithoutFeedback, Keyboard } from 'react-native'
+import { View, Text, TouchableWithoutFeedback, Keyboard, Platform } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { classNames } from '../utils'
 import { styles } from '../constants'
@@ -8,8 +8,12 @@ import { useFriends } from '../utils/hooks/useFriends'
 import { setBackgroundColorAsync } from 'expo-navigation-bar'
 
 export default function FriendsPage() {
-    const {user, searchText, selectedTab, viewFriends, viewCategorys, handleSearchTextChange, handleTabChange, handleReloadFriends} = useFriends();
-    setBackgroundColorAsync(styles.Colors.primary);
+    const { user, searchText, selectedTab, viewFriends, viewCategorys, handleSearchTextChange, handleTabChange, handleReloadFriends } = useFriends();
+
+    if (Platform.OS === 'android') {
+        setBackgroundColorAsync(styles.Colors.primary);
+    }
+
     return (
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <SafeAreaView className={classNames(
@@ -30,7 +34,7 @@ export default function FriendsPage() {
                         {viewCategorys && <FriendsCategorys selectedTab={selectedTab} onTabChange={handleTabChange} />}
 
                         {/* Friends Content*/}
-                        <FriendsContainer friends={viewFriends} searchText={searchText} user={user} selectedTab={selectedTab} handleReloadFriends={handleReloadFriends}/>
+                        <FriendsContainer friends={viewFriends} searchText={searchText} user={user} selectedTab={selectedTab} handleReloadFriends={handleReloadFriends} />
                     </>
                 )}
             </SafeAreaView>

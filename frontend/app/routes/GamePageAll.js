@@ -1,4 +1,4 @@
-import { View, Text, ScrollView, Image } from 'react-native'
+import { View, Text, ScrollView, Image, Platform } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { GamesPerCategory } from '../components'
 import { classNames } from '../utils';
@@ -8,10 +8,12 @@ import { useIsFocused } from '@react-navigation/native';
 import { useEffect } from 'react';
 
 
-export default function GamePageAll(){
+export default function GamePageAll() {
     const isFocused = useIsFocused();
     useEffect(() => {
-        setBackgroundColorAsync(styles.Colors.secondary);
+        if (Platform.OS === 'android') {
+            setBackgroundColorAsync(styles.Colors.secondary);
+        }
     }, [isFocused]);
 
     return (
@@ -40,7 +42,7 @@ export default function GamePageAll(){
             <ScrollView showsVerticalScrollIndicator={false} className='mx-4'>
 
                 {/* games */}
-                <GamesPerCategory/>
+                <GamesPerCategory />
             </ScrollView>
 
         </SafeAreaView>

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { View, TouchableOpacity, FlatList, Image, RefreshControl, ActivityIndicator } from 'react-native';
+import { View, TouchableOpacity, FlatList, Image, RefreshControl, ActivityIndicator, Platform } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { classNames } from '../utils';
 import { events, styles } from '../constants';
@@ -15,7 +15,9 @@ export default function HomePage() {
 
     const isFocused = useIsFocused();
     useEffect(() => {
-        setBackgroundColorAsync(styles.Colors.secondary);
+        if (Platform.OS === 'android') {
+            setBackgroundColorAsync(styles.Colors.secondary);
+        }
     }, [isFocused]);
 
     const Header = () => {
@@ -84,7 +86,7 @@ export default function HomePage() {
                                 onRefresh={onRefresh}
                                 progressBackgroundColor={'#DFFA54'}
                             />}
-                        ListFooterComponent={<View className={classNames('pb-6')}/>}
+                        ListFooterComponent={<View className={classNames('pb-6')} />}
                     />
                 </RefreshContext.Provider>
             );
