@@ -102,7 +102,7 @@ async function addEvent(req){
 }
 async function changeFirstName(userID, newName){
     const personalInformation = (await database.initializeCollections()).personalInformation
-    const filter = {_id: ObjectId(userID)}
+    const filter = {_id: userID}
     const update = {$set: {"firstName": newName}}
 
     const postName = await personalInformation.updateOne(filter, update)
