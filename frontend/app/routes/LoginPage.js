@@ -1,19 +1,30 @@
-/* Imports */
-import { View, Text, SafeAreaView, Image } from 'react-native'
-import { Colors } from '../constants/styles'
-import React, { useEffect } from 'react'
-import { router } from 'expo-router'
-import { styles } from '../constants'
-import { TextField, SipsterButton } from '../components/'
+// Imports
+import { View, Text, SafeAreaView, Image } from 'react-native';
+import { Colors } from '../constants/styles';
+import React, { useEffect } from 'react';
+import { router } from 'expo-router';
+import { styles } from '../constants';
+import { TextField, SipsterButton } from '../components/';
 import { useLoginLogic } from '../utils/hooks/useLogin';
 import { setBackgroundColorAsync } from 'expo-navigation-bar'
 import { useIsFocused } from '@react-navigation/native'
 
-/* Frontend der LoginPage */
+/*
+Front end of the LoginPage.
+Typ: Page/route
+*/
 export default function LoginPage() {
 
-    /* Import der Logik für die LoginPage aus useLogin.js */
-    const { username, setUsername, password, setPassword, loginError, setLoginError, handleLogin } = useLoginLogic();
+    // Import the logic for the LoginPage from useLogin.js
+    const {
+        username,
+        setUsername,
+        password,
+        setPassword,
+        loginError,
+        setLoginError,
+        handleLogin
+    } = useLoginLogic();
 
     const isFocused = useIsFocused();
     useEffect(() => {

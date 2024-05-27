@@ -1,8 +1,14 @@
+// Imports
 import React from 'react';
 import { TouchableOpacity, View, Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
-/* Frontend Component für den CheckButton */
+/* 
+This component renders a Checkbutton.
+Typ: Component from settings 
+
+@ change     -> Executes a specific function.
+*/
 export default function CheckButton({ change }) {
 
     return (

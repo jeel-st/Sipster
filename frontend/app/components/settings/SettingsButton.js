@@ -1,10 +1,15 @@
-/* Imports */
+// Imports
 import React from 'react';
 import { TouchableOpacity, View, Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { styles } from '../../constants'
 
-/* Frontend Component für den SettingsButton - Kann individuell genutzt werden da titel und icon variabel */
+/* 
+This component displays the general Settingsbutton where you can change specific information such as the username.
+Typ: Component from settings 
+
+@ title
+@ onPress       -> Executes a specific function.
+*/
 export default function SettingsButton({ title, onPress }) {
     return (
         <TouchableOpacity className="shadow-md shadow-black w-[340px] rounded-xl bg-secondary mt-3" onPress={onPress}>

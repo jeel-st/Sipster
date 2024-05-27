@@ -1,9 +1,16 @@
-/* Imports*/
+// Imports
 import { useState } from 'react'
 import axiosInstance from './axiosConfig';
 
-/* Datenbankrequest um User in Datenbank abzufragen */
+/* 
+Database request to query user in database
+Typ: utils from login
+
+@ login 
+*/
 export function useLogin() {
+
+    // useState() -> Hook function of React to trade states
     const [loginError, setLoginError] = useState('');
 
     const login = (username, password, setLoginError, onLoginSuccess) => {

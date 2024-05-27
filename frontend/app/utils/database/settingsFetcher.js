@@ -1,10 +1,23 @@
+// Imports
 import { useState } from 'react';
 import useUser from '../database/userFetcher';
 import axiosInstance from './axiosConfig';
 
+/*
+Database request to query user in database
+Typ: utils from settings
+
+@ changeUsername
+@ changeFirstname
+@ changeLastname
+@ changePassword
+@ changeEmail
+*/
 export function settingsFetcher() {
 
     const user = useUser();
+
+    // useState() -> Hook function of React to trade states
     const [settingsError, setSettingsError] = useState('');
 
     const changeUsername = (newUsername) => {
@@ -35,8 +48,36 @@ export function settingsFetcher() {
             });
     };
 
-    const changeLastname = (lastName) => {
-        console.log(user.userID)
+    const changeFirstName = (firstName) => {
+
+        axiosInstance.post('/user/changeFirstName',
+            {
+                "userID": user._id,
+                "newName": firstName
+            },
+            {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => {
+                console.log("The new firstname has been successfully changed.", response.data);
+                setSettingsError('');
+                user.firstName = firstName;
+            })
+            .catch(error => {
+                console.error("Error changing the firstname:", error);
+                console.log(error)
+                if (error.response && error.response.status === "404") {
+                    setSettingsError('This firstname already exists.');
+                } else {
+                    setSettingsError('Changing firstname failed. Please check your firstname information.');
+                }
+            });
+    };
+
+    const changeLastName = (lastName) => {
+
         axiosInstance.post('/user/changeLastName',
             {
                 "userID": user.userID,
@@ -118,5 +159,20 @@ export function settingsFetcher() {
             });
     };
 
-    return { changeUsername, changePassword, changeEmail, changeLastname, settingsError, setSettingsError };
+    const deleteAccount = () => {
+
+        axiosInstance.delete(`/register/${user.username}/${user.password} HTTP/1.1`)
+            .then(response => {
+                console.log("The user has been successfully deleted.", response.data);
+                setSettingsError('');
+                () => router.navigate('routes/LoginPage');
+
+            })
+            .catch(error => {
+                console.error("Error deleting the user:", error);
+                console.log(error)
+            });
+    };
+
+    return { changeUsername, changePassword, changeEmail, changeLastName, changeFirstName, settingsError, setSettingsError, deleteAccount };
 }

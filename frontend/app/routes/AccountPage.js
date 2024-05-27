@@ -1,5 +1,5 @@
-/* Imports */
-import { SafeAreaView, Pressable, Text, StatusBar, Image } from "react-native"
+// Imports
+import { SafeAreaView, Pressable, Text, StatusBar, Image } from "react-native";
 import { styles } from '../constants';
 import React from 'react';
 import { router } from 'expo-router'
@@ -9,10 +9,15 @@ import { FriendsScrollView, FriendsSkeleton, IconButton } from "../components";
 import { AntDesign } from '@expo/vector-icons';
 import { setBackgroundColorAsync } from "expo-navigation-bar";
 
-/* Frontend der AccountPage */
+/*
+Front end of the AccountPage.
+All user information is displayed and managed here.
+Typ: Page/route
+*/
 export default function AccountPage() {
     setBackgroundColorAsync(styles.Colors.secondary);
-    /* Eingeloggter User wird aufgerufen */
+
+    // logged in user is called
     const user = useUser();
 
     return (

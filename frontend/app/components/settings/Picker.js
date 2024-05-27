@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Image, Pressable, Text, View, SafeAreaView, StyleSheet } from 'react-native';
+import { Image, View, SafeAreaView, StyleSheet } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
-import { uploadProfilePicture } from '../utils/database/accountFetcher';
-import useUser from '../utils/database/userFetcher';
+import useUser from '../../utils/database/userFetcher';
+import SipsterButton from '../layout/SipsterButton';
+import { uploadProfilePicture } from '../../utils/database/imageFetcher';
 
 export default function Picker() {
     const [hasPhotoPermission, setPhotoPermission] = useState(null);
@@ -18,7 +19,7 @@ export default function Picker() {
     }, []);
 
     const pickImage = async () => {
-        if(hasPhotoPermission){
+        if (hasPhotoPermission) {
             try {
                 let result = await ImagePicker.launchImageLibraryAsync({
                     mediaTypes: ImagePicker.MediaTypeOptions.Images,
@@ -39,12 +40,10 @@ export default function Picker() {
 
     return (
         <SafeAreaView style={styles.container} className="bg-primary">
-            <Pressable onPress={pickImage} style={styles.button}>
-                <Text style={styles.buttonText}>Choose Image</Text>
-            </Pressable>
             <View style={styles.imageContainer}>
                 {image && <Image source={{ uri: image }} style={styles.image} />}
             </View>
+            <SipsterButton title="Choose Image" navigation={pickImage}/>
         </SafeAreaView>
     );
 }
