@@ -25,7 +25,7 @@ export function useSettings() {
     const [settingsError, setSettingsError] = useState('');
 
     // Import of fetcher functions
-    const { changeUsername, changePassword, changeEmail, changeLastName, changeFirstName } = settingsFetcher();
+    const { changeUsername, changePassword, changeEmail, changeLastName, changeFirstName, deleteAccount } = settingsFetcher();
 
     // Changing the username
     const handleChangeUsername = async () => {
@@ -104,6 +104,20 @@ export function useSettings() {
         }
     }
 
+    const handleDeleteAccount = async (isChecked) => {
+        if (isChecked) {
+            /* If the Checkbox filled in, the account will be deleted. */
+            console.log("DeleteAccount details have been entered.")
+
+            deleteAccount();
+            
+        } else {
+            /* The system checks whether the Checkbox is filled. */
+            setSettingsError('Please ckeck the box.')
+            return;
+        }
+    }
+
     return {
         username,
         lastName,
@@ -125,6 +139,7 @@ export function useSettings() {
         handleChangePassword,
         handleChangeEmail,
         handleChangeLastName,
-        handleChangeFirstName
+        handleChangeFirstName,
+        handleDeleteAccount
     };
 }

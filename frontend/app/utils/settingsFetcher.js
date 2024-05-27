@@ -159,5 +159,20 @@ export function settingsFetcher() {
             });
     };
 
-    return { changeUsername, changePassword, changeEmail, changeLastName, changeFirstName, settingsError, setSettingsError };
+    const deleteAccount = () => {
+
+        axios.delete(`http://85.215.71.124/register/${user.username}/${user.password} HTTP/1.1`)
+            .then(response => {
+                console.log("The user has been successfully deleted.", response.data);
+                setSettingsError('');
+                () => router.navigate('routes/LoginPage');
+
+            })
+            .catch(error => {
+                console.error("Error deleting the user:", error);
+                console.log(error)
+            });
+    };
+
+    return { changeUsername, changePassword, changeEmail, changeLastName, changeFirstName, settingsError, setSettingsError, deleteAccount };
 }

@@ -14,7 +14,15 @@ Typ: Page/route
 export default function LoginPage() {
 
     // Import the logic for the LoginPage from useLogin.js
-    const { username, setUsername, password, setPassword, loginError, setLoginError, handleLogin } = useLoginLogic();
+    const {
+        username,
+        setUsername,
+        password,
+        setPassword,
+        loginError,
+        setLoginError,
+        handleLogin
+    } = useLoginLogic();
 
 
     return (

@@ -30,6 +30,8 @@ import CheckButton from './settings/CheckButton';
 import AboutUs from './settings/AboutUs';
 import TextButton from './settings/TextButton';
 import Help from './settings/Help';
+import Picker from './settings/Picker';
+import DeleteAccount from './settings/deleteAccount';
 
 // Profile imports
 import ProfileCard from './profile/ProfileCard';
@@ -61,7 +63,7 @@ export {
   IconButton, SipsterButton, SmallTextField, TagCard, TextField, TextFieldConst,
 
   // Settings
-  SettingsButton, CheckButton, AboutUs, TextButton, Help,
+  SettingsButton, CheckButton, AboutUs, TextButton, Help, Picker, DeleteAccount, 
 
   // Profile
   ProfileCard, ProfileHeaderButtons,

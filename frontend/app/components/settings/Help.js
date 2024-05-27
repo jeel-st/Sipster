@@ -23,7 +23,7 @@ export default function Help() {
             <TextButton title="Help & FAQs" icon="help-circle-outline" color="white" content={() => setHelpVisible(!isHelpVisible)} />
 
             {isHelpVisible && (
-                <View className="mt-6 mb-6 ml-3">
+                <View className="mt-6 mb-6">
                     <Text className="text-yellow font-bold text-l">How do I log in to the application?</Text>
                     <Text className="text-white text-l">{settings.questions1}</Text>
 

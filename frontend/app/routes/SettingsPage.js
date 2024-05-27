@@ -1,11 +1,12 @@
 // Imports
 import { SafeAreaView, Text, StatusBar, View } from "react-native";
-import { SettingsButton, SipsterButton, CheckButton, TextField, IconButton, AboutUs, TextButton, Help } from '../components/';
+import { SettingsButton, SipsterButton, CheckButton, TextField, IconButton, AboutUs, Help, Picker, DeleteAccount } from '../components/';
 import { styles } from '../constants';
 import { router } from 'expo-router';
 import { useSettings } from '../utils/hooks/useSettings';
 import React, { useState } from 'react';
 import { ScrollView, NativeBaseProvider } from "native-base";
+import { classNames } from '../utils';
 
 /* 
 Front end of the SettingsPage. 
@@ -13,12 +14,18 @@ Typ: Page/route
 */
 export default function SettingsPage() {
 
+    // CSS properties of the ChangeButtons
+    const design = classNames(
+        'flex-row items-center',
+        'mt-6 mb-6 ml-3');
+
     // useState() -> Hook function of React to trade states
     const [isChangeUsernameVisible, setChangeUsernameVisible] = useState(false);
     const [isChangePasswordVisible, setChangePasswordVisible] = useState(false);
     const [isChangeFirstNameVisible, setChangeFirstNameVisible] = useState(false);
     const [isChangeLastNameVisible, setChangeLastNameVisible] = useState(false);
     const [isChangeEmailVisible, setChangeEmailVisible] = useState(false);
+    const [isChangePictureVisible, setChangePictureVisible] = useState(false);
 
     // Import the logic for the changeUsername component from changeSettingsLogic.js
     const {
@@ -47,7 +54,7 @@ export default function SettingsPage() {
 
     return (
         <NativeBaseProvider>
-            <SafeAreaView className="flex-1 bg-primary" contentContainerStyle={{ flexGrow: 1 }} >
+            <SafeAreaView className={classNames('flex-1 bg-primary')} contentContainerStyle={{ flexGrow: 1 }} >
 
                 <View className={styles.spaceText}>
                     {/* Header */}
@@ -57,18 +64,18 @@ export default function SettingsPage() {
                     <IconButton icon="chevron-left" navigation={() => router.back()} />
 
                     {/* Title */}
-                    <View className="mt-6">
+                    <View className={classNames('mt-6')}>
                         <Text className={styles.brandingText}>your settings</Text>
                     </View>
 
                     {/* Change Buttons */}
-                    <ScrollView className="mt-6 pb-10" >
+                    <ScrollView className={classNames('mt-6 pb-10')} >
 
                         {/* Change Username */}
                         <SettingsButton title="change username" onPress={() => setChangeUsernameVisible(!isChangeUsernameVisible)} />
                         {/* Expandable element for changing the username */}
                         {isChangeUsernameVisible && (
-                            <View className="flex-row mt-6 mb-6 ml-3 items-center">
+                            <View className={design}>
                                 <TextField placeholder="new username" value={username} onChangeText={(text) => { setUsername(text); setSettingsError('') }} />
                                 <CheckButton change={() => handleChangeUsername().then(() => setChangeUsernameVisible(!isChangeUsernameVisible))} />
                             </View>
@@ -78,7 +85,7 @@ export default function SettingsPage() {
                         <SettingsButton title="change password" onPress={() => setChangePasswordVisible(!isChangePasswordVisible)} />
                         {/* Expandable element for changing the password */}
                         {isChangePasswordVisible && (
-                            <View className="flex-row mt-6 mb-6 ml-3 items-center">
+                            <View className={design}>
                                 <View>
                                     <TextField placeholder="old password" value={oldPassword} onChangeText={(text) => { setOldPassword(text); setSettingsError('') }} />
                                     <TextField placeholder="new password" value={newPassword} onChangeText={(text) => { setNewPassword(text); setSettingsError('') }} />
@@ -92,7 +99,7 @@ export default function SettingsPage() {
                         <SettingsButton title="change firstname" onPress={() => setChangeFirstNameVisible(!isChangeFirstNameVisible)} />
                         {/* Expandable element for changing the firstname */}
                         {isChangeFirstNameVisible && (
-                            <View className="flex-row mt-6 mb-6 ml-3 items-center">
+                            <View className={design}>
                                 <TextField placeholder="new firstname" value={firstName} onChangeText={(text) => { setFirstName(text); setSettingsError('') }} />
                                 <CheckButton change={() => handleChangeFirstName().then(() => setChangeFirstNameVisible(!isChangeFirstNameVisible))} />
                             </View>
@@ -102,7 +109,7 @@ export default function SettingsPage() {
                         <SettingsButton title="change lastname" onPress={() => setChangeLastNameVisible(!isChangeLastNameVisible)} />
                         {/* Expandable element for changing the lastname */}
                         {isChangeLastNameVisible && (
-                            <View className="flex-row mt-6 mb-6 ml-3 items-center">
+                            <View className={design}>
                                 <TextField placeholder="new lastname" value={lastName} onChangeText={(text) => { setLastName(text); setSettingsError('') }} />
                                 <CheckButton change={() => handleChangeLastName().then(() => setChangeLastNameVisible(!isChangeLastNameVisible))} />
                             </View>
@@ -112,16 +119,22 @@ export default function SettingsPage() {
                         <SettingsButton title="change email" onPress={() => setChangeEmailVisible(!isChangeEmailVisible)} />
                         {/* Expandable element for changing the email */}
                         {isChangeEmailVisible && (
-                            <View className="flex-row mt-6 mb-6 ml-3 items-center">
+                            <View className={design}>
                                 <TextField placeholder="new email" value={email} onChangeText={(text) => { setEmail(text); setSettingsError('') }} />
                                 <CheckButton change={() => handleChangeEmail().then(() => setChangeEmailVisible(!isChangeEmailVisible))} />
                             </View>
                         )}
 
                         {/* Change ProfilPicture*/}
-                        <SettingsButton title="change profile picture" />
+                        <SettingsButton title="change profile picture" onPress={() => setChangePictureVisible(!isChangePictureVisible)} />
+                        {/* Expandable element for changing the profile picture */}
+                        {isChangePictureVisible && (
+                            <View className={design}>
+                                <Picker />
+                            </View>
+                        )}
 
-                        <View className="mt-6">
+                        <View className={classNames('mt-6')}>
                             {/*Help*/}
                             <Help />
 
@@ -129,21 +142,25 @@ export default function SettingsPage() {
                             <AboutUs />
 
                             {/*Delete Account*/}
-                            <TextButton title="Delete account" icon="warning-outline" color="red" />
+                            <DeleteAccount/>
                         </View>
 
                         {/* Logout Button*/}
-                        <View className="items-center">
+                        <View className={classNames('items-center')}>
                             <SipsterButton title="Logout" navigation={() => router.navigate('routes/LoginPage')} />
                         </View>
 
                         {/* Error Message */}
                         <View className={styles.spaceText}>
-                            {settingsError ? (<Text className="text-red-500 text-center">{settingsError}</Text>) : null}
+                            {settingsError ? (<Text
+                                className={classNames(
+                                    'text-center',
+                                    'text-red-500')}>
+                                {settingsError}</Text>) : null}
                         </View>
 
                         {/* Distance */}
-                        <View className="h-20 mt-16" />
+                        <View className={classNames('h-20 mt-16')} />
 
                     </ScrollView>
 
