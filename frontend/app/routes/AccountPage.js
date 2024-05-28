@@ -32,7 +32,7 @@ export default function AccountPage() {
 
                     {/* Branding & Settings */}
                     <View className="flex-row mt-4 mx-6 items-center justify-between" >
-                        <Image source={require('../assets/images/logo-small.png')} />
+                    <Image style={{ width: 100, height: 50, resizeMode: 'contain' }} source={require('../assets/images/logo-small.png')}/>
 
                         <IconButton icon="gear" navigation={() => router.navigate('routes/SettingsPage')} />
                     </View>

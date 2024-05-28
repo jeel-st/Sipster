@@ -6,8 +6,8 @@ import { router } from 'expo-router';
 import { styles } from '../constants';
 import { TextField, SipsterButton } from '../components/';
 import { useLoginLogic } from '../utils/hooks/useLogin';
-import { setBackgroundColorAsync } from 'expo-navigation-bar'
-import { useIsFocused } from '@react-navigation/native'
+import { setBackgroundColorAsync } from 'expo-navigation-bar';
+import { useIsFocused } from '@react-navigation/native';
 
 /*
 Front end of the LoginPage.
@@ -38,11 +38,11 @@ export default function LoginPage() {
             <View className="mx-6 items-center">
 
                 {/* Distance */}
-                <View className="h-20 mt-16" />
+                <View className="h-20 mt-14" />
 
                 {/* Branding */}
-                <View className="mt-20 mb-5">
-                    <Image source={require('../assets/images/logo.png')} />
+                <View className="mt-20 mb-8">
+                    <Image style={{ width: 300, height: 90, resizeMode: 'contain' }} source={require('../assets/images/logo.png')} />
                 </View>
 
                 {/* input fields */}

@@ -47,11 +47,11 @@ export default function RegisterPage() {
                 <View className="mx-6 items-center">
 
                     {/* Distance */}
-                    <View className="h-4 mt-10" />
+                    <View className="h-4 mt-8" />
 
                     {/* Branding */}
-                    <View className="mt-20 mb-5">
-                        <Image source={require('../assets/images/logo.png')} />
+                    <View className="mt-20 mb-8">
+                    <Image style={{ width: 300, height: 90, resizeMode: 'contain' }} source={require('../assets/images/logo.png')} />
                     </View>
 
                     {/* input fields */}
