@@ -18,7 +18,7 @@ export default function GameActivity({ user, game, taggedFriends }) {
             'absolute z-20 justify-center items-center',
             'space-y-4',
             'w-full h-full',
-            'bg-black opacity-95'
+            'bg-black opacity-80'
         )}>
             <View className={classNames(
                 'justify-between',
