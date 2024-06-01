@@ -1,7 +1,7 @@
 // Imports
 import { View, TextInput } from 'react-native';
 import React from 'react';
-import { styles } from '../../constants';
+import { classNames } from '../../utils';
 
 /* 
 This is a normal text field.
@@ -16,8 +16,11 @@ export default function TextField({ placeholder, onChangeText, value, hideText }
     return (
         <View>
             <TextInput
-                className="h-10 m-1 rounded-xl shadow-md shadow-black w-64 text-white pl-2"
-                style={{ backgroundColor: styles.Colors.secondary }}
+                className={classNames(
+                    'pl-2 m-1', // spacing 
+                    'h-10 w-64', // sizing
+                    'rounded-xl shadow-md shadow-black text-white bg-secondary' // styling
+                )}
                 placeholder={placeholder}
                 onChangeText={onChangeText}
                 value={value}

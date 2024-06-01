@@ -1,7 +1,6 @@
 // Imports
 import React from 'react';
 import { TouchableOpacity, Text } from 'react-native';
-import { Colors } from '../../constants/styles';
 import { classNames } from '../../utils';
 
 /* 
@@ -14,11 +13,19 @@ Typ: Component from layout
 */
 export default function SipsterButton({ title, navigation }) {
     return (
-        <TouchableOpacity className={classNames('px-6 py-4 rounded-3xl shadow-md shadow-black text-center mt-5 w-[200px]')}
-            style={{ backgroundColor: Colors.yellow }}
+        <TouchableOpacity className={classNames(
+            'text-center', // position
+            'px-6 py-4 mt-5', // spacing 
+            'w-[200px]', // sizing
+            'rounded-3xl shadow-md shadow-black bg-yellow' // styling
+        )}
             onPress={navigation}
         >
-            <Text className="text-center font-bold">{title}</Text>
+            <Text className={classNames(
+                'text-center', // position
+                'font-bold' // styling
+            )}>
+                {title}</Text>
         </TouchableOpacity>
     );
 };

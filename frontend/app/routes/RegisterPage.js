@@ -1,20 +1,22 @@
 // Imports
-import { View, Text, SafeAreaView, Pressable, Image, Platform } from 'react-native'
-import { Colors } from '../constants/styles'
-import React, { useEffect } from 'react'
+import { View, Text, SafeAreaView, Pressable, Image, Platform } from 'react-native';
+import React, { useEffect } from 'react';
 import { router } from 'expo-router';
 import { styles } from '../constants';
 import { Popover, NativeBaseProvider } from "native-base";
-import { SipsterButton, SmallTextField, TextField } from '../components';
-import { useRegisterLogic } from '../utils/hooks/useRegister/'
+import { ErrorMessage, SipsterButton, SmallTextField, TextField } from '../components';
+import { useRegisterLogic } from '../utils/hooks/useRegister/';
 import { setBackgroundColorAsync } from 'expo-navigation-bar';
 import { useIsFocused } from '@react-navigation/native';
+import { classNames } from '../utils';
 
 /*
 Front end of the RegisterPage.
 Typ: Page/route
 */
 export default function RegisterPage() {
+
+    // Background is set depending on the operating system
     const isFocused = useIsFocused();
     useEffect(() => {
         if (Platform.OS === 'android') {
@@ -43,19 +45,22 @@ export default function RegisterPage() {
 
     return (
         <NativeBaseProvider>
-            <SafeAreaView className="flex-1 items-center" style={{ backgroundColor: Colors.primary }}>
-                <View className="mx-6 items-center">
-
-                    {/* Distance */}
-                    <View className="h-4 mt-8" />
+            <SafeAreaView className={classNames(
+                'flex-1 items-center justify-center', // position
+                'bg-primary' // styling
+            )}>
+                <View className={classNames(
+                    'items-center', // position
+                    'mx-6 mb-12' // spacing
+                )}>
 
                     {/* Branding */}
-                    <View className="mt-20 mb-8">
-                    <Image style={{ width: 300, height: 90, resizeMode: 'contain' }} source={require('../assets/images/logo.png')} />
+                    <View className={classNames("mb-4")}>
+                        <Image style={{ width: 300, height: 90, resizeMode: 'contain' }} source={require('../assets/images/logo.png')} />
                     </View>
 
                     {/* input fields */}
-                    <View className="flex-row">
+                    <View className={("flex-row")}>
                         <SmallTextField
                             className="w-28"
                             placeholder="first name"
@@ -106,9 +111,7 @@ export default function RegisterPage() {
                     </View>
 
                     {/* Error Message */}
-                    <View className={styles.spaceText}>
-                        {registerError ? (<Text className="text-red-500 text-center">{registerError}</Text>) : null}
-                    </View>
+                    <ErrorMessage error={registerError}/>
 
                 </View>
             </SafeAreaView>

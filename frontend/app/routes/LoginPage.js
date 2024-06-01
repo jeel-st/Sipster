@@ -1,13 +1,13 @@
 // Imports
 import { View, Text, SafeAreaView, Image, Platform } from 'react-native';
-import { Colors } from '../constants/styles';
 import React, { useEffect } from 'react';
 import { router } from 'expo-router';
 import { styles } from '../constants';
-import { TextField, SipsterButton } from '../components/';
+import { TextField, SipsterButton, ErrorMessage } from '../components/';
 import { useLoginLogic } from '../utils/hooks/useLogin';
 import { setBackgroundColorAsync } from 'expo-navigation-bar';
 import { useIsFocused } from '@react-navigation/native';
+import { classNames } from '../utils';
 
 /*
 Front end of the LoginPage.
@@ -26,6 +26,7 @@ export default function LoginPage() {
         handleLogin
     } = useLoginLogic();
 
+    // Background is set depending on the operating system
     const isFocused = useIsFocused();
     useEffect(() => {
         if (Platform.OS === 'android') {
@@ -34,14 +35,14 @@ export default function LoginPage() {
     }, [isFocused]);
 
     return (
-        <SafeAreaView className="flex-1 items-center" style={{ backgroundColor: Colors.primary }}>
-            <View className="mx-6 items-center">
-
-                {/* Distance */}
-                <View className="h-20 mt-14" />
+        <SafeAreaView className={classNames(
+            'flex-1 items-center justify-center', // position
+            'bg-primary' // styling
+            )}>
+            <View className={classNames('items-center')}>
 
                 {/* Branding */}
-                <View className="mt-20 mb-8">
+                <View className={classNames("mb-6")}>
                     <Image style={{ width: 300, height: 90, resizeMode: 'contain' }} source={require('../assets/images/logo.png')} />
                 </View>
 
@@ -59,9 +60,7 @@ export default function LoginPage() {
                 </View>
 
                 {/* Error Message */}
-                <View className={styles.spaceText}>
-                    {loginError ? (<Text className="text-red-500 text-center">{loginError}</Text>) : null}
-                </View>
+                <ErrorMessage error={loginError}/>
 
             </View>
         </SafeAreaView>

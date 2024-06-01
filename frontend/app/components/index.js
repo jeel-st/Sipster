@@ -27,6 +27,7 @@ import SipsterButton from './layout/SipsterButton';
 import SmallTextField from './layout/SmallTextField';
 import TagCard from './layout/TagCard';
 import TextField from './layout/TextField';
+import ErrorMessage from './layout/ErrorMessage';
 
 // Settings Import
 import SettingsButton from './settings/SettingsButton';
@@ -70,7 +71,7 @@ export {
   GameCard, Games, GameFriendBtn, GameActivity,  GamesPerCategory, GameCameraBtn,
 
   // Layout
-  IconButton, SipsterButton, SmallTextField, TagCard, TextField, 
+  IconButton, SipsterButton, SmallTextField, TagCard, TextField, ErrorMessage,
 
   // Settings
   SettingsButton, CheckButton, AboutUs, TextButton, Help, Picker, DeleteAccount, 

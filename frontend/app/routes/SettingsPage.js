@@ -1,6 +1,6 @@
 // Imports
 import { SafeAreaView, Text, StatusBar, View, Platform } from "react-native";
-import { SettingsButton, SipsterButton, CheckButton, TextField, IconButton, AboutUs, Help, Picker, DeleteAccount } from '../components/';
+import { SettingsButton, SipsterButton, CheckButton, TextField, IconButton, AboutUs, Help, Picker, DeleteAccount, ErrorMessage } from '../components/';
 import { styles } from '../constants';
 import { router } from 'expo-router';
 import { useSettings } from '../utils/hooks/useSettings';
@@ -13,6 +13,8 @@ import { setBackgroundColorAsync } from "expo-navigation-bar";
 Front end of the SettingsPage.
 Typ: Page/route
 */
+
+// Background is set depending on the operating system
 export default function SettingsPage() {
     if (Platform.OS === 'android') {
         setBackgroundColorAsync(styles.Colors.primary);
@@ -73,7 +75,7 @@ export default function SettingsPage() {
                     </View>
 
                     {/* Change Buttons */}
-                    <ScrollView className={classNames('mt-6 pb-10')} >
+                    <ScrollView className={classNames('mt-6 pb-10')}>
 
                         {/* Change Username */}
                         <SettingsButton title="change username" onPress={() => setChangeUsernameVisible(!isChangeUsernameVisible)} />
@@ -155,13 +157,7 @@ export default function SettingsPage() {
                         </View>
 
                         {/* Error Message */}
-                        <View className={styles.spaceText}>
-                            {settingsError ? (<Text
-                                className={classNames(
-                                    'text-center',
-                                    'text-red-500')}>
-                                {settingsError}</Text>) : null}
-                        </View>
+                        <ErrorMessage error={settingsError}/>
 
                         {/* Distance */}
                         <View className={classNames('h-20 mt-16')} />
