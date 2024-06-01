@@ -136,7 +136,7 @@ export default function SettingsPage() {
                         {/* Expandable element for changing the profile picture */}
                         {isChangePictureVisible && (
                             <View className={design}>
-                                <Picker />
+                                <Picker change={() => setChangePictureVisible(!isChangePictureVisible)} />
                             </View>
                         )}
 
@@ -157,7 +157,7 @@ export default function SettingsPage() {
                         </View>
 
                         {/* Error Message */}
-                        <ErrorMessage error={settingsError}/>
+                        <ErrorMessage error={settingsError} />
 
                         {/* Distance */}
                         <View className={classNames('h-20 mt-16')} />

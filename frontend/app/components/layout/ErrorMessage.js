@@ -5,11 +5,10 @@ import { classNames } from '../../utils';
 import { styles } from '../../constants';
 
 /*
-This button displays a customised icon and navigates to a new page.
+This component defines the layout of the ErrorMessages.
 Typ: Component from layout
 
-@ icon 
-@ navigation 
+@ error 
 */
 const ErrorMessage = ({ error }) => {
     return (
