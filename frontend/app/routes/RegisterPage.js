@@ -82,8 +82,12 @@ export default function RegisterPage() {
                     <View className="items-end w-64">
 
                         <Popover trigger={triggerProps => {
-                            return <Pressable {...triggerProps} className="w-5 h-5 rounded-full border-2 border-yellow justify-center items-center bg-secondary text-yellow">
-                                <Text className="text-yellow text-ls font-bold">i</Text>
+                            return <Pressable {...triggerProps} className={classNames(
+                                'justify-center items-center', // position
+                                'w-5 h-5', // sizing
+                                'bg-secondary text-yellow rounded-full border-2 border-yellow' // styling
+                            )}>
+                                <Text className={classNames("text-yellow text-ls font-bold")}>i</Text>
                             </Pressable>;
                         }}>
                             <Popover.Content accessibilityLabel="Delete Customerd" w="56">
@@ -111,7 +115,7 @@ export default function RegisterPage() {
                     </View>
 
                     {/* Error Message */}
-                    <ErrorMessage error={registerError}/>
+                    <ErrorMessage error={registerError} />
 
                 </View>
             </SafeAreaView>
