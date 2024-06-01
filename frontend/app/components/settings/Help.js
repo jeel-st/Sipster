@@ -3,6 +3,7 @@ import { Text, View } from "react-native";
 import React, { useState } from 'react';
 import { settings } from '../../constants';
 import TextButton from './TextButton';
+import { classNames } from "../../utils";
 
 /* 
 This component renders the Help&FAQs information
@@ -23,15 +24,15 @@ export default function Help() {
             <TextButton title="Help & FAQs" icon="help-circle-outline" color="white" content={() => setHelpVisible(!isHelpVisible)} />
 
             {isHelpVisible && (
-                <View className="mt-6 mb-6">
-                    <Text className="text-yellow font-bold text-l">How do I log in to the application?</Text>
-                    <Text className="text-white text-l">{settings.questions1}</Text>
+                <View className={classNames('mt-6')}>
+                    <Text className={settings.header}>How do I log in to the application?</Text>
+                    <Text className={settings.text}>{settings.questions1}</Text>
 
-                    <Text className="text-yellow font-bold text-l mt-4">How can I collect sips?</Text>
-                    <Text className="text-white text-l">{settings.questions2}</Text>
+                    <Text className={settings.header}>How can I collect sips?</Text>
+                    <Text className={settings.text}>{settings.questions2}</Text>
 
-                    <Text className="text-yellow font-bold text-l mt-4">How can I get help or support if I encounter an issue?</Text>
-                    <Text className="text-white text-l">{settings.questions3}</Text>
+                    <Text className={settings.header}>How can I get help or support if I encounter an issue?</Text>
+                    <Text className={settings.text}>{settings.questions3}</Text>
                 </View>
             )}
         </View>

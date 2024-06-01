@@ -7,12 +7,15 @@ import useUser from '../utils/database/userFetcher';
 import { NativeBaseProvider, View } from "native-base";
 import { FriendsScrollView, FriendsSkeleton, IconButton } from "../components";
 import { setBackgroundColorAsync } from "expo-navigation-bar";
+import { classNames } from "../utils";
 
 /*
 Front end of the AccountPage.
 All user information is displayed and managed here.
 Typ: Page/route
 */
+
+// Background is set depending on the operating system
 export default function AccountPage() {
     if (Platform.OS === 'android') {
         setBackgroundColorAsync(styles.Colors.secondary);
@@ -20,6 +23,11 @@ export default function AccountPage() {
 
     // logged in user is called
     const user = useUser();
+
+    // Styling: Tailwind rendering as a constant because we use it more then one.
+    const text = classNames(
+        'text-center text-2xl font-bold' // styling
+    );
 
     return (
         <NativeBaseProvider>
@@ -31,9 +39,11 @@ export default function AccountPage() {
                     <View style={{ height: StatusBar.currentHeight }} />
 
                     {/* Branding & Settings */}
-                    <View className="flex-row mt-4 mx-6 items-center justify-between" >
-                        <Image source={require('../assets/images/logo-small.png')} />
-
+                    <View className={classNames(
+                        'flex-row items-center justify-between', // position 
+                        'mt-4 mx-6' // spacing
+                    )}>
+                        <Image style={{ width: 100, height: 50, resizeMode: 'contain' }} source={require('../assets/images/logo-small.png')} />
                         <IconButton icon="gear" navigation={() => router.navigate('routes/SettingsPage')} />
                     </View>
 
@@ -43,22 +53,39 @@ export default function AccountPage() {
                     </View>
 
                     {/* Informations */}
-                    <View className="flex-row mx-6">
-
+                    <View className={classNames(
+                        'flex-row justify-between', // position
+                        'mx-6' // spacing
+                    )}>
                         {/* Sip-Counter */}
-                        <View className="h-40 w-40 flex items-center justify-center rounded-3xl shadow-md shadow-black mt-3 bg-yellow" >
-                            <Text className="text-center text-2xl font-bold">1000 sips</Text>
+                        <View className={classNames(
+                            'flex items-center justify-center', // position
+                            'mt-3', // spacing
+                            'h-40 w-40', // sizing
+                            'rounded-3xl shadow-md shadow-black bg-yellow' // styling
+                        )}>
+                            <Text className={text}>1000 sips</Text>
                         </View>
 
                         {/* Profile Picture */}
-                        <View className="h-40 w-40 mx-5 rounded-3xl shadow-md shadow-black mt-3 bg-secondary" >
-                            <Image source={{ uri: user && user.profilePicture }} className="w-40 h-40" />
+                        <View className={classNames(
+                            'flex items-center justify-center', // position
+                            'mt-3', // spacing
+                            'h-40 w-40', // sizing
+                            'rounded-3xl shadow-md shadow-black bg-secondary' // styling
+                        )}>
+                            <Image source={{ uri: user && user.profilePicture }} className={classNames('w-40 h-40')} />
                         </View>
                     </View>
 
                     {/* Map */}
-                    <View className="h-40 m-1 mx-6 flex items-center justify-center rounded-3xl shadow-md shadow-black mt-5 bg-purple">
-                        <Text className="text-center text-4xl font-bold">Map</Text>
+                    <View className={classNames(
+                        'flex items-center justify-center', // position
+                        'mt-5 mx-6', // spacing
+                        'h-40', // sizing
+                        'rounded-3xl shadow-md shadow-black bg-purple' // styling
+                    )}>
+                        <Text className={text}>Map</Text>
                     </View>
 
                     {/* Events */}

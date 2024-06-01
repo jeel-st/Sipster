@@ -15,9 +15,10 @@ const IconButton = ({ icon, navigation }) => {
     return (
         <TouchableOpacity onPress={navigation}>
             <View className={classNames(
-                'justify-center items-center',
-                'w-10 h-10',
-                'rounded-xl bg-secondary')}>
+                'justify-center items-center', // position
+                'w-10 h-10', // sizing
+                'rounded-xl bg-secondary' // styling
+            )}>
                 <FontAwesome name={icon} size={24} color="white" />
             </View>
         </TouchableOpacity>

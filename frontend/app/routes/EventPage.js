@@ -20,7 +20,7 @@ export default function EventPage() {
 
                 {/* Branding */}
                 <View className={styles.spaceText}>
-                    <Image source={require('../assets/images/logo-small.png')} />
+                    <Image style={{ width: 100, height: 50, resizeMode: 'contain' }} source={require('../assets/images/logo-small.png')} />
                 </View>
 
                 {/* Event Info */}

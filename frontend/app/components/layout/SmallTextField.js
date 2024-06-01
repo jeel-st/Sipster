@@ -1,7 +1,7 @@
 // Imports
 import { View, TextInput } from 'react-native';
 import React from 'react';
-import { styles } from '../../constants';
+import { classNames } from '../../utils';
 
 /* 
 This is a small text field.
@@ -16,8 +16,11 @@ export default function SmallTextField({ placeholder, onChangeText, value, hideT
     return (
         <View>
             <TextInput
-                className="h-10 m-1 rounded-xl shadow-md shadow-black text-white w-[122px] pl-2"
-                style={{ backgroundColor: styles.Colors.secondary }}
+                className={classNames(
+                    'm-1 pl-2', // spacing
+                    'h-10 w-[122px]', // sizing
+                    'rounded-xl shadow-md shadow-black text-white bg-secondary' // styling
+                )}
                 placeholder={placeholder}
                 onChangeText={onChangeText}
                 value={value}

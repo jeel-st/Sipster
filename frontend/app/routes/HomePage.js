@@ -29,7 +29,7 @@ export default function HomePage() {
                     'mt-4 mx-6')}>
 
                     {/* Sipster Logo */}
-                    <Image source={require('../assets/images/logo-small.png')} />
+                    <Image style={{ width: 100, height: 50, resizeMode: 'contain' }} source={require('../assets/images/logo-small.png')} />
 
                     {/* Friendsmenu Button */}
                     <TouchableOpacity

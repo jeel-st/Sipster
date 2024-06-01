@@ -2,6 +2,7 @@
 import React from 'react';
 import { TouchableOpacity, View, Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { classNames } from '../../utils';
 
 /* 
 This component renders a Checkbutton.
@@ -13,7 +14,12 @@ export default function CheckButton({ change }) {
 
     return (
         <TouchableOpacity onPress={change}>
-            <View className="justify-center items-center pr-1 w-10 h-10 rounded-full bg-yellow ml-3">
+            <View className={classNames(
+                'justify-center items-center', // position
+                'pr-1 ml-3', // spacing
+                'w-10 h-10', // sizing
+                'rounded-full bg-yellow' // styling
+            )}>
                 <Ionicons name="checkmark-done" size={30} color="black" />
             </View>
         </TouchableOpacity>

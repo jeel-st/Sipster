@@ -1,8 +1,21 @@
+// Imports
+import { classNames } from "../utils";
+
 /* 
 settings.js collects all constants such as texts in a central js file. 
 This means that the actual code does not become confusing. 
 Typ: Constant from settings 
 */
+
+// Styling: Tailwind rendering as a constant because we use it more then one.
+const header = classNames(
+    'text-yellow font-bold text-l' // styling
+);
+
+const text = classNames(
+    'mb-4', // spacing
+    'text-white text-l' // styling
+);
 
 // texts for the settings
 export const AGB = 
@@ -36,4 +49,4 @@ export const questions2 = "Each time you participate in games or events, you can
 export const questions3 = "If you need help or support, you can read the frequently asked questions (FAQs) or contact our support team directly by sending an email to info@sipster.com."
 
 // bundled export of the individual string variables
-export const settings = { questions1, questions2, questions3, impressum, datenschutz, AGB }
+export const settings = { header, text, questions1, questions2, questions3, impressum, datenschutz, AGB }
