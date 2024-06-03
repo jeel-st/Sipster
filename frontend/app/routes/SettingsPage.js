@@ -1,5 +1,5 @@
 // Imports
-import { SafeAreaView, Text, StatusBar, View, Platform } from "react-native";
+import { SafeAreaView, Text, StatusBar, View } from "react-native";
 import { SettingsButton, SipsterButton, CheckButton, TextField, IconButton, AboutUs, Help, Picker, DeleteAccount, ErrorMessage } from '../components/';
 import { styles } from '../constants';
 import { router } from 'expo-router';
@@ -7,7 +7,7 @@ import { useSettings } from '../utils/hooks/useSettings';
 import React, { useState } from 'react';
 import { ScrollView, NativeBaseProvider } from "native-base"
 import { classNames } from '../utils';
-import { setBackgroundColorAsync } from "expo-navigation-bar";
+import { navBarColor } from "../utils/navBarColor";
 
 /*
 Front end of the SettingsPage.
@@ -16,9 +16,7 @@ Typ: Page/route
 
 // Background is set depending on the operating system
 export default function SettingsPage() {
-    if (Platform.OS === 'android') {
-        setBackgroundColorAsync(styles.Colors.primary);
-    }
+    navBarColor(styles.Colors.primary)
 
     // CSS properties of the ChangeButtons
     const design = classNames(

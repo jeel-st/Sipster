@@ -1,4 +1,4 @@
-import { View, Text, Image, TouchableOpacity, ScrollView, Platform } from 'react-native'
+import { View, Text, Image, TouchableOpacity, ScrollView } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { classNames } from '../utils'
 import { navigateToFriendsPage } from '../utils/navigator'
@@ -8,7 +8,7 @@ import { router } from 'expo-router'
 import { GameActivity, GameFriendBtn } from '../components'
 import { useGame } from '../utils/hooks/useGame'
 import { styles } from '../constants'
-import { setBackgroundColorAsync } from 'expo-navigation-bar'
+import { navBarColor } from '../utils/navBarColor'
 
 /*
     GamePage is a page that displays the landing page of a game and allows the user to tag friends and start the game.
@@ -19,9 +19,7 @@ import { setBackgroundColorAsync } from 'expo-navigation-bar'
 export default function GamePage() {
     const { user, game, friends, taggedFriends, handleTaggedFriends, isTagged, isPressed, handlePress } = useGame()
 
-    if (Platform.OS === 'android') {
-        setBackgroundColorAsync(styles.Colors.primary);
-    }
+    navBarColor(styles.Colors.primary)
 
     return (
         <View className={classNames(

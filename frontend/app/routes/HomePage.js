@@ -7,8 +7,7 @@ import { navigateToFriendsPage } from '../utils/navigator';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { EventInfoCard, Events, HomeActivityCard, HomeFriends, RefreshContext } from '../components';
 import useHome from '../utils/hooks/useHome';
-import { setBackgroundColorAsync } from 'expo-navigation-bar';
-import { useIsFocused } from '@react-navigation/native';
+import { useNavBarColor } from '../utils/hooks/useNavBarColor';
 
 /*
     HomePage is a page that displays the user's friends and their activities.
@@ -19,12 +18,7 @@ import { useIsFocused } from '@react-navigation/native';
 export default function HomePage() {
     const { user, displayFriend, handleFriendSelection, onRefresh, refreshing, refreshDate } = useHome();
 
-    const isFocused = useIsFocused();
-    useEffect(() => {
-        if (Platform.OS === 'android') {
-            setBackgroundColorAsync(styles.Colors.secondary);
-        }
-    }, [isFocused]);
+    useNavBarColor(styles.Colors.secondary)
 
     const Header = () => {
         return (

@@ -1,13 +1,12 @@
 // Imports
-import { View, Text, SafeAreaView, Image, Platform } from 'react-native';
-import React, { useEffect } from 'react';
+import { View, Text, SafeAreaView, Image } from 'react-native';
+import React from 'react';
 import { router } from 'expo-router';
 import { styles } from '../constants';
 import { TextField, SipsterButton, ErrorMessage } from '../components/';
 import { useLoginLogic } from '../utils/hooks/useLogin';
-import { setBackgroundColorAsync } from 'expo-navigation-bar';
-import { useIsFocused } from '@react-navigation/native';
 import { classNames } from '../utils';
+import { useNavBarColor } from '../utils/hooks/useNavBarColor';
 
 /*
 Front end of the LoginPage.
@@ -27,12 +26,7 @@ export default function LoginPage() {
     } = useLoginLogic();
 
     // Background is set depending on the operating system
-    const isFocused = useIsFocused();
-    useEffect(() => {
-        if (Platform.OS === 'android') {
-            setBackgroundColorAsync(styles.Colors.primary);
-        }
-    }, [isFocused]);
+    useNavBarColor(styles.Colors.primary)
 
     return (
         <SafeAreaView className={classNames(

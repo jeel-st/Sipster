@@ -1,14 +1,15 @@
 // Imports
-import { SafeAreaView, Pressable, Text, StatusBar, Image, Platform } from "react-native";
+import { SafeAreaView, Pressable, Text, StatusBar, Image } from "react-native";
 import { styles } from '../constants';
 import React from 'react';
 import { router } from 'expo-router'
 import useUser from '../utils/database/userFetcher';
 import { NativeBaseProvider, View } from "native-base";
 import { FriendsScrollView, FriendsSkeleton, IconButton } from "../components";
-import { setBackgroundColorAsync } from "expo-navigation-bar";
+
 import { classNames } from "../utils";
 import { fetchProfilePictureCompressed } from '../utils/database/imageFetcher';
+import { navBarColor } from "../utils/navBarColor";
 
 /*
 Front end of the AccountPage.
@@ -18,9 +19,7 @@ Typ: Page/route
 
 // Background is set depending on the operating system
 export default function AccountPage() {
-    if (Platform.OS === 'android') {
-        setBackgroundColorAsync(styles.Colors.secondary);
-    }
+    navBarColor(styles.Colors.secondary)
 
     // logged in user is called
     const user = useUser();
@@ -41,7 +40,7 @@ export default function AccountPage() {
 
                     {/* Branding & Settings */}
                     <View className={classNames(
-                        'flex-row items-center justify-between', // position 
+                        'flex-row items-center justify-between', // position
                         'mt-4 mx-6' // spacing
                     )}>
                         <Image style={{ width: 100, height: 50, resizeMode: 'contain' }} source={require('../assets/images/logo-small.png')} />

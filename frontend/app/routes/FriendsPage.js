@@ -1,11 +1,11 @@
-import { View, Text, TouchableWithoutFeedback, Keyboard, Platform } from 'react-native'
+import { View, Text, TouchableWithoutFeedback, Keyboard } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { classNames } from '../utils'
 import { styles } from '../constants'
 import { FriendsHeaderButtons, FriendsCategorys, FriendsContainer } from '../components'
 import React from 'react';
-import { setBackgroundColorAsync } from 'expo-navigation-bar'
 import { useFriends } from '../utils/hooks/friends/useFriends'
+import { navBarColor } from '../utils/navBarColor'
 
 /*
     FriendsPage is a page that displays the friends and allows the user to search and view friends.
@@ -16,9 +16,7 @@ import { useFriends } from '../utils/hooks/friends/useFriends'
 export default function FriendsPage() {
     const { user, searchText, selectedTab, viewFriends, viewCategorys, handleSearchTextChange, handleTabChange, handleReloadFriends } = useFriends();
 
-    if (Platform.OS === 'android') {
-        setBackgroundColorAsync(styles.Colors.primary);
-    }
+    navBarColor(styles.Colors.primary)
 
     return (
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
