@@ -1,7 +1,7 @@
-import { GamePage } from '../routes';
+import { GamePageAll } from '../routes';
 
 export default function Tab() {
   return (
-    <GamePage />
+    <GamePageAll />
   );
 }

@@ -26,7 +26,7 @@ async function deleteRegister(req, res) {
         if(deleteUser == "Benutzer erfolgreich gelöscht"){
             res.json(deleteUser)
         }else{
-            res.status(404).json(deleteUser)
+            res.status(404).json("Something went wrong " + deleteUser)
         }
 }
 
