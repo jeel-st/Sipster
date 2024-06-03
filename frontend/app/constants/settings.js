@@ -1,6 +1,3 @@
-// Imports
-import { classNames } from "../utils";
-
 /* 
 settings.js collects all constants such as texts in a central js file. 
 This means that the actual code does not become confusing. 
@@ -8,14 +5,9 @@ Typ: Constant from settings
 */
 
 // Styling: Tailwind rendering as a constant because we use it more then one.
-const header = classNames(
-    'text-yellow font-bold text-l' // styling
-);
+const header = 'text-yellow font-bold text-l'
 
-const text = classNames(
-    'mb-4', // spacing
-    'text-white text-l' // styling
-);
+const text = 'mb-4 text-white text-l'
 
 // texts for the settings
 export const AGB = 

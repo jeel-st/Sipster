@@ -22,7 +22,7 @@ export function settingsFetcher() {
 
     const changeUsername = (newUsername) => {
 
-        axiosInstance.put('/user/changeUsername',
+        axiosInstance.post('/user/changeUsername',
             {
                 "username": user.username,
                 "newUsername": newUsername
@@ -106,7 +106,7 @@ export function settingsFetcher() {
 
     const changePassword = (password) => {
 
-        axiosInstance.put('/user/changePassword',
+        axiosInstance.post('/user/changePassword',
             {
                 "username": user.username,
                 "newPassword": password
@@ -119,6 +119,7 @@ export function settingsFetcher() {
             .then(response => {
                 console.log("The new password has been successfully changed.", response.data);
                 setSettingsError('');
+                user.password = password;
             })
             .catch(error => {
                 console.error("Error changing the password:", error);
@@ -133,7 +134,7 @@ export function settingsFetcher() {
 
     const changeEmail = (email) => {
 
-        axiosInstance.put('/user/changeEmail',
+        axiosInstance.post('/user/changeEmail',
             {
                 "username": user.username,
                 "newEmail": email

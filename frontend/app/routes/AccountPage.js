@@ -8,6 +8,7 @@ import { NativeBaseProvider, View } from "native-base";
 import { FriendsScrollView, FriendsSkeleton, IconButton } from "../components";
 import { setBackgroundColorAsync } from "expo-navigation-bar";
 import { classNames } from "../utils";
+import { fetchProfilePictureCompressed } from '../utils/database/imageFetcher';
 
 /*
 Front end of the AccountPage.
@@ -74,14 +75,18 @@ export default function AccountPage() {
                             'h-40 w-40', // sizing
                             'rounded-3xl shadow-md shadow-black bg-secondary' // styling
                         )}>
-                            <Image source={{ uri: user && user.profilePicture }} className={classNames('w-40 h-40')} />
+                            {user && user.profilePicture ? (
+                                <Image className="w-40 h-40 rounded-3xl" source={{ uri: fetchProfilePictureCompressed(user) }} />
+                            ) : (
+                                <Text className={classNames('text-white')}>No Profile Picture</Text>
+                            )}
                         </View>
                     </View>
 
                     {/* Map */}
                     <View className={classNames(
                         'flex items-center justify-center', // position
-                        'mt-5 mx-6', // spacing
+                        'mt-6 mx-6', // spacing
                         'h-40', // sizing
                         'rounded-3xl shadow-md shadow-black bg-purple' // styling
                     )}>

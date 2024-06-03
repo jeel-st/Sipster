@@ -1,16 +1,28 @@
+// Imports
 import React, { useEffect, useState } from 'react';
 import { Image, View, SafeAreaView, StyleSheet } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import useUser from '../../utils/database/userFetcher';
-import SipsterButton from '../layout/SipsterButton';
 import { uploadProfilePicture } from '../../utils/database/imageFetcher';
+import { classNames } from '../../utils';
+import TextButton from './TextButton';
+import CheckButton from './CheckButton';
 
-export default function Picker() {
+/*
+This component can be used to upload your own and new profile pictures.
+Typ: Component from settings
+*/
+export default function Picker({ change }) {
+
+    // useState() -> Hook function of React to trade states
     const [hasPhotoPermission, setPhotoPermission] = useState(null);
     const [image, setImage] = useState(null);
 
+    // logged in user is called
     const user = useUser()
 
+    // When the component is first rendered, this function checks whether the app 
+    // has authorisation to access the device's media library.
     useEffect(() => {
         (async () => {
             const galleryStatus = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -18,6 +30,8 @@ export default function Picker() {
         })();
     }, []);
 
+    // The pickImage function starts a process to select an image from the device's media library, 
+    // provided authorisation has been granted. 
     const pickImage = async () => {
         if (hasPhotoPermission) {
             try {
@@ -28,7 +42,7 @@ export default function Picker() {
                     quality: 1,
                 });
 
-                if (!result.cancelled) {
+                if (!result.canceled) {
                     setImage(result.assets[0].uri);
                     await uploadProfilePicture(result.assets[0], user.username);
                 }
@@ -39,49 +53,30 @@ export default function Picker() {
     };
 
     return (
-        <SafeAreaView style={styles.container} className="bg-primary">
-            <View style={styles.imageContainer}>
-                {image && <Image source={{ uri: image }} style={styles.image} />}
+            <View className={classNames('flex-row justify-between')}>
+                <View style={styles.imageContainer}>
+                    {image && <Image source={{ uri: image }} className={('w-full h-full object-cover')}/>}
+                </View>
+                <View className={classNames('items-center justify-center')}>
+                    <TextButton title="Choose Image" color="white" icon="attach-outline" content={pickImage} />
+                    <View className={('mt-6')}/>
+                    <CheckButton change={change}/>
+                </View>
             </View>
-            <SipsterButton title="Choose Image" navigation={pickImage}/>
-        </SafeAreaView>
     );
 }
 
+// Stylesheet for the ImageContainter
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    text: {
-        fontSize: 18,
-        color: 'red',
-    },
-    button: {
-        backgroundColor: '#007bff',
-        padding: 15,
-        borderRadius: 8,
-        marginBottom: 20,
-    },
-    buttonText: {
-        color: '#fff',
-        fontSize: 16,
-        fontWeight: 'bold',
-    },
     imageContainer: {
-        width: 200,
-        height: 200,
+        width: 150,
+        height: 150,
         borderWidth: 1,
         borderColor: '#ccc',
         borderRadius: 10,
         alignItems: 'center',
         justifyContent: 'center',
         overflow: 'hidden',
-    },
-    image: {
-        width: '100%',
-        height: '100%',
-        resizeMode: 'cover',
+        marginRight: 20,
     },
 });
