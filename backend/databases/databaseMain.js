@@ -5,6 +5,8 @@ const dbRegister = require("../databases/databaseRegister")
 const dbFriendSystem = require("../databases/databaseFriendSystem")
 const dbProfilePicture = require("../databases/databaseProfilePicture")
 const dbUser = require("../databases/databaseUser")
+const dbSips = require("../databases/databaseSips")
+const log = require("../logging/logger")
 
 let db = null;
 const url = `mongodb://localhost:27017/`;
@@ -67,32 +69,122 @@ async function getFriendRecommendations(req){
     return await dbFriendSystem.getFriendRecommendations(req);
 }
 
-async function uploadProfilePicture(username, fileExtension){
-    return await dbProfilePicture.uploadProfilePicture(username, fileExtension)
+async function getInvitations(req){
+    return await dbFriendSystem.getInvitations(req);
+}
+
+async function uploadProfilePicture(username, fileExtension, filePathOriginal){
+    return await dbProfilePicture.uploadProfilePicture(username, fileExtension, filePathOriginal)
 }
 
 async function getUserData(req){
     return await dbUser.getUserData(req)
 }
 
+async function getEventsData(req){
+    return await dbUser.getEventsData(req)
+}
+
 async function postNewUsername(req){
     return await dbUser.postNewUsername(req)
 }
 
-async function getProfilePictureURL(username){
-    return await dbProfilePicture.getProfilePictureURL(username)
+async function postNewPassword(req) {
+    return await dbUser.postNewPassword(req)
+}
+
+async function postNewEmail(req) {
+    return await dbUser.postNewEmail(req)
+}
+
+async function getProfilePictureURL(username, original){
+    return await dbProfilePicture.getProfilePictureURL(username, original)
 }
 
 async function deleteProfilePictureURL(username){
     return await dbProfilePicture.deleteProfilePictureURL(username)
 }
-function getDB() {
-    return db
+
+async function getSips(username){
+    return await dbSips.getSips(username)
 }
 
+async function changeSips(username, sipsNew){
+    return await dbSips.changeSips(username, sipsNew)
+}
 
+async function changeFirstName(userID, newName){
+    return await dbUser.changeFirstName(userID, newName)
+}
 
+async function changeLastName(userID, newName){
+    return await dbUser.changeLastName(userID, newName)
+}
+ function getDB(){
+    return  db
+}
 
+async function getSipsterID(username) {
+    const personalInformation = (await initializeCollections()).personalInformation
+    let sipsterID = await personalInformation.find({username: username}).project({_id: 1}).toArray()
+    sipsterID = sipsterID.map(id => id._id)
+    if (!sipsterID) {
+        throw new UsernameNotFoundError("This username was not found in the database")
+    }
+    return sipsterID[0]
+}
+
+async function initializeCollections() {
+    const personalInformation = db.collection("personalInformation");
+    const invitations = db.collection("invitations");
+    const events = db.collection("events");
+    return {
+        personalInformation: personalInformation,
+        invitations: invitations,
+        events: events
+    };
+}
+
+class UsernameNotFoundError extends Error {
+    constructor(message) {
+        super(message);
+        this.name = this.constructor.name;
+    }
+}
+
+Object.assign(exports, {  
+    connectToDB,
+    getDB,
+    postEvents,
+    deleteEvents,
+getEvents,
+getLoginData,
+postUser,
+deleteUser,
+postFriendRequest,
+acceptFriendRequest,
+declineFriendRequest,
+removeFriend,
+getFriendList,
+ getFriendRecommendations,
+getInvitations,
+uploadProfilePicture,
+getUserData,
+getEventsData,
+postNewEmail,
+postNewPassword,
+postNewUsername,
+getProfilePictureURL,
+deleteProfilePictureURL,
+getSipsterID,
+initializeCollections,
+getSips,
+changeSips,
+changeFirstName,
+changeLastName,
+UsernameNotFoundError})
+
+/*
 exports.connectToDB = connectToDB
 exports.getDB = getDB
 exports.postEvents = postEvents
@@ -107,8 +199,20 @@ exports.declineFriendRequest = declineFriendRequest
 exports.removeFriend = removeFriend
 exports.getFriendList = getFriendList
 exports.getFriendRecommendations = getFriendRecommendations
+exports.getInvitations = getInvitations
 exports.uploadProfilePicture = uploadProfilePicture
 exports.getUserData = getUserData
+exports.getEventsData = getEventsData
+exports.postNewEmail = postNewEmail
+exports.postNewPassword = postNewPassword
 exports.postNewUsername = postNewUsername
 exports.getProfilePictureURL = getProfilePictureURL
 exports.deleteProfilePictureURL = deleteProfilePictureURL
+exports.getSipsterID = getSipsterID
+exports.initializeCollections = initializeCollections;
+exports.getSips = getSips
+exports.changeSips = changeSips
+exports.changeFirstName = changeFirstName
+exports.changeLastName = changeLastName
+exports.UsernameNotFoundError = UsernameNotFoundError;
+*/

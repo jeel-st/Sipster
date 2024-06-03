@@ -2,8 +2,9 @@
 
 # dependencies
 node_modules/
-profilePictures/
+static/
 *.log
+*/log
 
 # Expo
 .expo/
@@ -41,4 +42,3 @@ yarn-error.*
 
 expo-env.d.ts
 # @end expo-cli
-backend/logging/app.log

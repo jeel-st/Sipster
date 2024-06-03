@@ -34,11 +34,11 @@ POST {{host}}/register HTTP/1.1
 Content-Type: application/json
 
 {
-    "username": "Maike",
-    "password": "Sipster!24",
-    "email": "mk486@hdm-stuttgart.de",
-    "firstName": "Maike",
-    "lastName": "König",
+    "username": "friendTest",
+    "password": "JoelStinkt*100",
+    "email": "ft486@hdm-stuttgart.de",
+    "firstName": "friend",
+    "lastName": "test",
     "friends": null
 }
 
@@ -72,6 +72,6 @@ Content-Type: application/json
 
 ###
 
-DELETE {{host}}/register/Crypto/crYpT123!!! HTTP/1.1
+DELETE {{host}}/register/gamsa/JoelStinkt*100 HTTP/1.1
 
 ###
