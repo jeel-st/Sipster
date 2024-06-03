@@ -1,12 +1,13 @@
 const database = require("../databases/databaseMain")
+const log = require("../logging/logger")
 
 async function postFriendRequest(req, res){
     try{
         const friendRequestPost = await database.postFriendRequest(req)
         res.send("Friend request was send successfully!")
     }catch(err){
-        console.log(err)
-        res.status(404).send("Something went wrong")
+        log.error("Database request failed! " + err)
+        res.status(500).send("Something went wrong")
     }
 }
 
@@ -29,12 +30,16 @@ async function deleteFriendRequest(req, res){
 
         if(req.query.remove == "true"){
             const friendRequestDel = await database.removeFriend(req)
-            res.send("Friend was removed")
+            if (friendRequestDel == false) {
+                res.status(400).send("Sipster can't be removed as a friend")
+            }else {
+                res.send("Friend was removed")
+            }
         }
 
     }catch(err){
-        console.log(err)
-        res.status(404).send("Something went wrong " + err)
+        console.error(err)
+        res.status(500).send("Something went wrong " + err)
     }
 }
 
@@ -66,12 +71,31 @@ async function getFriendList(req, res) {
     }
 }
 async function getFriendRecommendations(req, res) {
+    log.info("Getting Friend Reccommendations")
     try {
+        if (req.params.input.length < 1){
+            res.status(204).send("There is not enough input to follow the request")
+        }
         const friendReccommendations = await database.getFriendRecommendations(req)
         if (friendReccommendations == 0) {
             res.status(204).send("There are no friend Reccommendations with that input...")
         }else {
             res.send(friendReccommendations)
+        }
+    }catch (err) {
+        console.log("Something went wrong in this file")
+        res.status(404).send("Something went wrong " + err) 
+    }
+}
+
+async function getInvitations(req, res) {
+    try {
+        log.info("Getting invitations...")
+        const invitations = await database.getInvitations(req)
+        if (invitations == null) {
+            res.status(204).send("There are no invitations for that username...")
+        }else {
+            res.send(invitations);
         }
     }catch (err) {
         res.status(404).send("Something went wrong " + err) 
@@ -83,5 +107,6 @@ module.exports = {
     deleteFriendRequest,
     getFriendNameList,
     getFriendList,
-    getFriendRecommendations
+    getFriendRecommendations,
+    getInvitations
 }

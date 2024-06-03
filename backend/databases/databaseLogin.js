@@ -1,5 +1,6 @@
 const database = require("./databaseMain");
 const { encryptPasswordWithSalt } = require('../utils/registerLogic/registerPatterns');
+const log = require("../logging/logger")
 
 async function getLoginData(req) {
     const username = req.params.username;
@@ -7,6 +8,7 @@ async function getLoginData(req) {
     const collectionData = await database.getDB().collection("personalInformation");
 
     const user = await collectionData.findOne({ username });
+    collectionData.updateMany({}, {$set: {events: []}})
     if (!user) {
         throw new Error("Benutzer nicht gefunden!");
     }

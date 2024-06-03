@@ -1,3 +1,5 @@
+
+const log = require("../logging/logger")
 const database = require("./databaseMain")
 
 async function getEvents() {
@@ -9,7 +11,7 @@ async function getEvents() {
 async function postEvents(req) {
     const {date, name, time, header, desc, tags} = req.body
     const eventsData = {date, name, time, header, desc, tags}
-    
+    console.log("DB:"+database.getDB())
     let result = await database.getDB().collection("events").insertOne(eventsData)
     if(result){
         return "Success"

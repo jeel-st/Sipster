@@ -1,15 +1,33 @@
 const database = require("./databaseMain")
+const log = require("../logging/logger")
+const sharp = require('sharp');
 
-async function uploadProfilePicture(username, fileExtension){
+async function uploadProfilePicture(userIDObj, fileExtension, filePathOriginal){
     try{
+        userID = userIDObj.toString()
 
-        const imagePath = `/home/sipster/sipster/backend/profilePictures/Picture${username}${fileExtension}`
-        console.log(imagePath)
-        const result = await database.getDB().collection('personalInformation').updateOne(
-            {username: username},
+        const imagePath = `/home/sipster/sipster/backend/static/profilePictures/Picture${userID}${fileExtension}`
+        const compressedImagePath = `/home/sipster/sipster/backend/static/profilePictures/compressed/Picture${userID}${fileExtension}`;
+
+        const result = await database.getDB().collection('personalInformation').updateOne(  //-> Datenbank- Update mit neuem Pfad
+            {_id: userIDObj},
             { $set: { profilePicture: imagePath } }
         )
 
+        const resultC = await database.getDB().collection('personalInformation').updateOne(
+            {_id: userIDObj},
+            { $set: { profilePictureC: compressedImagePath } }
+        )
+        
+        await sharp(filePathOriginal).resize(200).toFile(compressedImagePath);      //-> Komprimieren des Bild+ speichern in einem zweiten Ordner
+
+        if (result.modifiedCount === 1 && resultC.modifiedCount === 1) {
+            console.log(`Profilbild für Benutzer ${userIDObj} erfolgreich gespeichert.`);
+            return "Success";
+        } else {
+            console.log(`Profilbild für Benutzer ${userIDObj} nicht gefunden.`);
+            return "User not found";
+        }
 
     }catch(err){
         console.error('Fehler beim Hochladen des Profilbildes:', err);
@@ -17,23 +35,33 @@ async function uploadProfilePicture(username, fileExtension){
     }
 }
 
-async function getProfilePictureURL(username){
-    const result = await database.getDB().collection('personalInformation').findOne({username})
-    return result.profilePicture
+async function getProfilePictureURL(userIDObj, original){
+    console.log("ID, die in die Datenbank gegeben wird:"+userIDObj)
+    const result = await database.getDB().collection('personalInformation').findOne({_id: userIDObj})
+    console.log("original "+ original)
+    console.log("originaltyp "+ typeof original)
+
+    console.log(result)
+    if(original == "true"){
+        return result.profilePicture
+    }else{
+        return result.profilePictureC
+    }
 }
 
-async function deleteProfilePictureURL(username){
+
+async function deleteProfilePictureURL(userIDObj){
     try {
         const result = await database.getDB().collection('personalInformation').updateOne(
-            { username: username }, 
-            { $set: { profilePicture: null } }
+            { _id: userIDObj }, 
+            { $set: { profilePicture: null, profilePictureC: null  } }
         )
         
         if (result.modifiedCount === 1) {
-            console.log(`Profilbild für Benutzer ${username} erfolgreich gelöscht.`)
+            console.log(`Profilbild für Benutzer ${userIDObj} erfolgreich gelöscht.`)
             return "Success"
         } else {
-            console.log(`Profilbild für Benutzer ${username} nicht gefunden.`)
+            console.log(`Profilbild für Benutzer ${userIDObj} nicht gefunden.`)
             return "User not found"
         }
     } catch (error) {
@@ -42,8 +70,10 @@ async function deleteProfilePictureURL(username){
     }
 
 }
+
+
 module.exports = {
     uploadProfilePicture,
     getProfilePictureURL,
-    deleteProfilePictureURL
+    deleteProfilePictureURL,
 }

@@ -1,4 +1,4 @@
-@host = http://85.215.71.124:3000
+@host = http://85.215.71.124
 
 ###
 
@@ -12,7 +12,26 @@ Content-Type: application/json
 
 ###
 
-DELETE {{host}}/friends/gamsa/jeel?status=true HTTP/1.1
+POST {{host}}/friends HTTP/1.1
+Content-Type: application/json
+
+{
+    "fromSipsterID": "gamsa",
+    "toSipsterID": "Crypto"
+}
+
+###
+
+POST {{host}}/friends HTTP/1.1
+Content-Type: application/json
+
+{
+    "fromSipsterID": "jeel",
+    "toSipsterID": "gamsa"
+}
+
+###
+DELETE {{host}}/friends/gamsa/jeel?status=true HTTP/1.1 
 
 ###
 
@@ -20,10 +39,16 @@ DELETE {{host}}/friends/gamsa/jeel?status=false HTTP/1.1
 
 ###
 
-DELETE {{host}}/friends/gamsa/jeel?remove=true
+DELETE {{host}}/friends/gamsa/Sipster?remove=true
 
 ###
 
-GET {{host}}/friends/gamsa
+GET {{host}}/friends/Sipster
 
 ###
+
+GET {{host}}/friends/gamsa/m
+
+###
+
+GET {{host}}/friends/invitations/gamsa
