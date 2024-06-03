@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { fetchRecommendationFriendsData } from '../../utils/database/friendsFetcher';
+import { fetchRecommendationFriendsData } from '../../database/friendsFetcher';
 
 export function useFriendContainer({ friends, searchText, user, selectedTab }) {
     const [searchFriendsVisible, setSearchFriendsVisible] = useState(false);

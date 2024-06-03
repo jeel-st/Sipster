@@ -6,6 +6,14 @@ import HomeActivityImage from './HomeAcitivityImage'
 import { fetchProfilePictureCompressed } from '../../utils/database/imageFetcher'
 import { RefreshContext } from '../provider/RefreshProvider'
 
+/*
+    HomeActivityCard is a component that represents the activity of a friend in the home screen.
+    It displays the profile picture, username, and activity of the friend.
+    Typ: Component from home
+
+    @param friend: object -> the friend to display
+    @return:       JSX -> returns the HomeActivityCard component
+*/
 export default function HomeActivityCard({ friend }) {
     const emojis = ['🍻', '😍', '🤮', '🥳']
     const scrollViewRef = useRef(null)
@@ -13,6 +21,7 @@ export default function HomeActivityCard({ friend }) {
 
     const refreshDate = useContext(RefreshContext)
 
+    // handleScroll is a function that is called when the user scrolls the scroll view.
     const handleScroll = (event) => {
         const { contentOffset, layoutMeasurement } = event.nativeEvent
         const visibleIndex = Math.floor(contentOffset.x / layoutMeasurement.width)
@@ -21,40 +30,36 @@ export default function HomeActivityCard({ friend }) {
 
     return (
         <View className={classNames(
-            'justify-between',
-            'mx-6 mt-4 space-y-2',
-            'h-[550px]',
+            'justify-between', // position
+            'mx-6 mt-4 space-y-2', // spacing
+            'h-[550px]', // sizing
         )}>
             <View className={classNames(
-                'flex-row justify-start items-center',
-                'space-x-3',
-                'h-[10%] w-full'
+                'flex-row justify-start items-center', // position
+                'space-x-3', // spacing
+                'h-[10%] w-full' // sizing
             )}>
                 <View className={classNames(
-                    'w-12 h-12',
-                    'rounded-full border-yellow border-[1px]'
+                    'w-12 h-12', // sizing
+                    'rounded-full border-yellow border-[1px]' // styling
                 )}>
                     <Image
                         className={classNames(
-                            'w-full h-full',
-                            'rounded-full'
+                            'w-full h-full', // sizing
+                            'rounded-full' // styling
                         )}
                         source={{ uri: fetchProfilePictureCompressed(friend, refreshDate) }} />
                 </View>
 
                 <View>
-                    <Text className={classNames(
-                        'text-white font-bold'
-                    )}>{friend.username}</Text>
-                    <Text className={classNames(
-                        'text-neutral-300 font-thin'
-                    )}>played bierpong | vaihingen</Text>
+                    <Text className='text-white font-bold'>{friend.username}</Text>
+                    <Text className='text-neutral-300 font-thin'>played bierpong | vaihingen</Text>
                 </View>
             </View>
 
             <View className={classNames(
-                'h-[90%]',
-                'rounded-2xl'
+                'h-[90%]', // sizing
+                'rounded-2xl' // styling
             )}>
                 <ScrollView
                     ref={scrollViewRef}
@@ -67,38 +72,35 @@ export default function HomeActivityCard({ friend }) {
                         overflow: 'hidden'
                     }}
                     onScroll={handleScroll}>
-                    {[...Array(2)].map((value, index) => ( <HomeActivityImage key={index} friend={friend}/> ))}
+                    {[...Array(2)].map((value, index) => (<HomeActivityImage key={index} friend={friend} />))}
                 </ScrollView>
 
                 <View className={classNames(
-                    'absolute bottom-4 justify-between flex-row items-end',
-                    'w-full',
-                    'px-3'
+                    'absolute bottom-4 justify-between flex-row items-end', // position
+                    'w-full', // sizing
+                    'px-3' // spacing
                 )}>
-                    <Text className={classNames(
-                        'text-white text-l'
-                    )}>
-                        About last Night #fun #party
-                    </Text>
+                    <Text className='text-white text-l' > About last Night #fun #party </Text>
 
                     <View>
-                        {emojis.map((emoji, index) => {
-                            return (
-                                <HomeReactionCard emoji={emoji} key={index} />
-                            )
-                        })}
+                        {emojis.map((emoji, index) =>
+                            <HomeReactionCard
+                                emoji={emoji}
+                                key={index}
+                            />
+                        )}
                     </View>
                 </View>
 
                 <View className={classNames(
-                    'absolute flex-row justify-center items-center',
-                    'space-x-2',
-                    'w-full'
+                    'absolute flex-row justify-center items-center', // position
+                    'space-x-2', // spacing
+                    'w-full' // sizing
                 )}>
                     {[...Array(2)].map((_, index) => (
                         <Text key={index} className={classNames(
-                            index === visibleIndex ? 'text-white' : 'text-neutral-400',
-                            'text-2xl'
+                            index === visibleIndex ? 'text-white' : 'text-neutral-400', // styling
+                            'text-2xl' // styling
                         )}>
                             •
                         </Text>

@@ -4,9 +4,15 @@ import { classNames } from '../utils'
 import { styles } from '../constants'
 import { FriendsHeaderButtons, FriendsCategorys, FriendsContainer } from '../components'
 import React from 'react';
-import { useFriends } from '../utils/hooks/useFriends'
 import { setBackgroundColorAsync } from 'expo-navigation-bar'
+import { useFriends } from '../utils/hooks/friends/useFriends'
 
+/*
+    FriendsPage is a page that displays the friends and allows the user to search and view friends.
+    Typ: Page/route
+
+    @return: JSX -> returns the FriendsPage component
+*/
 export default function FriendsPage() {
     const { user, searchText, selectedTab, viewFriends, viewCategorys, handleSearchTextChange, handleTabChange, handleReloadFriends } = useFriends();
 

@@ -5,6 +5,12 @@ import React from 'react';
 import { useEventDisplay } from '../utils';
 import { setBackgroundColorAsync } from 'expo-navigation-bar';
 
+/*
+    EventPage is a page that displays the event information and allows the user to save events and view more details.
+    Typ: Page/route
+
+    @return: JSX -> returns the EventPage component
+*/
 export default function EventPage() {
     const { displayEvent, handleEventSelection } = useEventDisplay();
 

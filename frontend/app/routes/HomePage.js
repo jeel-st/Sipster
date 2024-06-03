@@ -10,6 +10,12 @@ import useHome from '../utils/hooks/useHome';
 import { setBackgroundColorAsync } from 'expo-navigation-bar';
 import { useIsFocused } from '@react-navigation/native';
 
+/*
+    HomePage is a page that displays the user's friends and their activities.
+    Typ: Page/route
+
+    @return: JSX -> returns the HomePage component
+*/
 export default function HomePage() {
     const { user, displayFriend, handleFriendSelection, onRefresh, refreshing, refreshDate } = useHome();
 
@@ -25,8 +31,9 @@ export default function HomePage() {
             <View>
                 {/* Header Text and Friendsmenu Button */}
                 <View className={classNames(
-                    'flex-row justify-between',
-                    'mt-4 mx-6')}>
+                    'flex-row justify-between', // position
+                    'mt-4 mx-6' // spacing
+                )}>
 
                     {/* Sipster Logo */}
                     <Image style={{ width: 100, height: 50, resizeMode: 'contain' }} source={require('../assets/images/logo-small.png')} />
@@ -34,20 +41,24 @@ export default function HomePage() {
                     {/* Friendsmenu Button */}
                     <TouchableOpacity
                         onPress={navigateToFriendsPage}
-                        className={classNames(
-                            'justify-center items-center')}>
+                        className='justify-center items-center' >
 
                         <FontAwesome5 name="user-friends" size={24} color="white" />
                     </TouchableOpacity>
                 </View>
 
                 {/* Friend controller tab bar */}
-                <HomeFriends user={user} displayFriend={displayFriend} handleFriendSelection={handleFriendSelection} />
+                <HomeFriends
+                    user={user}
+                    displayFriend={displayFriend}
+                    handleFriendSelection={handleFriendSelection}
+                />
 
                 {/* Separation line */}
                 <View className={classNames(
-                    'w-full h-[2px]',
-                    'bg-secondary')} />
+                    'w-full h-[2px]', // sizing
+                    'bg-secondary' // styling
+                )} />
             </View>
         );
     };
@@ -100,9 +111,10 @@ export default function HomePage() {
 
                 {/* Separation line */}
                 <View className={classNames(
-                    'mt-4',
-                    'w-full h-[2px]',
-                    'bg-secondary')} />
+                    'mt-4', // spacing
+                    'w-full h-[2px]', // sizing
+                    'bg-secondary' // styling
+                )} />
 
                 {/* Füge die EventInfoCard und Events abwechselnd ein */}
                 {index % 2 ?
@@ -112,9 +124,10 @@ export default function HomePage() {
                 {/* Füge die Separation Line hinzu, außer beim letzten Element */}
                 {index !== user.friends.length - 1 &&
                     <View className={classNames(
-                        'mt-4',
-                        'w-full h-[2px]',
-                        'bg-secondary')} />
+                        'mt-4', // spacing
+                        'w-full h-[2px]', // sizing
+                        'bg-secondary' // styling
+                    )} />
                 }
             </View>
         );
@@ -123,8 +136,8 @@ export default function HomePage() {
     const renderFooter = () => {
         return (
             <View className={classNames(
-                'h-20',
-                'justify-center items-center',
+                'h-20', // sizing
+                'justify-center items-center', // position
             )}>
                 <ActivityIndicator size={'large'} color={'#DFFA54'} />
             </View>
@@ -137,8 +150,9 @@ export default function HomePage() {
 
     return (
         <SafeAreaView className={classNames(
-            'flex-1',
-            'bg-primary')}>
+            'flex-1', // sizing
+            'bg-primary' // styling
+        )}>
 
             <Header />
             <Content />

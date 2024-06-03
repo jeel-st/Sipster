@@ -4,10 +4,18 @@ import { classNames } from '../../utils'
 import { fetchProfilePicture, fetchProfilePictureCompressed } from '../../utils/database/imageFetcher'
 import { RefreshContext } from '../provider/RefreshProvider'
 
-const windowWidth = Dimensions.get('window').width
+/*
+    HomeActivityImage is a component that represents the image of a friend in the home activity.
+    It displays the profile picture of the friend.
+    Typ: Component from home
 
+    @param friend: object -> the friend to display
+    @return:       JSX -> returns the HomeActivityImage component
+*/
 export default function HomeActivityImage({ friend }) {
     const [imageLoaded, setImageLoaded] = useState(false)
+
+    const windowWidth = Dimensions.get('window').width
 
     const handleImageLoad = () => {
         setImageLoaded(true)

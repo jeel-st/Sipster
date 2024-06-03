@@ -3,30 +3,26 @@ import { FontAwesome } from '@expo/vector-icons'
 import { classNames } from '../../utils'
 import { router } from 'expo-router'
 import { styles } from '../../constants'
-import React, { useRef, useState } from 'react'
+import React, { useRef } from 'react'
+import { useFriendsHeaderButtons } from '../../utils/hooks/friends/useFriendsHeaderButtons'
 
+/*
+    FriendsHeaderButtons is a component that represents the header buttons in the friends page.
+    It displays a back button, a search bar, and a close button.
+    Typ: Component from friends
+
+    @param onSearchTextChange: function -> the function to call when the search text changes
+    @return:                   JSX -> returns the FriendsHeaderButtons component
+*/
 export default function FriendsHeaderButtons({ onSearchTextChange }) {
-    const [buttonVisible, setButtonVisible] = useState(false);
-
     const inputRef = useRef(null);
-
-    const handleTextChange = (inputText) => {
-        onSearchTextChange(inputText)
-        setButtonVisible(inputText.length > 0)
-    }
-
-    const handleCloseButtonPress = () => {
-        Keyboard.dismiss()
-        inputRef.current.clear()
-        onSearchTextChange('')
-        setButtonVisible(false)
-    };
+    const {handleTextChange, handleCloseButtonPress, buttonVisible} = useFriendsHeaderButtons({onSearchTextChange, inputRef})
 
     return (
         <View className={classNames(
-            'flex-row justify-between items-center',
-            'px-4',
-            'w-full h-16',
+            'flex-row justify-between items-center', // position
+            'px-4', // spacing
+            'w-full h-16', // sizing
         )}>
             {/* Back Button*/}
             <TouchableOpacity onPress={() => router.back()}>
@@ -44,10 +40,10 @@ export default function FriendsHeaderButtons({ onSearchTextChange }) {
             <TouchableOpacity
                 onPress={() => inputRef.current.focus()}
                 className={classNames(
-                    'flex-1 flex-row items-center justify-between',
-                    'px-4 mx-4',
-                    'h-10',
-                    'rounded-xl bg-secondary',
+                    'flex-1 flex-row items-center justify-between', // position
+                    'px-4 mx-4', // spacing
+                    'h-10', // sizing
+                    'rounded-xl bg-secondary', // styling
                 )}>
                 <TextInput
                     ref={inputRef}
@@ -65,10 +61,10 @@ export default function FriendsHeaderButtons({ onSearchTextChange }) {
                     <TouchableOpacity
                         onPress={handleCloseButtonPress}
                         className={classNames(
-                            'flex-row items-center justify-between',
-                            'px-4',
-                            'h-10',
-                            'rounded-xl bg-secondary',
+                            'flex-row items-center justify-between', // position
+                            'px-4', // spacing
+                            'h-10', // sizing
+                            'rounded-xl bg-secondary', // styling
                         )}>
                         <FontAwesome name="close" size={24} color="white" />
                     </TouchableOpacity>

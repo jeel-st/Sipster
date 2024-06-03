@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import useUser from '../database/userFetcher';
-import { fetchFriendsData, fetchFriendsInvitations } from '../database/friendsFetcher';
+import useUser from '../../database/userFetcher';
+import { fetchFriendsData, fetchFriendsInvitations } from '../../database/friendsFetcher';
 
 export function useFriends() {
     const [searchText, setSearchText] = useState('')

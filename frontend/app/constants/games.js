@@ -135,3 +135,5 @@ export const categorys = [
     "Adult Game",
     "Skill Game"
 ]
+
+export const emojis = ['🍻', '😍', '🤮', '🥳'];

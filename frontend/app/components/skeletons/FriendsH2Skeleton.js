@@ -3,6 +3,13 @@ import { Center, NativeBaseProvider, Skeleton, VStack } from "native-base";
 import { styles } from '../../constants';
 import React from 'react'
 
+/*
+    FriendsH2Skeleton is a component that represents the skeleton of the friends page.
+    It displays a skeleton of the friends page.
+    Typ: Component from skeletons
+
+    @return: JSX -> returns the FriendsH2Skeleton component
+*/
 export default function FriendsH2Skeleton() {
     return (
         <Center w="100%" className="mt-[15px]">
