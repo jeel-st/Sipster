@@ -4,9 +4,36 @@
 
 ## Getting started
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+Um die App zu builden, haben wir in unserem Projekt Expo benutzt. Hier zeigen wir eine Schritt für Schritt Anleitung, was getan werden muss, um erfolgreich das Projekt starten zu können.
+[Was ist überhaupt Expo?](https://www.youtube.com/watch?v=vFW_TxKLyrE)
+[Expo-Router Docs](https://docs.expo.dev/router/installation/#quick-start)
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+Zuerst muss der frontend-Ordner im integrierten Terminal geöffnet werden.
+
+Hiermit wird ein Minimalprojekt erstellt, in dem die Expo Router-Bibliothek bereits installiert ist:
+```bash
+npx create-expo-app@latest --template tabs@50
+```
+
+Hiermit werden weitere wichtige Abhängigkeiten installiert:
+```bash
+npm install expo-font axios react-native-dotenv
+```
+
+Außerdem sollten die restlichen Packages ebenfalls installiert werden:
+```bash
+npm install
+```
+
+Dadurch wird das Projekt gestartet:
+```bash
+npx expo start
+```
+
+Um die App auf dem Handy anzuzeigen, wird während der Entwicklungsphase die “Expo Go” App benötigt:
+[Expo-App](https://expo.dev/go)
+
+Nun sollte der QR-Code mit dem Handy gescannt werden. Es gibt bei Expo zusätzlich weitere Features, wie bespielsweise die App im Browser zu öffnen. Dazu kann man einfach den Anweisungen im Terminal folgen.
 
 ## Add your files
 
