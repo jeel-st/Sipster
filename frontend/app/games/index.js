@@ -1,3 +1,3 @@
 import BombPartyGame from "./bombparty/BombPartyGame";
-
-export { BombPartyGame };
+import WahrheitOderPflichtGame from "./WahrheitOderPflicht/WahrheitOderPflichtGame";
+export { BombPartyGame, WahrheitOderPflichtGame };

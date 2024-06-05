@@ -124,7 +124,8 @@ export default function GameActivity({ user, game, taggedFriends }) {
             />
 
             {/* Start Game Button */}
-            {image &&
+            {/*image &&  muss vor touchableOpacity rein*/}
+            {
                 <TouchableOpacity
                     onPress={handlePress}
                     className={classNames(
