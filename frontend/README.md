@@ -1,8 +1,21 @@
 # Sipster
 
+## Projektbeschreibung
 
+Bei unserem Projekt handelt es sich um eine Trinkspiel- App, die verschiedene Trinkspiele in einer App vereint. Zudem soll man aber nicht nur Spiele spielen können, sondern auch Events in der Nähe angezeigt bekommen, Freunde adden können und Bilder von Feiern oder Spieleabende teilen können. Zudem soll man auf andere Beiträge reagieren können. Unser Ziel ist es dabei, eine lebendige und unterstützende Community zu schaffen, in der sich jeder willkommen und wohl fühlt.
 
-## Getting started
+## Projektstatus
+
+Bei unserem Projekt handelt es sich bis jetzt nur um eine Alphaversion, weswegen man noch nicht mit allen Funktionen rechnen sollte.
+
+## Installation
+
+Zuerst sollte das Repository geklont werden
+```bash
+git clone https://gitlab.mi.hdm-stuttgart.de/lg107/sipster.git
+```
+
+## App bauen
 
 Um die App zu builden, haben wir in unserem Projekt Expo benutzt. Hier zeigen wir eine Schritt für Schritt Anleitung, was getan werden muss, um erfolgreich das Projekt starten zu können.
 [Was ist überhaupt Expo?](https://www.youtube.com/watch?v=vFW_TxKLyrE)
@@ -47,3 +60,11 @@ Es gibt in React 18 eine Warnung, die eigentlich nicht schlimm ist, man kann sie
 - Run `npx patch-package native-base`. Select 'yes' in the prompt.
 
 
+## Mitwirkende
+
+An diesem Projekt haben insgesamt fünf Studierende mitgearbeitet:
+- Joel Starkov (js486)
+- Lars Gerigk (lg107)
+- Maike König (mk414)
+- Julia Ebert (je073)
+- Lorenz Bauscher (lb225)
