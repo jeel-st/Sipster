@@ -2,7 +2,7 @@
 
 ## Projektbeschreibung
 
-Bei unserem Projekt handelt es sich um eine Trinkspiel- App, die verschiedene Trinkspiele in einer App vereint. Zudem soll man aber nicht nur Spiele spielen können, sondern auch Events in der Nähe angezeigt bekommen, Freunde adden können und Bilder von Feiern oder Spieleabende teilen können. Zudem soll man auf andere Beiträge reagieren können. Unser Ziel ist es dabei, eine lebendige und unterstützende Community zu schaffen, in der sich jeder willkommen und wohl fühlt.
+Bei unserem Projekt handelt es sich um eine Trinkspiel- App, die verschiedene Trinkspiele in einer App vereint. Zudem soll man aber nicht nur Spiele spielen können, sondern auch Events in der Nähe angezeigt bekommen, Freunde adden und Bilder von Feiern oder Spieleabenden teilen können. Zudem soll man auf andere Beiträge reagieren können. Unser Ziel ist es dabei, eine lebendige und unterstützende Community zu schaffen, in der sich jeder willkommen und wohl fühlt.
 
 ## Projektstatus
 
