@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { fetchRecommendationFriendsData } from '../../database/friendsFetcher';
+import { friendLog } from '../../logger/config';
 
 export function useFriendContainer({ friends, searchText, user, selectedTab }) {
     const [searchFriendsVisible, setSearchFriendsVisible] = useState(false);
@@ -17,7 +18,7 @@ export function useFriendContainer({ friends, searchText, user, selectedTab }) {
             const recommendedFriends = await fetchRecommendationFriendsData(user.username, searchText);
             setSearchFriends(recommendedFriends);
         } catch (error) {
-            console.log("[FriendsContent.recommendedFriends] Error", error);
+            friendLog.error(error)
         }
     };
 

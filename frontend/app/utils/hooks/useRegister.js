@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { useRegister } from '../database/registerFetcher';
 import { router } from 'expo-router'
+import { userLog } from '../logger/config';
 
 /*
 The logic of the registerPage is processed here and forwarded to the backend
@@ -37,7 +38,7 @@ export function useRegisterLogic() {
 
         /* If text fields are filled in, a new user is created */
         register(firstName, lastName, username, email, password, () => {
-            console.log("Registration successful.");
+            userLog.debug("Registration successful.")
             router.navigate('routes/LoginPage');
         });
     };

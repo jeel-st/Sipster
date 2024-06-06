@@ -4,6 +4,7 @@ import { classNames } from './utils'
 import { Text, View } from 'react-native'
 import { Asset } from 'expo-asset'
 import LoginPage from '../app/routes/LoginPage'
+import { rootLog } from './utils/logger/config'
 
 // Prevent the splash screen from automatically hiding (preventing White Screen)
 SplashScreen.preventAutoHideAsync()
@@ -26,7 +27,7 @@ export default function index() {
   useEffect(() => {
     const loadResourcesAsync = async () => {
       await cacheResourcesAsync()
-      console.log("App loaded")
+      rootLog.info("App loaded")
       setIsLoaded(true)
     }
 

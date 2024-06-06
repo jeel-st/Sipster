@@ -1,3 +1,5 @@
+const { gameLog } = require("../utils/logger/config");
+
 class Game{
     constructor(gameData){
         this.ID = gameData._id;
@@ -29,11 +31,11 @@ class Game{
     }
 
     present() {
-        console.log(`ID: ${this.ID}` +
+        gameLog.debug(`ID: ${this.ID}` +
                     `\nName: ${this.name}` +
                     `\nThumbnail: ${this.thumbnail}` +
                     `\nDescription: ${this.description}` +
-                    `\nPlaytime: ${this.playtime}`);
+                    `\nPlaytime: ${this.playtime}`)
     }
 }
 

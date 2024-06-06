@@ -1,12 +1,13 @@
 // Imports
 import { useState } from 'react'
 import axiosInstance from './axiosConfig';
+import { userLog } from '../logger/config';
 
-/* 
+/*
 Database request to query user in database
 Typ: utils from login
 
-@ login 
+@ login
 */
 export function useLogin() {
 
@@ -16,13 +17,12 @@ export function useLogin() {
     const login = (username, password, setLoginError, onLoginSuccess) => {
         axiosInstance.get(`/login/${username}/${password}`)
             .then(response => {
-                console.log("A suitable user has been found.")
+                userLog.debug("A suitable user has been found.")
                 setLoginError('');
                 if (onLoginSuccess) { onLoginSuccess() };
             })
             .catch(error => {
-                console.log(error);
-                setLoginError('Login failed. Please check your login information.');
+                userLog.error("Login failed. Please check your login information.", error)
             })
     }
 

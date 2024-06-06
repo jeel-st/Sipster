@@ -1,9 +1,10 @@
 import Activity from "../../entitys/activity";
+import { activityLog } from "../logger/config";
 
 export async function createActivity(user, game){
     try {
         const activity = new Activity(1, "beforeImagePath", "afterImagePath", "emojis", "comment", game._id, user, taggedFriends)
-        console.log("[createActivity] create activity successfully")
+        activityLog.debug("Activity has been created successfully.")
         try{
             const activityObject = {
                 ID: activity.ID,
@@ -19,10 +20,10 @@ export async function createActivity(user, game){
             const jsonValue = JSON.stringify(activityObject);
             await AsyncStorage.setItem('activity', jsonValue)
         } catch (error){
-            console.log("[createActivity Error] ",error)
+            activityLog.error("Activity could not be stored.", error)
         }
     } catch (error) {
-        console.log(error)
+        activityLog.error("Activity could not be created.", error)
     }
 }
 
@@ -32,7 +33,7 @@ export async function getActivity(){
         if (jsonValue !== null) {
             const activityData = JSON.parse(jsonValue)
 
-            console.log("[getActivity] loading activity successfully")
+            activityLog.debug("Activity has been loaded successfully.")
 
             const activity = new Activity(
                 activityData.ID,
@@ -46,9 +47,9 @@ export async function getActivity(){
 
             return(activity)
         }else{
-            console.log("[getActivity] Activity is Null")
+            activityLog.error("Activity could not be loaded.")
         }
     } catch (error){
-        console.log("[getActivity Error] ",error)
+        activityLog.error("Activity could not be loaded.", error)
     }
 }

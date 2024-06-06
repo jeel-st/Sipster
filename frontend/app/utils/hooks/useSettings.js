@@ -1,6 +1,7 @@
 // Imports
 import React, { useState } from 'react';
 import { settingsFetcher } from '../database/settingsFetcher'
+import { userLog } from '../logger/config';
 
 /*
 The logic of the settingsPage is processed here and forwarded to the backend
@@ -35,7 +36,7 @@ export function useSettings() {
             return;
         } else {
             /* If the text field is filled in, the new username is saved */
-            console.log("changeUsername details have been entered.")
+            userLog.debug("changeUsername details have been entered.")
 
             changeUsername(username)
 
@@ -50,7 +51,7 @@ export function useSettings() {
             return;
         } else {
             /* If the text field is filled in, the new lastname is saved */
-            console.log("changeFirstName details have been entered.")
+            userLog.debug("changeFirstName details have been entered.")
 
             changeFirstName(firstName)
 
@@ -65,7 +66,7 @@ export function useSettings() {
             return;
         } else {
             /* If the text field is filled in, the new lastname is saved */
-            console.log("changeLastName details have been entered.")
+            userLog.debug("changeLastName details have been entered.")
 
             changeLastName(lastName)
 
@@ -84,7 +85,7 @@ export function useSettings() {
             return;
         } else {
             /* If the text field is filled in, the new password is saved */
-            console.log("changePassword details have been entered.")
+            userLog.debug("changePassword details have been entered.")
 
             changePassword(newPassword)
         }
@@ -98,7 +99,7 @@ export function useSettings() {
             return;
         } else {
             /* If the text field is filled in, the new email is saved */
-            console.log("changeEmail details have been entered.")
+            userLog.debug("changeEmail details have been entered.")
 
             changeEmail(email);
         }
@@ -107,7 +108,7 @@ export function useSettings() {
     const handleDeleteAccount = async (isChecked) => {
         if (isChecked) {
             /* If the Checkbox filled in, the account will be deleted. */
-            console.log("DeleteAccount details have been entered.")
+            userLog.debug("DeleteAccount details have been entered.")
 
             deleteAccount();
 

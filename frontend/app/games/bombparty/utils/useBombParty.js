@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { Vibration } from "react-native"
 import { Audio } from 'expo-av'
 import categories from "../constants/categories"
+import { gameLog } from "../../../utils/logger/config"
 
 // Map of sound filenames to their corresponding require paths
 const soundMap = {
@@ -51,7 +52,7 @@ const useBombParty = () => {
 
         // Start game timer
         const startTime = Date.now()
-        console.log("[BombParty] Game started successfully")
+        gameLog.info('Bomb Party game started')
 
         // Update timer
         const updateElapsedTime = () => {
@@ -69,7 +70,7 @@ const useBombParty = () => {
     useEffect(() => {
         // If explosion time is reached and a sound is present
         if (explodingTime < timer && sound) {
-            console.log("[BombParty] Explosion time reached")
+            gameLog.info('Explosion time reached')
             // Stop ticking sound
             sound.stopAsync()
             // Play explosion sound
@@ -83,10 +84,10 @@ const useBombParty = () => {
 
     // Function to play a sound
     const playSound = async (filename) => {
-        console.log(`[BombParty] Loading ${filename}`)
+        gameLog.info(`Loading ${filename}`)
         // Load sound
         const { sound } = await Audio.Sound.createAsync(soundMap[filename])
-        console.log(`[BombParty] Playing ${filename}`)
+        gameLog.info(`Playing ${filename}`)
         // Play sound
         await sound.playAsync()
         return sound
@@ -106,7 +107,7 @@ const useBombParty = () => {
     useEffect(() => {
         // If the game is not in progress
         if (!isPlaying) {
-            console.log("[BombParty] Game ended")
+            gameLog.info('Bomb Party game ended')
         }
     }, [isPlaying])
 

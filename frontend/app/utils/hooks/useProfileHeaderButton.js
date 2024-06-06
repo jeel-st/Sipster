@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { fetchFriendsInvitations, removeFriend, sendFriendInvite, declineFriendInvite } from '../database/friendsFetcher';
 import useUser from '../database/userFetcher';
 import { useDisclose } from 'native-base';
+import { friendLog } from '../logger/config';
 
 const useProfileHeaderButton = (friend) => {
     const [isFriend, setIsFriend] = useState(false);
@@ -34,7 +35,7 @@ const useProfileHeaderButton = (friend) => {
             setIsFriend(false)
             user.friends.filter(item => item.username !== friend.username);
         } catch (error) {
-            console.log("[useFriendStatus.removeFriendHandler] ", error);
+            friendLog.error("Remove friendrequest failed", error)
         }
     };
 
@@ -43,7 +44,7 @@ const useProfileHeaderButton = (friend) => {
             await sendFriendInvite(user.username, friend.username);
             await handleIsFriend();
         } catch (error) {
-            console.log("[useFriendStatus.inviteFriendHandler] ", error);
+            friendLog.error("Send friendrequest failed", error)
         }
     };
 
@@ -52,7 +53,7 @@ const useProfileHeaderButton = (friend) => {
             await declineFriendInvite(user.username, friend.username);
             await handleIsFriend();
         } catch (error) {
-            console.log("[useFriendStatus.closeInviteHandler] ", error);
+            friendLog.error("Decline friendrequest failed", error)
         }
     };
 

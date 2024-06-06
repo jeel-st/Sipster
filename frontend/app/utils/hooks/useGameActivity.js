@@ -3,6 +3,7 @@ import * as MediaLibrary from 'expo-media-library'
 import { Camera } from "expo-camera";
 import { CameraType, FlashMode } from 'expo-camera/build/legacy/Camera.types';
 import { useRouter } from 'expo-router'
+import { gameLog } from '../logger/config';
 
 const useGameActivity = (cameraRef, game, taggedFriends) => {
     // State variables for camera permission, captured image, camera type, flash mode, and caption
@@ -32,7 +33,7 @@ const useGameActivity = (cameraRef, game, taggedFriends) => {
             setImage(photo.uri)
             // Turn off flash
             setFlash(FlashMode.off)
-            console.log('[useGameActivity] Picture taken')
+            gameLog.info('Picture taken')
         }
     }
 
