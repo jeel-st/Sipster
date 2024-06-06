@@ -1,6 +1,17 @@
+//Imports
 const database = require("./databaseMain")
 const log = require("../logging/logger")
 const sharp = require('sharp');
+
+/**
+ * Diese Methode dient dazu, ein Profilbild für einen Benutzer hochzuladen, das Bild zu komprimieren und die Pfade in der Datenbank zu speichern.
+ * 
+ * @param userIDObj: ObjectId -> Die ID des Benutzers
+ * @param fileExtension: String -> Die Dateierweiterung des Bildes
+ * @param filePathOriginal: String -> Der ursprüngliche Pfad des hochgeladenen Bildes
+ * @return: String -> "Success" bei Erfolg, Error -> "User not found" wenn der Benutzer nicht gefunden wird
+ * @throws Error -> Bei Fehlern während des Uploads oder der Komprimierung
+ */
 
 async function uploadProfilePicture(userIDObj, fileExtension, filePathOriginal){
     try{
@@ -35,6 +46,14 @@ async function uploadProfilePicture(userIDObj, fileExtension, filePathOriginal){
     }
 }
 
+/**
+ * Diese Methode dient dazu, die URL des Profilbildes eines Benutzers abzurufen.
+ * 
+ * @param userIDObj: ObjectId -> Die ID des Benutzers
+ * @param original: String -> Ein String ("true" oder "false"), der angibt, ob das originale oder das komprimierte Bild zurückgegeben werden soll
+ * @return: String -> Die URL des Profilbildes (original oder komprimiert)
+ */
+
 async function getProfilePictureURL(userIDObj, original){
     console.log("ID, die in die Datenbank gegeben wird:"+userIDObj)
     const result = await database.getDB().collection('personalInformation').findOne({_id: userIDObj})
@@ -49,6 +68,13 @@ async function getProfilePictureURL(userIDObj, original){
     }
 }
 
+/**
+ * Diese Methode dient dazu, das Profilbild eines Benutzers aus der Datenbank zu löschen.
+ * 
+ * @param userIDObj: ObjectId -> Die ID des Benutzers
+ * @return: String -> "Success" bei Erfolg,  wenn der Benutzer nicht gefunden wird
+ * @throws Error -> "User not found" oder "Fehler beim Löschen des Profilbilds:"
+ */
 
 async function deleteProfilePictureURL(userIDObj){
     try {

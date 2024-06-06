@@ -1,5 +1,16 @@
+//Imports
 const database = require("../databases/databaseMain")
 const log = require("../logging/logger")
+
+/**
+ * Diese Methode dient dazu, eine Freundesanfrage zu senden.
+ * 
+ * @param req: Object -> Die Anfrage
+ * @param res: Object -> Die Antwort
+ * @param postFriendRequest: Function -> Funktion zum Senden einer Freundesanfrage an die Datenbank
+ * @return: String -> Eine Bestätigungsmeldung "Friend request was send successfully!" 
+ * @throws Error -> Wenn ein interner Serverfehler auftritt
+ */
 
 async function postFriendRequest(req, res){
     try{
@@ -10,6 +21,18 @@ async function postFriendRequest(req, res){
         res.status(500).send("Something went wrong")
     }
 }
+
+/**
+ * Diese Methode dient dazu, eine Freundesanfrage zu löschen, zu akzeptieren oder abzulehnen.
+ * 
+ * @param req: Object -> Die Anfrage
+ * @param res: Object -> Die Antwort
+ * @param acceptFriendRequest: Function -> Funktion zum Akzeptieren einer Freundesanfrage in der Datenbank
+ * @param declineFriendRequest: Function -> Funktion zum Ablehnen einer Freundesanfrage in der Datenbank
+ * @param removeFriend: Function -> Funktion zum Entfernen eines Freundes aus der Liste in der Datenbank
+ * @return: JSON -> Eine Bestätigungsmeldung oder eine entsprechende Fehlermeldung
+ * @throws Error -> Wenn ein interner Serverfehler auftritt oder die Anfrage nicht korrekt ist
+ */
 
 async function deleteFriendRequest(req, res){
     try{
@@ -43,6 +66,16 @@ async function deleteFriendRequest(req, res){
     }
 }
 
+/**
+ * Diese Methode dient dazu, die Liste der Freunde nach Benutzernamen abzurufen.
+ * 
+ * @param req: Object -> Die Anfrage
+ * @param res: Object -> Die Antwort
+ * @param getFriendNameList: Function -> Funktion zum Abrufen der Liste der Freunde aus der Datenbank
+ * @return: Array -> Die Liste der Freundesnamen
+ * @throws Error -> Wenn ein interner Serverfehler auftritt oder die Liste leer ist
+ */
+/*
 async function getFriendNameList(req, res) {
     try {
         const friendList = await database.getFriendNameList(req)
@@ -56,6 +89,17 @@ async function getFriendNameList(req, res) {
         res.status(404).send("Something went wrong " + err)
     }
 }
+*/
+
+/**
+ * Diese Methode dient dazu, die Liste der Freunde abzurufen.
+ * 
+ * @param req: Object -> Die Anfrage
+ * @param res: Object -> Die Antwort
+ * @param getFriendList: Function -> Funktion zum Abrufen der Liste der Freunde aus der Datenbank
+ * @return: Array mit Users -> Ein Array der Daten der Freunde oder eine entsprechende Statusmeldung
+ * @throws Error -> Wenn ein interner Serverfehler auftritt oder die Liste leer ist
+ */
 
 async function getFriendList(req, res) {
     try {
@@ -70,6 +114,17 @@ async function getFriendList(req, res) {
         res.status(404).send("Something went wrong " + err)
     }
 }
+
+/**
+ * Diese Methode dient dazu, Freundesempfehlungen abzurufen.
+ * 
+ * @param req: Object -> Die Anfrage
+ * @param res: Object -> Die Antwort
+ * @param getFriendRecommendations: Function -> Funktion zum Abrufen von Freundesempfehlungen aus der Datenbank
+ * @return: User- Array -> Die Freundesempfehlungen oder eine entsprechende Statusmeldung
+ * @throws Error -> Wenn ein interner Serverfehler auftritt oder keine Empfehlungen gefunden werden
+ */
+
 async function getFriendRecommendations(req, res) {
     log.info("Getting Friend Reccommendations")
     try {
@@ -87,6 +142,18 @@ async function getFriendRecommendations(req, res) {
         res.status(404).send("Something went wrong " + err) 
     }
 }
+
+/**
+ * Diese Methode dient dazu, Einladungen für einen bestimmten Benutzer abzurufen.
+ * 
+ * @param req: Object -> Die Anfrage
+ * @param res: Object -> Die Antwort
+ * @param getInvitations: Function -> Funktion zum Abrufen von Einladungen aus der Datenbank
+ * @return: Array mit zwei Arrays -> [receivedFromUsers, sentToUsers] 
+ *          receivedFromUsers: Benutzer, die Einladungen gesendet haben
+ *          sentToUsers: Benutzer, die Einladungen erhalten haben
+ * @throws Error -> Wenn ein interner Serverfehler auftritt oder keine Einladungen gefunden werden
+ */
 
 async function getInvitations(req, res) {
     try {

@@ -1,7 +1,15 @@
+//Imports
 const database = require("./databaseMain")
 const log = require("../logging/logger")
 
 const { isValidPassword, isValidEmail, encryptPassword } = require("../utils/registerLogic/registerPatterns")
+
+/**
+ * Diese Methode dient dazu, Benutzerdaten basierend auf dem Benutzernamen abzurufen.
+ * 
+ * @param req: Object -> Die Anfrage, die den Benutzernamen im Parameter enthält
+ * @return: Object -> Die Benutzerdaten aus der Datenbank
+ */
 
 async function getUserData(req) {
     const personalInformation = (await database.initializeCollections()).personalInformation;
@@ -13,6 +21,13 @@ async function getUserData(req) {
     return userData;
 }
 
+/**
+ * Diese Methode dient dazu, Eventdaten eines Benutzers basierend auf dem Benutzernamen abzurufen.
+ * 
+ * @param req: Object -> Die Anfrage, die den Benutzernamen im Parameter enthält
+ * @return: Array -> Die Eventdaten des Benutzers
+ */
+
 async function getEventsData(req) {
     const username = req.params.username
     const sipsterID = await database.getSipsterID(username)
@@ -23,6 +38,14 @@ async function getEventsData(req) {
     return userData.events;
     
 }
+
+/**
+ * Diese Methode dient dazu, den Benutzernamen eines Benutzers zu ändern.
+ * 
+ * @param req: Object -> Die Anfrage, die den aktuellen und neuen Benutzernamen im Body enthält
+ * @return: Boolean -> True, wenn die Aktualisierung erfolgreich war, sonst False
+ * @throws Error -> Wenn der Benutzer nicht gefunden wird
+ */
 
 async function postNewUsername(req){
     const {username, newUsername} = req.body
@@ -41,6 +64,14 @@ async function postNewUsername(req){
     }
 
 }
+
+/**
+ * Diese Methode dient dazu, das Passwort eines Benutzers zu ändern.
+ * 
+ * @param req: Object -> Die Anfrage, die den Benutzernamen und das neue Passwort im Body enthält
+ * @return: Boolean -> True, wenn die Aktualisierung erfolgreich war, sonst False
+ * @throws Error -> Wenn die Passwortaktualisierung nicht abgeschlossen werden konnte
+ */
 
 async function postNewPassword(req){
     const {username, newPassword} = req.body
@@ -65,6 +96,14 @@ async function postNewPassword(req){
 
 }
 
+/**
+ * Diese Methode dient dazu, die E-Mail-Adresse eines Benutzers zu ändern.
+ * 
+ * @param req: Object -> Die Anfrage, die den Benutzernamen und die neue E-Mail-Adresse im Body enthält
+ * @return: Boolean -> True, wenn die Aktualisierung erfolgreich war, sonst False
+ * @throws Error -> Wenn die E-Mail-Aktualisierung nicht abgeschlossen werden konnte
+ */
+
 async function postNewEmail(req){
     const {username, newEmail} = req.body
     const personalInformation = (await database.initializeCollections()).personalInformation;
@@ -83,6 +122,13 @@ async function postNewEmail(req){
     }
 }
 
+/**
+ * Diese Methode dient dazu, ein Event zu einem Benutzer hinzuzufügen.
+ * 
+ * @param req: Object -> Die Anfrage, die den Benutzernamen und die Event-ID im Body enthält
+ * @return: Boolean -> True, wenn das Event erfolgreich hinzugefügt wurde, sonst False
+ */
+
 async function addEvent(req){
     const {username, eventID} = req.body
     const personalInformation = (await database.initializeCollections()).personalInformation;
@@ -100,6 +146,15 @@ async function addEvent(req){
     }
 
 }
+
+/**
+ * Diese Methode dient dazu, den Vornamen eines Benutzers zu ändern.
+ * 
+ * @param userID: ObjectID -> Die ID des Benutzers
+ * @param newName: String -> Der neue Vorname
+ * @return: Boolean -> True, wenn die Aktualisierung erfolgreich war, sonst False
+ */
+
 async function changeFirstName(userID, newName){
     const personalInformation = (await database.initializeCollections()).personalInformation
     const filter = {_id: userID}
@@ -112,6 +167,15 @@ async function changeFirstName(userID, newName){
         return false
     }
 }
+
+/**
+ * Diese Methode dient dazu, den Nachnamen eines Benutzers zu ändern.
+ * 
+ * @param userID: ObjectID -> Die ID des Benutzers
+ * @param newName: String -> Der neue Nachname
+ * @return: Boolean -> True, wenn die Aktualisierung erfolgreich war, sonst False
+ */
+
 async function changeLastName(userID, newName){
     const personalInformation = (await database.initializeCollections()).personalInformation
     const filter = {_id: userID}

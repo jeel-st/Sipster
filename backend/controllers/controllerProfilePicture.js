@@ -1,3 +1,4 @@
+//Imports
 const database = require('../databases/databaseMain')
 const Form = require('multiparty').Form
 const { uploadOptions } = require('../utils/uploadLogic/config')
@@ -5,10 +6,20 @@ const fs = require('fs');
 const path = require('path');
 const log = require("../logging/logger")
 
-
+/**
+ * Diese Methode dient zum Hochladen eines Profilbildes.
+ * 
+ * @param req: Object -> Die Anfrage
+ * @param res: Object -> Die Antwort
+ * @param Form: Object -> Das Formular für den Dateiupload
+ * @param uploadOptions: Object -> Die Konfiguration für den Dateiupload
+ * @param fs: Object -> Das Modul "fs" für Dateioperationen
+ * @param path: Object -> Das Modul "path" für Dateipfade
+ * @return: String -> "Success!"
+ * @throws: Error-> bei Fehlern
+ */
 
 async function uploadProfilePicture(req, res) {
-
 
     try {
 
@@ -96,6 +107,15 @@ async function uploadProfilePicture(req, res) {
         res.status(500).send("Es ist ein Fehler aufgetreten" + err)
     }
 }
+
+/**
+ * Diese Methode dient zum Abrufen des Profilbildes eines Benutzers.
+ * 
+ * @param req: Object -> Die Anfrage
+ * @param res: Object -> Die Antwort
+ * @return: String -> Die URL des Profilbildes oder eine entsprechende Fehlermeldung mit Statuscode
+ * @throws: Error -> Fehler, falls etwas nicht richtig funktioniert
+ */
 
 async function getProfilePicture(req, res){
         const username = req.params.username

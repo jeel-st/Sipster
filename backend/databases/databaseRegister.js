@@ -1,8 +1,15 @@
+//Imports
 const database = require("./databaseMain")
 const { isValidPassword, isValidEmail, encryptPassword, encryptPasswordWithSalt } = require('../utils/registerLogic/registerPatterns')
 const log = require("../logging/logger")
 const databaseFriend = require("./databaseFriendSystem")
 
+/**
+ * Diese Methode dient dazu, einen neuen Benutzer zu registrieren.
+ * 
+ * @param req: Request-Objekt -> Enthält die Benutzerdaten im Body (username, password, email, firstName, lastName)
+ * @return: String -> "Success!" bei erfolgreicher Registrierung, oder ein Fehlerstring bei Problemen
+ */
 
 async function postUser(req){
     const { username, password, email, firstName, lastName} = req.body
@@ -50,6 +57,14 @@ async function postUser(req){
 
 }
 
+/**
+ * Diese Methode dient dazu, einen Benutzer zu löschen.
+ * 
+ * @param req: Request-Objekt -> Enthält den Benutzernamen und das Passwort in den Parametern (username, password)
+ * @return: String -> "Benutzer erfolgreich gelöscht" bei erfolgreicher Löschung, oder ein Fehlerstring bei Problemen
+ * @throws Error -> Bei Fehlern während des Löschvorgangs
+ */
+
 async function deleteUser(req){
     const username = req.params.username
     const password = req.params.password
@@ -74,6 +89,13 @@ async function deleteUser(req){
         return "Interner Serverfehler"
     }
 }
+
+/**
+ * Diese Methode dient dazu, einen Benutzer aus den Freundeslisten anderer Benutzer zu entfernen.
+ * 
+ * @param usernameToRemove: String -> Der Benutzername des zu entfernenden Benutzers
+ * @return: void
+ */
 
 async function deleteUserFromFriends(usernameToRemove) {
     const result = await database.getDB().collection("personalInformation").updateMany(
