@@ -7,6 +7,7 @@ import { uploadProfilePicture } from '../../utils/database/imageFetcher';
 import { classNames } from '../../utils';
 import TextButton from './TextButton';
 import CheckButton from './CheckButton';
+import { userLog } from '../../utils/logger/config';
 
 /*
 This component can be used to upload your own and new profile pictures.
@@ -21,7 +22,7 @@ export default function Picker({ change }) {
     // logged in user is called
     const user = useUser()
 
-    // When the component is first rendered, this function checks whether the app 
+    // When the component is first rendered, this function checks whether the app
     // has authorisation to access the device's media library.
     useEffect(() => {
         (async () => {
@@ -30,8 +31,8 @@ export default function Picker({ change }) {
         })();
     }, []);
 
-    // The pickImage function starts a process to select an image from the device's media library, 
-    // provided authorisation has been granted. 
+    // The pickImage function starts a process to select an image from the device's media library,
+    // provided authorisation has been granted.
     const pickImage = async () => {
         if (hasPhotoPermission) {
             try {
@@ -47,7 +48,7 @@ export default function Picker({ change }) {
                     await uploadProfilePicture(result.assets[0], user.username);
                 }
             } catch (error) {
-                console.log("[pickImageError] ", error);
+                userLog.error("Error during image upload:", error)
             }
         }
     };

@@ -1,8 +1,8 @@
 import FormData from 'form-data'
 import axiosInstance from './axiosConfig'
+import { userLog } from '../logger/config'
 
 export async function uploadProfilePicture(file, username) {
-    console.log(file)
     const filename = file.uri.split("/").pop()
 
     let data = new FormData()
@@ -16,11 +16,11 @@ export async function uploadProfilePicture(file, username) {
             }
         })
 
-        console.log("[uploadProfilePicture] upload profile picture successfully")
+        userLog.debug("Profile picture has been uploaded successfully.")
 
         return response.data
     } catch (error) {
-        console.log(error)
+        userLog.error("Profile picture could not be uploaded.", error)
         throw error
     }
 }

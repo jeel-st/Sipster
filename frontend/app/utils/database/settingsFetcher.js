@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import useUser from '../database/userFetcher';
 import axiosInstance from './axiosConfig';
+import { userLog } from '../logger/config';
 
 /*
 Database request to query user in database
@@ -33,13 +34,12 @@ export function settingsFetcher() {
                 }
             })
             .then(response => {
-                console.log("The new username has been successfully changed.", response.data);
+                userLog.debug("The new username has been successfully changed.", response.data)
                 setSettingsError('');
                 user.username = newUsername;
             })
             .catch(error => {
-                console.error("Error changing the username:", error);
-                console.log(error)
+                userLog.error("Error changing the username:", error)
                 if (error.response && error.response.status === "404") {
                     setSettingsError('This username already exists.');
                 } else {
@@ -61,13 +61,12 @@ export function settingsFetcher() {
                 }
             })
             .then(response => {
-                console.log("The new firstname has been successfully changed.", response.data);
+                userLog.debug("The new firstname has been successfully changed.", response.data)
                 setSettingsError('');
                 user.firstName = firstName;
             })
             .catch(error => {
-                console.error("Error changing the firstname:", error);
-                console.log(error)
+                userLog.error("Error changing the firstname:", error)
                 if (error.response && error.response.status === "404") {
                     setSettingsError('This firstname already exists.');
                 } else {
@@ -89,13 +88,12 @@ export function settingsFetcher() {
                 }
             })
             .then(response => {
-                console.log("The new lastname has been successfully changed.", response.data);
+                userLog.debug("The new lastname has been successfully changed.", response.data)
                 setSettingsError('');
                 user.lastName = lastName;
             })
             .catch(error => {
-                console.error("Error changing the lastname:", error);
-                console.log(error)
+                userLog.error("Error changing the lastname:", error)
                 if (error.response && error.response.status === "404") {
                     setSettingsError('This lastname already exists.');
                 } else {
@@ -117,13 +115,12 @@ export function settingsFetcher() {
                 }
             })
             .then(response => {
-                console.log("The new password has been successfully changed.", response.data);
+                userLog.debug("The new password has been successfully changed.", response.data)
                 setSettingsError('');
                 user.password = password;
             })
             .catch(error => {
-                console.error("Error changing the password:", error);
-                console.log(error)
+                userLog.error("Error changing the password:", error)
                 if (error.response && error.response.status === "404") {
                     setSettingsError('This password already exists.'); // notwendig?
                 } else {
@@ -145,13 +142,12 @@ export function settingsFetcher() {
                 }
             })
             .then(response => {
-                console.log("The new email has been successfully changed.", response.data);
+                userLog.debug("The new email has been successfully changed.", response.data)
                 setSettingsError('');
                 user.email = email;
             })
             .catch(error => {
-                console.error("Error changing the email:", error);
-                console.log(error)
+                userLog.error("Error changing the email:", error)
                 if (error.response && error.response.status === "404") {
                     setSettingsError('This email already exists.');
                 } else {
@@ -164,14 +160,13 @@ export function settingsFetcher() {
 
         axiosInstance.delete(`/register/${user.username}/${user.password} HTTP/1.1`)
             .then(response => {
-                console.log("The user has been successfully deleted.", response.data);
+                userLog.debug("The user has been successfully deleted.", response.data)
                 setSettingsError('');
                 () => router.navigate('routes/LoginPage');
 
             })
             .catch(error => {
-                console.error("Error deleting the user:", error);
-                console.log(error)
+                userLog.error("Error deleting the user:", error)
             });
     };
 

@@ -8,6 +8,7 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import { EventInfoCard, Events, HomeActivityCard, HomeFriends, RefreshContext } from '../components';
 import useHome from '../utils/hooks/useHome';
 import { useNavBarColor } from '../utils/hooks/useNavBarColor';
+import { rootLog } from '../utils/logger/config';
 
 /*
     HomePage is a page that displays the user's friends and their activities.
@@ -139,7 +140,7 @@ export default function HomePage() {
     }
 
     const loadMoreData = () => {
-        console.log('Load more data');
+        rootLog.debug('Load more data');
     };
 
     return (

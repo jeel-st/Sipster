@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useLogin } from '../database/loginFetcher';
 import { storeUser } from '../database/userFetcher';
 import { router } from 'expo-router'
+import { userLog } from '../logger/config';
 
 /*
 The logic of the loginPage is processed here and forwarded to the backend
@@ -29,11 +30,11 @@ export function useLoginLogic() {
 
         } else {
             /* If text fields are filled in, the system checks whether there is a matching user */
-            console.log("Login details have been entered.")
+            userLog.debug("Login details have been entered.")
             login(username, password, setLoginError, async () => {
                 await storeUser(username)
                 router.navigate('(tabs)')
-                console.log("Login successful.")
+                userLog.debug("Login successful.")
                 setLoginError('')
             });
         }

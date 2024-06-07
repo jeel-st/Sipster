@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import axiosInstance from './axiosConfig';
+import { userLog } from '../logger/config';
 
 /*
 Database request to query user in database
@@ -28,15 +29,14 @@ export function useRegister() {
                 }
             })
             .then(response => {
-                console.log("The user was successfully created", response.data);
+                userLog.debug("The user was successfully created", response.data);
                 setRegisterError('');
                 if (onRegisterSuccess) {
                     onRegisterSuccess();
                 }
             })
             .catch(error => {
-                console.error("Error during registration:", error);
-                console.log(error)
+                userLog.error("Error during registration:", error)
                 if (error.response && error.response.status === "404") {
                     setRegisterError('This user already exists.');
                 } else {
