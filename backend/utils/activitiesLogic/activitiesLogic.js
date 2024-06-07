@@ -6,7 +6,7 @@ const fs = require('fs');
 const path = require('path');
 
 
-async function uploadBeforePicture(req) {
+async function uploadBeforePicture(req, res) {
     try {
         const form = new Form(uploadOptions)
         let activityID
@@ -46,15 +46,16 @@ async function uploadBeforePicture(req) {
         })
         form.on('close', async () => {
             console.log("Success")
-            return "Success"
+            res.send("Success")
         })
         form.parse(req)
     } catch (err) {
-        return "Error"+err
+        res.status(500).send("Internal Server Error")
     }
 }
 
-async function uploadAfterPicture(req) {
+async function uploadAfterPicture(req, res) {
+    try{
     const form = new Form(uploadOptions)
     let activityID
 
@@ -92,10 +93,12 @@ async function uploadAfterPicture(req) {
 })
     form.on('close', async () => {
 
-        return "Success"
+        res.send("Success")
     })
     form.parse(req)
-
+    }catch(err){
+        res.status(500).send("Internal Server Error"+err)
+    }
 }
 
 module.exports = {

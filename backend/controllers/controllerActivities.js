@@ -54,25 +54,21 @@ async function deleteEvents(req, res){
 async function postBeforePicture(req, res){
     try{
         console.log("Went into logic postBeforePicture")
-        const result = await logicFile.uploadBeforePicture(req)
+        const result = await logicFile.uploadBeforePicture(req, res)
         console.log("Result"+result)
-        res.send(result)
+        
     }catch(error){
         console.error('Fehler beim Hochladen des Bildes:', error);
-
-        res.status(500).send("Internal Server Error")
     }
 }
 
 async function postAfterPicture(req, res){
     try{
         console.log("Went into logic postAfterPicture")
-        const result = await logicFile.uploadAfterPicture(req)
-        res.send(result)
+        const result = await logicFile.uploadAfterPicture(req, res)
     }catch(error){
         console.error('Fehler beim Hochladen des Bildes:', error);
 
-        res.status(500).send("Internal Server Error")
     }
 }
 
