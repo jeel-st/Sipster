@@ -1,6 +1,7 @@
 const database = require("./databaseMain")
 const log = require("../logging/logger")
 const { ObjectId } = require('mongodb');
+const { uploadAfterPicture } = require("../utils/activitiesLogic/activitiesLogic");
 
 async function postActivity(req) {
     const {beforeImagePath,  afterImagePath, reactions, comment, username, gameName} = req.body
@@ -9,10 +10,12 @@ async function postActivity(req) {
     log.info("Data to be inserted:" + activityData)
     
     let result = await activites.insertOne(activityData)
-    if(result){
-        return true
+    console.log("Result- Objekt: " + result)
+    if(result.insertedId){
+        console.log("Activity ID: " + result.insertedId)
+        return result.insertedId.toString()
     }else{
-        return false;
+        throw new Error("Post new Activity failed")
     }
 }
 
@@ -53,11 +56,36 @@ async function deleteEvents(req){
 async function uploadBeforePicture(activityID, fileExtension) {
     try {
         const imagePath = `/home/sipster/sipster/backend/static/beforePicture/PictureBefore${activityID}${fileExtension}`
+        console.log("Neuer ImagePath: "+ imagePath)
         const activityObjectId = new ObjectId(activityID);
         const result = await database.getDB().collection('activities').updateOne(  //-> Datenbank- Update mit neuem Pfad
             { _id: activityObjectId },
             { $set: { beforeImagePath: imagePath } }
         )
+        console.log("Result der Datenbank: "+result)
+        if (result.modifiedCount === 1) {
+            console.log(`BeforePicture für ${activityID} gespeichert.`);
+            return "Success";
+        } else {
+            console.log(`Profilbild für Benutzer ${userIDObj} nicht gefunden.`);
+            return "User not found";
+        }
+    } catch (err) {
+        throw new Error("Fehler in der Datenbank")
+    }
+}
+
+async function uploadBeforePicture(activityID, fileExtension) {
+    try {
+        const imagePath = `/home/sipster/sipster/backend/static/beforePicture/PictureAfter${activityID}${fileExtension}`
+        console.log("Neuer ImagePath: "+ imagePath)
+        const activityObjectId = new ObjectId(activityID);
+        const result = await database.getDB().collection('activities').updateOne(  //-> Datenbank- Update mit neuem Pfad
+            { _id: activityObjectId },
+            { $set: { afterImagePath: imagePath } }
+        )
+        console.log("Result der Datenbank: "+result)
+
         if (result.modifiedCount === 1) {
             console.log(`BeforePicture für ${activityID} gespeichert.`);
             return "Success";
@@ -71,5 +99,5 @@ async function uploadBeforePicture(activityID, fileExtension) {
 }
 
 module.exports = {
-    postActivity, getActivities, deleteEvents, uploadBeforePicture
+    postActivity, getActivities, deleteEvents, uploadBeforePicture, uploadAfterPicture
 }

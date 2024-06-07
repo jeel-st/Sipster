@@ -4,12 +4,13 @@ const logicFile = require("../utils/activitiesLogic/activitiesLogic")
 
 async function postActivity(req, res) {
     try {
-        const activity = await database.postActivity(req)
+        console.log("Went to database postActitity")
+        const activityId = await database.postActivity(req)
 
-        console.log(activity)
+        console.log(activityId)
         
-        if (activity){
-            res.json("Activity was added to database")
+        if (activityId){
+            res.json({ _id: activityId });
         }else {
             res.status(404).send("Something went wrong here!")
         }
@@ -52,7 +53,7 @@ async function deleteEvents(req, res){
 
 async function postBeforePicture(req, res){
     try{
-
+        console.log("Went into logic postBeforePicture")
         const result = await logicFile.uploadBeforePicture(req)
         res.send(result)
     }catch(error){
@@ -62,9 +63,23 @@ async function postBeforePicture(req, res){
     }
 }
 
+async function postAfterPicture(req, res){
+    try{
+        console.log("Went into logic postAfterPicture")
+        const result = await logicFile.uploadAfterPicture(req)
+        res.send(result)
+    }catch(error){
+        console.error('Fehler beim Hochladen des Bildes:', error);
+
+        res.status(500).send("Internal Server Error")
+    }
+}
+
+
 module.exports = {
     postActivity,
     getActivities,
     deleteEvents,
-    postBeforePicture
+    postBeforePicture,
+    postAfterPicture
 }

@@ -118,6 +118,10 @@ async function uploadBeforePicture(activityID, fileExtension){
     return await dbActivities.uploadBeforePicture(activityID, fileExtension)
 }
 
+async function uploadAfterPicture(activityID, fileExtension){
+    return await dbActivities.uploadAfterPicture(activityID, fileExtension)
+}
+
 function getDB() {
     return db
 }
@@ -183,4 +187,6 @@ exports.postActivity = postActivity;
 exports.getActivities = getActivities;
 exports.getSipsterID = getSipsterID
 exports.initializeCollections = initializeCollections;
+exports.uploadAfterPicture = uploadAfterPicture
+exports.uploadBeforePicture = uploadBeforePicture
 exports.UsernameNotFoundError = UsernameNotFoundError;
