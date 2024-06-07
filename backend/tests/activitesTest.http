@@ -1,0 +1,32 @@
+@host = http://localhost:3000
+
+###
+
+POST {{host}}/activities/postActivity HTTP/1.1
+Content-Type: application/json
+
+{
+    "beforeImagePath": "someImagePath12345.jpg",
+    "afterImagePath": "someImagePath67890.jpeg",
+    "reactions": {
+        "beer": [
+            "User5"
+        ],
+        "love": [
+            "user2"
+        ],
+        "barf": [
+            "user3"
+        ],
+        "party": [
+            "user4"
+        ]
+    },
+    "comment": "BeispielKommentar",
+    "username": "EineID203820492",
+    "gameName": "EineGameID12938922"
+}
+
+###
+
+GET {{host}}/activities/Cryptocryxx

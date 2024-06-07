@@ -7,6 +7,7 @@ const dbFriendSystem = require("../databases/databaseFriendSystem")
 const dbProfilePicture = require("../databases/databaseProfilePicture")
 const dbUser = require("../databases/databaseUser")
 const dbSips = require("../databases/databaseSips")
+const dbActivities = require("../databases/databaseActivities")
 const log = require("../logging/logger")
 
 let db = null;
@@ -106,6 +107,26 @@ async function deleteProfilePictureURL(username){
     return await dbProfilePicture.deleteProfilePictureURL(username)
 }
 
+
+async function postActivity(req) {
+    return await dbActivities.postActivity(req)
+}
+
+async function getActivities(req) {
+    return await dbActivities.getActivities(req)
+}
+
+async function uploadBeforePicture(activityID, fileExtension){
+    return await dbActivities.uploadBeforePicture(activityID, fileExtension)
+}
+
+async function uploadAfterPicture(activityID, fileExtension){
+    return await dbActivities.uploadAfterPicture(activityID, fileExtension)
+}
+
+function getDB() {
+    return db
+
 async function getSips(username){
     return await dbSips.getSips(username)
 }
@@ -153,10 +174,13 @@ async function initializeCollections() {
     const personalInformation = db.collection("personalInformation");
     const invitations = db.collection("invitations");
     const events = db.collection("events");
+    const activites = db.collection("activities");
+
     return {
         personalInformation: personalInformation,
         invitations: invitations,
-        events: events
+        events: events,
+        activites: activites
     };
 }
 
@@ -224,11 +248,19 @@ exports.postNewPassword = postNewPassword
 exports.postNewUsername = postNewUsername
 exports.getProfilePictureURL = getProfilePictureURL
 exports.deleteProfilePictureURL = deleteProfilePictureURL
+exports.postActivity = postActivity;
+exports.getActivities = getActivities;
 exports.getSipsterID = getSipsterID
 exports.initializeCollections = initializeCollections;
+<<<<<<< backend/databases/databaseMain.js
+exports.uploadAfterPicture = uploadAfterPicture
+exports.uploadBeforePicture = uploadBeforePicture
+exports.UsernameNotFoundError = UsernameNotFoundError;
+=======
 exports.getSips = getSips
 exports.changeSips = changeSips
 exports.changeFirstName = changeFirstName
 exports.changeLastName = changeLastName
 exports.UsernameNotFoundError = UsernameNotFoundError;
 */
+>>>>>>> backend/databases/databaseMain.js

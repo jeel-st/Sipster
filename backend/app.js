@@ -11,11 +11,13 @@ app.use(express.urlencoded({ limit: "50mb", extended: true }));
 
 const PORT = 3000
 
-const { uploadDir, uploadDirCom, uploadStaticDir } = require('./utils/uploadLogic/config')
+const { uploadDir, uploadDirCom, uploadStaticDir, uploadBeforePicture, uploadAfterPicture } = require('./utils/uploadLogic/config')
 
 // Versuche die Upload-Verzeichnisse zu erstellen, falls sie noch nicht existieren
 
 try {
+    fs.mkdirSync(uploadBeforePicture)
+    fs.mkdirSync(uploadAfterPicture)
     fs.mkdirSync(uploadStaticDir)
     fs.mkdirSync(uploadDir)
     fs.mkdirSync(uploadDirCom)
@@ -33,6 +35,7 @@ const friendsRouter = require('./routes/routerFriendSystem')
 const profilePictureRouter = require("./routes/routerProfilePicture")
 const userRouter = require("./routes/routerUser")
 const sipsRouter = require("./routes/routerSips")
+const activitiesRouter = require("./routes/routerActivities")
 
 // Datenbankverbindung herstellen
 
@@ -48,6 +51,7 @@ app.use('/friends', friendsRouter)
 app.use('/imageUpload', profilePictureRouter)
 app.use('/user', userRouter)
 app.use("/sips", sipsRouter)
+app.use("/activities", activitiesRouter)
 
 // Bereitstellung statischer Dateien im "static"-Verzeichnis
 
