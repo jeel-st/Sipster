@@ -1,3 +1,4 @@
+//Imports
 const { MongoClient } = require("mongodb")
 const dbEvents = require("../databases/databaseEvents")
 const dbLogin = require("../databases/databaseLogin")
@@ -124,6 +125,14 @@ async function changeLastName(userID, newName){
     return  db
 }
 
+/**
+ * Diese Methode dient dazu, die Sipster-ID eines Benutzers anhand des Benutzernamens abzurufen.
+ * 
+ * @param username: String -> Der Benutzername, für den die Sipster-ID abgerufen werden soll
+ * @return: ObjectId -> Die Sipster-ID des Benutzers, 
+ * @throws: UsernameNotFoundError -> Wenn der Benutzername nicht in der Datenbank gefunden wird
+ */
+
 async function getSipsterID(username) {
     const personalInformation = (await initializeCollections()).personalInformation
     let sipsterID = await personalInformation.find({username: username}).project({_id: 1}).toArray()
@@ -133,6 +142,12 @@ async function getSipsterID(username) {
     }
     return sipsterID[0]
 }
+
+/**
+ * Diese Methode dient dazu, die erforderlichen Datenbank-Collections zu initialisieren.
+ * 
+ * @return: Object -> Ein Objekt, das die initialisierten Collections `personalInformation`, `invitations` und `events` enthält
+ */
 
 async function initializeCollections() {
     const personalInformation = db.collection("personalInformation");
@@ -152,37 +167,38 @@ class UsernameNotFoundError extends Error {
     }
 }
 
-Object.assign(exports, {  
+Object.assign(exports, {
     connectToDB,
     getDB,
     postEvents,
     deleteEvents,
-getEvents,
-getLoginData,
-postUser,
-deleteUser,
-postFriendRequest,
-acceptFriendRequest,
-declineFriendRequest,
-removeFriend,
-getFriendList,
- getFriendRecommendations,
-getInvitations,
-uploadProfilePicture,
-getUserData,
-getEventsData,
-postNewEmail,
-postNewPassword,
-postNewUsername,
-getProfilePictureURL,
-deleteProfilePictureURL,
-getSipsterID,
-initializeCollections,
-getSips,
-changeSips,
-changeFirstName,
-changeLastName,
-UsernameNotFoundError})
+    getEvents,
+    getLoginData,
+    postUser,
+    deleteUser,
+    postFriendRequest,
+    acceptFriendRequest,
+    declineFriendRequest,
+    removeFriend,
+    getFriendList,
+    getFriendRecommendations,
+    getInvitations,
+    uploadProfilePicture,
+    getUserData,
+    getEventsData,
+    postNewEmail,
+    postNewPassword,
+    postNewUsername,
+    getProfilePictureURL,
+    deleteProfilePictureURL,
+    getSipsterID,
+    initializeCollections,
+    getSips,
+    changeSips,
+    changeFirstName,
+    changeLastName,
+    UsernameNotFoundError
+})
 
 /*
 exports.connectToDB = connectToDB

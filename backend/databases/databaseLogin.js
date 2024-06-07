@@ -1,7 +1,15 @@
+//Imports
 const database = require("./databaseMain");
 const { encryptPasswordWithSalt } = require('../utils/registerLogic/registerPatterns');
 const log = require("../logging/logger")
 
+/**
+ * Diese Methode dient dazu, die Anmeldedaten eines Benutzers zu überprüfen.
+ * 
+ * @param req: Request-Objekt -> hier müssen der Benutzername und das Passwort übergeben werden
+ * @return: Boolean (Bei Erfolg) -> `true` wenn die Anmeldedaten korrekt sind
+ * @throws: Error (Bei Fehler) -> "Benutzer nicht gefunden!" oder "Ungültige Anmeldedaten." oder allgemeiner Fehler
+ */
 async function getLoginData(req) {
     const username = req.params.username;
     const password = req.params.password;
