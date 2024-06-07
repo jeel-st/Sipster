@@ -5,10 +5,11 @@ import { navigateToFriendsPage } from '../utils/navigator'
 import { FontAwesome, FontAwesome5 } from '@expo/vector-icons'
 import { LinearGradient } from 'expo-linear-gradient'
 import { router } from 'expo-router'
-import { GameActivity, GameFriendBtn } from '../components'
+import { GameActivity, GameFriendBtn, GameGoBtn } from '../components'
 import { useGame } from '../utils/hooks/useGame'
 import { styles } from '../constants'
 import { navBarColor } from '../utils/navBarColor'
+import { gameLog } from '../utils/logger/config'
 
 /*
     GamePage is a page that displays the landing page of a game and allows the user to tag friends and start the game.
@@ -73,16 +74,8 @@ export default function GamePage() {
                         </ScrollView>
                     </View>
 
-                    <TouchableOpacity
-                        onPress={handlePress}
-                        className={classNames(
-                            'justify-center items-center', // position
-                            'mt-8', // spacing
-                            'h-24 w-[80%]', // sizing
-                            'bg-yellow rounded-2xl shadow-md shadow-black' // styling
-                        )}>
-                        <Text className='text-black text-xl font-bold' >Go</Text>
-                    </TouchableOpacity>
+                    {game.status === "available" && <GameGoBtn handlePress={handlePress} text="Go" color="bg-yellow"/> }
+                    {game.status === "unavailable" && <GameGoBtn handlePress={() => gameLog.warn("Game unavailable")} text={game.status} color="bg-red-500"/> }
                 </View>
             </SafeAreaView>
         </View>

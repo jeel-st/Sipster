@@ -15,8 +15,8 @@ const loadGameComponent = (game) => {
     switch (game) {
         case 'Bomb Party':
             return lazy(() => import('../games/bombparty/BombPartyGame'));
-        case 'gameB':
-            return lazy(() => import('../games/bombparty/BombPartyGame'));
+        case 'Beer Pong':
+            return lazy(() => import('../games/beerpongExtreme/BeerpongExtreme'));
         case 'gameC':
             return lazy(() => import('../games/bombparty/BombPartyGame'));
         default:

@@ -19,6 +19,7 @@ import GameFriendBtn from './games/GameFriendBtn';
 import GameActivity from './games/GameActivity';
 import GamesPerCategory from './games/GamesPerCategory';
 import GameCameraBtn from './games/GameCameraBtn';
+import GameGoBtn from './games/GameGoBtn';
 
 
 // Layout imports
@@ -68,13 +69,13 @@ export {
   FriendBtn, FriendBtn2, FriendsCategorys, FriendsContainer, FriendsHeaderButtons, FriendsScrollView, FriendsTabButton,
 
   // Games
-  GameCard, Games, GameFriendBtn, GameActivity,  GamesPerCategory, GameCameraBtn,
+  GameCard, Games, GameFriendBtn, GameActivity,  GamesPerCategory, GameCameraBtn, GameGoBtn,
 
   // Layout
   IconButton, SipsterButton, SmallTextField, TagCard, TextField, ErrorMessage,
 
   // Settings
-  SettingsButton, CheckButton, AboutUs, TextButton, Help, Picker, DeleteAccount, 
+  SettingsButton, CheckButton, AboutUs, TextButton, Help, Picker, DeleteAccount,
 
   // Profile
   ProfileCard, ProfileHeaderButtons, ProfileStagger, ProfileInviteBtn,

@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native'
+import { View, Text, TouchableOpacity, Image } from 'react-native'
 import useBombParty from './utils/useBombParty'
 import { AntDesign, FontAwesome5 } from '@expo/vector-icons';
 import classNames from '../bombparty/utils/classNames'
