@@ -126,7 +126,7 @@ async function uploadAfterPicture(activityID, fileExtension){
 
 function getDB() {
     return db
-
+}
 async function getSips(username){
     return await dbSips.getSips(username)
 }
@@ -221,6 +221,10 @@ Object.assign(exports, {
     changeSips,
     changeFirstName,
     changeLastName,
+    postActivity,
+    getActivities,
+    uploadAfterPicture,
+    uploadBeforePicture,
     UsernameNotFoundError
 })
 
@@ -263,4 +267,4 @@ exports.changeFirstName = changeFirstName
 exports.changeLastName = changeLastName
 exports.UsernameNotFoundError = UsernameNotFoundError;
 */
->>>>>>> backend/databases/databaseMain.js
+// backend/databases/databaseMain.js
