@@ -10,7 +10,7 @@ Content-Type: application/json
     "afterImagePath": "someImagePath67890.jpeg",
     "reactions": {
         "beer": [
-            "User1"
+            "User5"
         ],
         "love": [
             "user2"
