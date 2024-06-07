@@ -75,7 +75,7 @@ async function uploadBeforePicture(activityID, fileExtension) {
     }
 }
 
-async function uploadBeforePicture(activityID, fileExtension) {
+async function uploadAfterPicture(activityID, fileExtension) {
     try {
         const imagePath = `/home/sipster/sipster/backend/static/beforePicture/PictureAfter${activityID}${fileExtension}`
         console.log("Neuer ImagePath: "+ imagePath)
