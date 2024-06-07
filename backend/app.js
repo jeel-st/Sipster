@@ -33,7 +33,6 @@ const sipsRouter = require("./routes/routerSips")
 const activitiesRouter = require("./routes/routerActivities")
 
 const { connectToDB } = require('./databases/databaseMain');
-const { uploadAfterPicture } = require('./databases/databaseActivities');
 connectToDB()
 
 app.use('/login', loginRouter)
