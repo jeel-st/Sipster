@@ -4,8 +4,8 @@ const { ObjectId } = require('mongodb');
 const { uploadAfterPicture } = require("../utils/activitiesLogic/activitiesLogic");
 
 async function postActivity(req) {
-    const {beforeImagePath,  afterImagePath, reactions, comment, username, gameName} = req.body
-    const activityData = {beforeImagePath,  afterImagePath, reactions, comment, username, gameName}
+    const {beforeImagePath,  afterImagePath, reactions, caption, userID, gameID} = req.body
+    const activityData = {beforeImagePath,  afterImagePath, reactions, caption, userID, gameID}
     const activites = (await database.initializeCollections()).activites
     log.info("Data to be inserted:" + activityData)
     
