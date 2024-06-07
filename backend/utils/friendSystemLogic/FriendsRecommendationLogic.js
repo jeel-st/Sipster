@@ -1,4 +1,10 @@
-
+/**
+ * Überprüft eine Liste von Freundschaftsempfehlungen und entfernt diejenigen, die bereits Freunde des angegebenen Benutzers sind.
+ * 
+ * @param friendRecommendations Objekt- Array  -> Die Liste der Freundschaftsempfehlungen.
+ * @param username String -> Der Benutzername des Benutzers, für den die Empfehlungen geprüft werden.
+ * @returns Array -> Eine neue Liste von Freundschaftsempfehlungen, die keine Freunde des Benutzers enthalten.
+ */
 
 async function checkForFriendsInRecommendations(friendRecommendations, username) {
     let sortedFriendRecommendations = [];
