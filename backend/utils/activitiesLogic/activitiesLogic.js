@@ -1,7 +1,7 @@
 const database = require("../../databases/databaseMain")
-const log = require("../logging/logger")
+const log = require("../../logging/logger")
 const Form = require('multiparty').Form
-const { uploadOptions } = require('../utils/uploadLogic/config')
+const { uploadOptions } = require('../uploadLogic/config')
 const fs = require('fs');
 const path = require('path');
 
