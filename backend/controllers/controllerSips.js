@@ -1,5 +1,15 @@
+//Imports
 const { on } = require('nodemon')
 const database = require('../databases/databaseMain')
+
+/**
+ * Diese Methode ruft die Sipswerte für einen bestimmten Benutzer ab.
+ * 
+ * @param req: Object -> Die Anfrage
+ * @param res: Object -> Die Antwort
+ * @return: Number -> Die Sipswerte des Benutzers 
+ * @throws: Error -> falscher username oder Error
+ */
 
 async function getSips(req, res){
     try {
@@ -16,6 +26,14 @@ async function getSips(req, res){
         
     }
 }
+
+/**
+ * Diese Methode aktualisiert die Sipswerte für einen bestimmten Benutzer.
+ * 
+ * @param req: Object -> Die Anfrage
+ * @param res: Object -> Die Antwort
+ * @return: Object -> Ergebnis des Updatevorgangs
+ */
 
 async function changeSips(req, res){
     try {
@@ -35,6 +53,14 @@ async function changeSips(req, res){
         
     }
 }
+
+/**
+ * Diese Methode aktualisiert die Sipswerte für eine Liste von Freunden.
+ * 
+ * @param req: Object -> Die Anfrage
+ * @param res: Object -> Die Antwort
+ * @return: Array aus Objects -> Die aktualisierten Sipswerte der Freunde oder eine entsprechende Fehlermeldung mit Statuscode
+ */
 
 async function changeSipsForFriends(req, res){
     const usernameArray = req.body.friends

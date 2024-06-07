@@ -1,3 +1,4 @@
+//Imports
 const { MongoClient } = require("mongodb")
 const dbEvents = require("../databases/databaseEvents")
 const dbLogin = require("../databases/databaseLogin")
@@ -106,6 +107,7 @@ async function deleteProfilePictureURL(username){
     return await dbProfilePicture.deleteProfilePictureURL(username)
 }
 
+
 async function postActivity(req) {
     return await dbActivities.postActivity(req)
 }
@@ -124,7 +126,33 @@ async function uploadAfterPicture(activityID, fileExtension){
 
 function getDB() {
     return db
+
+async function getSips(username){
+    return await dbSips.getSips(username)
 }
+
+async function changeSips(username, sipsNew){
+    return await dbSips.changeSips(username, sipsNew)
+}
+
+async function changeFirstName(userID, newName){
+    return await dbUser.changeFirstName(userID, newName)
+}
+
+async function changeLastName(userID, newName){
+    return await dbUser.changeLastName(userID, newName)
+}
+ function getDB(){
+    return  db
+}
+
+/**
+ * Diese Methode dient dazu, die Sipster-ID eines Benutzers anhand des Benutzernamens abzurufen.
+ * 
+ * @param username: String -> Der Benutzername, für den die Sipster-ID abgerufen werden soll
+ * @return: ObjectId -> Die Sipster-ID des Benutzers, 
+ * @throws: UsernameNotFoundError -> Wenn der Benutzername nicht in der Datenbank gefunden wird
+ */
 
 async function getSipsterID(username) {
     const personalInformation = (await initializeCollections()).personalInformation
@@ -135,6 +163,12 @@ async function getSipsterID(username) {
     }
     return sipsterID[0]
 }
+
+/**
+ * Diese Methode dient dazu, die erforderlichen Datenbank-Collections zu initialisieren.
+ * 
+ * @return: Object -> Ein Objekt, das die initialisierten Collections `personalInformation`, `invitations` und `events` enthält
+ */
 
 async function initializeCollections() {
     const personalInformation = db.collection("personalInformation");
@@ -157,9 +191,40 @@ class UsernameNotFoundError extends Error {
     }
 }
 
+Object.assign(exports, {
+    connectToDB,
+    getDB,
+    postEvents,
+    deleteEvents,
+    getEvents,
+    getLoginData,
+    postUser,
+    deleteUser,
+    postFriendRequest,
+    acceptFriendRequest,
+    declineFriendRequest,
+    removeFriend,
+    getFriendList,
+    getFriendRecommendations,
+    getInvitations,
+    uploadProfilePicture,
+    getUserData,
+    getEventsData,
+    postNewEmail,
+    postNewPassword,
+    postNewUsername,
+    getProfilePictureURL,
+    deleteProfilePictureURL,
+    getSipsterID,
+    initializeCollections,
+    getSips,
+    changeSips,
+    changeFirstName,
+    changeLastName,
+    UsernameNotFoundError
+})
 
-
-
+/*
 exports.connectToDB = connectToDB
 exports.getDB = getDB
 exports.postEvents = postEvents
@@ -187,6 +252,15 @@ exports.postActivity = postActivity;
 exports.getActivities = getActivities;
 exports.getSipsterID = getSipsterID
 exports.initializeCollections = initializeCollections;
+<<<<<<< backend/databases/databaseMain.js
 exports.uploadAfterPicture = uploadAfterPicture
 exports.uploadBeforePicture = uploadBeforePicture
 exports.UsernameNotFoundError = UsernameNotFoundError;
+=======
+exports.getSips = getSips
+exports.changeSips = changeSips
+exports.changeFirstName = changeFirstName
+exports.changeLastName = changeLastName
+exports.UsernameNotFoundError = UsernameNotFoundError;
+*/
+>>>>>>> backend/databases/databaseMain.js

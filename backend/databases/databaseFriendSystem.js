@@ -1,8 +1,16 @@
+//Imports
 const database = require("./databaseMain")
 const log = require("../logging/logger")
 const { ObjectId } = require('mongodb');
 const { checkForFriendsInRecommendations } = require("../utils/friendSystemLogic/FriendsRecommendationLogic")
 
+/**
+ * Hier wird eine Freundesanfrage, mithilfe der SenderID, der EmpfängerID und eines Zeitstempels, erstellt
+ * 
+ * @param req:  Request- Objekt -> in denen die ID des Senders und Empfängers mitgegeben werden muss
+ * @return:     InsertOneResult- Objekt (Bei Erfolg)
+ * @throws:     Error (Bei Fehler) -> "Database disconnected + err"
+ */
 async function postFriendRequest(req){
     const invitations = await database.getDB().collection("invitations")
     const {fromSipsterID, toSipsterID} = req.body
@@ -15,11 +23,20 @@ async function postFriendRequest(req){
     const userData = {fromID, toID, sendAt}
 
     try{
-        await invitations.insertOne(userData)
+        let result = await invitations.insertOne(userData)
+        return result
     }catch(err){
         throw new Error("Database disconnected" + err)
     }
 }
+
+/**
+ * Hier wird die Freundesanfrage angenommen. Dazu wird die Freundesanfrage gelöscht und die UserID's werden in der gegenseitigen Freundesliste eingetragen.
+ * 
+ * @param req:  Request- Objekt -> hier muss die ID des Senders und Empfängers mitgegeben werden (bis jetzt noch usernames)
+ * @return:     String (Bei Erfolg) -> "Anfrage erfolgreich gelöscht"
+ * @throws:     Error (Bei Fehler) -> "Benutzername nicht gefunden" oder "Anfrage nicht gefunden"
+ */
 
 async function acceptFriendRequest(req){
     const personalInformation = (await database.initializeCollections()).personalInformation
@@ -57,6 +74,15 @@ async function acceptFriendRequest(req){
     }
 }
 
+/**
+ * 
+ * Bei dieser Funktion wird die Freundesanfrage abgelehnt, die Freundesanfrage wird also gelöscht.
+ * 
+ * @param req:  Request- Objekt -> hier muss die ID des Senders und Empfängers mitgegeben werden (bis jetzt noch usernames)
+ * @return      String (Bei Erfolg) -> "Anfrage erfolgreich gelöscht"
+ * @throws:     Error (Bei Fehler) -> "Benutzer nicht gefunden" oder "Anfrage nicht gefunden"
+ */
+
 async function declineFriendRequest(req){
     const invitations = await database.getDB().collection("invitations")
     const personalInformation = await database.getDB().collection("personalInformation")
@@ -84,9 +110,16 @@ async function declineFriendRequest(req){
     }
 }
 
+/**
+ * Bei dieser Methode wird ein Freund entfernt, somit werden die ID's beider User aus ihren Freundeslisten gelöscht
+ * 
+ * @param req:  Request- Objekt -> hier muss die ID des Senders und Empfängers mitgegeben werden (bis jetzt noch usernames)
+ * @return      Boolean(Bei Erfolg) -> Wenn alles geklappt hat, wird "true" übergeben
+ * @throws:     Error(bei Fehler) -> "An error ocurred while removing friend"
+ */
+
 async function removeFriend(req){
     
-
     const personalInformation = await database.getDB().collection("personalInformation")
 
     try {
@@ -117,6 +150,14 @@ async function removeFriend(req){
         throw new Error("An error occurred while removing friend")
     }
 }
+
+/**
+ * Die Methode hat die Funktion, alle ID's der Freunde eines Users zurück zu geben.
+ * 
+ * @param req:  Request- Objekt -> hier muss die ID des Users mitgegeben werden (bis jetzt noch usernames)
+ * @return      Array aus personalInformations -> hier werden die Daten der Freunde in einem Array zurückgeliefert
+ * @throws:     Error (Bei Fehler)-> "Something went wrong while getting friend list"
+ */
 
 async function getFriendList(req){
     const personalInformation = await database.getDB().collection("personalInformation")
@@ -156,6 +197,13 @@ async function getFriendList(req){
 
 }
 
+/**
+ * Diese Methode ist dazu da, Freundesvorschläge angezeigt zu bekommen.
+ * 
+ * @param req: Request-Objekt -> hier muss ein UserID und ein input übergeben werden (im Moment noch ein username)
+ * @param checkForFriendsInRecommendations: Funktion, welche in utils/friendsystemlogic enthalten ist. Dort wird sie ausführlicher erklärt
+ * @return: Array mit Freundesvorschlägen, die den Suchbegriff im Benutzernamen enthalten
+ */
 async function getFriendRecommendations(req) {
     let friendRecommendations = [];
     try {
@@ -174,6 +222,15 @@ async function getFriendRecommendations(req) {
 }
 
 
+/**
+ * Diese Methode dient dazu, Einladungen (Freundesanfragen) eines Benutzers abzurufen.
+ * 
+ * @param req: Request-Objekt -> hier muss der Benutzername übergeben werden
+ * @param getReceivedInvitations: Funktion, die unten weiter beschrieben wird
+ * @return: Array mit zwei Arrays -> [receivedFromUsers, sentToUsers] 
+ *          receivedFromUsers: Benutzer, die Einladungen gesendet haben
+ *          sentToUsers: Benutzer, die Einladungen erhalten haben
+ */
 
 async function getInvitations(req) {
     try {
@@ -194,6 +251,13 @@ async function getInvitations(req) {
     }
 }
 
+/**
+ * Diese Methode dient dazu, Benutzerdaten für erhaltene Einladungen abzurufen.
+ * 
+ * @param invitations: Array -> erhaltenen Einladungen (Objekte, die fromID enthalten)
+ * @return: Array -> Benutzerdaten der Benutzer, die Einladungen gesendet haben
+ */
+
 async function getReceivedInvitations(invitations) {
     const personalInformation = await database.getDB().collection("personalInformation")
     const userIds = invitations.map(invitation => invitation.fromID)
@@ -202,6 +266,13 @@ async function getReceivedInvitations(invitations) {
     return users
 }
 
+/**
+ * Diese Methode dient dazu, Benutzerdaten für gesendete Einladungen abzurufen.
+ * 
+ * @param invitations: Array -> gesendete Einladungen (Objekte, die toID enthalten)
+ * @return: Array -> Benutzerdaten der Benutzer, die Einladungen erhalten haben
+ */
+
 async function getSentInvitations(invitations) {
     const personalInformation = await database.getDB().collection("personalInformation")
     const userIds = invitations.map(invitation => invitation.toID)
@@ -209,6 +280,7 @@ async function getSentInvitations(invitations) {
     const users = await personalInformation.find({ _id: { $in: userIds } }).toArray()
     return users
 }
+
 /*
 async function getUsers(usernames) {
     const personalInformation = await database.getDB().collection("personalInformation");

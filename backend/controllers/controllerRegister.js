@@ -1,5 +1,15 @@
+//Imports
 const database = require('../databases/databaseMain')
 const log = require("../logging/logger")
+
+/**
+ * Diese Methode verarbeitet die Registrierung eines neuen Benutzers.
+ * 
+ * @param req: Object -> Die Anfrage
+ * @param res: Object -> Die Antwort
+ * @return: String -> Erfolgsmeldung oder entsprechende Fehlermeldungen mit Statuscode
+ * @throws: Error -> schwerwiegender Fehler
+ */
 
 async function postRegister(req, res) {
     
@@ -18,6 +28,14 @@ async function postRegister(req, res) {
         res.status(500).json(pushingUser)
     }
 }
+
+/**
+ * Diese Methode verarbeitet das Löschen eines Benutzerkontos.
+ * 
+ * @param req: Object -> Die Anfrage
+ * @param res: Object -> Die Antwort
+ * @return: JSON -> Erfolgsmeldung oder entsprechende Fehlermeldung mit Statuscode
+ */
 
 async function deleteRegister(req, res) {
 
