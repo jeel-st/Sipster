@@ -55,6 +55,7 @@ async function postBeforePicture(req, res){
     try{
         console.log("Went into logic postBeforePicture")
         const result = await logicFile.uploadBeforePicture(req)
+        console.log("Result"+result)
         res.send(result)
     }catch(error){
         console.error('Fehler beim Hochladen des Bildes:', error);
