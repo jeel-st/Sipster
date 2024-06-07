@@ -172,7 +172,7 @@ async function getInvitations(req, res) {
 module.exports = {
     postFriendRequest,
     deleteFriendRequest,
-    getFriendNameList,
+    //getFriendNameList,
     getFriendList,
     getFriendRecommendations,
     getInvitations
