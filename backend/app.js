@@ -9,9 +9,10 @@ app.use(express.urlencoded({ limit: "50mb", extended: true }));
 
 const PORT = 3000
 
-const { uploadDir, uploadDirCom, uploadStaticDir } = require('./utils/uploadLogic/config')
+const { uploadDir, uploadDirCom, uploadStaticDir, uploadBeforePicture } = require('./utils/uploadLogic/config')
 
 try {
+    fs.mkdirSync(uploadBeforePicture)
     fs.mkdirSync(uploadStaticDir)
     fs.mkdirSync(uploadDir)
     fs.mkdirSync(uploadDirCom)

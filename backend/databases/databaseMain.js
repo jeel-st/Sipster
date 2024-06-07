@@ -114,6 +114,10 @@ async function getActivities(req) {
     return await dbActivities.getActivities(req)
 }
 
+async function uploadBeforePicture(activityID, fileExtension){
+    return await dbActivities.uploadBeforePicture(activityID, fileExtension)
+}
+
 function getDB() {
     return db
 }

@@ -1,5 +1,6 @@
 const database = require("./databaseMain")
 const log = require("../logging/logger")
+const { ObjectId } = require('mongodb');
 
 async function postActivity(req) {
     const {beforeImagePath,  afterImagePath, reactions, comment, username, gameName} = req.body
@@ -49,6 +50,26 @@ async function deleteEvents(req){
     }
 }
 
+async function uploadBeforePicture(activityID, fileExtension) {
+    try {
+        const imagePath = `/home/sipster/sipster/backend/static/beforePicture/PictureBefore${activityID}${fileExtension}`
+        const activityObjectId = new ObjectId(activityID);
+        const result = await database.getDB().collection('activities').updateOne(  //-> Datenbank- Update mit neuem Pfad
+            { _id: activityObjectId },
+            { $set: { beforeImagePath: imagePath } }
+        )
+        if (result.modifiedCount === 1) {
+            console.log(`BeforePicture für ${activityID} gespeichert.`);
+            return "Success";
+        } else {
+            console.log(`Profilbild für Benutzer ${userIDObj} nicht gefunden.`);
+            return "User not found";
+        }
+    } catch (err) {
+        throw new Error("Fehler in der Datenbank")
+    }
+}
+
 module.exports = {
-    postActivity, getActivities, deleteEvents
+    postActivity, getActivities, deleteEvents, uploadBeforePicture
 }

@@ -1,5 +1,6 @@
 const database = require('../databases/databaseMain')
 const log = require("../logging/logger")
+const logicFile = require("../utils/activitiesLogic/activitiesLogic")
 
 async function postActivity(req, res) {
     try {
@@ -49,8 +50,21 @@ async function deleteEvents(req, res){
     }
 }
 
+async function postBeforePicture(req, res){
+    try{
+
+        const result = await logicFile.uploadBeforePicture(req)
+        res.send(result)
+    }catch(error){
+        console.error('Fehler beim Hochladen des Bildes:', error);
+
+        res.status(500).send("Internal Server Error")
+    }
+}
+
 module.exports = {
     postActivity,
     getActivities,
-    deleteEvents
+    deleteEvents,
+    postBeforePicture
 }
