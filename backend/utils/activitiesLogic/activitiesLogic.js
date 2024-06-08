@@ -74,7 +74,7 @@ async function uploadAfterPicture(req, res) {
         const filePath = path.join(uploadOptions.uploadAfterPicture, newFilename);   //-> neuer Filename wird erstellt
         console.log("FilePath: "+ filePath)
         console.log("Sent to database uploadBeforePicture")
-        const uploadPicture = await database.uploadProfilePicture(activityID, fileExtension);
+        const uploadPicture = await database.uploadAfterPicture(activityID, fileExtension);
 
         if (uploadPicture == "User not found") {
             throw new Error("User not found")

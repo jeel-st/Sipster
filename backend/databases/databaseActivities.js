@@ -1,7 +1,7 @@
 const database = require("./databaseMain")
 const log = require("../logging/logger")
 const { ObjectId } = require('mongodb');
-const { uploadAfterPicture } = require("../utils/activitiesLogic/activitiesLogic");
+
 
 async function postActivity(req) {
     const {beforeImagePath,  afterImagePath, reactions, caption, userID, gameID} = req.body
