@@ -3,7 +3,7 @@ const database = require("./databaseMain")
 const { isValidPassword, isValidEmail, encryptPassword, encryptPasswordWithSalt } = require('../utils/registerLogic/registerPatterns')
 const log = require("../logging/logger")
 const databaseFriend = require("./databaseFriendSystem")
-const { ObjectId } = require("mongodb")
+const { ObjectId, MongoClient } = require("mongodb")
 
 /**
  * Diese Methode dient dazu, einen neuen Benutzer zu registrieren.
@@ -68,22 +68,34 @@ async function postUser(req){
 
 async function deleteUser(req){
     const userID = new ObjectId(req.params.userID)
-    console.log(userID)
     const password = req.params.password
     const personalInformation = await database.getDB().collection("personalInformation")
     try {
         const user = await personalInformation.findOne({_id: userID})
-        console.log(user)
         if (user == null) {
             return "Benutzer nicht gefunden"
         } else {
             const salt = user.salt;
             const encryptedPassword = await encryptPasswordWithSalt(salt, password)
             const result = await personalInformation.deleteOne({ _id: userID, encryptedPassword: encryptedPassword })
-            if (result === 0) {
+            if (result.deletedCount === 0) {
                 return "Passwort ist inkorrekt"
             }
-            await deleteUserFromFriends(userID)
+            try {
+            const deletedFromFriends = await deleteUserFromFriends(userID)
+            
+            const deletedActivities = await deleteActivitiesFromDeletedUser(userID)
+
+            const deletedReactions = await deleteReactionsFromDeletedUser(userID)
+
+            log.info(`
+            User was deleted from ${deletedFromFriends} friend(s).
+            ${deletedActivities} Activitie(s) from the user were deleted.
+            ${deletedReactions} Reaction(s) from the user were deleted.
+            `)
+            }catch (err) {
+                throw new Error("Something went wrong with the connected deletions: " + err)
+            }
             return "Benutzer erfolgreich gelöscht"
         }
     } catch (error) {
@@ -92,7 +104,7 @@ async function deleteUser(req){
     }
 }
 
-/**username zu userid new ObjectID addReactions
+/**
  * Diese Methode dient dazu, einen Benutzer aus den Freundeslisten anderer Benutzer zu entfernen.
  * 
  * @param usernameToRemove: String -> Der Benutzername des zu entfernenden Benutzers
@@ -104,6 +116,38 @@ async function deleteUserFromFriends(userIDToRemove) {
         { friends: userIDToRemove},
         { $pull: { friends: userIDToRemove} }
     );
+}
+
+async function deleteActivitiesFromDeletedUser(userIDToRemove) {
+    try {
+        const result = (await database.initializeCollections()).activities.deleteMany(
+            { userID: userIDToRemove},
+            { $pull: { userID: userIDToRemove} }
+        )
+        return result.deletedCount
+    }catch (err) {
+        return err
+    }
+}
+
+async function deleteReactionsFromDeletedUser(userIDToRemove) {
+    try {
+        const result = (await database.initializeCollections()).activities.deleteMany(
+            {
+                $or: Object.keys(database.reactionsTemplate).map(key => ({ [`reactions.${key}`]: userID }))
+            },
+            {
+                $pull: Object.keys(database.reactionsTemplate).reduce((acc, key) => {
+                    acc[`reactions.${key}`] = userID;
+                    return acc;
+                  }, {})
+            }
+        )
+        return result.deletedCount
+    }catch (err) {
+        return err
+    }
+
 }
 
 module.exports = {

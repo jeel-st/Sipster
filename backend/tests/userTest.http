@@ -38,6 +38,6 @@ Content-Type: application/json
 
 ###
 
-DELETE {{host}}/user/661d09ba6671060e01a4fd3e/Alladin!101 HTTP/1.1
+DELETE {{host}}/user/661d07706671060e01a4fd3d/JoelStinkt*100 HTTP/1.1
 
 

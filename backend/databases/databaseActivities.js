@@ -4,13 +4,26 @@ const { ObjectId } = require('mongodb');
 
 
 async function postActivity(req) {
-    const {beforeImagePath,  afterImagePath, reactions, caption, userID, gameID} = req.body
-    const activityData = {beforeImagePath,  afterImagePath, reactions, caption, userID, gameID}
+    const {caption, userID, gameID} = req.body
+
+    const userIDObj = new ObjectId(userID)
+    const gameIDObj = new ObjectId(gameID)
+
+    const reactions = {
+        "beer": [],
+        "love": [],
+        "barf": [],
+        "party": []
+    }
+    const beforeImagePath = "";
+    const afterImagePath = "";
+
+    const activityData = {beforeImagePath,  afterImagePath, reactions, caption, userIDObj, gameIDObj}
     const activites = (await database.initializeCollections()).activites
     log.info("Data to be inserted:" + activityData)
     
     let result = await activites.insertOne(activityData)
-    console.log("Result- Objekt: " + result)
+    log.info("Result- Objekt: " + result)
     if(result.insertedId){
         console.log("Activity ID: " + result.insertedId)
         return result.insertedId.toString()
@@ -21,14 +34,10 @@ async function postActivity(req) {
 
 async function getActivities(req) {
     const username = req.params.username
-    console.log(username)
     const activites = (await database.initializeCollections()).activites
     const personalInformation = (await database.initializeCollections()).personalInformation
     const sipsterID = await database.getSipsterID(username)
-    console.log(sipsterID)
-
     const friends = (await personalInformation.findOne({_id: sipsterID})).friends
-    console.log(friends)
     const activitesData = await activites.find({ sipsterID: { $in: friends } }).toArray()
    if (activitesData != null){
         return activitesData
@@ -95,6 +104,27 @@ async function uploadAfterPicture(activityID, fileExtension) {
         }
     } catch (err) {
         throw new Error("Fehler in der Datenbank")
+    }
+}
+
+async function addReaction(userID, activityID, reactionType) {
+    try {
+        const activities = (await database.initializeCollections).activites
+        activityID = new ObjectId(activityID)
+        userID = new ObjectId(userID)
+        const update = {
+            $addToSet: {
+              [`reactions.${reactionType}`]: userID
+            }
+          };
+        
+        activities.updateOne(
+            {_id: activityID},
+            update
+        )
+        return ("Reaction added succesfully")
+    }catch (err) {
+        return ("Error")
     }
 }
 

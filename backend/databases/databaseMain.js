@@ -10,6 +10,13 @@ const dbSips = require("../databases/databaseSips")
 const dbActivities = require("../databases/databaseActivities")
 const log = require("../logging/logger")
 
+const reactionsTemplate = {
+    beer: [],
+    love: [],
+    barf: [],
+    party: []
+  };
+
 let db = null;
 const url = `mongodb://localhost:27017/`;
 
