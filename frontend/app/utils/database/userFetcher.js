@@ -68,3 +68,7 @@ export default function useUser() {
     return user;
 }
 
+export async function clearUser() {
+    await AsyncStorage.removeItem('user');
+    userLog.debug("User data cleared successfully.");
+}
