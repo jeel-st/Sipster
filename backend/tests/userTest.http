@@ -1,4 +1,4 @@
-@host = http://85.215.71.124
+@host = http://localhost:3000
 
 ###
 
@@ -36,5 +36,8 @@ Content-Type: application/json
     "newUsername": "cryp"
 }
 
+###
+
+DELETE {{host}}/user/661d09ba6671060e01a4fd3e/Alladin!101 HTTP/1.1
 
 

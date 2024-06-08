@@ -38,13 +38,16 @@ async function postRegister(req, res) {
  */
 
 async function deleteRegister(req, res) {
-
          const deleteUser = await database.deleteUser(req)
         console.log(deleteUser)
         if(deleteUser == "Benutzer erfolgreich gelöscht"){
             res.json(deleteUser)
-        }else{
-            res.status(404).json(deleteUser)
+        }else if(deleteUser == "Benutzer nicht gefunden"){
+            res.status(400).json("User was not found!")
+        }else if (deleteUser == "Passwort ist inkorrekt") {
+            res.status(400).json("Passwort für User inkorrekt!")
+        }else {
+            res.status(404).json("Something went wrong")
         }
 }
 

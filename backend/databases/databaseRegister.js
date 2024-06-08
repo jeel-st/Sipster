@@ -3,6 +3,7 @@ const database = require("./databaseMain")
 const { isValidPassword, isValidEmail, encryptPassword, encryptPasswordWithSalt } = require('../utils/registerLogic/registerPatterns')
 const log = require("../logging/logger")
 const databaseFriend = require("./databaseFriendSystem")
+const { ObjectId } = require("mongodb")
 
 /**
  * Diese Methode dient dazu, einen neuen Benutzer zu registrieren.
@@ -60,28 +61,29 @@ async function postUser(req){
 /**
  * Diese Methode dient dazu, einen Benutzer zu löschen.
  * 
- * @param req: Request-Objekt -> Enthält den Benutzernamen und das Passwort in den Parametern (username, password)
+ * @param req: Request-Objekt -> Enthält die UserID und das Passwort in den Parametern (userID, password)
  * @return: String -> "Benutzer erfolgreich gelöscht" bei erfolgreicher Löschung, oder ein Fehlerstring bei Problemen
  * @throws Error -> Bei Fehlern während des Löschvorgangs
  */
 
 async function deleteUser(req){
-    const username = req.params.username
+    const userID = new ObjectId(req.params.userID)
+    console.log(userID)
     const password = req.params.password
     const personalInformation = await database.getDB().collection("personalInformation")
     try {
-        const user = await personalInformation.findOne({username: username})
-        
+        const user = await personalInformation.findOne({_id: userID})
+        console.log(user)
         if (user == null) {
             return "Benutzer nicht gefunden"
         } else {
             const salt = user.salt;
             const encryptedPassword = await encryptPasswordWithSalt(salt, password)
-            const result = await personalInformation.deleteOne({ username: username, encryptedPassword: encryptedPassword })
+            const result = await personalInformation.deleteOne({ _id: userID, encryptedPassword: encryptedPassword })
             if (result === 0) {
-                return "Passwort für " + username + " ist inkorrekt"
+                return "Passwort ist inkorrekt"
             }
-            await deleteUserFromFriends(username)
+            await deleteUserFromFriends(userID)
             return "Benutzer erfolgreich gelöscht"
         }
     } catch (error) {
@@ -90,17 +92,17 @@ async function deleteUser(req){
     }
 }
 
-/**
+/**username zu userid new ObjectID addReactions
  * Diese Methode dient dazu, einen Benutzer aus den Freundeslisten anderer Benutzer zu entfernen.
  * 
  * @param usernameToRemove: String -> Der Benutzername des zu entfernenden Benutzers
  * @return: void
  */
 
-async function deleteUserFromFriends(usernameToRemove) {
+async function deleteUserFromFriends(userIDToRemove) {
     const result = await database.getDB().collection("personalInformation").updateMany(
-        { friends: usernameToRemove },
-        { $pull: { friends: usernameToRemove } }
+        { friends: userIDToRemove},
+        { $pull: { friends: userIDToRemove} }
     );
 }
 
