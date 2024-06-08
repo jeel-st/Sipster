@@ -2,6 +2,8 @@
 import React, { useState } from 'react';
 import { settingsFetcher } from '../database/settingsFetcher'
 import { userLog } from '../logger/config';
+import { clearUser } from '../database/userFetcher';
+import { router } from 'expo-router';
 
 /*
 The logic of the settingsPage is processed here and forwarded to the backend
@@ -119,6 +121,16 @@ export function useSettings() {
         }
     }
 
+    const handleLogout = async () => {
+        try {
+            await clearUser();
+            router.navigate('routes/LoginPage');
+            userLog.debug("Logout successful.");
+        } catch (error) {
+            userLog.error("Error logging out:", error);
+        }
+    }
+
     return {
         username,
         lastName,
@@ -141,6 +153,7 @@ export function useSettings() {
         handleChangeEmail,
         handleChangeLastName,
         handleChangeFirstName,
-        handleDeleteAccount
+        handleDeleteAccount,
+        handleLogout
     };
 }

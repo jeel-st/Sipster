@@ -1,8 +1,8 @@
 // Imports
 import { Ionicons } from '@expo/vector-icons';
-import { Text, View, TouchableOpacity } from "react-native";
+import { Text, View, TouchableOpacity, Pressable } from "react-native";
 import React, { useState } from 'react';
-import { Popover, Button, Checkbox } from "native-base";
+import { Popover } from "native-base";
 import { useSettings } from '../../utils/hooks/useSettings';
 import { Colors } from '../../constants/styles';
 import { classNames } from '../../utils';
@@ -21,8 +21,10 @@ const DeleteAccount = React.forwardRef(({ ...props }, ref) => {
     // Import the logic for the changeUsername component from changeSettingsLogic.js
     const { handleDeleteAccount } = useSettings();
 
+    // useState() -> Hook function of React to trade states
     const [isChecked, setIsChecked] = useState(false);
 
+    
     const handleCheckboxChange = () => {
         setIsChecked(!isChecked);
     };
@@ -51,11 +53,29 @@ const DeleteAccount = React.forwardRef(({ ...props }, ref) => {
                         reversed. Deleted data cannot be recovered.
                     </Text>
                 </Popover.Body>
-                <Popover.Footer style={{ flexDirection: 'row', alignItems: 'center' }}>
-                    <Checkbox isChecked={isChecked} onChange={handleCheckboxChange} colorScheme={isChecked ? "red" : "primary"} accessibilityLabel="checkbox"/>
+                <Popover.Footer className={classNames('flex-row items-center justify-center')}>
+                    <Pressable onPress={() => handleCheckboxChange()}>
+                        {() => (
+                            <View className={classNames(
+                                'items-center justify-center', // position
+                                'mr-2', // spacing
+                                'w-6 h-6', // sizing
+                                'rounded border' // styling
+                            )}
+                                style={{
+                                    borderColor: Colors.primary,
+                                    backgroundColor: isChecked ? Colors.yellow : 'transparent',
+                                }}
+                            >
+                                {isChecked && (
+                                    <Text style={{ color: Colors.primary, fontSize: 16 }}>✓</Text>
+                                )}
+                            </View>
+                        )}
+                    </Pressable>
                     <Text style={{ marginLeft: 6, marginRight: 12 }}>I accept.</Text>
-                    <TouchableOpacity className={classNames('px-4 py-4 rounded-3xl text-center w-18')} style={{ backgroundColor: Colors.purple}}>
-                        <Text className="text-center font-bold">Delete</Text>
+                    <TouchableOpacity className={classNames('px-4 py-4 rounded-3xl text-center w-18')} style={{ backgroundColor: Colors.purple }} onPress={() => handleDeleteAccount(isChecked)}>
+                        <Text className={classNames('text-center font-bold')}>Delete</Text>
                     </TouchableOpacity>
                 </Popover.Footer>
             </Popover.Content>

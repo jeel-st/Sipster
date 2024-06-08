@@ -1,12 +1,11 @@
 // Imports
 import { SafeAreaView, Pressable, Text, StatusBar, Image } from "react-native";
 import { styles } from '../constants';
-import React from 'react';
+import { React } from "react";
 import { router } from 'expo-router'
 import useUser from '../utils/database/userFetcher';
 import { NativeBaseProvider, View } from "native-base";
 import { FriendsScrollView, FriendsSkeleton, IconButton } from "../components";
-
 import { classNames } from "../utils";
 import { fetchProfilePictureCompressed } from '../utils/database/imageFetcher';
 import { navBarColor } from "../utils/navBarColor";
@@ -19,6 +18,7 @@ Typ: Page/route
 
 // Background is set depending on the operating system
 export default function AccountPage() {
+
     navBarColor(styles.Colors.secondary)
 
     // logged in user is called
@@ -64,7 +64,12 @@ export default function AccountPage() {
                             'h-40 w-40', // sizing
                             'rounded-3xl shadow-md shadow-black bg-yellow' // styling
                         )}>
-                            <Text className={text}>1000 sips</Text>
+                            <Text className='text-center text-xl font-bold'>Level 8</Text>
+                            <Text className='text-center'>______</Text>
+                            <View className="flex-row items-center">
+                                <Text className='text-center text-3xl font-bold mt-2 mr-2'>{user && user.sips}</Text>
+                                <Text className='text-center text-xl mt-2'>sips</Text>
+                            </View>
                         </View>
 
                         {/* Profile Picture */}
