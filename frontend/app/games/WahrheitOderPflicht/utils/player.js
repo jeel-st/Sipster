@@ -1,8 +1,9 @@
 // Imports 
 import { useState } from 'react';
-import { View,Text } from 'react-native';
+import { View,Text, TouchableOpacity } from 'react-native';
 import classNames from './classNames';
 import currentPlayer from '../constants/currentPlayers';
+import { AntDesign } from '@expo/vector-icons';
 
 
 /* 
@@ -51,16 +52,30 @@ export function player(){
     if (newPlayers.length === 0) {
         setList(
           <View>
-            <Text>Test</Text>
+            
           </View>
         );
       } else {
         setList(
           <View>
             {newPlayers.map((player, index) => (
-              <Text className={classNames('font-bold text-l text-white')} key={index}>
-                {player}
-              </Text>
+              <View className={classNames(
+                      'pl-2 m-1', // spacing 
+                      'w-12/12', // sizing
+                      'items-center flex-row', //position
+                      'rounded-xl shadow-md shadow-black text-white bg-purple' // styling
+                      )}>
+                      <Text className={classNames('font-bold text-l text-black basis-11/12 ')} key={index}>
+                      {player}
+                      </Text>
+                      <TouchableOpacity
+                          onPress={() => { handleDeletPlayer(player)}}
+                          className={classNames(
+                              ' mr-0.5 items-center basis-1/12')}>
+
+                          <AntDesign name="close" size={20} color="black" />
+                      </TouchableOpacity>
+              </View>
             ))}
           </View>
         );
@@ -79,6 +94,29 @@ export function player(){
    }
 
 
+
+   /* 
+   delet Player   
+   funktioniert noch nicht richtig löscht zuviel 
+   */
+
+
+   const handleDeletPlayer = (player) => {
+      console.log(player + 'Wer raus soll')
+      const indexToDelete = players.indexOf(player);
+      console.log(indexToDelete + 'Wer raus soll als index')
+      let newArray = [];
+      newArray = [
+        ...players.slice(0, indexToDelete),
+        ...players.slice(indexToDelete + 1)
+      ];
+
+
+      
+      console.log(newArray + 'neuer Array')
+      setPlayers(newArray);
+      handleList(newArray);
+   }
 
    
         
