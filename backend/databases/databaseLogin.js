@@ -16,7 +16,7 @@ async function getLoginData(req) {
     const collectionData = await database.getDB().collection("personalInformation");
 
     const user = await collectionData.findOne({ username });
-    collectionData.updateMany({}, {$set: {events: []}})
+    //collectionData.updateMany({}, {$set: {events: []}})
     if (!user) {
         throw new Error("Benutzer nicht gefunden!");
     }
