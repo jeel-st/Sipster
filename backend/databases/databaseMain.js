@@ -10,6 +10,13 @@ const dbSips = require("../databases/databaseSips")
 const dbActivities = require("../databases/databaseActivities")
 const log = require("../logging/logger")
 
+const reactionsTemplate = {
+    beer: [],
+    love: [],
+    barf: [],
+    party: []
+  };
+
 let db = null;
 const url = `mongodb://localhost:27017/`;
 
@@ -124,9 +131,6 @@ async function uploadAfterPicture(activityID, fileExtension){
     return await dbActivities.uploadAfterPicture(activityID, fileExtension)
 }
 
-function getDB() {
-    return db
-}
 async function getSips(username){
     return await dbSips.getSips(username)
 }
@@ -225,7 +229,8 @@ Object.assign(exports, {
     getActivities,
     uploadAfterPicture,
     uploadBeforePicture,
-    UsernameNotFoundError
+    UsernameNotFoundError,
+    reactionsTemplate
 })
 
 /*
