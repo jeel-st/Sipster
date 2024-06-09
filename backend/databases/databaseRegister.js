@@ -83,22 +83,24 @@ async function deleteUser(req){
                 return "Passwort ist inkorrekt"
             }
             try {
+    
             const deletedFromFriends = await deleteUserFromFriends(userID)
-            
+            console.log("deleted friends succesfull " + deletedFromFriends)
             const deletedActivities = await deleteActivitiesFromDeletedUser(userID)
-
+            console.log("deleted activities succesfull " + deletedActivities)
             const deletedReactions = await deleteReactionsFromDeletedUser(userID)
-
+            console.log("deleted reactions succesfull " + deletedReactions)
             const deletedInvitations = await deleteUserFromInvitation(userID)
-
+            console.log("deleted invitations succesfull " + deletedInvitations)
             log.info(`
             User was deleted from ${deletedFromFriends} friend(s).
-            ${deletedActivities.deletedCount} Activitie(s) from the user were deleted.
-            ${deletedReactions.deletedCount} Reaction(s) from the user were deleted.
-            ${deletedInvitations.deletedCount}
+            ${deletedActivities} Activitie(s) from the user were deleted.
+            ${deletedReactions} Reaction(s) from the user were deleted.
+            ${deletedInvitations} Invitation(s) deleted.
             `)
             }catch (err) {
-                throw new Error("Something went wrong with the connected deletions: " + err)
+                console.error(err)
+                return ("Something went wrong with the connected deletions")
             }
             return "Benutzer erfolgreich gelöscht"
         }
@@ -116,58 +118,51 @@ async function deleteUser(req){
  */
 
 async function deleteUserFromFriends(userIDToRemove) {
-    const result = await database.getDB().collection("personalInformation").updateMany(
+    const result = (await database.initializeCollections()).personalInformation.updateMany(
         { friends: userIDToRemove},
         { $pull: { friends: userIDToRemove} }
     );
 }
 
 async function deleteUserFromInvitation(userIDToRemove) {
-    try {
-    const invitations = (await database.initializeCollections).invitations
+    const invitations = (await database.initializeCollections()).invitations
 
-    const result = invitations.deleteMany(
+    const result = await invitations.deleteMany(
         { $or: [
             { fromID: userIDToRemove },
             { toID: userIDToRemove }
           ]}
     )
-    }catch (err) {
-        return err;
-    }
-    
+    return result.deletedCount 
 }
 
 async function deleteActivitiesFromDeletedUser(userIDToRemove) {
-    try {
-        const result = (await database.initializeCollections()).activities.deleteMany(
-            { userID: userIDToRemove},
-            { $pull: { userID: userIDToRemove} }
+        const activities = (await database.initializeCollections()).activities
+        const result = await activities.deleteMany(
+            { userID: userIDToRemove}
         )
+        console.log(result)
+
         return result.deletedCount
-    }catch (err) {
-        return err
-    }
+
 }
 
 async function deleteReactionsFromDeletedUser(userIDToRemove) {
-    try {
-        const result = (await database.initializeCollections()).activities.deleteMany(
+        const activities = (await database.initializeCollections()).activities
+
+        const result = await activities.deleteMany(
             {
-                $or: Object.keys(database.reactionsTemplate).map(key => ({ [`reactions.${key}`]: userID }))
+                $or: Object.keys(database.reactionsTemplate).map(key => ({ [`reactions.${key}`]: userIDToRemove }))
             },
             {
                 $pull: Object.keys(database.reactionsTemplate).reduce((acc, key) => {
-                    acc[`reactions.${key}`] = userID;
+                    acc[`reactions.${key}`] = userIDToRemove;
                     return acc;
                   }, {})
             }
         )
+        console.log(result)
         return result.deletedCount
-    }catch (err) {
-        return err
-    }
-
 }
 
 module.exports = {

@@ -123,6 +123,10 @@ async function getActivities(req) {
     return await dbActivities.getActivities(req)
 }
 
+async function addReaction(req) {
+    return await dbActivities.addReaction(req)
+}
+
 async function uploadBeforePicture(activityID, fileExtension){
     return await dbActivities.uploadBeforePicture(activityID, fileExtension)
 }
@@ -178,13 +182,13 @@ async function initializeCollections() {
     const personalInformation = db.collection("personalInformation");
     const invitations = db.collection("invitations");
     const events = db.collection("events");
-    const activites = db.collection("activities");
+    const activities = db.collection("activities");
 
     return {
         personalInformation: personalInformation,
         invitations: invitations,
         events: events,
-        activites: activites
+        activities: activities
     };
 }
 
@@ -227,6 +231,7 @@ Object.assign(exports, {
     changeLastName,
     postActivity,
     getActivities,
+    addReaction,
     uploadAfterPicture,
     uploadBeforePicture,
     UsernameNotFoundError,

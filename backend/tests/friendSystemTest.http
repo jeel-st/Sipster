@@ -1,4 +1,4 @@
-@host = http://85.215.71.124
+@host = http://localhost:3000
 
 ###
 
@@ -17,7 +17,7 @@ Content-Type: application/json
 
 {
     "fromSipsterID": "gamsa",
-    "toSipsterID": "Crypto"
+    "toSipsterID": "cryp"
 }
 
 ###

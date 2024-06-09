@@ -7,10 +7,21 @@ Content-Type: application/json
 
 {
     "caption": "BeispielKommentar",
-    "userID": "666399b2836465f324792e54",
+    "userID": "661d09ba6671060e01a4fd3e",
     "gameID": "666399b2836465f324792e54"
 }
 
 ###
 
 GET {{host}}/activities/661d09ba6671060e01a4fd31
+
+###
+
+POST {{host}}/activities/addReaction HTTP/1.1
+Content-Type: application/json
+
+{
+    "userID": "661d09ba6671060e01a4fd3e",
+    "activityID": "6666311b8663e5335a54e9b4",
+    "reactionType": "beer"
+}

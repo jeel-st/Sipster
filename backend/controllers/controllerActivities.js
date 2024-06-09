@@ -54,10 +54,7 @@ async function deleteEvents(req, res){
 
 async function postBeforePicture(req, res){
     try{
-        console.log("Went into logic postBeforePicture")
         const result = await logicFile.uploadBeforePicture(req, res)
-        console.log("Result"+result)
-        
     }catch(error){
         console.error('Fehler beim Hochladen des Bildes:', error);
     }
@@ -65,11 +62,24 @@ async function postBeforePicture(req, res){
 
 async function postAfterPicture(req, res){
     try{
-        console.log("Went into logic postAfterPicture")
         const result = await logicFile.uploadAfterPicture(req, res)
     }catch(error){
         console.error('Fehler beim Hochladen des Bildes:', error);
 
+    }
+}
+
+async function addReaction(req, res) {
+    try{
+        const result = await database.addReaction(req)
+
+        if (result !== null) {
+            res.json("Reaction added successfully")
+        }else {
+            res.status(404).json("Something went wrong!")
+        }
+    }catch (err) {
+        res.status(404).json('Fehler beim Hochladen des Bildes:', error);
     }
 }
 
@@ -79,5 +89,6 @@ module.exports = {
     getActivities,
     deleteEvents,
     postBeforePicture,
-    postAfterPicture
+    postAfterPicture,
+    addReaction
 }

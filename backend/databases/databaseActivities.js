@@ -9,15 +9,17 @@ async function postActivity(req) {
     const userIDObj = new ObjectId(userID)
     const gameIDObj = new ObjectId(gameID)
 
+
     const reactions = database.reactionsTemplate
     const beforeImagePath = "";
     const afterImagePath = "";
 
-    const activityData = {beforeImagePath,  afterImagePath, reactions, caption, userIDObj, gameIDObj}
-    const activites = (await database.initializeCollections()).activites
-    log.info("Data to be inserted:" + activityData)
+    const activityData = {beforeImagePath,  afterImagePath, reactions, caption, 'userID': userIDObj, 'gameID': gameIDObj}
+    const activities = (await database.initializeCollections()).activities
+    log.info("Data to be inserted:")
+    console.log(activities)
     
-    let result = await activites.insertOne(activityData)
+    let result = await activities.insertOne(activityData)
     log.info("Result- Objekt: " + result)
     if(result.insertedId){
         console.log("Activity ID: " + result.insertedId)
@@ -30,7 +32,7 @@ async function postActivity(req) {
 async function getActivities(req) {
     const userID = req.params.userID
     const userIDObj = new ObjectId(userID)
-    const activites = (await database.initializeCollections()).activites
+    const activities = (await database.initializeCollections()).activities
     const personalInformation = (await database.initializeCollections()).personalInformation
     const user = (await personalInformation.findOne({_id: userIDObj}))
     if (user == null){
@@ -38,9 +40,9 @@ async function getActivities(req) {
     }else {
         const friends = user.friends
     }
-    const activitesData = await activites.find({ sipsterID: { $in: friends } }).toArray()
-   if (activitesData != null){
-        return activitesData
+    const activitiesData = await activities.find({ sipsterID: { $in: friends } }).toArray()
+   if (activitiesData != null){
+        return activitiesData
    }
 }
 
@@ -105,27 +107,33 @@ async function uploadAfterPicture(activityID, fileExtension) {
     }
 }
 
-async function addReaction(userID, activityID, reactionType) {
+async function addReaction(req) {
     try {
-        const activities = (await database.initializeCollections).activites
-        activityID = new ObjectId(activityID)
-        userID = new ObjectId(userID)
+        const {userID, activityID, reactionType} = req.body
+
+        const activities = (await database.initializeCollections()).activities
+        const activityIDObj = new ObjectId(activityID)
+        const userIDObj = new ObjectId(userID)
         const update = {
             $addToSet: {
-              [`reactions.${reactionType}`]: userID
+              [`reactions.${reactionType}`]: userIDObj
             }
           };
         
-        activities.updateOne(
-            {_id: activityID},
+        const result = await activities.updateOne(
+            {_id: activityIDObj},
             update
         )
+        if (result != null) {
         return ("Reaction added succesfully")
+        }else {
+            return "error"
+        }
     }catch (err) {
         return ("Error")
     }
 }
 
 module.exports = {
-    postActivity, getActivities, deleteEvents, uploadBeforePicture, uploadAfterPicture
+    postActivity, getActivities, deleteEvents, uploadBeforePicture, uploadAfterPicture, addReaction
 }

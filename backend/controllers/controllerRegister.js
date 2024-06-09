@@ -46,8 +46,10 @@ async function deleteRegister(req, res) {
             res.status(400).json("User was not found!")
         }else if (deleteUser == "Passwort ist inkorrekt") {
             res.status(400).json("Passwort für User inkorrekt!")
+        }else if (deleteUser == "Something went wrong with the connected deletions") {
+            res.status(404).json("Something went wrong with the connected deletions")
         }else {
-            res.status(404).json("Something went wrong")
+            res.status(404).json("Something went wrong!")
         }
 }
 
