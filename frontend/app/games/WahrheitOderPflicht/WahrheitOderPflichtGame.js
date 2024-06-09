@@ -1,3 +1,4 @@
+//Imports
 import React from 'react'
 import { View, Text, TouchableOpacity, Image, ScrollView } from 'react-native'
 import { AntDesign } from '@expo/vector-icons';
@@ -5,11 +6,18 @@ import classNames from '../WahrheitOderPflicht/utils/classNames'
 import { router } from 'expo-router';
 import { TextInput } from 'react-native';
 import { player } from './utils/player';
-import PlayerList from './components/PlayerList';
+
+/*
+WahrheitOderPflichtGame starts the Game and allow the player to add all other players 
+
+@return  -> returns the WahrheitOderPflichtGame components 
+@param list: component -> list of players who have been added
+
+*/
 
 
 export default function WahrheitOderPflichtGame() {
-    const { handleInputChange, handlePlayer, players, inputValue, handleNextPlayer, list, handleAllPlayer} = player();
+    const { handleInputChange, handlePlayer, inputValue, list, handleAllPlayer} = player();
 
     return (
 
@@ -34,8 +42,12 @@ export default function WahrheitOderPflichtGame() {
                 </TouchableOpacity>
             </View>
 
+
+
+            {/* Game Header */}
             <View className={classNames(
             'flex-1 ',)}>
+
                 <View className={classNames(
                 'mt-4 mx-6')}>
                     <Text className={classNames(
@@ -52,14 +64,18 @@ export default function WahrheitOderPflichtGame() {
                 </View>
 
 
+                
+
                 <ScrollView showsVerticalScrollIndicator={false} className={classNames(
                 'mt-4 mx-6 mb-20 w-100% ')}>
                     <Text className={classNames(
                             'font-bold text-xl text-white',
                         )}>Mitspieler:</Text>
                         
+                    {/* current List of Players */}    
                     <Text> {list} </Text>
 
+                    {/* Input Field for the Players name  */}
 
                     <TextInput className={classNames(
                     'pl-2 m-1 mt-4', // spacing 
@@ -70,15 +86,14 @@ export default function WahrheitOderPflichtGame() {
                     onChangeText={handleInputChange}
                     onSubmitEditing={handlePlayer}
                     placeholder='Player Name' />
-
-                    
-
                   
                 </ScrollView>
 
 
                 <View className={classNames(
                 'mt-4 mx-20 absolute bottom-4 ')}>
+
+                    {/* Start Button  */}
                     <TouchableOpacity className={classNames(
                         'justify-center items-center', // position
                         'px-6 py-4 mt-5', // spacing 
@@ -95,6 +110,8 @@ export default function WahrheitOderPflichtGame() {
                             )}>
                                 Start the Game  </Text>
                     </TouchableOpacity>
+
+
                 </View>
             </View>
         </View>
