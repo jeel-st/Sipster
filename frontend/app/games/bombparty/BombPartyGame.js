@@ -4,7 +4,7 @@ import useBombParty from './utils/useBombParty'
 import { AntDesign, FontAwesome5 } from '@expo/vector-icons';
 import classNames from '../bombparty/utils/classNames'
 import { useRouter } from 'expo-router';
-import { quitGame } from '../../utils/hooks/useGameQuit';
+import { quitGame } from '../../utils/navigator';
 
 export default function BombPartyGame({activity}) {
     const router = useRouter();

@@ -4,7 +4,7 @@ import classNames from '../beerpongExtreme/utils/classNames'
 import { useRouter } from 'expo-router';
 import Category from './components/Category';
 import useBeerPongExtreme from './utils/useBeerPongExtreme';
-import { quitGame } from '../../utils/hooks/useGameQuit';
+import { quitGame } from '../../utils/navigator';
 
 export default function BeerpongExtreme({ activity }) {
     const router = useRouter();

@@ -2,7 +2,7 @@
 import { useRouter } from 'expo-router'
 import { gameLog } from '../logger/config';
 
-export const useGameQuit = (game) => {
+const useGameQuit = (game) => {
     const router = useRouter()
 
     // Function to handle navigation back to previous screen
@@ -14,10 +14,4 @@ export const useGameQuit = (game) => {
     return { handlePress }
 }
 
-export default quitGame = (activity, router) => {
-    if(activity.withSips) {
-        router.navigate({ pathname: "/routes/GameQuitPage", params: { activity: JSON.stringify(activity) } })
-    } else {
-        router.navigate('(tabs)/games')
-    }
-}
+export default useGameQuit;
