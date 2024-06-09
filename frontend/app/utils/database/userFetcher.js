@@ -69,6 +69,11 @@ export default function useUser() {
     return user;
 }
 
+/*export function saveEvent() {
+    // ich brauche noch den richtigen Endpoint
+}
+*/
+
 // Function to clear the user data from AsyncStorage
 export async function clearUser() {
     await AsyncStorage.clear()

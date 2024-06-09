@@ -2,6 +2,7 @@
 import EventBtn from './events/EventBtn';
 import EventInfoCard from './events/EventInfoCard';
 import Events from './events/Events';
+import SavedEvents from './events/savedEvents';
 
 // Friends imports
 import FriendBtn from './friends/FriendBtn';
@@ -62,7 +63,7 @@ import { RefreshContext } from './provider/RefreshProvider';
 
 export {
   // Events
-  EventBtn, EventInfoCard, Events,
+  EventBtn, EventInfoCard, Events, SavedEvents,
 
   // Friends
   FriendBtn, FriendBtn2, FriendsCategorys, FriendsContainer, FriendsHeaderButtons, FriendsScrollView, FriendsTabButton,

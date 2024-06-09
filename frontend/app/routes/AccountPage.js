@@ -5,11 +5,12 @@ import { React } from "react";
 import { router } from 'expo-router'
 import useUser from '../utils/database/userFetcher';
 import { NativeBaseProvider, View } from "native-base";
-import { FriendsScrollView, FriendsSkeleton, IconButton } from "../components";
+import { FriendsScrollView, FriendsSkeleton, IconButton, SavedEvents } from "../components";
 import { classNames } from "../utils";
 import { fetchProfilePictureCompressed } from '../utils/database/imageFetcher';
 import { navBarColor } from "../utils/navBarColor";
 import { useAccount } from "../utils/hooks/useAccount";
+import { useEventDisplay } from '../utils';
 
 /*
 Front end of the AccountPage.
@@ -29,10 +30,11 @@ export default function AccountPage() {
 
     // import of the logik 
     const { level, levelInfo } = useAccount();
+    const { displayEvent, handleEventSelection } = useEventDisplay();
 
     return (
         <NativeBaseProvider>
-            <SafeAreaView className="flex-1 bg-primary">
+            <SafeAreaView className={classNames('flex-1 bg-primary')} contentContainerStyle={{ flexGrow: 1 }}>
 
                 <View>
 
@@ -105,9 +107,7 @@ export default function AccountPage() {
                     </View>
 
                     {/* Events */}
-                    <View className={styles.spaceText}>
-                        <Text className={styles.categoryText}>saved events</Text>
-                    </View>
+                    <SavedEvents onSelectEvent={handleEventSelection} selectedEvent={displayEvent} />
 
                     {/* Friends */}
                     <Pressable className={styles.spaceText}
