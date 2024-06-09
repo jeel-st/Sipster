@@ -21,7 +21,7 @@ import { emojis } from '../../constants/games';
 */
 export default function GameActivity({ user, game, taggedFriends }) {
     const cameraRef = useRef(null);
-    const { image, setImage, type, setType, flash, setFlash, takePicture, caption, setCaption, handlePress } = useGameActivity(cameraRef, game, taggedFriends);
+    const { image, setImage, type, setType, flash, setFlash, takePicture, caption, setCaption, handlePress } = useGameActivity(user, cameraRef, game, taggedFriends);
 
     return (user &&
         <View className={classNames(
@@ -67,7 +67,7 @@ export default function GameActivity({ user, game, taggedFriends }) {
                 )}>
                     {image ?
                         <Image
-                            source={{ uri: image }}
+                            source={{ uri: image.uri }}
                             className='w-full h-full rounded-2xl' /> :
                         <CameraView
                             facing={type}

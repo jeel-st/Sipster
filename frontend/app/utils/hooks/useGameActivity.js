@@ -4,8 +4,9 @@ import { Camera } from "expo-camera";
 import { CameraType, FlashMode } from 'expo-camera/build/legacy/Camera.types';
 import { useRouter } from 'expo-router'
 import { gameLog } from '../logger/config';
+import { sendActivity } from '../database/activityFetcher';
 
-const useGameActivity = (cameraRef, game, taggedFriends) => {
+const useGameActivity = (user, cameraRef, game, taggedFriends) => {
     // State variables for camera permission, captured image, camera type, flash mode, and caption
     const [hasCameraPermission, setHasCameraPermission] = useState(null)
     const [image, setImage] = useState(null)
@@ -30,7 +31,7 @@ const useGameActivity = (cameraRef, game, taggedFriends) => {
         if (cameraRef.current) {
             // Capture picture and update URI
             const photo = await cameraRef.current.takePictureAsync()
-            setImage(photo.uri)
+            setImage(photo)
             // Turn off flash
             setFlash(FlashMode.off)
             gameLog.info('Picture taken')
@@ -39,6 +40,7 @@ const useGameActivity = (cameraRef, game, taggedFriends) => {
 
     // Function to handle navigation back to previous screen
     const handlePress = () => {
+        sendActivity(user, game, image, caption)
         router.navigate({ pathname: "/routes/GameFactory", params: game })
     }
 
