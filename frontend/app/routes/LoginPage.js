@@ -11,6 +11,8 @@ import { useNavBarColor } from '../utils/hooks/useNavBarColor';
 /*
 Front end of the LoginPage.
 Typ: Page/route
+
+@return:    JSX -> returns the LoginPage component
 */
 export default function LoginPage() {
 

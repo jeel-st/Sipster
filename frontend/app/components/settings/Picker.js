@@ -12,6 +12,9 @@ import { userLog } from '../../utils/logger/config';
 /*
 This component can be used to upload your own and new profile pictures.
 Typ: Component from settings
+
+@param change   function -> Passes a function to close the expanded element.
+@return         JSX -> returns a component to pick a new profil picture
 */
 export default function Picker({ change }) {
 

@@ -12,10 +12,13 @@ import { navBarColor } from "../utils/navBarColor";
 /*
 Front end of the SettingsPage.
 Typ: Page/route
+
+@return:    JSX -> returns the SettingsPage component
 */
 
-// Background is set depending on the operating system
 export default function SettingsPage() {
+
+    // Background is set depending on the operating system
     navBarColor(styles.Colors.primary)
 
     // CSS properties of the ChangeButtons

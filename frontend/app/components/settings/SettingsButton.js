@@ -8,8 +8,9 @@ import { classNames } from '../../utils';
 This component displays the general Settingsbutton where you can change specific information such as the username.
 Typ: Component from settings 
 
-@ title
-@ onPress       -> Executes a specific function.
+@param title        string -> title of the button 
+@param onPress      function -> Executes a specific function.
+@return             JSX -> returns a SettingsButton 
 */
 export default function SettingsButton({ title, onPress }) {
     return (

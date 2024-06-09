@@ -5,14 +5,11 @@ import axiosInstance from './axiosConfig';
 import { userLog } from '../logger/config';
 
 /*
-Database request to query user in database
+Database request to change user information in database
 Typ: utils from settings
 
-@ changeUsername
-@ changeFirstname
-@ changeLastname
-@ changePassword
-@ changeEmail
+@return: object ->  An object containing functions for changing username, password, email, 
+last name, and first name, as well as functions for managing settings errors and deleting the account.
 */
 export function settingsFetcher() {
 
@@ -21,6 +18,7 @@ export function settingsFetcher() {
     // useState() -> Hook function of React to trade states
     const [settingsError, setSettingsError] = useState('');
 
+    // function to change the username
     const changeUsername = (newUsername) => {
 
         axiosInstance.post('/user/changeUsername',
@@ -48,6 +46,7 @@ export function settingsFetcher() {
             });
     };
 
+    // function to change the first name
     const changeFirstName = (firstName) => {
 
         axiosInstance.put('/user/changeFirstName',
@@ -75,6 +74,7 @@ export function settingsFetcher() {
             });
     };
 
+    // function to change the last name
     const changeLastName = (lastName) => {
 
         axiosInstance.put('/user/changeLastName',
@@ -102,6 +102,7 @@ export function settingsFetcher() {
             });
     };
 
+    // function to change the password
     const changePassword = (password) => {
 
         axiosInstance.post('/user/changePassword',
@@ -129,6 +130,7 @@ export function settingsFetcher() {
             });
     };
 
+    // function to change the email 
     const changeEmail = (email) => {
 
         axiosInstance.post('/user/changeEmail',
@@ -156,6 +158,7 @@ export function settingsFetcher() {
             });
     };
 
+    // function to delete the account 
     const deleteAccount = () => {
 
         axiosInstance.delete(`/register/${user.username}/${user.password} HTTP/1.1`)

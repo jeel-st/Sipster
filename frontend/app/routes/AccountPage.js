@@ -15,15 +15,19 @@ import { useAccount } from "../utils/hooks/useAccount";
 Front end of the AccountPage.
 All user information is displayed and managed here.
 Typ: Page/route
+
+@return:    JSX -> returns the AccountPage component.
 */
 
-// Background is set depending on the operating system
 export default function AccountPage() {
 
+    // Background is set depending on the operating system
     navBarColor(styles.Colors.secondary)
 
     // logged in user is called
     const user = useUser();
+
+    // import of the logik 
     const { level, levelInfo } = useAccount();
 
     return (
@@ -84,7 +88,7 @@ export default function AccountPage() {
                         </View>
                     </View>
 
-                    {/* Map */}
+                    {/* Badges */}
                     <View className={classNames(
                         'flex items-center justify-center', // position
                         'mt-6 mx-6', // spacing

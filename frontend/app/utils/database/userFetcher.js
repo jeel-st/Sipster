@@ -1,3 +1,4 @@
+// imports
 import { useEffect, useState } from "react";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import User from "../../entitys/user";
@@ -70,6 +71,8 @@ export default function useUser() {
 
 // Function to clear the user data from AsyncStorage
 export async function clearUser() {
-    await AsyncStorage.removeItem('user');
+    await AsyncStorage.clear()
     userLog.debug("User data cleared successfully.");
 }
+
+

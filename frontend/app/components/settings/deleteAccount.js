@@ -8,15 +8,14 @@ import { Colors } from '../../constants/styles';
 import { classNames } from '../../utils';
 
 /* 
-This component renders a button with a warning icon and "delete Account"-Text.
+This component displays a deleteAccount button with a popover that allows you to delete your account.
 Type: Component from settings 
 
-React.forwardRef            ->  This is a function from React that is used to enable the forwarding of refs in function components. 
-                                By using React.forwardRef, refs can be forwarded from parent components to subordinate components.
-@ ...props                  ->  The ...props syntax captures all other props that are passed to the component and packs them into an object called props. 
-@ ref                       ->  The ref argument enables the component to receive refs from higher-level components.
+@param ...props    object ->  The ...props syntax captures all other props that are passed to the component and packs them into an object called props. 
+@param ref         React.ref ->  The ref argument enables the component to receive refs from higher-level components.
+@return            JSX -> returns a deleteAccount button with a popover
 */
-const DeleteAccount = React.forwardRef(({ ...props }, ref) => {
+const DeleteAccount = ({ ...props }, ref) => {
 
     // Import the logic for the changeUsername component from changeSettingsLogic.js
     const { handleDeleteAccount } = useSettings();
@@ -81,6 +80,6 @@ const DeleteAccount = React.forwardRef(({ ...props }, ref) => {
             </Popover.Content>
         </Popover>
     );
-});
+};
 
 export default DeleteAccount;

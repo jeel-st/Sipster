@@ -6,7 +6,7 @@ import { userLog } from '../logger/config';
 Database request to query user in database
 Typ: utils from register
 
-@ register
+@return     object -> An object containing the register function, a string representing register errors, and a function to set register errors.
 */
 export function useRegister() {
 
