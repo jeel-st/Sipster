@@ -17,12 +17,14 @@ export function useLogin() {
     const login = (username, password, setLoginError, onLoginSuccess) => {
         axiosInstance.get(`/login/${username}/${password}`)
             .then(response => {
+                userLog.info(response)
                 userLog.debug("A suitable user has been found.")
                 setLoginError('');
                 if (onLoginSuccess) { onLoginSuccess() };
             })
             .catch(error => {
                 userLog.error("Login failed. Please check your login information.", error)
+                setLoginError('Login failed. Please check your login information.');
             })
     }
 
