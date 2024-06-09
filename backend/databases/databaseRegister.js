@@ -88,10 +88,13 @@ async function deleteUser(req){
 
             const deletedReactions = await deleteReactionsFromDeletedUser(userID)
 
+            const deletedInvitations = await deleteUserFromInvitation(userID)
+
             log.info(`
             User was deleted from ${deletedFromFriends} friend(s).
-            ${deletedActivities} Activitie(s) from the user were deleted.
-            ${deletedReactions} Reaction(s) from the user were deleted.
+            ${deletedActivities.deletedCount} Activitie(s) from the user were deleted.
+            ${deletedReactions.deletedCount} Reaction(s) from the user were deleted.
+            ${deletedInvitations.deletedCount}
             `)
             }catch (err) {
                 throw new Error("Something went wrong with the connected deletions: " + err)
@@ -116,6 +119,22 @@ async function deleteUserFromFriends(userIDToRemove) {
         { friends: userIDToRemove},
         { $pull: { friends: userIDToRemove} }
     );
+}
+
+async function deleteUserFromInvitation(userIDToRemove) {
+    try {
+    const invitations = (await database.initializeCollections).invitations
+
+    const result = invitations.deleteMany(
+        { $or: [
+            { fromID: userIDToRemove },
+            { toID: userIDToRemove }
+          ]}
+    )
+    }catch (err) {
+        return err;
+    }
+    
 }
 
 async function deleteActivitiesFromDeletedUser(userIDToRemove) {

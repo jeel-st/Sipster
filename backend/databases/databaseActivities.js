@@ -28,16 +28,19 @@ async function postActivity(req) {
 }
 
 async function getActivities(req) {
-    const username = req.params.username
+    const userID = req.params.userID
+    const userIDObj = new ObjectId(userID)
     const activites = (await database.initializeCollections()).activites
     const personalInformation = (await database.initializeCollections()).personalInformation
-    const sipsterID = await database.getSipsterID(username)
-    const friends = (await personalInformation.findOne({_id: sipsterID})).friends
+    const user = (await personalInformation.findOne({_id: userIDObj}))
+    if (user == null){
+        return 'no activity was found by that user!';
+    }else {
+        const friends = user.friends
+    }
     const activitesData = await activites.find({ sipsterID: { $in: friends } }).toArray()
    if (activitesData != null){
         return activitesData
-   }else {
-        return null;
    }
 }
 

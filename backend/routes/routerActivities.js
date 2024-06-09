@@ -7,7 +7,7 @@ router.use(logMiddleware);
 const activitesController = require('../controllers/controllerActivities')
 
 router.post('/postActivity', activitesController.postActivity)
-router.get('/:username', activitesController.getActivities)
+router.get('/:userID', activitesController.getActivities)
 router.put('/postBeforePicture', activitesController.postBeforePicture)
 router.put('/postAfterPicture', activitesController.postAfterPicture)
 
