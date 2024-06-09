@@ -18,7 +18,7 @@ import { gameLog } from '../utils/logger/config'
     @return: JSX -> returns the GamePage component
 */
 export default function GamePage() {
-    const { user, game, friends, taggedFriends, handleTaggedFriends, isTagged, isPressed, handlePress } = useGame()
+    const { user, game, friends, taggedFriends, handleTaggedFriends, isTagged, isPressed, handlePress, activity } = useGame()
 
     navBarColor(styles.Colors.primary)
 
@@ -27,7 +27,7 @@ export default function GamePage() {
             'flex-1', // position
             'bg-primary' // styling
         )}>
-            {isPressed && <GameActivity user={user} game={game} taggedFriends={taggedFriends} />}
+            {isPressed && <GameActivity activity={activity} />}
             <SafeAreaView className={classNames('flex-1')}>
 
                 {/* Blurred Background with Gradient*/}
@@ -74,8 +74,8 @@ export default function GamePage() {
                         </ScrollView>
                     </View>
 
-                    {game.status === "available" && <GameGoBtn handlePress={handlePress} text="Go" color="bg-yellow"/> }
-                    {game.status === "unavailable" && <GameGoBtn handlePress={() => gameLog.warn("Game unavailable")} text={game.status} color="bg-red-500"/> }
+                    {game.status === "available" && <GameGoBtn handlePress={handlePress} text="Go" color="bg-yellow" />}
+                    {game.status === "unavailable" && <GameGoBtn handlePress={() => gameLog.warn("Game unavailable")} text={game.status} color="bg-red-500" />}
                 </View>
             </SafeAreaView>
         </View>

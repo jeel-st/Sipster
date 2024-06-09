@@ -18,6 +18,7 @@ export default function AppLayout() {
             <Stack.Screen name='routes/AccountPage' options={{ headerShown: false, animation: 'fade_from_bottom' }} />
             <Stack.Screen name='routes/SettingsPage' options={{ headerShown: false, animation: 'fade_from_bottom' }} />
             <Stack.Screen name='routes/GameFactory' options={{ headerShown: false, animation: 'fade_from_bottom' }} />
+            <Stack.Screen name='routes/GameQuitPage' options={{ headerShown: false, animation: 'fade_from_bottom' }} />
             <Stack.Screen name='index' options={{ headerShown: false, animation: 'fade_from_bottom' }} />
         </Stack>
     )

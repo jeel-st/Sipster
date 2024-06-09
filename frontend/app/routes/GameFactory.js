@@ -3,6 +3,7 @@ import React, { Suspense, lazy } from 'react'
 import { useLocalSearchParams } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { classNames } from '../utils';
+import { gameLog } from '../utils/logger/config';
 
 /*
     loadGameComponent is a function that loads the game component based on the game name.
@@ -11,11 +12,13 @@ import { classNames } from '../utils';
     @param game: string -> the game name
     @return:    Component -> returns the game component
 */
-const loadGameComponent = (game) => {
-    switch (game) {
+const loadGameComponent = (activity) => {
+    switch (activity.game.name) {
         case 'Bomb Party':
+            gameLog.info('Loading Bomb Party Game')
             return lazy(() => import('../games/bombparty/BombPartyGame'));
         case 'Beer Pong':
+            gameLog.info('Loading Beer Pong Game')
             return lazy(() => import('../games/beerpongExtreme/BeerpongExtreme'));
         case 'gameC':
             return lazy(() => import('../games/bombparty/BombPartyGame'));
@@ -31,7 +34,7 @@ const loadGameComponent = (game) => {
     @param text: string -> the text to display
     @return:    JSX -> returns the Fallback component
 */
-const Fallback = ({text}) => {
+const Fallback = ({ text }) => {
     return <View className={classNames(
         'flex-1 justify-center items-center',
     )}>
@@ -48,15 +51,15 @@ const Fallback = ({text}) => {
     @return: JSX -> returns the GameFactory component
 */
 export default function GameFactory() {
-    const game = useLocalSearchParams();
-    const GameComponent = loadGameComponent(game.name);
+    const activity = JSON.parse(useLocalSearchParams().activity);
+    const GameComponent = loadGameComponent(activity);
 
     return (
         <SafeAreaView className={classNames(
             'flex-1',
             'bg-primary')}>
-            <Suspense fallback={<Fallback text={"Loading..."}/>}>
-                <GameComponent />
+            <Suspense fallback={<Fallback text={"Loading..."} />}>
+                <GameComponent activity={activity} />
             </Suspense>
         </SafeAreaView>
     );

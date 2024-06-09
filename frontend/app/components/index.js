@@ -20,6 +20,7 @@ import GameActivity from './games/GameActivity';
 import GamesPerCategory from './games/GamesPerCategory';
 import GameCameraBtn from './games/GameCameraBtn';
 import GameGoBtn from './games/GameGoBtn';
+import GameAcitvityPost from './games/GameAcitvityCam';
 
 
 // Layout imports
@@ -69,7 +70,7 @@ export {
   FriendBtn, FriendBtn2, FriendsCategorys, FriendsContainer, FriendsHeaderButtons, FriendsScrollView, FriendsTabButton,
 
   // Games
-  GameCard, Games, GameFriendBtn, GameActivity,  GamesPerCategory, GameCameraBtn, GameGoBtn,
+  GameCard, Games, GameFriendBtn, GameActivity,  GamesPerCategory, GameCameraBtn, GameGoBtn, GameAcitvityPost,
 
   // Layout
   IconButton, SipsterButton, SmallTextField, TagCard, TextField, ErrorMessage,

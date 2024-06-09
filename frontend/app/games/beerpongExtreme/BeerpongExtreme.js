@@ -1,11 +1,13 @@
 import React from 'react'
 import { View, Text, TouchableOpacity, Image } from 'react-native'
 import classNames from '../beerpongExtreme/utils/classNames'
-import { router } from 'expo-router';
+import { useRouter } from 'expo-router';
 import Category from './components/Category';
 import useBeerPongExtreme from './utils/useBeerPongExtreme';
+import { quitGame } from '../../utils/hooks/useGameQuit';
 
-export default function BeerpongExtreme() {
+export default function BeerpongExtreme({ activity }) {
+    const router = useRouter();
     const { isPlaying, isReady, category, challenge, handleStartGame, handleIsReady } = useBeerPongExtreme()
 
     return (
@@ -34,24 +36,24 @@ export default function BeerpongExtreme() {
                 </Text>
 
                 {!isPlaying &&
-                <View className={classNames(
-                    'flex justify-center items-center',
-                    'py-8 px-2 mt-4',
-                    'w-[90%] h-[70%]',
-                    'bg-primary rounded-3xl'
-                )}>
-                    <TouchableOpacity onPress={handleStartGame} disabled={isPlaying} className={classNames(
-                        'w-96 h-96',
+                    <View className={classNames(
+                        'flex justify-center items-center',
+                        'py-8 px-2 mt-4',
+                        'w-[90%] h-[70%]',
+                        'bg-primary rounded-3xl'
                     )}>
-                        {/* Beerpong Cup */}
-                        <Image className="w-full h-full" source={require('../beerpongExtreme/assets/images/beer-pong-illustration2.png')} />
-                    </TouchableOpacity>
-                </View>
+                        <TouchableOpacity onPress={handleStartGame} disabled={isPlaying} className={classNames(
+                            'w-96 h-96',
+                        )}>
+                            {/* Beerpong Cup */}
+                            <Image className="w-full h-full" source={require('../beerpongExtreme/assets/images/beer-pong-illustration2.png')} />
+                        </TouchableOpacity>
+                    </View>
                 }
-                {isPlaying && <Category handlePress={handleIsReady} category={category} challenge={challenge} isReady={isReady}/>}
+                {isPlaying && <Category handlePress={handleIsReady} category={category} challenge={challenge} isReady={isReady} />}
 
                 <TouchableOpacity
-                    onPress={() => { router.navigate('(tabs)/games') }}
+                    onPress={() => quitGame(activity, router)}
                     className={classNames(
                         'flex justify-center items-center',
                         'py-1 px-6 my-4',
