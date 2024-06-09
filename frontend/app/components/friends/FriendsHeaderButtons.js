@@ -1,4 +1,4 @@
-import { View, Pressable, TextInput, Keyboard, TouchableOpacity } from 'react-native'
+import { View, Pressable, TextInput, TouchableOpacity } from 'react-native'
 import { FontAwesome } from '@expo/vector-icons'
 import { classNames } from '../../utils'
 import { router } from 'expo-router'
