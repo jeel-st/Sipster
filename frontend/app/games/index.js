@@ -1,3 +1,4 @@
 import BombPartyGame from "./bombparty/BombPartyGame";
+import BeerpongExtreme from "./beerpongExtreme/BeerpongExtreme";
 
-export { BombPartyGame };
+export { BombPartyGame, BeerpongExtreme };
