@@ -18,12 +18,13 @@ async function postUser(req){
     const registerDate = new Date(timestamp).toISOString();
     const profilePicture = null
     const profilPictureC = null
+    const sips = 0
 
     encryptedPasswordAndSalt = await encryptPassword(password)
     encryptedPassword = encryptedPasswordAndSalt[0]
     salt = encryptedPasswordAndSalt[1]
     
-    const personalData = { username, profilePicture, profilPictureC, encryptedPassword, salt, email, firstName, lastName, registerDate, friends }
+    const personalData = { username, profilePicture, profilPictureC, encryptedPassword, salt, email, firstName, lastName, registerDate, friends, sips }
     
     const usernameFinder = await database.getDB().collection("personalInformation").findOne({ username: username})
     const emailFinder = await database.getDB().collection("personalInformation").findOne({ email: email })
