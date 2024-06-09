@@ -6,6 +6,7 @@ profilePictures/
 *.log
 
 # Expo
+android/
 .expo/
 dist/
 web-build/
