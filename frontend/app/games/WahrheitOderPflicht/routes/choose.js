@@ -4,6 +4,10 @@ import { AntDesign, FontAwesome5 } from '@expo/vector-icons';
 import classNames from '../utils/classNames'
 import { router } from 'expo-router';
 import { useNavigation } from '@react-navigation/native';
+import { player } from '../utils/player';
+import { useEffect } from 'react';
+import currentPlayer from '../constants/currentPlayers';
+
 
  export default function choose() {
 
@@ -12,6 +16,11 @@ import { useNavigation } from '@react-navigation/native';
     React.useLayoutEffect(() => {
     navigation.setOptions({ headerShown: false }); // Header ausblenden
     }, [navigation]);
+
+    
+    const randomIndex = Math.floor(Math.random() * currentPlayer.length);
+    const nextPlayer = currentPlayer[randomIndex];
+    console.log(nextPlayer + ' ist dran')
 
      return (
          <View className={classNames(
@@ -47,7 +56,12 @@ import { useNavigation } from '@react-navigation/native';
                      <Text className={classNames(
                              'font-bold text-xl text-white',
                          )}>
-                             Wer drann ist  
+                             {nextPlayer}
+                     </Text>
+                     <Text className={classNames(
+                             'font-bold text-xl text-white',
+                         )}>
+                             du bist dran... 
                      </Text>
                  </View>
  
@@ -60,7 +74,7 @@ import { useNavigation } from '@react-navigation/native';
                         'w-100% h-60', // sizing
                         'rounded-3xl shadow-md shadow-black bg-yellow' // styling
                         )}
-                        onPress={() => {router.navigate('/games/WahrheitOderPflicht/routes/truth')}}
+                        onPress={() => {router.navigate('/games/WahrheitOderPflicht/routes/truthPage')}}
                         >
                             <Text className={classNames(
                                 'text-center', // position
@@ -75,7 +89,7 @@ import { useNavigation } from '@react-navigation/native';
                         'w-100% h-60', // sizing
                         'rounded-3xl shadow-md shadow-black bg-purple' // styling
                         )}
-                        onPress={() => {router.navigate('/games/WahrheitOderPflicht/routes/dare')}}
+                        onPress={() => {router.navigate('/games/WahrheitOderPflicht/routes/darePage')}}
                         >
                             <Text className={classNames(
                                 'text-center', // position

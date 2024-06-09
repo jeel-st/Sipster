@@ -1,5 +1,5 @@
 import choose from './choose';
-import truth from './truth';
-import dare from './dare'
+import truthPage from './truthPage';
+import darePage from './darePage'
 
-export{choose, truth, dare};
+export{choose, truthPage, darePage};
