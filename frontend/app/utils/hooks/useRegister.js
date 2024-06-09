@@ -53,8 +53,14 @@ export function useRegisterLogic() {
             return;
         }
 
+        // removes blanks
+        const trimmedFirstname = firstName.trim();
+        const trimmedLastname = lastName.trim();
+        const trimmedUsername = username.trim();
+        const trimmedEmail =  email.trim();
+
         /* If text fields are filled in, a new user is created */
-        register(firstName, lastName, username, email, password, () => {
+        register(trimmedFirstname, trimmedLastname, trimmedUsername, trimmedEmail, password, () => {
             userLog.debug("Registration successful.")
             router.navigate('routes/LoginPage');
         });

@@ -60,7 +60,10 @@ export function useSettings() {
             /* If the text field is filled in, the new username is saved */
             userLog.debug("changeUsername details have been entered.")
 
-            changeUsername(username)
+            // removes blank
+            trimmedUsername = username.trim()
+
+            changeUsername(trimmedUsername)
 
         }
     }
@@ -76,7 +79,10 @@ export function useSettings() {
             /* If the text field is filled in, the new lastname is saved */
             userLog.debug("changeFirstName details have been entered.")
 
-            changeFirstName(firstName)
+            // removes blank
+            trimmedFirstname = firstName.trim()
+
+            changeFirstName(trimmedFirstname)
 
         }
     }
@@ -92,7 +98,10 @@ export function useSettings() {
             /* If the text field is filled in, the new lastname is saved */
             userLog.debug("changeLastName details have been entered.")
 
-            changeLastName(lastName)
+            // removes blank
+            trimmedLastname = lastName.trim()
+
+            changeLastName(trimmedLastname)
 
         }
     }
@@ -128,7 +137,10 @@ export function useSettings() {
             /* If the text field is filled in, the new email is saved */
             userLog.debug("changeEmail details have been entered.")
 
-            changeEmail(email);
+            // removes blank
+            trimmedEmail = email.trim()
+
+            changeEmail(trimmedEmail);
         }
     }
 
