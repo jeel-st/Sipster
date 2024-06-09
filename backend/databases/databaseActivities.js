@@ -9,12 +9,7 @@ async function postActivity(req) {
     const userIDObj = new ObjectId(userID)
     const gameIDObj = new ObjectId(gameID)
 
-    const reactions = {
-        "beer": [],
-        "love": [],
-        "barf": [],
-        "party": []
-    }
+    const reactions = database.reactionsTemplate
     const beforeImagePath = "";
     const afterImagePath = "";
 
