@@ -9,6 +9,7 @@ import { FriendsScrollView, FriendsSkeleton, IconButton } from "../components";
 import { classNames } from "../utils";
 import { fetchProfilePictureCompressed } from '../utils/database/imageFetcher';
 import { navBarColor } from "../utils/navBarColor";
+import { useAccount } from "../utils/hooks/useAccount";
 
 /*
 Front end of the AccountPage.
@@ -23,11 +24,7 @@ export default function AccountPage() {
 
     // logged in user is called
     const user = useUser();
-
-    // Styling: Tailwind rendering as a constant because we use it more then one.
-    const text = classNames(
-        'text-center text-2xl font-bold' // styling
-    );
+    const { level, levelInfo } = useAccount();
 
     return (
         <NativeBaseProvider>
@@ -64,7 +61,7 @@ export default function AccountPage() {
                             'h-40 w-40', // sizing
                             'rounded-3xl shadow-md shadow-black bg-yellow' // styling
                         )}>
-                            <Text className='text-center text-xl font-bold'>Level 8</Text>
+                            <Text className='text-center text-xl font-bold'>Level {level}</Text>
                             <Text className='text-center'>______</Text>
                             <View className="flex-row items-center">
                                 <Text className='text-center text-3xl font-bold mt-2 mr-2'>{user && user.sips}</Text>
@@ -94,7 +91,13 @@ export default function AccountPage() {
                         'h-40', // sizing
                         'rounded-3xl shadow-md shadow-black bg-purple' // styling
                     )}>
-                        <Text className={text}>Map</Text>
+                        <View className='flex-row items-center'>
+                            <Image style={{ width: 100, height: 80, resizeMode: 'contain' }} source={levelInfo.image} />
+                            <View className='ml-4'>
+                            <Text className='text-2xl font-bold'>{levelInfo.header}</Text>
+                            <Text className='text-xl'>{levelInfo.text}</Text>
+                            </View>
+                        </View>
                     </View>
 
                     {/* Events */}
