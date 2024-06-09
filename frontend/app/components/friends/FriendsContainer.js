@@ -24,7 +24,7 @@ export default function FriendsContainer({ friends, searchText, user, selectedTa
 
     return (
         <NativeBaseProvider>
-            <View className={classNames('px-4 pt-4 space-y-3')}>
+            <View className={classNames('flex-1 px-4 pt-4 space-y-3')}>
 
                 {/*Friends Counter Text*/}
                 <Text className='text-white font-thin'>
@@ -46,7 +46,7 @@ export default function FriendsContainer({ friends, searchText, user, selectedTa
                 )}
 
                 {/*Friend ScrollView Container*/}
-                <ScrollView showsVerticalScrollIndicator={false}>
+                <ScrollView showsVerticalScrollIndicator={false} >
 
                     {/*Show friendsskeleton if no friends found*/}
                     {(filteredFriends.length === 0 && searchFriends.length === 0) && FriendsH2Skeleton()}
