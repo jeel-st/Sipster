@@ -2,7 +2,6 @@ import { View, Text, Image } from 'react-native'
 import { classNames } from '../../utils'
 import { formatDate } from '../../utils/formDate'
 import TagCard from '../layout/TagCard'
-import useUser from '../../utils/database/userFetcher'
 import { fetchProfilePicture } from '../../utils/database/imageFetcher'
 
 /*
@@ -27,7 +26,8 @@ export default function ProfileCard({ friend }) {
                 source={{ uri: fetchProfilePicture(friend) }}
                 className={classNames(
                     'mt-[-22.5%]', // position
-                    'w-44 h-44 rounded-full' // sizing
+                    'w-44 h-44', // sizing
+                    'rounded-full' // styling
                 )} />
 
             {/* Profile Fullname Text*/}
