@@ -13,9 +13,12 @@ const log = require("../logging/logger")
 async function getLoginData(req) {
     const username = req.params.username;
     const password = req.params.password;
+    console.log("username: "+username)
+    console.log("password: "+ password)
     const collectionData = await database.getDB().collection("personalInformation");
 
     const user = await collectionData.findOne({ username });
+    console.log("user: "+ user)
     //collectionData.updateMany({}, {$set: {events: []}})
     if (!user) {
         throw new Error("Benutzer nicht gefunden!");
