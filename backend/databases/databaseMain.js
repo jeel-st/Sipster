@@ -123,6 +123,10 @@ async function getActivities(req) {
     return await dbActivities.getActivities(req)
 }
 
+async function getActivitiesFromUser(req) {
+    return await dbActivities.getActivitiesFromUser(req)
+}
+
 async function addReaction(req) {
     return await dbActivities.addReaction(req)
 }
@@ -233,6 +237,7 @@ Object.assign(exports, {
     changeLastName,
     postActivity,
     getActivities,
+    getActivitiesFromUser,
     addReaction,
     uploadAfterPicture,
     uploadBeforePicture,

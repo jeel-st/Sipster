@@ -26,7 +26,26 @@ async function getActivities(req, res) {
     try {
         const activities = await database.getActivities(req)
 
-        console.log(activities)
+        if (activities == 'no activity was found by that user!'){
+            res.status(400).json("no activity was found by that user!")
+        }else if (activities != null){
+            res.send(activities)
+        }else {
+            res.status(404).json("Something went wrong here!")
+        }
+        
+        //res.json(activity)
+
+    } catch (error) {
+        console.error(error)
+        res.status(500).json('Internal Server Error')
+    }
+}
+
+async function getActivitiesFromUser(req, res) {
+    try {
+        const activities = await database.getActivitiesFromUser(req)
+
         if (activities == 'no activity was found by that user!'){
             res.status(400).json("no activity was found by that user!")
         }else if (activities != null){
@@ -90,5 +109,6 @@ module.exports = {
     deleteEvents,
     postBeforePicture,
     postAfterPicture,
-    addReaction
+    addReaction,
+    getActivitiesFromUser
 }

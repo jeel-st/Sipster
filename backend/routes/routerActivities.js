@@ -9,6 +9,7 @@ const activitiesController = require('../controllers/controllerActivities')
 router.post('/postActivity', activitiesController.postActivity)
 router.put('/addReaction', activitiesController.addReaction)
 router.get('/:userID', activitiesController.getActivities)
+router.get('/getActivitiesFromUser/:userID', activitiesController.getActivitiesFromUser)
 router.put('/postBeforePicture', activitiesController.postBeforePicture)
 router.put('/postAfterPicture', activitiesController.postAfterPicture)
 
