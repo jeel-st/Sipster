@@ -69,18 +69,15 @@ async function postUser(req){
 
 async function deleteUser(req){
     const userID = new ObjectId(req.params.userID)
-    const password = req.params.password
     const personalInformation = await database.getDB().collection("personalInformation")
     try {
         const user = await personalInformation.findOne({_id: userID})
         if (user == null) {
             return "Benutzer nicht gefunden"
         } else {
-            const salt = user.salt;
-            const encryptedPassword = await encryptPasswordWithSalt(salt, password)
-            const result = await personalInformation.deleteOne({ _id: userID, encryptedPassword: encryptedPassword })
+            const result = await personalInformation.deleteOne({ _id: userID })
             if (result.deletedCount === 0) {
-                return "Passwort ist inkorrekt"
+                return "user wurde nicht gefunden"
             }
             try {
     
