@@ -66,6 +66,30 @@ async function getActivities(req) {
    }
 }
 
+async function getActivitiesFromUser(req) {
+    const userID = req.params.userID
+    const userIDObj = new ObjectId(userID)
+    try {
+    const activities = (await database.initializeCollections()).activities
+    const activitiesFromUser = activities.find(
+        {userID: userIDObj}
+    ).toArray()
+
+    console.log(activitiesFromUser.length)
+    if (activitiesFromUser.length === undefined){
+
+        return ("no activity was found by that user!")
+    }else {
+        return activitiesFromUser
+    }
+
+
+    }catch (err){
+        return ("Something went wrong" + err)
+    } 
+
+}
+
 async function deleteEvents(req){
 
     const date = req.params.date
@@ -155,5 +179,5 @@ async function addReaction(req) {
 }
 
 module.exports = {
-    postActivity, getActivities, deleteEvents, uploadBeforePicture, uploadAfterPicture, addReaction
+    postActivity, getActivities, getActivitiesFromUser, deleteEvents, uploadBeforePicture, uploadAfterPicture, addReaction
 }
