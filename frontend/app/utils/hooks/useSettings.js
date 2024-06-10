@@ -158,16 +158,6 @@ export function useSettings() {
         }
     }
 
-    const handleLogout = async () => {
-        try {
-            await clearUser();
-            router.navigate('routes/LoginPage');
-            userLog.debug("Logout successful.");
-        } catch (error) {
-            userLog.error("Error logging out:", error);
-        }
-    }
-
     return {
         username,
         lastName,
@@ -190,7 +180,6 @@ export function useSettings() {
         handleChangeEmail,
         handleChangeLastName,
         handleChangeFirstName,
-        handleDeleteAccount,
-        handleLogout
+        handleDeleteAccount
     };
 }

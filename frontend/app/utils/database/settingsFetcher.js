@@ -160,8 +160,8 @@ export function settingsFetcher() {
 
     // function to delete the account 
     const deleteAccount = () => {
-
-        axiosInstance.delete(`/register/${user.username}/${user.password} HTTP/1.1`)
+        userLog.debug(user.userID, user.password)
+        axiosInstance.delete(`/user/${user.userID}`)
             .then(response => {
                 userLog.debug("The user has been successfully deleted.", response.data)
                 setSettingsError('');
@@ -173,5 +173,27 @@ export function settingsFetcher() {
             });
     };
 
-    return { changeUsername, changePassword, changeEmail, changeLastName, changeFirstName, settingsError, setSettingsError, deleteAccount };
+    const saveEvent = (event) => {
+        
+        axiosInstance.post('/user/addEvent',
+            {
+                "userID": user.userID,
+                "eventID": event.eventID
+            },
+            {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => {
+                userLog.debug("The user .", response.data)
+                setSettingsError('');
+            })
+            .catch(error => {
+                userLog.error("Error deleting the user:", error)
+                setSettingsError('Delete account failed.');
+            });
+    }
+
+    return { changeUsername, changePassword, changeEmail, changeLastName, changeFirstName, settingsError, setSettingsError, deleteAccount, saveEvent };
 }
