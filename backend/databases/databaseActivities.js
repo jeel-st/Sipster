@@ -42,6 +42,23 @@ async function getActivities(req) {
         friends = user.friends
     }
     const activitiesData = await activities.find({ userID: { $in: friends } }).toArray()
+
+    const games = (await database.initializeCollections()).games
+    for (const activity of activitiesData) {
+
+        try {
+            const user = await personalInformation.findOne({_id: activity.userID})
+            const game = await games.findOne({_id: activity.gameID})
+            delete activity.userID
+            delete activity.gameID
+            activity.user = user
+            activity.game = game
+        }catch (err) {
+            return "Something went wrong with getting the user and the game!"
+        }
+
+    }
+
    if (activitiesData != null){
         return activitiesData
    }

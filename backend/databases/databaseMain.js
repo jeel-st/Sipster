@@ -183,12 +183,14 @@ async function initializeCollections() {
     const invitations = db.collection("invitations");
     const events = db.collection("events");
     const activities = db.collection("activities");
+    const games = db.collection("games");
 
     return {
         personalInformation: personalInformation,
         invitations: invitations,
         events: events,
-        activities: activities
+        activities: activities,
+        games: games
     };
 }
 
