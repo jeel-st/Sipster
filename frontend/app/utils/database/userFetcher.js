@@ -1,3 +1,4 @@
+// imports
 import { useEffect, useState } from "react";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import User from "../../entitys/user";
@@ -67,4 +68,7 @@ export default function useUser() {
 
     return user;
 }
+
+
+
 

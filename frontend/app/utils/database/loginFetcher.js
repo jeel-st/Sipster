@@ -7,7 +7,7 @@ import { userLog } from '../logger/config';
 Database request to query user in database
 Typ: utils from login
 
-@ login
+@return:    object -> An object containing the login function, a string representing login errors, and a function to set login errors.
 */
 export function useLogin() {
 

@@ -8,6 +8,8 @@ import { classNames } from "../../utils";
 /* 
 This component renders the Help&FAQs information
 Typ: Component from settings 
+
+@return     JSX -> returns the Help-Component
 */
 export default function Help() {
 

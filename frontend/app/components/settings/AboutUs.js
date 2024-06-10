@@ -8,6 +8,8 @@ import { classNames } from "../../utils";
 /* 
 This component renders the AboutUs information
 Typ: Component from settings 
+
+@return:       JSX -> returns the AboutUs-Component 
 */
 export default function AboutUs() {
 
