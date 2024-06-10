@@ -34,13 +34,14 @@ async function getActivities(req) {
     const userIDObj = new ObjectId(userID)
     const activities = (await database.initializeCollections()).activities
     const personalInformation = (await database.initializeCollections()).personalInformation
-    const user = (await personalInformation.findOne({_id: userIDObj}))
+    const user = await personalInformation.findOne({_id: userIDObj})
+    let friends = [];
     if (user == null){
         return 'no activity was found by that user!';
     }else {
-        const friends = user.friends
+        friends = user.friends
     }
-    const activitiesData = await activities.find({ sipsterID: { $in: friends } }).toArray()
+    const activitiesData = await activities.find({ userID: { $in: friends } }).toArray()
    if (activitiesData != null){
         return activitiesData
    }
