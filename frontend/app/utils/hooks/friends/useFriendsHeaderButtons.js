@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Keyboard } from "react-native";
 
 export function useFriendsHeaderButtons({ onSearchTextChange, inputRef}) {
     const [buttonVisible, setButtonVisible] = useState(false);

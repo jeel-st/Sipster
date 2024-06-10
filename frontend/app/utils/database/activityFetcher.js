@@ -1,11 +1,15 @@
+import FormData from "form-data";
 import Activity from "../../entitys/activity";
 import { activityLog } from "../logger/config";
+import axiosInstance from "./axiosConfig";
+import * as FileSystem from 'expo-file-system';
+import { getMimeType } from "../mimeType";
 
-export async function createActivity(user, game){
+export async function createActivity(user, game) {
     try {
         const activity = new Activity(1, "beforeImagePath", "afterImagePath", "emojis", "comment", game._id, user, taggedFriends)
         activityLog.debug("Activity has been created successfully.")
-        try{
+        try {
             const activityObject = {
                 ID: activity.ID,
                 beforeImagePath: activity.beforeImagePath,
@@ -19,7 +23,7 @@ export async function createActivity(user, game){
 
             const jsonValue = JSON.stringify(activityObject);
             await AsyncStorage.setItem('activity', jsonValue)
-        } catch (error){
+        } catch (error) {
             activityLog.error("Activity could not be stored.", error)
         }
     } catch (error) {
@@ -27,7 +31,7 @@ export async function createActivity(user, game){
     }
 }
 
-export async function getActivity(){
+export async function getActivity() {
     try {
         const jsonValue = await AsyncStorage.getItem('activity');
         if (jsonValue !== null) {
@@ -45,11 +49,48 @@ export async function getActivity(){
                 activityData.creatorID
             );
 
-            return(activity)
-        }else{
+            return (activity)
+        } else {
             activityLog.error("Activity could not be loaded.")
         }
-    } catch (error){
+    } catch (error) {
         activityLog.error("Activity could not be loaded.", error)
+    }
+}
+
+export async function sendActivity(user, game, file, caption) {
+    try {
+        const response = await axiosInstance.post('/activities/postActivity',
+            {
+                "beforeImagePath": "",
+                "afterImagePath": "",
+                "reactions": "",
+                "caption": caption,
+                "userID": user._id,
+                "gameID": game._id
+            },
+            {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+        activityLog.info("Activity has been sent successfully.")
+        activityLog.debug(response.data)
+
+        const filename = file.uri.split("/").pop()
+
+        let data = new FormData()
+        data.append('acitivityID', response.data._id)
+        data.append('file', { uri: file.uri, name: filename, type: await getMimeType(file.uri) })
+
+        const response2 = await axiosInstance.put('/activities/postBeforePicture', data, {
+            headers: {
+                'Content-Type': `multipart/form-data`,
+            }
+        })
+        activityLog.info("ActivityBeforeImage has been sent successfully.")
+        activityLog.debug(response2.data)
+    } catch (error) {
+        activityLog.error("Activity could not be sent.", error)
     }
 }

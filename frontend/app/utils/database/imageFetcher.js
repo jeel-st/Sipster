@@ -26,6 +26,7 @@ export async function uploadProfilePicture(file, username) {
 }
 
 export function fetchProfilePicture(friend, refreshDate) {
+    if(!refreshDate) refreshDate = friend.lastLogin
     try {
         const endPoint = `${HOST}/static/profilePictures/${getProfileFileName(friend)}?${refreshDate}`
         return endPoint
@@ -35,6 +36,7 @@ export function fetchProfilePicture(friend, refreshDate) {
 }
 
 export function fetchProfilePictureCompressed(friend, refreshDate) {
+    if(!refreshDate) refreshDate = friend.lastLogin
     try {
         const endPoint = `${HOST}/static/profilePictures/compressed/${getProfileFileName(friend)}?${refreshDate}`
         return endPoint

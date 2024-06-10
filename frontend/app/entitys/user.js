@@ -12,6 +12,7 @@ class User {
         this.registerDate = userData.registerDate;
         this.profilePicture = userData.profilePicture;
         this.sips = userData.sips;
+        this.lastLogin = new Date();
 
         {/* Friends Information */ }
         this.friends = null;

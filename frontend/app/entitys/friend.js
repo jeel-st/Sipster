@@ -7,6 +7,7 @@ class Friend {
         this.registerDate = friend.registerDate;
         this.username = friend.username;
         this.profilePicture = friend.profilePicture;
+        this.lastLogin = new Date();
     }
 
     present() {

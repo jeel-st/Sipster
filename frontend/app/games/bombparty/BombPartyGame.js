@@ -1,11 +1,13 @@
 import React from 'react'
-import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native'
+import { View, Text, TouchableOpacity, Image } from 'react-native'
 import useBombParty from './utils/useBombParty'
 import { AntDesign, FontAwesome5 } from '@expo/vector-icons';
 import classNames from '../bombparty/utils/classNames'
-import { router } from 'expo-router';
+import { useRouter } from 'expo-router';
+import { quitGame } from '../../utils/navigator';
 
-export default function BombPartyGame() {
+export default function BombPartyGame({activity}) {
+    const router = useRouter();
     const { isPlaying, category, handleStartGame } = useBombParty()
 
     return (
@@ -22,7 +24,7 @@ export default function BombPartyGame() {
 
                 {/* Close Button */}
                 <TouchableOpacity
-                    onPress={() => { router.navigate('(tabs)/games')}}
+                    onPress={() => quitGame(activity, router)}
                     className={classNames(
                         'justify-center items-center')}>
 
