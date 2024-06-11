@@ -16,12 +16,12 @@ const { uploadDir, uploadDirCom200,uploadDirCom1080, uploadStaticDir, uploadBefo
 // Versuche die Upload-Verzeichnisse zu erstellen, falls sie noch nicht existieren
 
 try {
-    fs.mkdirSync(uploadBeforePicture)
-    fs.mkdirSync(uploadAfterPicture)
-    fs.mkdirSync(uploadStaticDir)
     fs.mkdirSync(uploadDir)
     fs.mkdirSync(uploadDirCom200)
     fs.mkdirSync(uploadDirCom1080)
+    fs.mkdirSync(uploadStaticDir)
+    fs.mkdirSync(uploadBeforePicture)
+    fs.mkdirSync(uploadAfterPicture)
   } catch (e) {
 
     if (e.code !== 'EEXIST') throw e
