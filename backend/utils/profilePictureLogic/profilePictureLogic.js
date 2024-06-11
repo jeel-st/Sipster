@@ -1,5 +1,5 @@
 //Imports
-const database = require('../databases/databaseMain')
+const database = require("../../databases/databaseMain")
 const Form = require('multiparty').Form
 const { uploadOptions } = require('../utils/uploadLogic/config')
 const fs = require('fs');
