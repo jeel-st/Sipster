@@ -16,7 +16,7 @@ const sharp = require('sharp');
 async function uploadProfilePicture(userIDObj, fileExtension, filePathOriginal){
     try{
         userID = userIDObj.toString()
-        const webp = "webp"
+        const webp = ".webp"
         const imagePath = `/home/sipster/sipster/backend/static/profilePictures/Picture${userID}${fileExtension}`
         const compressedImagePath200 = `/home/sipster/sipster/backend/static/profilePictures/compressed200/Picture${userID}${webp}`;
         const compressedImagePath1080 = `/home/sipster/sipster/backend/static/profilePictures/compressed1080/Picture${userID}${webp}`
