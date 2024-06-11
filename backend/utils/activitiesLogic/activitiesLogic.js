@@ -24,7 +24,7 @@ async function uploadBeforePicture(req, res) {
             console.log("FileExtension: " + fileExtension)
             const newFilename = `PictureBefore${activityID}${fileExtension}`;
             console.log("Neuer Filename: " + newFilename)
-            const filePath = path.join(uploadOptions.uploadBeforePicture, newFilename);   //-> neuer Filename wird erstellt
+            const filePath = path.join(uploadOptions.uploadBeforePictureCom1080, newFilename);   //-> neuer Filename wird erstellt
             console.log("FilePath: " + filePath)
            
             await sharp(file.path)
@@ -73,20 +73,23 @@ async function uploadAfterPicture(req, res) {
 
     form.on('file', async (name, file) => {
         console.log("ActivityID: "+ activityID)
+        const webp = ".webp"
         const originalFilename = file.originalFilename;
-        const fileExtension = path.extname(originalFilename);
+        //const fileExtension = path.extname(originalFilename);
         console.log("FileExtension: "+ fileExtension)
-        const newFilename = `PictureAfter${activityID}${fileExtension}`;
+        const newFilename = `PictureAfter${activityID}${webp}`;
         console.log("Neuer Filename: "+ newFilename)
-        const filePath = path.join(uploadOptions.uploadAfterPicture, newFilename);   //-> neuer Filename wird erstellt
+        const filePath = path.join(uploadOptions.uploadAfterPictureCom1080, newFilename);   //-> neuer Filename wird erstellt
         console.log("FilePath: "+ filePath)
-
+        try{
         // Komprimiere und speichere das Bild
         await sharp(file.path)
-        .resize({ width: 1080 }) // Ändere die Größe des Bildes auf eine Breite von 800px
-        .toFormat('webp', { quality: 80 }) // Komprimiere das Bild mit 80% Qualität
-        .toFile(filePath);
-        
+            .resize({ width: 1080 }) // Ändere die Größe des Bildes auf eine Breite von 800px
+            .toFormat('webp', { quality: 80 }) // Komprimiere das Bild mit 80% Qualität
+            .toFile(filePath);
+        }catch(err){
+            console.log("Error, couldn't compress the picture: "+ err)
+        }
         console.log("Sent to database uploadBeforePicture")
         const uploadPicture = await database.uploadAfterPicture(activityID, "webp");
 
