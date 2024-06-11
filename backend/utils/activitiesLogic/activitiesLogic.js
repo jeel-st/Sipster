@@ -26,11 +26,11 @@ async function uploadBeforePicture(req, res) {
             console.log("Neuer Filename: " + newFilename)
             const filePath = path.join(uploadOptions.uploadBeforePicture, newFilename);   //-> neuer Filename wird erstellt
             console.log("FilePath: " + filePath)
-           
+            
             await sharp(file.path)
-                .resize({ width: 1080 }) // Ändere die Größe des Bildes auf eine Breite von 800px
-                .toFormat('webp', { quality: 80 }) // Komprimiere das Bild mit 80% Qualität
-                .toFile(filePath);
+            .resize({ width: 1080 }) // Ändere die Größe des Bildes auf eine Breite von 800px
+            .toFormat('webp', { quality: 80 }) // Komprimiere das Bild mit 80% Qualität
+            .toFile(filePath);
 
             console.log("Sent to database uploadBeforePicture")
             const uploadPicture = await database.uploadBeforePicture(activityID, "webp");
