@@ -1,15 +1,16 @@
 // Imports
 import { SafeAreaView, Pressable, Text, StatusBar, Image } from "react-native";
 import { styles } from '../constants';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { router } from 'expo-router'
-import useUser from '../utils/database/userFetcher';
+import useUser, { getUser } from '../utils/database/userFetcher';
 import { NativeBaseProvider, View } from "native-base";
 import { FriendsScrollView, FriendsSkeleton, IconButton } from "../components";
 
 import { classNames } from "../utils";
 import { fetchProfilePictureCompressed } from '../utils/database/imageFetcher';
 import { navBarColor } from "../utils/navBarColor";
+import { usePathname } from "expo-router";
 
 /*
 Front end of the AccountPage.
@@ -20,9 +21,18 @@ Typ: Page/route
 // Background is set depending on the operating system
 export default function AccountPage() {
     navBarColor(styles.Colors.secondary)
+    const [user, setUser] = useState(null)
 
-    // logged in user is called
-    const user = useUser();
+    const path = usePathname()
+    useEffect(() => {
+        async function fetchUser() {
+            const userData = await getUser()
+            // Set user data in state
+            setUser(userData);
+        }
+        if(path !== "/account") return
+        fetchUser()
+    }, [path]);
 
     // Styling: Tailwind rendering as a constant because we use it more then one.
     const text = classNames(

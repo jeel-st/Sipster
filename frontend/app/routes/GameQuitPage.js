@@ -7,8 +7,11 @@ import GameAcitvityCam from '../components/games/GameAcitvityCam';
 
 export default function GameQuitPage() {
     const activity = JSON.parse(useLocalSearchParams().activity);
+
+    console.log(activity)
+
     const cameraRef = useRef(null);
-    const { handlePress } = useGameQuit(cameraRef, activity.game);
+    const { handlePress } = useGameQuit(activity);
 
     return (activity &&
         <View className={classNames(

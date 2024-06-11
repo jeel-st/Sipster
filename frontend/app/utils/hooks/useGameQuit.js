@@ -1,13 +1,15 @@
 
 import { useRouter } from 'expo-router'
-import { gameLog } from '../logger/config';
+import { sendActivityAfterImage } from '../database/activityFetcher';
 
-const useGameQuit = (game) => {
+const useGameQuit = (activity) => {
     const router = useRouter()
 
     // Function to handle navigation back to previous screen
     const handlePress = () => {
-        router.navigate({ pathname: "(tabs)/games" })
+        console.log(activity)
+        sendActivityAfterImage(activity)
+        router.navigate({ pathname: "(tabs)/game" })
     }
 
     // Return state variables and functions for use in the component

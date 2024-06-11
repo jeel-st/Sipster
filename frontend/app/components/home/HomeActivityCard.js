@@ -14,8 +14,7 @@ import { RefreshContext } from '../provider/RefreshProvider'
     @param friend: object -> the friend to display
     @return:       JSX -> returns the HomeActivityCard component
 */
-export default function HomeActivityCard({ friend }) {
-    const emojis = ['🍻', '😍', '🤮', '🥳']
+export default function HomeActivityCard({ activity, user }) {
     const scrollViewRef = useRef(null)
     const [visibleIndex, setVisibleIndex] = useState(0)
 
@@ -48,12 +47,12 @@ export default function HomeActivityCard({ friend }) {
                             'w-full h-full', // sizing
                             'rounded-full' // styling
                         )}
-                        source={{ uri: fetchProfilePictureCompressed(friend, refreshDate) }} />
+                        source={{ uri: fetchProfilePictureCompressed(activity.user, refreshDate) }} />
                 </View>
 
                 <View>
-                    <Text className='text-white font-bold'>{friend.username}</Text>
-                    <Text className='text-neutral-300 font-thin'>played bierpong | vaihingen</Text>
+                    <Text className='text-white font-bold'>{activity.user.username}</Text>
+                    <Text className='text-neutral-300 font-thin'>played {activity.game.name} | vaihingen</Text>
                 </View>
             </View>
 
@@ -72,7 +71,7 @@ export default function HomeActivityCard({ friend }) {
                         overflow: 'hidden'
                     }}
                     onScroll={handleScroll}>
-                    {[...Array(2)].map((value, index) => (<HomeActivityImage key={index} friend={friend} />))}
+                    {[...Array(2)].map((value, index) => (<HomeActivityImage key={index} activity={activity} index={index}/>))}
                 </ScrollView>
 
                 <View className={classNames(
@@ -80,13 +79,15 @@ export default function HomeActivityCard({ friend }) {
                     'w-full', // sizing
                     'px-3' // spacing
                 )}>
-                    <Text className='text-white text-l' > About last Night #fun #party </Text>
+                    <Text className='text-white text-l' > {activity.caption} </Text>
 
                     <View>
-                        {emojis.map((emoji, index) =>
+                        {Object.entries(activity.reactions).map((reaction, index) =>
                             <HomeReactionCard
-                                emoji={emoji}
                                 key={index}
+                                reaction={reaction}
+                                activity={activity}
+                                user={user}
                             />
                         )}
                     </View>

@@ -15,6 +15,7 @@ export function useLogin() {
     const [loginError, setLoginError] = useState('');
 
     const login = (username, password, setLoginError, onLoginSuccess) => {
+        userLog.debug(username, password)
         axiosInstance.get(`/login/${username}/${password}`)
             .then(response => {
                 userLog.info(response)

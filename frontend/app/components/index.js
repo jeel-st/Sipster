@@ -17,7 +17,6 @@ import GameCard from './games/GameCard';
 import Games from './games/Games';
 import GameFriendBtn from './games/GameFriendBtn';
 import GameActivity from './games/GameActivity';
-import GamesPerCategory from './games/GamesPerCategory';
 import GameCameraBtn from './games/GameCameraBtn';
 import GameGoBtn from './games/GameGoBtn';
 import GameAcitvityPost from './games/GameAcitvityCam';
@@ -56,6 +55,9 @@ import HomeActivityCard from './home/HomeActivityCard';
 import HomeReactionCard from './home/HomeReactionCard';
 import HomeFriendBtn from './home/HomeFriendBtn';
 import HomeActivityImage from './home/HomeAcitivityImage';
+import HomeFooter from './home/HomeFooter';
+import HomeHeader from './home/HomeHeader';
+import HomeActivityFactory from './home/HomeActivityFactory';
 
 // Provider Imports
 import { UserProvider } from './provider/UserProvider';
@@ -70,7 +72,7 @@ export {
   FriendBtn, FriendBtn2, FriendsCategorys, FriendsContainer, FriendsHeaderButtons, FriendsScrollView, FriendsTabButton,
 
   // Games
-  GameCard, Games, GameFriendBtn, GameActivity,  GamesPerCategory, GameCameraBtn, GameGoBtn, GameAcitvityPost,
+  GameCard, Games, GameFriendBtn, GameActivity, GameCameraBtn, GameGoBtn, GameAcitvityPost,
 
   // Layout
   IconButton, SipsterButton, SmallTextField, TagCard, TextField, ErrorMessage,
@@ -85,7 +87,7 @@ export {
   FriendsH2Skeleton, FriendsSkeleton,
 
   // Home
-  HomeFriends, HomeActivityCard, HomeReactionCard, HomeFriendBtn, HomeActivityImage,
+  HomeFriends, HomeActivityCard, HomeReactionCard, HomeFriendBtn, HomeActivityImage, HomeFooter, HomeHeader, HomeActivityFactory,
 
   // Provider
   UserProvider, RefreshContext

@@ -33,7 +33,7 @@ export function useLoginLogic() {
             userLog.debug("Login details have been entered.")
             login(username, password, setLoginError, async () => {
                 await storeUser(username)
-                router.navigate('(tabs)')
+                router.replace('(tabs)')
                 userLog.debug("Login successful.")
                 setLoginError('')
             });
