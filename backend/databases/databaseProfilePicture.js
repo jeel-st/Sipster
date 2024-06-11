@@ -31,7 +31,7 @@ async function uploadProfilePicture(userIDObj, fileExtension, filePathOriginal){
                 .toFormat('webp', { quality: 80 }) // Komprimiere das Bild mit 80% Qualität
                 .toFile(compressedImagePath1080);
         }catch(err){
-            throw new Error("Compressing pictures went wrong")
+            throw new Error("Compressing pictures went wrong" +err)
         }
         const result = await database.getDB().collection('personalInformation').updateOne(  //-> Datenbank- Update mit neuem Pfad
             {_id: userIDObj},
