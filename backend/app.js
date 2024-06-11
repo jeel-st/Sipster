@@ -16,14 +16,14 @@ const { uploadDir, uploadDirCom200,uploadDirCom1080, uploadStaticDir, uploadBefo
 // Versuche die Upload-Verzeichnisse zu erstellen, falls sie noch nicht existieren
 
 try {
-    fs.mkdirSync(uploadDir)
-    fs.mkdirSync(uploadDirCom200)
-    fs.mkdirSync(uploadDirCom1080)
-    fs.mkdirSync(uploadStaticDir)
-    fs.mkdirSync(uploadBeforePicture)
-    fs.mkdirSync(uploadAfterPicture)
+    fs.mkdirSync(uploadStaticDir, { recursive: true })
+    fs.mkdirSync(uploadDir, { recursive: true })
+    fs.mkdirSync(uploadDirCom200, { recursive: true })
+    fs.mkdirSync(uploadDirCom1080, { recursive: true })
+    fs.mkdirSync(uploadBeforePicture, { recursive: true })
+    fs.mkdirSync(uploadAfterPicture, { recursive: true })
   } catch (e) {
-
+    console.log("Error beim Erstellen der Ornder: "+ e)
     if (e.code !== 'EEXIST') throw e
   }
 
