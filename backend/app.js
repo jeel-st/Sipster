@@ -11,7 +11,7 @@ app.use(express.urlencoded({ limit: "50mb", extended: true }));
 
 const PORT = 3000
 
-const { uploadDir, uploadDirCom, uploadStaticDir, uploadBeforePicture, uploadAfterPicture } = require('./utils/uploadLogic/config')
+const { uploadDir, uploadDirCom200, uploadStaticDir, uploadBeforePicture, uploadAfterPicture } = require('./utils/uploadLogic/config')
 
 // Versuche die Upload-Verzeichnisse zu erstellen, falls sie noch nicht existieren
 
@@ -20,7 +20,7 @@ try {
     fs.mkdirSync(uploadAfterPicture)
     fs.mkdirSync(uploadStaticDir)
     fs.mkdirSync(uploadDir)
-    fs.mkdirSync(uploadDirCom)
+    fs.mkdirSync(uploadDirCom200)
   } catch (e) {
 
     if (e.code !== 'EEXIST') throw e

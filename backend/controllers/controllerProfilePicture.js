@@ -51,7 +51,7 @@ async function uploadProfilePicture(req, res) {
 
             const filePath = path.join(uploadOptions.uploadDir, newFilename);   //-> neuer Filename wird erstellt
 
-            const pictureURL = await database.getProfilePictureURL(userIDObj, true);
+            const pictureURL = await database.getProfilePictureURL(userIDObj, "0");
 
             
             if (pictureURL != null) {
@@ -64,17 +64,26 @@ async function uploadProfilePicture(req, res) {
 
                 });
 
-                const pictureURLCompressed = await database.getProfilePictureURL(userIDObj, false)
-                if (pictureURLCompressed != null) {         //-> Falls ein Bildpfad bereits in der Datenbank existiert, wird das ursprüngliche Bild aus dem Server gelöscht
-                    fs.unlink(pictureURLCompressed, (err) => {
+                const pictureURLCompressed200 = await database.getProfilePictureURL(userIDObj, "200")
+                if (pictureURLCompressed200 != null) {         //-> Falls ein Bildpfad bereits in der Datenbank existiert, wird das ursprüngliche Bild aus dem Server gelöscht
+                    fs.unlink(pictureURLCompressed200, (err) => {
                         if (err) {
                             console.error('Fehler beim Löschen des Bildes aus dem Dateisystem:', err);
                             return;
                         }
                         console.log(`Bild ${pictureURL} erfolgreich gelöscht`);
                     })
+                    const pictureURLCompressed800 = await database.getProfilePictureURL(userIDObj, "800")
+                    if (pictureURLCompressed800 != null) {         //-> Falls ein Bildpfad bereits in der Datenbank existiert, wird das ursprüngliche Bild aus dem Server gelöscht
+                        fs.unlink(pictureURLCompressed200, (err) => {
+                            if (err) {
+                                console.error('Fehler beim Löschen des Bildes aus dem Dateisystem:', err);
+                                return;
+                            }
+                            console.log(`Bild ${pictureURL} erfolgreich gelöscht`);
+                        })
                 }
-
+            }
                 const deleteURL = await database.deleteProfilePictureURL(userIDObj);
                 const uploadPicture = await database.uploadProfilePicture(userIDObj, fileExtensionParam, file.path);
 

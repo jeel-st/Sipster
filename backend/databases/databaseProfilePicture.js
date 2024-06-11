@@ -18,21 +18,29 @@ async function uploadProfilePicture(userIDObj, fileExtension, filePathOriginal){
         userID = userIDObj.toString()
 
         const imagePath = `/home/sipster/sipster/backend/static/profilePictures/Picture${userID}${fileExtension}`
-        const compressedImagePath = `/home/sipster/sipster/backend/static/profilePictures/compressed/Picture${userID}${fileExtension}`;
+        const compressedImagePath200 = `/home/sipster/sipster/backend/static/profilePictures/compressed200/Picture${userID}${fileExtension}`;
+        const compressedImagePath800 = `/home/sipster/sipster/backend/static/profilePictures/compressed800/Picture${userID}${fileExtension}`
 
+        try{
+            await sharp(filePathOriginal).resize(200).toFile(compressedImagePath200);      //-> Komprimieren des Bild+ speichern in einem zweiten Ordner
+
+        }catch(err){
+            throw new Error("Compressing pictures went wrong")
+        }
         const result = await database.getDB().collection('personalInformation').updateOne(  //-> Datenbank- Update mit neuem Pfad
             {_id: userIDObj},
             { $set: { profilePicture: imagePath } }
         )
 
-        const resultC = await database.getDB().collection('personalInformation').updateOne(
+        const resultCompressed200 = await database.getDB().collection('personalInformation').updateOne(
             {_id: userIDObj},
-            { $set: { profilePictureC: compressedImagePath } }
+            { $set: { profilePictureCom200: compressedImagePath200 } }
         )
-        
-        await sharp(filePathOriginal).resize(200).toFile(compressedImagePath);      //-> Komprimieren des Bild+ speichern in einem zweiten Ordner
-
-        if (result.modifiedCount === 1 && resultC.modifiedCount === 1) {
+        const resultCompressed800 = await database.getDB().collection('personalInformation').updateOne(
+            {_id: userIDObj},
+            { $set: { profilePictureCom800: compressedImagePath800 } }
+        )      
+        if (result.modifiedCount === 1 && resultCompressed200.modifiedCount === 1 && resultCompressed800.modifiedCount ===1) {
             console.log(`Profilbild für Benutzer ${userIDObj} erfolgreich gespeichert.`);
             return "Success";
         } else {
@@ -61,10 +69,12 @@ async function getProfilePictureURL(userIDObj, original){
     console.log("originaltyp "+ typeof original)
 
     console.log(result)
-    if(original == "true"){
+    if(original == "0"){
         return result.profilePicture
+    }else if(original == "200"){
+        return result.profilePictureCom200
     }else{
-        return result.profilePictureC
+        return result.profilePictureCom800
     }
 }
 
@@ -80,7 +90,7 @@ async function deleteProfilePictureURL(userIDObj){
     try {
         const result = await database.getDB().collection('personalInformation').updateOne(
             { _id: userIDObj }, 
-            { $set: { profilePicture: null, profilePictureC: null  } }
+            { $set: { profilePicture: null, profilePictureCom200: null, profilePictureCom800:null  } }
         )
         
         if (result.modifiedCount === 1) {
