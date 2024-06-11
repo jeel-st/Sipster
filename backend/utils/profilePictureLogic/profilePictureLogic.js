@@ -1,10 +1,10 @@
 //Imports
 const database = require("../../databases/databaseMain")
 const Form = require('multiparty').Form
-const { uploadOptions } = require('../utils/uploadLogic/config')
+const { uploadOptions } = require("../uploadLogic/config")
 const fs = require('fs');
 const path = require('path');
-const log = require("../logging/logger")
+const log = require("../../logging/logger")
 
 /**
  * Diese Methode dient zum Hochladen eines Profilbildes.
