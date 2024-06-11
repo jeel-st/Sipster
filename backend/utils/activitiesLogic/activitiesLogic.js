@@ -6,6 +6,7 @@ const { uploadOptions } = require('../uploadLogic/config')
 const fs = require('fs');
 const path = require('path');
 
+const webp = ".webp"
 
 async function uploadBeforePicture(req, res) {
     try {
@@ -22,16 +23,18 @@ async function uploadBeforePicture(req, res) {
             const originalFilename = file.originalFilename;
             const fileExtension = path.extname(originalFilename);
             console.log("FileExtension: " + fileExtension)
-            const newFilename = `PictureBefore${activityID}${fileExtension}`;
+            const newFilename = `PictureBefore${activityID}${webp}`;
             console.log("Neuer Filename: " + newFilename)
             const filePath = path.join(uploadOptions.uploadBeforePictureCom1080, newFilename);   //-> neuer Filename wird erstellt
             console.log("FilePath: " + filePath)
-           
+           try{
             await sharp(file.path)
                 .resize({ width: 1080 }) // Ändere die Größe des Bildes auf eine Breite von 800px
                 .toFormat('webp', { quality: 80 }) // Komprimiere das Bild mit 80% Qualität
                 .toFile(filePath);
-
+            }catch(err){
+                console.log("Error, couldn't compress the picture: "+ err)
+            }
             console.log("Sent to database uploadBeforePicture")
             const uploadPicture = await database.uploadBeforePicture(activityID, "webp");
 
@@ -73,7 +76,6 @@ async function uploadAfterPicture(req, res) {
 
     form.on('file', async (name, file) => {
         console.log("ActivityID: "+ activityID)
-        const webp = ".webp"
         const originalFilename = file.originalFilename;
         //const fileExtension = path.extname(originalFilename);
         console.log("FileExtension: "+ fileExtension)
