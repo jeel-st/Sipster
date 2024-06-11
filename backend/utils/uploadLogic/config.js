@@ -4,7 +4,7 @@ const path = require('path')
 
 const uploadDir = path.join(process.cwd(), 'static/profilePictures')
 const uploadDirCom200 = path.join(process.cwd(), "static/profilePictures/compressed200")
-const uploadDirCom800 = path.join(process.cwd(), "static/profilePictures/compressed800")
+const uploadDirCom800 = path.join(process.cwd(), "static/profilePictures/compressed1080")
 const uploadStaticDir = path.join(process.cwd(), "static")
 const uploadBeforePicture = path.join(process.cwd(), "static/beforePicture")
 const uploadAfterPicture = path.join(process.cwd(), "static/afterPicture")
