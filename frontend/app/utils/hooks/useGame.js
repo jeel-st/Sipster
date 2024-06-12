@@ -1,9 +1,8 @@
 import { useLocalSearchParams } from "expo-router";
-import useUser from "../database/userFetcher";
 import { useEffect, useState } from "react";
 import { BackHandler } from "react-native";
 import Activity from "../../entitys/activity";
-import { gameLog } from "../logger/config";
+import { useUser } from "./useUser";
 
 export function useGame() {
     const game = new useLocalSearchParams();

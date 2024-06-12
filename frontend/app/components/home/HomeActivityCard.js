@@ -14,7 +14,7 @@ import { RefreshContext } from '../provider/RefreshProvider'
     @param friend: object -> the friend to display
     @return:       JSX -> returns the HomeActivityCard component
 */
-export default function HomeActivityCard({ activity, user }) {
+export default function HomeActivityCard({ activity }) {
     const scrollViewRef = useRef(null)
     const [visibleIndex, setVisibleIndex] = useState(0)
 
@@ -87,7 +87,6 @@ export default function HomeActivityCard({ activity, user }) {
                                 key={index}
                                 reaction={reaction}
                                 activity={activity}
-                                user={user}
                             />
                         )}
                     </View>

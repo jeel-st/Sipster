@@ -3,7 +3,6 @@ import Activity from "../../entitys/activity";
 import { activityLog } from "../logger/config";
 import axiosInstance, { HOST } from "./axiosConfig";
 import { getMimeType } from "../mimeType";
-import { func } from "prop-types";
 
 export async function createActivity(user, game) {
     try {
@@ -149,9 +148,13 @@ export function fetchActivityPicture(activity, refreshDate, isBeforeImage) {
 }
 
 function getActivityFileName(activityImage) {
-    if (activityImage == null) return "unknown.jpg"
-    const name = activityImage.split("/")
-    return name[name.length - 1]
+    if (activityImage == null) return "unknown.webp"
+
+    //get the name of the file without the extension
+    const name = activityImage.split("/").pop().split(".").slice(0, -1).join(".");
+
+    //return the name with the webp extension
+    return name + ".webp"
 }
 
 export async function addReaction(user, activity, emoji) {

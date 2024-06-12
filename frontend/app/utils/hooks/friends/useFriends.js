@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import useUser from '../../database/userFetcher';
 import { fetchFriendsData, fetchFriendsInvitations } from '../../database/friendsFetcher';
+import { useUser } from '../useUser';
 
 export function useFriends() {
     const [searchText, setSearchText] = useState('')
@@ -48,5 +48,5 @@ export function useFriends() {
         }
     }, [user, selectedTab])
 
-    return { user, searchText, selectedTab, viewFriends, viewCategorys, handleSearchTextChange, handleTabChange, handleReloadFriends }
+    return { searchText, selectedTab, viewFriends, viewCategorys, handleSearchTextChange, handleTabChange, handleReloadFriends }
 }

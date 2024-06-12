@@ -1,7 +1,10 @@
 import { useCallback, useContext, useEffect, useState } from "react";
 import { addReaction } from "../database/activityFetcher";
+import { UserContext } from "../../components/provider/UserProvider";
 
-const useReactionCard = (reaction, activity, user) => {
+const useReactionCard = (reaction, activity) => {
+    const user = useContext(UserContext)
+
     const [emoji, setEmoji] = useState(null);
     const [reactionCount, setReactionCount] = useState(0);
     const [hasReacted, setHasReacted] = useState(false);

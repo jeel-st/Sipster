@@ -25,7 +25,6 @@ export default function HomePage() {
             'bg-primary' // styling
         )}>
             <HomeHeader
-                user={user}
                 displayFriend={displayFriend}
                 handleFriendSelection={handleFriendSelection}
             />
@@ -33,7 +32,7 @@ export default function HomePage() {
                 <RefreshContext.Provider value={refreshDate}>
                     <FlatList
                         data={activities}
-                        renderItem={({ item, index }) => <HomeActivityFactory item={item} index={index} user={user}/>}
+                        renderItem={({ item, index }) => <HomeActivityFactory item={item} index={index}/>}
                         keyExtractor={(item, index) => index.toString()}
                         showsHorizontalScrollIndicator={false}
                         refreshControl={

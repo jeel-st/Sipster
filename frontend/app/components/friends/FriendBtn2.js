@@ -13,12 +13,11 @@ import { useFriendBtn2 } from '../../utils/hooks/friends/useFriendBtn2'
 
     @param friend:          object -> the friend to display
     @param selectedTab:     number -> the selected tab in the friends page
-    @param user:            object -> the user
     @param handleReloadFriends: function -> the function to call when the friends list should be reloaded
     @return:                JSX -> returns the FriendBtn2 component
 */
-export default function FriendBtn2({ friend, selectedTab, user, handleReloadFriends }) {
-  const { handleAcceptInvite, handleDeclineInvite, handleCancelInvite } = useFriendBtn2({ friend, user, handleReloadFriends })
+export default function FriendBtn2({ friend, selectedTab, handleReloadFriends }) {
+  const { handleAcceptInvite, handleDeclineInvite, handleCancelInvite } = useFriendBtn2({ friend, handleReloadFriends })
 
   return (friend &&
     <TouchableOpacity

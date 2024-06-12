@@ -2,12 +2,12 @@
 import React, { useEffect, useState } from 'react';
 import { Image, View, SafeAreaView, StyleSheet } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
-import useUser from '../../utils/database/userFetcher';
 import { uploadProfilePicture } from '../../utils/database/imageFetcher';
 import { classNames } from '../../utils';
 import TextButton from './TextButton';
 import CheckButton from './CheckButton';
 import { userLog } from '../../utils/logger/config';
+import { useUser } from '../../utils/hooks/useUser';
 
 /*
 This component can be used to upload your own and new profile pictures.

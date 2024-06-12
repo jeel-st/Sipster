@@ -1,7 +1,8 @@
 import { ScrollView, Dimensions } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { classNames } from '../../utils';
 import HomeFriendBtn from './HomeFriendBtn';
+import { UserContext } from '../provider/UserProvider';
 
 /*
     HomeFriends is a component that represents the list of friends as a tablist.
@@ -13,7 +14,9 @@ import HomeFriendBtn from './HomeFriendBtn';
     @param handleFriendSelection: function -> the function to handle the selection of a friend
     @return: JSX -> returns the HomeFriends component
 */
-export default function HomeFriends({ user, displayFriend, handleFriendSelection }) {
+export default function HomeFriends({ displayFriend, handleFriendSelection }) {
+    const user = useContext(UserContext)
+
     const [scrollEnable, setScrollEnable] = useState(false);
 
     // Getting the width of the screen

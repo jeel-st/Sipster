@@ -3,7 +3,6 @@ import { SafeAreaView, Pressable, Text, StatusBar, Image } from "react-native";
 import { styles } from '../constants';
 import React, { useEffect, useState } from 'react';
 import { router } from 'expo-router'
-import useUser, { getUser } from '../utils/database/userFetcher';
 import { NativeBaseProvider, View } from "native-base";
 import { FriendsScrollView, FriendsSkeleton, IconButton } from "../components";
 
@@ -11,6 +10,7 @@ import { classNames } from "../utils";
 import { fetchProfilePictureCompressed } from '../utils/database/imageFetcher';
 import { navBarColor } from "../utils/navBarColor";
 import { usePathname } from "expo-router";
+import { useUser } from "../utils/hooks/useUser";
 
 /*
 Front end of the AccountPage.
@@ -25,13 +25,7 @@ export default function AccountPage() {
 
     const path = usePathname()
     useEffect(() => {
-        async function fetchUser() {
-            const userData = await getUser()
-            // Set user data in state
-            setUser(userData);
-        }
-        if(path !== "/account") return
-        fetchUser()
+        setUser(useUser())
     }, [path]);
 
     // Styling: Tailwind rendering as a constant because we use it more then one.

@@ -6,10 +6,10 @@ import Events from '../events/Events'
 import { events } from '../../constants'
 import EventInfoCard from '../events/EventInfoCard'
 
-export default function HomeActivityFactory({item, index, user}) {
+export default function HomeActivityFactory({ item, index }) {
     return (
         <View key={index}>
-            <HomeActivityCard activity={item} user={user}/>
+            <HomeActivityCard activity={item} />
 
             {/* Separation line */}
             <View className={classNames(

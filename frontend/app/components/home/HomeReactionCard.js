@@ -11,8 +11,8 @@ import useReactionCard from '../../utils/hooks/useReactionCard'
     @param emoji: string -> the emoji to display
     @return:       JSX -> returns the HomeReactionCard component
 */
-export default function HomeReactionCard({ reaction, activity, user }) {
-    const { emoji, handleReaction, reactionCount, hasReacted } = useReactionCard(reaction, activity, user)
+export default function HomeReactionCard({ reaction, activity }) {
+    const { emoji, handleReaction, reactionCount, hasReacted } = useReactionCard(reaction, activity)
 
     return (
         <TouchableOpacity

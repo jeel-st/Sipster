@@ -80,15 +80,6 @@ export default function GameAcitvityCam({ activity, cameraRef, handlePress }) {
                             borderRadius: 8,
                         }}
                     />
-
-                    <View>
-                        {emojis.map((emoji, index) =>
-                            <HomeReactionCard
-                                emoji={emoji}
-                                key={index}
-                            />
-                        )}
-                    </View>
                 </View>
             </View>
         </View>

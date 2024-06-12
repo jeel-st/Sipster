@@ -5,7 +5,7 @@ import HomeFriends from './HomeFriends'
 import { navigateToFriendsPage } from '../../utils/navigator'
 import { FontAwesome5 } from '@expo/vector-icons'
 
-export default function HomeHeader({user, displayFriend, handleFriendSelection}) {
+export default function HomeHeader({displayFriend, handleFriendSelection}) {
     return (
         <View>
             {/* Header Text and Friendsmenu Button */}
@@ -28,7 +28,6 @@ export default function HomeHeader({user, displayFriend, handleFriendSelection})
 
             {/* Friend controller tab bar */}
             <HomeFriends
-                user={user}
                 displayFriend={displayFriend}
                 handleFriendSelection={handleFriendSelection}
             />
