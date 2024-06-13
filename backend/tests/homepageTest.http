@@ -1,5 +1,5 @@
-@host = http://localhost:3000
+@host = http://85.215.71.124
 
 ###
 
-GET {{host}}/homepage/661d07706671060e01a4fd3d
+GET {{host}}/homepage/661d09ba6671060e01a4fd3e

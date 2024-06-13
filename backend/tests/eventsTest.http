@@ -60,12 +60,11 @@ POST {{host}}/events HTTP/1.1
 Content-Type: application/json
 
 {
-    "date": "06.07",
-    "name": "MediaNight",
-    "time": "ab 17 Uhr",
-    "header": "Vaihingen • 7 Apr 2024",
-    "desc": "Imagine a night full of unforgettable pranks and laughter, where every moment holds a new surprise - that's our April Fool's party!",
-    "tags": ["community", "100 sips"]
+    "date": "26.07.2024/23:00",
+    "name": "Semester Closing x HS Esslingen",
+    "header": "Schräglage • 26. Juli 2024",
+    "desc": "Feiert mit I Love College und der Campus Leben der HS Esslingen die Semester Closing Party in der Schräglage!",
+    "tags": ["community", "priced"]
 }
 
 ###

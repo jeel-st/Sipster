@@ -47,14 +47,16 @@ async function getActivities(req) {
     }else {
         friends = user.friends
     }
-    const activitiesData = await activities.find({ userID: { $in: friends } }).toArray()
+    const activitiesData = await activities.find({ userID: { $in: friends } })
+    .project({_id: 1, beforeImage: 1, afterImage: 1, reactions: 1, caption: 1, userID: 1, gameID: 1, timestamp: 1})
+    .toArray()
 
     const games = (await database.initializeCollections()).games
     for (const activity of activitiesData) {
 
         try {
             const user = await personalInformation.find({_id: activity.userID})
-                .project({_id: 1, username: 1, profilePicture: 1, email: 1, firstName: 1, lastName: 1, friends: 1, sips: 1, events: 1, profilePictureC: 1})
+                .project({_id: 1, username: 1, profilePicture: 1, email: 1, firstName: 1, lastName: 1, friends: 1, sips: 1, events: 1})
                 .toArray()
             const game = await games.findOne({_id: activity.gameID})
             delete activity.userID
