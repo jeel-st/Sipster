@@ -5,10 +5,10 @@ const logMiddleware = require("./logMiddleware");
 
 router.use(logMiddleware);
 
-const registerController = require('../controllers/controllerHomepage')
+const homepageController = require('../controllers/controllerHomepage')
 
 //Router, die an Controller weiterleiten
-router.get('/:userID', registerController.postRegister)
+router.get('/:userID', homepageController.getHomepage)
 
 
 module.exports = router

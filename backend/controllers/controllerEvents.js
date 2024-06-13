@@ -39,7 +39,7 @@ async function postEvents(req, res) {
         const event = await database.postEvents(req)
         res.json(event)
     } catch (error) {
-        res.status(500).send('Internal Server Error')
+        res.status(500).send('Internal Server Error' + error)
     }
 }
 

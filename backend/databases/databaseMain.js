@@ -8,7 +8,9 @@ const dbProfilePicture = require("../databases/databaseProfilePicture")
 const dbUser = require("../databases/databaseUser")
 const dbSips = require("../databases/databaseSips")
 const dbActivities = require("../databases/databaseActivities")
+const dbHomepage = require("../databases/databaseHomepage")
 const log = require("../logging/logger")
+
 
 const reactionsTemplate = {
     beer: [],
@@ -154,6 +156,11 @@ async function changeFirstName(userID, newName){
 async function changeLastName(userID, newName){
     return await dbUser.changeLastName(userID, newName)
 }
+
+async function getHomepage(req) {
+    return await dbHomepage.getHomepage(req)
+}
+
  function getDB(){
     return  db
 }
@@ -241,6 +248,7 @@ Object.assign(exports, {
     addReaction,
     uploadAfterPicture,
     uploadBeforePicture,
+    getHomepage,
     UsernameNotFoundError,
     reactionsTemplate
 })

@@ -1,6 +1,6 @@
 const database = require("./databaseMain")
 const log = require("../logging/logger")
-const { ObjectId } = require('mongodb');
+const { ObjectId, Timestamp } = require('mongodb');
 
 
 async function postActivity(req) {
@@ -11,10 +11,11 @@ async function postActivity(req) {
 
 
     const reactions = database.reactionsTemplate
-    const beforeImagePath = "";
-    const afterImagePath = "";
+    const beforeImagePath = null;
+    const afterImagePath = null;
+    const timestamp = new Date();
 
-    const activityData = {beforeImagePath,  afterImagePath, reactions, caption, 'userID': userIDObj, 'gameID': gameIDObj}
+    const activityData = {beforeImagePath,  afterImagePath, reactions, caption, timestamp, 'userID': userIDObj, 'gameID': gameIDObj}
     const activities = (await database.initializeCollections()).activities
     log.info("Data to be inserted:")
     console.log(activities)
@@ -37,7 +38,7 @@ async function getActivities(req) {
     const user = await personalInformation.findOne({_id: userIDObj})
     let friends = [];
     if (user == null){
-        return 'no activity was found by that user!';
+        return 'The User does not exist in the database!';
     }else {
         friends = user.friends
     }
@@ -86,22 +87,6 @@ async function getActivitiesFromUser(req) {
         return ("Something went wrong" + err)
     } 
 
-}
-
-async function deleteEvents(req){
-
-    const date = req.params.date
-    const name = req.params.name
-    const time = req.params.time
-    const header = req.params.header
-
-    let result = await database.getDB().collection("events").deleteOne({date: date, name: name, time: time, header: header})
-
-    if (result.deletedCount === 0) {
-        throw new Error("Event nicht gefunden")
-    } else {
-        return("Event erfolgreich gelöscht")
-    }
 }
 
 async function uploadBeforePicture(activityID, fileExtension) {
@@ -177,5 +162,5 @@ async function addReaction(req) {
 }
 
 module.exports = {
-    postActivity, getActivities, getActivitiesFromUser, deleteEvents, uploadBeforePicture, uploadAfterPicture, addReaction
+    postActivity, getActivities, getActivitiesFromUser, uploadBeforePicture, uploadAfterPicture, addReaction
 }

@@ -1,0 +1,5 @@
+@host = http://localhost:3000
+
+###
+
+GET {{host}}/homepage/661d07706671060e01a4fd3d

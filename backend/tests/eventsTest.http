@@ -6,9 +6,8 @@ POST {{host}}/events HTTP/1.1
 Content-Type: application/json
 
 {
-    "date": "01.10",
+    "date": "01.10/20:00",
     "name": "Unithekle",
-    "time": "ab 20 Uhr",
     "header": "Vaihingen • 7 Apr 2024",
     "desc": "Imagine a drinking night with Jordine...",
     "tags": [
@@ -22,9 +21,8 @@ POST {{host}}/events HTTP/1.1
 Content-Type: application/json
 
 {
-    "date": "07.04",
+    "date": "07.04/19:00",
     "name": "AprilApril",
-    "time": "ab 19 Uhr",
     "header": "Vaihingen • 7 Apr 2024",
     "desc": "Imagine a night full of unforgettable pranks and laughter, where every moment holds a new surprise - that's our April Fool's party!",
     "tags": ["community", "100 sips"]

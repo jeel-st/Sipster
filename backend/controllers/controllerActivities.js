@@ -26,8 +26,8 @@ async function getActivities(req, res) {
     try {
         const activities = await database.getActivities(req)
 
-        if (activities == 'no activity was found by that user!'){
-            res.status(400).json("no activity was found by that user!")
+        if (activities == 'The User does not exist in the database!'){
+            res.status(400).json("The User does not exist in the database!")
         }else if (activities != null){
             res.send(activities)
         }else {
