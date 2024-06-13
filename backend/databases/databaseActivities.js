@@ -151,7 +151,7 @@ async function uploadBeforePicture(activityID, fileExtension, filePathOriginal) 
         }
 
     } catch (err) {
-        throw new Error("Fehler in der Datenbank")
+        throw new Error("Fehler in der Datenbank"+ err)
     }
 }
 
