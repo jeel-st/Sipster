@@ -1,6 +1,7 @@
 const database = require("./databaseMain")
 const log = require("../logging/logger")
 const { ObjectId, Timestamp } = require('mongodb');
+const sharp = require('sharp')
 
 
 async function postActivity(req) {
@@ -17,8 +18,9 @@ async function postActivity(req) {
     const beforeImageCom1080 = null
     const afterImageCom80 = null
     const afterImageCom1080 = null
+    const timestamp = new Date();
 
-    const activityData = {beforeImage, beforeImageCom80, beforeImageCom1080, afterImage, afterImageCom80, afterImageCom1080, reactions, caption, 'userID': userIDObj, 'gameID': gameIDObj}
+    const activityData = {beforeImage, beforeImageCom80, beforeImageCom1080, afterImage, afterImageCom80, afterImageCom1080, reactions, caption, 'userID': userIDObj, 'gameID': gameIDObj, timestamp}
     const activities = (await database.initializeCollections()).activities
     log.info("Data to be inserted:")
     console.log(activities)
