@@ -2,6 +2,7 @@
 const database = require("./databaseMain")
 const log = require("../logging/logger")
 const sharp = require('sharp');
+const { ObjectId } = require('mongodb');
 
 /**
  * Diese Methode dient dazu, ein Profilbild für einen Benutzer hochzuladen, das Bild zu komprimieren und die Pfade in der Datenbank zu speichern.
@@ -13,9 +14,9 @@ const sharp = require('sharp');
  * @throws Error -> Bei Fehlern während des Uploads oder der Komprimierung
  */
 
-async function uploadProfilePicture(userIDObj, fileExtension, filePathOriginal){
+async function uploadProfilePicture(userID, fileExtension, filePathOriginal){
     try{
-        userID = userIDObj.toString()
+        const userIDObj = new ObjectId(userID)
         const webp = ".webp"
         const imagePath = `/home/sipster/sipster/backend/static/profilePictures/Picture${userID}${fileExtension}`
         const compressedImagePath200 = `/home/sipster/sipster/backend/static/profilePictures/compressed200/Picture${userID}${webp}`;
