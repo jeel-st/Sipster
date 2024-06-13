@@ -118,7 +118,7 @@ async function uploadBeforePicture(activityID, fileExtension, filePathOriginal) 
         const compressedImagePath1080 = `/home/sipster/sipster/backend/static/beforePicture/compressed1080/PictureBefore${activityID}${fileExtension}`
         try {
             await sharp(filePathOriginal)
-                .resize({ width: 200 }) // Ändere die Größe des Bildes auf eine Breite von 800px
+                .resize({ width: 20 }) // Ändere die Größe des Bildes auf eine Breite von 800px
                 .toFormat('webp', { quality: 80 }) // Komprimiere das Bild mit 80% Qualität
                 .toFile(compressedImagePath200);
             await sharp(filePathOriginal)
@@ -162,7 +162,7 @@ async function uploadAfterPicture(activityID, fileExtension, filePathOriginal) {
         const compressedImagePath1080 = `/home/sipster/sipster/backend/static/afterPicture/compressed1080/PictureAfter${activityID}${fileExtension}`
         try {
             await sharp(filePathOriginal)
-                .resize({ width: 200 }) // Ändere die Größe des Bildes auf eine Breite von 800px
+                .resize({ width: 20 }) // Ändere die Größe des Bildes auf eine Breite von 800px
                 .toFormat('webp', { quality: 80 }) // Komprimiere das Bild mit 80% Qualität
                 .toFile(compressedImagePath200);
             await sharp(filePathOriginal)
