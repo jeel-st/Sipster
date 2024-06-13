@@ -187,13 +187,13 @@ async function uploadAfterPicture(activityID, fileExtension, filePathOriginal) {
         )  
         console.log("Result der Datenbank: "+result)
 
-        if (result.modifiedCount === 1 && resultCompressed200.modifiedCount === 1 && resultCompressed1080.modifiedCount ===1) {
-            console.log(`Profilbild für Benutzer ${activityID} erfolgreich gespeichert.`);
+       /* if (result.modifiedCount === 1 && resultCompressed200.modifiedCount === 1 && resultCompressed1080.modifiedCount ===1) {
+            console.log(`Bild für Benutzer ${activityID} erfolgreich gespeichert.`);
             return "Success";
         } else {
-            console.log(`Profilbild für Benutzer ${activityID} nicht gefunden.`);
+            console.log(`Bild für Benutzer ${activityID} nicht gefunden.`);
             return "User not found";
-        }
+        }*/
     } catch (err) {
         throw new Error("Fehler in der Datenbank")
     }
