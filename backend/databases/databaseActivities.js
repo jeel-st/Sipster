@@ -14,12 +14,12 @@ async function postActivity(req) {
     const reactions = database.reactionsTemplate
     const beforeImage = null;
     const afterImage = null;
-    const beforeImageCom200 = null
+    const beforeImageCom80 = null
     const beforeImageCom1080 = null
-    const afterImageCom200 = null
+    const afterImageCom80 = null
     const afterImageCom1080 = null
 
-    const activityData = {beforeImage, beforeImageCom200, beforeImageCom1080, afterImage, afterImageCom200, afterImageCom1080, reactions, caption, 'userID': userIDObj, 'gameID': gameIDObj}
+    const activityData = {beforeImage, beforeImageCom80, beforeImageCom1080, afterImage, afterImageCom80, afterImageCom1080, reactions, caption, 'userID': userIDObj, 'gameID': gameIDObj}
     const activities = (await database.initializeCollections()).activities
     log.info("Data to be inserted:")
     console.log(activities)
@@ -135,7 +135,7 @@ async function uploadBeforePicture(activityID, fileExtension, filePathOriginal) 
         )
         const resultCompressed80 = await database.getDB().collection('activities').updateOne(
             {_id: activityObjectId},
-            { $set: { beforeImageCom200: compressedImagePath80 } }
+            { $set: { beforeImageCom80: compressedImagePath80 } }
         )
         const resultCompressed1080 = await database.getDB().collection('activities').updateOne(
             {_id: activityObjectId},
@@ -179,7 +179,7 @@ async function uploadAfterPicture(activityID, fileExtension, filePathOriginal) {
         )
         const resultCompressed80 = await database.getDB().collection('activities').updateOne(
             {_id: activityObjectId},
-            { $set: { afterImageCom200: compressedImagePath80 } }
+            { $set: { afterImageCom80: compressedImagePath80 } }
         )
         const resultCompressed1080 = await database.getDB().collection('activities').updateOne(
             {_id: activityObjectId},
