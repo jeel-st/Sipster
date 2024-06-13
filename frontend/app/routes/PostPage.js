@@ -1,10 +1,10 @@
 import { View, Text } from 'react-native'
-import React from 'react'
-import { GameActivity } from '../components'
+import React, { useRef } from 'react'
 import { classNames } from '../utils'
 import { games } from '../constants'
-import Game from '../entitys/game'
 import { useUser } from '../utils/hooks/useUser'
+import GameAcitvityCam from '../components/games/GameAcitvityCam'
+import Activity from '../entitys/activity'
 
 /*
     PostPage is a page that allows the user to make with a post.
@@ -14,14 +14,19 @@ import { useUser } from '../utils/hooks/useUser'
 */
 export default function PostPage() {
     const user = useUser()
-    const gameList = games.map((game) => new Game(game))
+    const cameraRef = useRef(null);
+    const activity = new Activity(games[0], user, [])
+
+    const handlePress = () => {}
 
     return (
         <View className={classNames(
-            'flex-1', // position
-            'bg-primary', // styling
+            'justify-center items-center', // position
+            'space-y-4', // spacing
+            'w-full h-full', // sizing
+            'bg-black opacity-90' // styling
         )}>
-            <GameActivity user={user} game={gameList[1]}/>
+        <GameAcitvityCam activity={activity} cameraRef={cameraRef} handlePress={handlePress}/>
         </View>
     )
 }

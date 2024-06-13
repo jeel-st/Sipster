@@ -6,6 +6,7 @@ class User {
         this.lastName = userData.lastName;
         this.fullName = `${userData.firstName} ${userData.lastName}`;
         this.username = userData.username;
+        this.registerDate = userData.registerDate;
         this.email = userData.email;
         this.profilePicture = userData.profilePicture;
         this.lastLogin = new Date();

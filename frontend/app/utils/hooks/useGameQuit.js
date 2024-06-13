@@ -7,7 +7,6 @@ const useGameQuit = (activity) => {
 
     // Function to handle navigation back to previous screen
     const handlePress = () => {
-        console.log(activity)
         sendActivityAfterImage(activity)
         router.navigate({ pathname: "(tabs)/game" })
     }

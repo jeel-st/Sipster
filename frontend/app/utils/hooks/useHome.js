@@ -1,12 +1,13 @@
 import { useCallback, useContext, useEffect, useState } from "react";
 import { UserContext } from "../../components/provider/UserProvider";
-import { fetchActivity } from "../database/activityFetcher";
+import { fetchActivity, fetchActivityFromUser } from "../database/activityFetcher";
 
 const useHome = () => {
   const [displayFriend, setDisplayFriend] = useState(0);
   const [refreshing, setRefreshing] = useState(false);
   const [refreshDate, setRefreshDate] = useState(new Date());
   const [activities, setActivities] = useState(null);
+  const [displayFriendActivities, setDisplayFriendActivities] = useState([]);
 
   const user = useContext(UserContext)
 
@@ -21,10 +22,14 @@ const useHome = () => {
   }, [user])
 
   // Function to handle friend selection
-  const handleFriendSelection = (selectedFriend) => {
+  const handleFriendSelection = async (selectedFriend) => {
     if (selectedFriend !== displayFriend) {
       // Update displayFriend state with selected friend
       setDisplayFriend(selectedFriend)
+
+      if(selectedFriend === 0) return
+      const activities = await fetchActivityFromUser(user.friends[selectedFriend])
+      setDisplayFriendActivities(activities)
     }
   }
 
@@ -36,7 +41,7 @@ const useHome = () => {
     setRefreshing(false);
 }, []);
 
-  return { user, displayFriend, handleFriendSelection, onRefresh, refreshing, refreshDate, activities }
+  return { user, displayFriend, handleFriendSelection, onRefresh, refreshing, refreshDate, activities, displayFriendActivities }
 }
 
 export default useHome;

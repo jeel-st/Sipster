@@ -45,7 +45,7 @@ export default function Picker({ change }) {
 
                 if (!result.canceled) {
                     setImage(result.assets[0].uri);
-                    await uploadProfilePicture(result.assets[0], user.username);
+                    await uploadProfilePicture(result.assets[0], user);
                 }
             } catch (error) {
                 userLog.error("Error during image upload:", error)

@@ -15,7 +15,7 @@ import { rootLog } from '../utils/logger/config';
     @return: JSX -> returns the HomePage component
 */
 export default function HomePage() {
-    const { user, displayFriend, handleFriendSelection, onRefresh, refreshing, refreshDate, activities } = useHome();
+    const { user, displayFriend, handleFriendSelection, onRefresh, refreshing, refreshDate, activities, displayFriendActivities } = useHome();
 
     useNavBarColor(styles.Colors.secondary)
 
@@ -47,11 +47,11 @@ export default function HomePage() {
                     />
                 </RefreshContext.Provider>
             }
-            {activities && displayFriend !== 0 &&
+            {displayFriendActivities && displayFriend !== 0 &&
                 <RefreshContext.Provider value={refreshDate}>
                     <FlatList
-                        data={activities.filter((activity, index) => index === displayFriend)}
-                        renderItem={({ item }) => <HomeActivityCard friend={item} />}
+                        data={displayFriendActivities}
+                        renderItem={({ activity }) => <HomeActivityCard activity={activity} />}
                         keyExtractor={(item, index) => index.toString()}
                         refreshControl={
                             <RefreshControl

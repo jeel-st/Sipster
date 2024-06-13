@@ -2,11 +2,11 @@ import FormData from 'form-data'
 import axiosInstance, { HOST } from './axiosConfig'
 import { userLog } from '../logger/config'
 
-export async function uploadProfilePicture(file, username) {
+export async function uploadProfilePicture(file, user) {
     const filename = file.uri.split("/").pop()
 
     let data = new FormData()
-    data.append('username', username)
+    data.append('userID', user.userID)
     data.append('file', { uri: file.uri, name: filename, type: file.mimeType })
 
     try {

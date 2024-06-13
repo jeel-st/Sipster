@@ -1,61 +1,7 @@
 import FormData from "form-data";
-import Activity from "../../entitys/activity";
 import { activityLog } from "../logger/config";
 import axiosInstance, { HOST } from "./axiosConfig";
 import { getMimeType } from "../mimeType";
-
-export async function createActivity(user, game) {
-    try {
-        const activity = new Activity(1, "beforeImagePath", "afterImagePath", "emojis", "comment", game._id, user, taggedFriends)
-        activityLog.debug("Activity has been created successfully.")
-        try {
-            const activityObject = {
-                ID: activity.ID,
-                beforeImagePath: activity.beforeImagePath,
-                afterImagePath: activity.afterImagePath,
-                emojis: activity.emojis,
-                comment: activity.comment,
-                gameID: activity.gameID,
-                creator: activity.creator,
-                taggedFriends: activity.taggedFriends
-            }
-
-            const jsonValue = JSON.stringify(activityObject);
-            await AsyncStorage.setItem('activity', jsonValue)
-        } catch (error) {
-            activityLog.error("Activity could not be stored.", error)
-        }
-    } catch (error) {
-        activityLog.error("Activity could not be created.", error)
-    }
-}
-
-export async function getActivity() {
-    try {
-        const jsonValue = await AsyncStorage.getItem('activity');
-        if (jsonValue !== null) {
-            const activityData = JSON.parse(jsonValue)
-
-            activityLog.debug("Activity has been loaded successfully.")
-
-            const activity = new Activity(
-                activityData.ID,
-                activityData.beforeImagePath,
-                activityData.afterImagePath,
-                activityData.emojis,
-                activityData.comment,
-                activityData.gameID,
-                activityData.creatorID
-            );
-
-            return (activity)
-        } else {
-            activityLog.error("Activity could not be loaded.")
-        }
-    } catch (error) {
-        activityLog.error("Activity could not be loaded.", error)
-    }
-}
 
 export async function sendActivity(activity) {
     try {
@@ -127,19 +73,50 @@ export async function fetchActivity(user) {
     }
 }
 
+export async function fetchActivityFromUser(user) {
+    try {
+        const response = await axiosInstance.get(`/activities/getActivitiesFromUser/${user.userID}`)
+        activityLog.debug("Activity has been fetched successfully.")
+
+        return response.data
+    } catch (error) {
+        activityLog.error("Activity could not be fetched.", error)
+    }
+}
+
 export function fetchActivityPicture(activity, refreshDate, isBeforeImage) {
     if (!refreshDate) refreshDate = friend.lastLogin
 
     if (isBeforeImage) {
         try {
-            const endPoint = `${HOST}/static/beforePicture/${getActivityFileName(activity.beforeImagePath)}?${refreshDate}`
+            const endPoint = `${HOST}/static/beforePicture/compressed1080/${getActivityFileName(activity.beforeImage)}?${refreshDate}`
             return endPoint
         } catch (error) {
             throw error;
         }
     } else {
         try {
-            const endPoint = `${HOST}/static/afterPicture/${getActivityFileName(activity.afterImagePath)}?${refreshDate}`
+            const endPoint = `${HOST}/static/afterPicture/compressed1080/${getActivityFileName(activity.afterImage)}?${refreshDate}`
+            return endPoint
+        } catch (error) {
+            throw error;
+        }
+    }
+}
+
+export function fetchActivityPictureCompressed(activity, refreshDate, isBeforeImage) {
+    if (!refreshDate) refreshDate = friend.lastLogin
+
+    if (isBeforeImage) {
+        try {
+            const endPoint = `${HOST}/static/beforePicture/compressed80/${getActivityFileName(activity.beforeImage)}?${refreshDate}`
+            return endPoint
+        } catch (error) {
+            throw error;
+        }
+    } else {
+        try {
+            const endPoint = `${HOST}/static/afterPicture/compressed80/${getActivityFileName(activity.afterImage)}?${refreshDate}`
             return endPoint
         } catch (error) {
             throw error;
@@ -148,7 +125,7 @@ export function fetchActivityPicture(activity, refreshDate, isBeforeImage) {
 }
 
 function getActivityFileName(activityImage) {
-    if (activityImage == null) return "unknown.webp"
+    if (activityImage === null) return "unknown.webp"
 
     //get the name of the file without the extension
     const name = activityImage.split("/").pop().split(".").slice(0, -1).join(".");

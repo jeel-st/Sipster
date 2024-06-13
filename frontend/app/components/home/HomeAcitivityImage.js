@@ -1,9 +1,8 @@
 import { View, Image, Dimensions } from 'react-native'
 import React, { useContext, useState } from 'react'
 import { classNames } from '../../utils'
-import { fetchProfilePicture, fetchProfilePictureCompressed } from '../../utils/database/imageFetcher'
 import { RefreshContext } from '../provider/RefreshProvider'
-import { fetchActivityPicture } from '../../utils/database/activityFetcher'
+import { fetchActivityPicture, fetchActivityPictureCompressed } from '../../utils/database/activityFetcher'
 
 /*
     HomeActivityImage is a component that represents the image of a friend in the home activity.
@@ -38,10 +37,11 @@ export default function HomeActivityImage({ activity, index }) {
                 className={classNames('rounded-2xl')}
             />
             <Image
-                source={{ uri: fetchActivityPicture(activity, refreshDate, isBeforeImage) }}
+                source={{ uri: fetchActivityPictureCompressed(activity, refreshDate, isBeforeImage) }}
                 style={{ width: '100%', height: '100%' }}
                 onLoadEnd={handleImageLoad}
                 className={classNames('rounded-2xl')}
+                blurRadius={10}
             />
         </View>
     )
