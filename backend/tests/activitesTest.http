@@ -29,3 +29,7 @@ Content-Type: application/json
     "activityID": "6666311b8663e5335a54e9b4",
     "reactionType": "beer"
 }
+
+###
+
+DELETE {{host}}/activities/661d5aeb7caebb258991f758/666b427d862f539d60f295a7/love

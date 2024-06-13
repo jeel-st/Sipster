@@ -98,22 +98,6 @@ async function getActivitiesFromUser(req) {
 
 }
 
-async function deleteEvents(req){
-
-    const date = req.params.date
-    const name = req.params.name
-    const time = req.params.time
-    const header = req.params.header
-
-    let result = await database.getDB().collection("events").deleteOne({date: date, name: name, time: time, header: header})
-
-    if (result.deletedCount === 0) {
-        throw new Error("Event nicht gefunden")
-    } else {
-        return("Event erfolgreich gelöscht")
-    }
-}
-
 async function uploadBeforePicture(activityID, fileExtension, filePathOriginal) {
     try {
         const imagePath = `/home/sipster/sipster/backend/static/beforePicture/PictureBefore${activityID}${fileExtension}`
@@ -209,6 +193,20 @@ async function addReaction(req) {
         const activities = (await database.initializeCollections()).activities
         const activityIDObj = new ObjectId(activityID)
         const userIDObj = new ObjectId(userID)
+
+        const reactionsTemplate = database.reactionsTemplate
+        const queryConditions = reactionsTemplate.map(reaction => {
+            return { [`reactions.${reaction}`]: userIDObj };
+        });
+
+        const alreadyReacted = await activities.findOne( {$AND:{ _id: activityIDObj, $OR:queryConditions }} )
+        if (alreadyReacted) {
+            const deleteResult = await activities.updateOne( {_id: activityIDObj }, {$pull: queryConditions})
+            if (deleteResult == null) {
+                return "Couldn't delete old Reaction please try again!"
+            }
+        }
+
         const update = {
             $addToSet: {
               [`reactions.${reactionType}`]: userIDObj
@@ -229,6 +227,27 @@ async function addReaction(req) {
     }
 }
 
+async function deleteReaction(req) {
+    try {
+        const userID = req.params.userID
+        const activityID = req.params.activityID
+        const reactionType = req.params.reactionType
+        const userIDObj = new ObjectId(userID)
+        const activityIDObj = new ObjectId(activityID)
+
+        const activities = (await database.initializeCollections()).activities
+        const result = await activities.updateOne( {_id: activityIDObj }, {$pull: {[reactions.love]: userIDObj}} )
+        if (result.modifiedCount > 0){
+            return "reaction couldn't be deleted!"
+        }else {
+            return "reaction deleted!"
+        }
+
+    }catch (err) {
+        return err
+    }
+}
+
 module.exports = {
-    postActivity, getActivities, getActivitiesFromUser, uploadBeforePicture, uploadAfterPicture, addReaction
+    postActivity, getActivities, getActivitiesFromUser, uploadBeforePicture, uploadAfterPicture, addReaction, deleteReaction
 }

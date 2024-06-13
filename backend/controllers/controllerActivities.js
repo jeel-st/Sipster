@@ -94,11 +94,25 @@ async function addReaction(req, res) {
 
         if (result !== null) {
             res.json("Reaction added successfully")
-        }else {
-            res.status(404).json("Something went wrong!")
+        }else if (result == "Couldn't delete old Reaction please try again!") {
+            res.status(400).json("Couldn't delete old Reaction please try again!")
         }
     }catch (err) {
-        res.status(404).json('Fehler beim Hochladen des Bildes:', error);
+        res.status(404).json('Something went wrong!: ', error);
+    }
+}
+
+async function deleteReaction(req, res) {
+    try {
+        const result = await database.deleteReaction(req);
+
+        if (result == "reaction deleted!"){
+            res.json("reaction deleted!")
+        }else {
+            res.status(400).json("Bad request!")
+        }
+    }catch (err) {
+        res.status(404).json("Something went wrong here: ") + err
     }
 }
 
@@ -110,5 +124,6 @@ module.exports = {
     postBeforePicture,
     postAfterPicture,
     addReaction,
-    getActivitiesFromUser
+    getActivitiesFromUser,
+    deleteReaction
 }

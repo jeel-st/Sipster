@@ -133,6 +133,10 @@ async function addReaction(req) {
     return await dbActivities.addReaction(req)
 }
 
+async function deleteReaction(req) {
+    return await dbActivities.deleteReaction(req)
+}
+
 async function uploadBeforePicture(activityID, fileExtension, filePathOriginal){
     return await dbActivities.uploadBeforePicture(activityID, fileExtension, filePathOriginal)
 }
@@ -246,6 +250,7 @@ Object.assign(exports, {
     getActivities,
     getActivitiesFromUser,
     addReaction,
+    deleteReaction,
     uploadAfterPicture,
     uploadBeforePicture,
     getHomepage,
