@@ -1,7 +1,6 @@
 const database = require("./databaseMain")
 const log = require("../logging/logger")
-const { ObjectId } = require('mongodb');
-const sharp = require('sharp');
+const { ObjectId, Timestamp } = require('mongodb');
 
 
 async function postActivity(req) {
@@ -42,7 +41,7 @@ async function getActivities(req) {
     const user = await personalInformation.findOne({_id: userIDObj})
     let friends = [];
     if (user == null){
-        return 'no activity was found by that user!';
+        return 'The User does not exist in the database!';
     }else {
         friends = user.friends
     }
@@ -227,5 +226,5 @@ async function addReaction(req) {
 }
 
 module.exports = {
-    postActivity, getActivities, getActivitiesFromUser, deleteEvents, uploadBeforePicture, uploadAfterPicture, addReaction
+    postActivity, getActivities, getActivitiesFromUser, uploadBeforePicture, uploadAfterPicture, addReaction
 }

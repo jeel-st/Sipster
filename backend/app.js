@@ -42,6 +42,7 @@ const profilePictureRouter = require("./routes/routerProfilePicture")
 const userRouter = require("./routes/routerUser")
 const sipsRouter = require("./routes/routerSips")
 const activitiesRouter = require("./routes/routerActivities")
+const homepageRouter = require("./routes/routerHomepage")
 
 // Datenbankverbindung herstellen
 
@@ -58,6 +59,7 @@ app.use('/imageUpload', profilePictureRouter)
 app.use('/user', userRouter)
 app.use("/sips", sipsRouter)
 app.use("/activities", activitiesRouter)
+app.use("/homepage", homepageRouter)
 
 // Bereitstellung statischer Dateien im "static"-Verzeichnis
 
