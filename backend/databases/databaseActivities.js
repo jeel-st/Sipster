@@ -1,6 +1,7 @@
 const database = require("./databaseMain")
 const log = require("../logging/logger")
 const { ObjectId } = require('mongodb');
+const sharp = require('sharp');
 
 
 async function postActivity(req) {
