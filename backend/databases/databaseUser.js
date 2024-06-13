@@ -2,7 +2,8 @@
 const database = require("./databaseMain")
 const log = require("../logging/logger")
 
-const { isValidPassword, isValidEmail, encryptPassword } = require("../utils/registerLogic/registerPatterns")
+const { isValidPassword, isValidEmail, encryptPassword } = require("../utils/registerLogic/registerPatterns");
+const { ObjectId } = require("mongodb");
 
 /**
  * Diese Methode dient dazu, Benutzerdaten basierend auf dem Benutzernamen abzurufen.
@@ -14,11 +15,11 @@ const { isValidPassword, isValidEmail, encryptPassword } = require("../utils/reg
 async function getUserData(req) {
     const personalInformation = (await database.initializeCollections()).personalInformation;
     const username = req.params.username
-    const sipsterID = await database.getSipsterID(username)
-    const userData = await personalInformation.findOne({_id: sipsterID})
+    const userID = await database.getSipsterID(username)
+    const userData = await personalInformation.find({_id: userID}).project({_id: 1, username: 1, profilePicture: 1, email: 1, firstName: 1, lastName: 1, friends: 1, sips: 1, events: 1, profilePictureC: 1}).toArray()
 
-    log.info(userData)
-    return userData;
+    log.info(userData[0])
+    return userData[0];
 }
 
 /**

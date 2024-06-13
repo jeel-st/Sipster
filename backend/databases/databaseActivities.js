@@ -11,11 +11,14 @@ async function postActivity(req) {
 
 
     const reactions = database.reactionsTemplate
-    const beforeImagePath = null;
-    const afterImagePath = null;
-    const timestamp = new Date();
+    const beforeImage = null;
+    const afterImage = null;
+    const beforeImageCom80 = null
+    const beforeImageCom1080 = null
+    const afterImageCom80 = null
+    const afterImageCom1080 = null
 
-    const activityData = {beforeImagePath,  afterImagePath, reactions, caption, timestamp, 'userID': userIDObj, 'gameID': gameIDObj}
+    const activityData = {beforeImage, beforeImageCom80, beforeImageCom1080, afterImage, afterImageCom80, afterImageCom1080, reactions, caption, 'userID': userIDObj, 'gameID': gameIDObj}
     const activities = (await database.initializeCollections()).activities
     log.info("Data to be inserted:")
     console.log(activities)
@@ -48,11 +51,13 @@ async function getActivities(req) {
     for (const activity of activitiesData) {
 
         try {
-            const user = await personalInformation.findOne({_id: activity.userID})
+            const user = await personalInformation.find({_id: activity.userID})
+                .project({_id: 1, username: 1, profilePicture: 1, email: 1, firstName: 1, lastName: 1, friends: 1, sips: 1, events: 1, profilePictureC: 1})
+                .toArray()
             const game = await games.findOne({_id: activity.gameID})
             delete activity.userID
             delete activity.gameID
-            activity.user = user
+            activity.user = user[0]
             activity.game = game
         }catch (err) {
             return "Something went wrong with getting the user and the game!"
@@ -89,44 +94,103 @@ async function getActivitiesFromUser(req) {
 
 }
 
-async function uploadBeforePicture(activityID, fileExtension) {
-    try {
-        const imagePath = `/home/sipster/sipster/backend/static/beforePicture/PictureBefore${activityID}${fileExtension}`
-        console.log("Neuer ImagePath: "+ imagePath)
-        const activityObjectId = new ObjectId(activityID);
-        const result = await database.getDB().collection('activities').updateOne(  //-> Datenbank- Update mit neuem Pfad
-            { _id: activityObjectId },
-            { $set: { beforeImagePath: imagePath } }
-        )
-        console.log("Result der Datenbank: "+result)
-        if (result.modifiedCount === 1) {
-            console.log(`BeforePicture für ${activityID} gespeichert.`);
-            return "Success";
-        } else {
-            console.log(`Profilbild für Benutzer ${userIDObj} nicht gefunden.`);
-            return "User not found";
-        }
-    } catch (err) {
-        throw new Error("Fehler in der Datenbank")
+async function deleteEvents(req){
+
+    const date = req.params.date
+    const name = req.params.name
+    const time = req.params.time
+    const header = req.params.header
+
+    let result = await database.getDB().collection("events").deleteOne({date: date, name: name, time: time, header: header})
+
+    if (result.deletedCount === 0) {
+        throw new Error("Event nicht gefunden")
+    } else {
+        return("Event erfolgreich gelöscht")
     }
 }
 
-async function uploadAfterPicture(activityID, fileExtension) {
+async function uploadBeforePicture(activityID, fileExtension, filePathOriginal) {
     try {
-        const imagePath = `/home/sipster/sipster/backend/static/beforePicture/PictureAfter${activityID}${fileExtension}`
-        console.log("Neuer ImagePath: "+ imagePath)
+        const imagePath = `/home/sipster/sipster/backend/static/beforePicture/PictureBefore${activityID}${fileExtension}`
+        const compressedImagePath80 = `/home/sipster/sipster/backend/static/beforePicture/compressed80/PictureBefore${activityID}${fileExtension}`
+        const compressedImagePath1080 = `/home/sipster/sipster/backend/static/beforePicture/compressed1080/PictureBefore${activityID}${fileExtension}`
+        try {
+            await sharp(filePathOriginal)
+                .resize({ width: 80 }) // Ändere die Größe des Bildes auf eine Breite von 800px
+                .toFormat('webp', { quality: 80 }) // Komprimiere das Bild mit 80% Qualität
+                .toFile(compressedImagePath80);
+            await sharp(filePathOriginal)
+                .resize({ width: 1080 }) // Ändere die Größe des Bildes auf eine Breite von 800px
+                .toFormat('webp', { quality: 80 }) // Komprimiere das Bild mit 80% Qualität
+                .toFile(compressedImagePath1080);
+        } catch (err) {
+            console.log("Error, couldn't compress the picture: " + err)
+        }
         const activityObjectId = new ObjectId(activityID);
         const result = await database.getDB().collection('activities').updateOne(  //-> Datenbank- Update mit neuem Pfad
             { _id: activityObjectId },
-            { $set: { afterImagePath: imagePath } }
+            { $set: { beforeImage: imagePath } }
         )
-        console.log("Result der Datenbank: "+result)
-
-        if (result.modifiedCount === 1) {
-            console.log(`BeforePicture für ${activityID} gespeichert.`);
+        const resultCompressed80 = await database.getDB().collection('activities').updateOne(
+            {_id: activityObjectId},
+            { $set: { beforeImageCom80: compressedImagePath80 } }
+        )
+        const resultCompressed1080 = await database.getDB().collection('activities').updateOne(
+            {_id: activityObjectId},
+            { $set: { beforeImageCom1080: compressedImagePath1080 } }
+        )   
+        console.log("Result der Datenbank: " + result)
+        if (result.modifiedCount === 1 && resultCompressed80.modifiedCount === 1 && resultCompressed1080.modifiedCount ===1) {
+            console.log(`Profilbild für Benutzer ${activityID} erfolgreich gespeichert.`);
             return "Success";
         } else {
-            console.log(`Profilbild für Benutzer ${userIDObj} nicht gefunden.`);
+            console.log(`Profilbild für Benutzer ${activityID} nicht gefunden.`);
+            return "User not found";
+        }
+
+    } catch (err) {
+        throw new Error("Fehler in der Datenbank"+ err)
+    }
+}
+
+async function uploadAfterPicture(activityID, fileExtension, filePathOriginal) {
+    try {
+        const imagePath = `/home/sipster/sipster/backend/static/afterPicture/PictureAfter${activityID}${fileExtension}`
+        const compressedImagePath80 = `/home/sipster/sipster/backend/static/afterPicture/compressed80/PictureAfter${activityID}${fileExtension}`
+        const compressedImagePath1080 = `/home/sipster/sipster/backend/static/afterPicture/compressed1080/PictureAfter${activityID}${fileExtension}`
+        try {
+            await sharp(filePathOriginal)
+                .resize({ width: 80 }) // Ändere die Größe des Bildes auf eine Breite von 800px
+                .toFormat('webp', { quality: 80 }) // Komprimiere das Bild mit 80% Qualität
+                .toFile(compressedImagePath80);
+            await sharp(filePathOriginal)
+                .resize({ width: 1080 }) // Ändere die Größe des Bildes auf eine Breite von 800px
+                .toFormat('webp', { quality: 80 }) // Komprimiere das Bild mit 80% Qualität
+                .toFile(compressedImagePath1080);
+        } catch (err) {
+            console.log("Error, couldn't compress the picture: " + err)
+        }
+        const activityObjectId = new ObjectId(activityID);
+        const result = await database.getDB().collection('activities').updateOne(  //-> Datenbank- Update mit neuem Pfad
+            { _id: activityObjectId },
+            { $set: { afterImage: imagePath } }
+        )
+        const resultCompressed80 = await database.getDB().collection('activities').updateOne(
+            {_id: activityObjectId},
+            { $set: { afterImageCom80: compressedImagePath80 } }
+        )
+        const resultCompressed1080 = await database.getDB().collection('activities').updateOne(
+            {_id: activityObjectId},
+            { $set: { afterImageCom1080: compressedImagePath1080 } }
+        )  
+        console.log("Result der Datenbank: "+result)
+
+        if (result.modifiedCount === 1 && resultCompressed80.modifiedCount === 1 && resultCompressed1080.modifiedCount ===1) {
+            console.log(`Bild für Benutzer ${activityID} erfolgreich gespeichert.`);
+            return "Success";
+        } else {
+            console.log(`Bild für Benutzer ${activityID} nicht gefunden.`);
             return "User not found";
         }
     } catch (err) {

@@ -18,14 +18,15 @@ async function postUser(req){
     const timestamp = Date.now()
     const registerDate = new Date(timestamp).toISOString();
     const profilePicture = null
-    const profilPictureC = null
+    const profilePictureCom200 = null
+    const profilePictureCom1080 = null
     const sips = 0
 
     encryptedPasswordAndSalt = await encryptPassword(password)
     encryptedPassword = encryptedPasswordAndSalt[0]
     salt = encryptedPasswordAndSalt[1]
     
-    const personalData = { username, profilePicture, profilPictureC, encryptedPassword, salt, email, firstName, lastName, registerDate, friends, sips }
+    const personalData = { username, profilePicture, profilePictureCom200, profilePictureCom1080, encryptedPassword, salt, email, firstName, lastName, registerDate, friends, sips }
     
     const usernameFinder = await database.getDB().collection("personalInformation").findOne({ username: username})
     const emailFinder = await database.getDB().collection("personalInformation").findOne({ email: email })
@@ -69,18 +70,15 @@ async function postUser(req){
 
 async function deleteUser(req){
     const userID = new ObjectId(req.params.userID)
-    const password = req.params.password
     const personalInformation = await database.getDB().collection("personalInformation")
     try {
         const user = await personalInformation.findOne({_id: userID})
         if (user == null) {
             return "Benutzer nicht gefunden"
         } else {
-            const salt = user.salt;
-            const encryptedPassword = await encryptPasswordWithSalt(salt, password)
-            const result = await personalInformation.deleteOne({ _id: userID, encryptedPassword: encryptedPassword })
+            const result = await personalInformation.deleteOne({ _id: userID })
             if (result.deletedCount === 0) {
-                return "Passwort ist inkorrekt"
+                return "user wurde nicht gefunden"
             }
             try {
     

@@ -84,8 +84,8 @@ async function getInvitations(req){
     return await dbFriendSystem.getInvitations(req);
 }
 
-async function uploadProfilePicture(username, fileExtension, filePathOriginal){
-    return await dbProfilePicture.uploadProfilePicture(username, fileExtension, filePathOriginal)
+async function uploadProfilePicture(userID, fileExtension, filePathOriginal){
+    return await dbProfilePicture.uploadProfilePicture(userID, fileExtension, filePathOriginal)
 }
 
 async function getUserData(req){
@@ -133,12 +133,12 @@ async function addReaction(req) {
     return await dbActivities.addReaction(req)
 }
 
-async function uploadBeforePicture(activityID, fileExtension){
-    return await dbActivities.uploadBeforePicture(activityID, fileExtension)
+async function uploadBeforePicture(activityID, fileExtension, filePathOriginal){
+    return await dbActivities.uploadBeforePicture(activityID, fileExtension, filePathOriginal)
 }
 
-async function uploadAfterPicture(activityID, fileExtension){
-    return await dbActivities.uploadAfterPicture(activityID, fileExtension)
+async function uploadAfterPicture(activityID, fileExtension, filePathOriginal){
+    return await dbActivities.uploadAfterPicture(activityID, fileExtension, filePathOriginal)
 }
 
 async function getSips(username){
