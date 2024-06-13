@@ -114,13 +114,13 @@ async function deleteEvents(req){
 async function uploadBeforePicture(activityID, fileExtension, filePathOriginal) {
     try {
         const imagePath = `/home/sipster/sipster/backend/static/beforePicture/PictureBefore${activityID}${fileExtension}`
-        const compressedImagePath200 = `/home/sipster/sipster/backend/static/beforePicture/compressed200/PictureBefore${activityID}${fileExtension}`
+        const compressedImagePath80 = `/home/sipster/sipster/backend/static/beforePicture/compressed80/PictureBefore${activityID}${fileExtension}`
         const compressedImagePath1080 = `/home/sipster/sipster/backend/static/beforePicture/compressed1080/PictureBefore${activityID}${fileExtension}`
         try {
             await sharp(filePathOriginal)
                 .resize({ width: 80 }) // Ändere die Größe des Bildes auf eine Breite von 800px
                 .toFormat('webp', { quality: 80 }) // Komprimiere das Bild mit 80% Qualität
-                .toFile(compressedImagePath200);
+                .toFile(compressedImagePath80);
             await sharp(filePathOriginal)
                 .resize({ width: 1080 }) // Ändere die Größe des Bildes auf eine Breite von 800px
                 .toFormat('webp', { quality: 80 }) // Komprimiere das Bild mit 80% Qualität
@@ -133,16 +133,16 @@ async function uploadBeforePicture(activityID, fileExtension, filePathOriginal) 
             { _id: activityObjectId },
             { $set: { beforeImage: imagePath } }
         )
-        const resultCompressed200 = await database.getDB().collection('activities').updateOne(
+        const resultCompressed80 = await database.getDB().collection('activities').updateOne(
             {_id: activityObjectId},
-            { $set: { beforeImageCom200: compressedImagePath200 } }
+            { $set: { beforeImageCom200: compressedImagePath80 } }
         )
         const resultCompressed1080 = await database.getDB().collection('activities').updateOne(
             {_id: activityObjectId},
             { $set: { beforeImageCom1080: compressedImagePath1080 } }
         )   
         console.log("Result der Datenbank: " + result)
-        if (result.modifiedCount === 1 && resultCompressed200.modifiedCount === 1 && resultCompressed1080.modifiedCount ===1) {
+        if (result.modifiedCount === 1 && resultCompressed80.modifiedCount === 1 && resultCompressed1080.modifiedCount ===1) {
             console.log(`Profilbild für Benutzer ${activityID} erfolgreich gespeichert.`);
             return "Success";
         } else {
@@ -158,13 +158,13 @@ async function uploadBeforePicture(activityID, fileExtension, filePathOriginal) 
 async function uploadAfterPicture(activityID, fileExtension, filePathOriginal) {
     try {
         const imagePath = `/home/sipster/sipster/backend/static/afterPicture/PictureAfter${activityID}${fileExtension}`
-        const compressedImagePath200 = `/home/sipster/sipster/backend/static/afterPicture/compressed200/PictureAfter${activityID}${fileExtension}`
+        const compressedImagePath80 = `/home/sipster/sipster/backend/static/afterPicture/compressed80/PictureAfter${activityID}${fileExtension}`
         const compressedImagePath1080 = `/home/sipster/sipster/backend/static/afterPicture/compressed1080/PictureAfter${activityID}${fileExtension}`
         try {
             await sharp(filePathOriginal)
                 .resize({ width: 80 }) // Ändere die Größe des Bildes auf eine Breite von 800px
                 .toFormat('webp', { quality: 80 }) // Komprimiere das Bild mit 80% Qualität
-                .toFile(compressedImagePath200);
+                .toFile(compressedImagePath80);
             await sharp(filePathOriginal)
                 .resize({ width: 1080 }) // Ändere die Größe des Bildes auf eine Breite von 800px
                 .toFormat('webp', { quality: 80 }) // Komprimiere das Bild mit 80% Qualität
@@ -177,9 +177,9 @@ async function uploadAfterPicture(activityID, fileExtension, filePathOriginal) {
             { _id: activityObjectId },
             { $set: { afterImage: imagePath } }
         )
-        const resultCompressed200 = await database.getDB().collection('activities').updateOne(
+        const resultCompressed80 = await database.getDB().collection('activities').updateOne(
             {_id: activityObjectId},
-            { $set: { afterImageCom200: compressedImagePath200 } }
+            { $set: { afterImageCom200: compressedImagePath80 } }
         )
         const resultCompressed1080 = await database.getDB().collection('activities').updateOne(
             {_id: activityObjectId},
@@ -187,7 +187,7 @@ async function uploadAfterPicture(activityID, fileExtension, filePathOriginal) {
         )  
         console.log("Result der Datenbank: "+result)
 
-        if (result.modifiedCount === 1 && resultCompressed200.modifiedCount === 1 && resultCompressed1080.modifiedCount ===1) {
+        if (result.modifiedCount === 1 && resultCompressed80.modifiedCount === 1 && resultCompressed1080.modifiedCount ===1) {
             console.log(`Bild für Benutzer ${activityID} erfolgreich gespeichert.`);
             return "Success";
         } else {
