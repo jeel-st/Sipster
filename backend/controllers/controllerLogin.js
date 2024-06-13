@@ -14,11 +14,12 @@ const log = require("../logging/logger")
 async function getLogin(req, res) {
     try {
         const usernameFinder = await database.getLoginData(req)
+        console.log("DatabaseResponse:"+ usernameFinder)
         if(usernameFinder == true){
             res.send(true)
         }
     } catch {
-        res.status(204).send("User not found")
+        res.status(401).send("User not found")
     }
 
 }

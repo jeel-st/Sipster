@@ -1,4 +1,5 @@
 const database = require("../../databases/databaseMain")
+const sharp = require('sharp');
 const log = require("../../logging/logger")
 const Form = require('multiparty').Form
 const { uploadOptions } = require('../uploadLogic/config')
@@ -25,8 +26,9 @@ async function uploadBeforePicture(req, res) {
             console.log("Neuer Filename: " + newFilename)
             const filePath = path.join(uploadOptions.uploadBeforePicture, newFilename);   //-> neuer Filename wird erstellt
             console.log("FilePath: " + filePath)
+           
             console.log("Sent to database uploadBeforePicture")
-            const uploadPicture = await database.uploadBeforePicture(activityID, fileExtension);
+            const uploadPicture = await database.uploadBeforePicture(activityID, ".webp", file.path);
 
             if (uploadPicture == "User not found") {
                 throw new Error("User not found")
@@ -73,8 +75,9 @@ async function uploadAfterPicture(req, res) {
         console.log("Neuer Filename: "+ newFilename)
         const filePath = path.join(uploadOptions.uploadAfterPicture, newFilename);   //-> neuer Filename wird erstellt
         console.log("FilePath: "+ filePath)
+                
         console.log("Sent to database uploadBeforePicture")
-        const uploadPicture = await database.uploadAfterPicture(activityID, fileExtension);
+        const uploadPicture = await database.uploadAfterPicture(activityID, ".webp", file.path);
 
         if (uploadPicture == "User not found") {
             throw new Error("User not found")

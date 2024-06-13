@@ -17,6 +17,6 @@ router.post('/changeUsername', userController.postNewUsername)
 router.post('/changePassword', userController.postNewPassword)
 router.post('/changeEmail', userController.postNewEmail)
 router.post('/addEvent', userController.addEvent)
-router.delete('/:username/:password', registerController.deleteRegister)
+router.delete('/:userID', registerController.deleteRegister)
 
 module.exports = router

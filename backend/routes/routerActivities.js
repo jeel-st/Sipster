@@ -4,11 +4,13 @@ const logMiddleware = require("./logMiddleware");
 
 router.use(logMiddleware);
 
-const activitesController = require('../controllers/controllerActivities')
+const activitiesController = require('../controllers/controllerActivities')
 
-router.post('/postActivity', activitesController.postActivity)
-router.get('/:username', activitesController.getActivities)
-router.put('/postBeforePicture', activitesController.postBeforePicture)
-router.put('/postAfterPicture', activitesController.postAfterPicture)
+router.post('/postActivity', activitiesController.postActivity)
+router.put('/addReaction', activitiesController.addReaction)
+router.get('/:userID', activitiesController.getActivities)
+router.get('/getActivitiesFromUser/:userID', activitiesController.getActivitiesFromUser)
+router.put('/postBeforePicture', activitiesController.postBeforePicture)
+router.put('/postAfterPicture', activitiesController.postAfterPicture)
 
 module.exports = router

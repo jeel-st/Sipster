@@ -8,7 +8,16 @@ const dbProfilePicture = require("../databases/databaseProfilePicture")
 const dbUser = require("../databases/databaseUser")
 const dbSips = require("../databases/databaseSips")
 const dbActivities = require("../databases/databaseActivities")
+const dbHomepage = require("../databases/databaseHomepage")
 const log = require("../logging/logger")
+
+
+const reactionsTemplate = {
+    beer: [],
+    love: [],
+    barf: [],
+    party: []
+  };
 
 let db = null;
 const url = `mongodb://localhost:27017/`;
@@ -75,8 +84,8 @@ async function getInvitations(req){
     return await dbFriendSystem.getInvitations(req);
 }
 
-async function uploadProfilePicture(username, fileExtension, filePathOriginal){
-    return await dbProfilePicture.uploadProfilePicture(username, fileExtension, filePathOriginal)
+async function uploadProfilePicture(userID, fileExtension, filePathOriginal){
+    return await dbProfilePicture.uploadProfilePicture(userID, fileExtension, filePathOriginal)
 }
 
 async function getUserData(req){
@@ -116,17 +125,22 @@ async function getActivities(req) {
     return await dbActivities.getActivities(req)
 }
 
-async function uploadBeforePicture(activityID, fileExtension){
-    return await dbActivities.uploadBeforePicture(activityID, fileExtension)
+async function getActivitiesFromUser(req) {
+    return await dbActivities.getActivitiesFromUser(req)
 }
 
-async function uploadAfterPicture(activityID, fileExtension){
-    return await dbActivities.uploadAfterPicture(activityID, fileExtension)
+async function addReaction(req) {
+    return await dbActivities.addReaction(req)
 }
 
-function getDB() {
-    return db
+async function uploadBeforePicture(activityID, fileExtension, filePathOriginal){
+    return await dbActivities.uploadBeforePicture(activityID, fileExtension, filePathOriginal)
 }
+
+async function uploadAfterPicture(activityID, fileExtension, filePathOriginal){
+    return await dbActivities.uploadAfterPicture(activityID, fileExtension, filePathOriginal)
+}
+
 async function getSips(username){
     return await dbSips.getSips(username)
 }
@@ -142,6 +156,11 @@ async function changeFirstName(userID, newName){
 async function changeLastName(userID, newName){
     return await dbUser.changeLastName(userID, newName)
 }
+
+async function getHomepage(req) {
+    return await dbHomepage.getHomepage(req)
+}
+
  function getDB(){
     return  db
 }
@@ -174,13 +193,15 @@ async function initializeCollections() {
     const personalInformation = db.collection("personalInformation");
     const invitations = db.collection("invitations");
     const events = db.collection("events");
-    const activites = db.collection("activities");
+    const activities = db.collection("activities");
+    const games = db.collection("games");
 
     return {
         personalInformation: personalInformation,
         invitations: invitations,
         events: events,
-        activites: activites
+        activities: activities,
+        games: games
     };
 }
 
@@ -223,9 +244,13 @@ Object.assign(exports, {
     changeLastName,
     postActivity,
     getActivities,
+    getActivitiesFromUser,
+    addReaction,
     uploadAfterPicture,
     uploadBeforePicture,
-    UsernameNotFoundError
+    getHomepage,
+    UsernameNotFoundError,
+    reactionsTemplate
 })
 
 /*

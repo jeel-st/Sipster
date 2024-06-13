@@ -11,18 +11,24 @@ app.use(express.urlencoded({ limit: "50mb", extended: true }));
 
 const PORT = 3000
 
-const { uploadDir, uploadDirCom, uploadStaticDir, uploadBeforePicture, uploadAfterPicture } = require('./utils/uploadLogic/config')
+const { uploadDir, uploadDirCom200,uploadDirCom1080, uploadStaticDir, uploadAfterPictureCom1080, 
+  uploadBeforePictureCom1080, uploadAfterPicture, uploadBeforePicture,uploadBeforePictureCom80, uploadAfterPictureCom80 } = require('./utils/uploadLogic/config')
 
 // Versuche die Upload-Verzeichnisse zu erstellen, falls sie noch nicht existieren
 
 try {
-    fs.mkdirSync(uploadBeforePicture)
-    fs.mkdirSync(uploadAfterPicture)
-    fs.mkdirSync(uploadStaticDir)
-    fs.mkdirSync(uploadDir)
-    fs.mkdirSync(uploadDirCom)
+    fs.mkdirSync(uploadStaticDir, { recursive: true })
+    fs.mkdirSync(uploadDir, { recursive: true })
+    fs.mkdirSync(uploadDirCom200, { recursive: true })
+    fs.mkdirSync(uploadDirCom1080, { recursive: true })
+    fs.mkdirSync(uploadAfterPicture, { recursive: true })
+    fs.mkdirSync(uploadBeforePicture, { recursive: true })
+    fs.mkdirSync(uploadBeforePictureCom80, { recursive: true })
+    fs.mkdirSync(uploadAfterPictureCom80, { recursive: true })
+    fs.mkdirSync(uploadBeforePictureCom1080, { recursive: true })
+    fs.mkdirSync(uploadAfterPictureCom1080, { recursive: true })
   } catch (e) {
-
+    console.log("Error beim Erstellen der Ornder: "+ e)
     if (e.code !== 'EEXIST') throw e
   }
 
@@ -36,6 +42,7 @@ const profilePictureRouter = require("./routes/routerProfilePicture")
 const userRouter = require("./routes/routerUser")
 const sipsRouter = require("./routes/routerSips")
 const activitiesRouter = require("./routes/routerActivities")
+const homepageRouter = require("./routes/routerHomepage")
 
 // Datenbankverbindung herstellen
 
@@ -52,6 +59,7 @@ app.use('/imageUpload', profilePictureRouter)
 app.use('/user', userRouter)
 app.use("/sips", sipsRouter)
 app.use("/activities", activitiesRouter)
+app.use("/homepage", homepageRouter)
 
 // Bereitstellung statischer Dateien im "static"-Verzeichnis
 
