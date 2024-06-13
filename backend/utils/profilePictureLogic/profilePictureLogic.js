@@ -5,6 +5,7 @@ const { uploadOptions } = require("../uploadLogic/config")
 const fs = require('fs');
 const path = require('path');
 const log = require("../../logging/logger")
+const { ObjectId } = require('mongodb');
 
 /**
  * Diese Methode dient zum Hochladen eines Profilbildes.
@@ -24,25 +25,21 @@ async function uploadProfilePicture(req, res) {
     try {
 
         const form = new Form(uploadOptions)
-        let username
+        let userID
         let fileExtensionParam
 
-        /*Aus dem Feld 'field' wird sich der Username geholt*/
+        /*Aus dem Feld 'field' wird sich die UserID geholt*/
 
         form.on('field', (name, value) => {
-            username = value
+            userID = value
             console.log(`value: ${value}`)
         })
 
         /*Aus dem Feld 'file' wird sich das File geholt*/
 
         form.on('file', async (name, file) => {
-            const userIDObj = await database.getSipsterID(username)
-
-            const userID = userIDObj.toString()
-
             const originalFilename = file.originalFilename;
-
+            const userIDObj = new ObjectId(userID)
             const fileExtension = path.extname(originalFilename);   //-> hier wird sich die Endung des Bildes geholt, welches die Komprimisation beschreibt (z.B .png, .jpg...)
 
             fileExtensionParam = fileExtension;
@@ -51,7 +48,7 @@ async function uploadProfilePicture(req, res) {
 
             const filePath = path.join(uploadOptions.uploadDir, newFilename);   //-> neuer Filename wird erstellt
 
-            const pictureURL = await database.getProfilePictureURL(userIDObj, "0");
+            const pictureURL = await database.getProfilePictureURL(userID, "0");
 
             
             if (pictureURL != null) {
@@ -85,7 +82,7 @@ async function uploadProfilePicture(req, res) {
                 }
             }
                 const deleteURL = await database.deleteProfilePictureURL(userIDObj);
-                const uploadPicture = await database.uploadProfilePicture(userIDObj, fileExtensionParam, file.path);
+                const uploadPicture = await database.uploadProfilePicture(userID, fileExtensionParam, file.path);
 
             } else {
                 const uploadPicture = await database.uploadProfilePicture(userIDObj, fileExtensionParam, file.path);    //-> Falls kein Pfad vorhanden ist, wird alles direkt an die Datenbank geschickt
