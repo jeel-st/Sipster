@@ -133,11 +133,11 @@ async function uploadBeforePicture(activityID, fileExtension, filePathOriginal) 
             { _id: activityObjectId },
             { $set: { beforeImage: imagePath } }
         )
-        const resultCompressed200 = await database.getDB().collection('personalInformation').updateOne(
+        const resultCompressed200 = await database.getDB().collection('activities').updateOne(
             {_id: activityObjectId},
             { $set: { beforeImageCom200: compressedImagePath200 } }
         )
-        const resultCompressed1080 = await database.getDB().collection('personalInformation').updateOne(
+        const resultCompressed1080 = await database.getDB().collection('activities').updateOne(
             {_id: activityObjectId},
             { $set: { beforeImageCom1080: compressedImagePath1080 } }
         )   
@@ -177,23 +177,23 @@ async function uploadAfterPicture(activityID, fileExtension, filePathOriginal) {
             { _id: activityObjectId },
             { $set: { afterImage: imagePath } }
         )
-        const resultCompressed200 = await database.getDB().collection('personalInformation').updateOne(
+        const resultCompressed200 = await database.getDB().collection('activities').updateOne(
             {_id: activityObjectId},
             { $set: { afterImageCom200: compressedImagePath200 } }
         )
-        const resultCompressed1080 = await database.getDB().collection('personalInformation').updateOne(
+        const resultCompressed1080 = await database.getDB().collection('activities').updateOne(
             {_id: activityObjectId},
             { $set: { afterImageCom1080: compressedImagePath1080 } }
         )  
         console.log("Result der Datenbank: "+result)
 
-       /* if (result.modifiedCount === 1 && resultCompressed200.modifiedCount === 1 && resultCompressed1080.modifiedCount ===1) {
+        if (result.modifiedCount === 1 && resultCompressed200.modifiedCount === 1 && resultCompressed1080.modifiedCount ===1) {
             console.log(`Bild für Benutzer ${activityID} erfolgreich gespeichert.`);
             return "Success";
         } else {
             console.log(`Bild für Benutzer ${activityID} nicht gefunden.`);
             return "User not found";
-        }*/
+        }
     } catch (err) {
         throw new Error("Fehler in der Datenbank")
     }
