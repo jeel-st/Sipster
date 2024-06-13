@@ -77,7 +77,7 @@ async function uploadAfterPicture(req, res) {
         console.log("FilePath: "+ filePath)
                 
         console.log("Sent to database uploadBeforePicture")
-        const uploadPicture = await database.uploadAfterPicture(activityID, "webp", file.path);
+        const uploadPicture = await database.uploadAfterPicture(activityID, ".webp", file.path);
 
         if (uploadPicture == "User not found") {
             throw new Error("User not found")
