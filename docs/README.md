@@ -1,38 +1,18 @@
 ---
 description: >-
-  Welcome to Sipster, the innovative platform that elevates the social
-  experience of drinking games to a whole new level. Sipster is more than just a
-  marketplace – it's a vibrant community.
+  "Erfolg ist nicht endgültig. Misserfolg ist nicht tödlich. Es ist der Mut,
+  weiterzumachen, der zählt." -Winston Churchill
 ---
 
-# What is Sipster
+# Sipster
 
-### Our Mission
+### Team overview
 
-Sipster aims to create a lively and supportive community where everyone feels welcome and comfortable. While providing a diverse range of drinking games, Sipster also emphasizes responsible alcohol consumption. Our mission is to foster connections, share memories, and create unforgettable moments.
+🎯 Mission: Eine innovative Plattform zu schaffen, die das soziale Erlebnis von Trinkspielen auf eine neue Ebene hebt. Sipster ist mehr als nur ein Marketplace - es ist eine lebendige Community, in der Nutzer ihre Lieblingsspiele teilen, neue entdecken und gemeinsam Spaß haben können. Neben der Vielfalt an Trinkspielen bietet Sipster auch die Möglichkeit, Bilder von Feiern und Spielabenden zu teilen, auf die Beiträge anderer zu reagieren und zu sehen, an welchen Events Freunde teilnehmen. Durch diese sozialen Funktionen wird Sipster zu einem Ort, an dem Menschen nicht nur Spiele finden, sondern auch Verbindungen knüpfen, Erinnerungen austauschen und gemeinsam unvergessliche Momente schaffen können. Unsere Vision ist es, eine lebendige und unterstützende Community zu schaffen, in der sich jeder willkommen und wohl fühlt, während gleichzeitig ein verantwortungsvoller Umgang mit Alkohol gefördert wird.
 
-### Features
+### Projektstatus
 
-#### Discover and Share Drinking Games
+Bei unserem Projekt handelt es sich bis jetzt nur um eine Alphaversion, weswegen man noch nicht mit allen Funktionen rechnen sollte.
 
-Sipster offers a wide variety of drinking games for users to explore. You can share your favorite games and discover new ones from other community members.
 
-#### Social Interaction
 
-* **Photo Sharing**: Share pictures from your celebrations and game nights.
-* **Reactions and Comments**: React to and comment on posts from other users.
-* **Event Participation**: See what events your friends are attending and join in the fun.
-
-#### Community and Connection
-
-Sipster is designed to be a place where people can not only find games but also build connections and exchange memories. Our vision is to create a vibrant and supportive community where everyone feels welcome.
-
-#### Responsible Drinking
-
-We believe in promoting a responsible approach to alcohol consumption. Sipster encourages users to enjoy their time while being mindful of their drinking habits.
-
-### Join Us
-
-Become a part of Sipster today and start exploring, sharing, and connecting with others who share your passion for drinking games. Whether you’re looking for new game ideas, wanting to share your own, or simply connecting with friends, Sipster is the place to be.
-
-Get started with Sipster

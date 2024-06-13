@@ -1,12 +1,22 @@
 # Table of contents
 
-* [What is Sipster](README.md)
-* [Get Started](get-started/README.md)
-  * [How to create an Account](get-started/how-to-create-an-account.md)
-  * [How to log in](get-started/how-to-log-in.md)
-
-## Legal
-
-* [Imprint](legal/imprint.md)
-* [Terms Of Use](legal/terms-of-use.md)
-* [Privacy Policy](legal/privacy-policy.md)
+* [Sipster](README.md)
+* [Installation](installation.md)
+* [Dokumentationen](dokumentationen/README.md)
+  * [Git Workflow](dokumentationen/git-workflow.md)
+  * [Issues / Milestones / Labels](dokumentationen/issues-milestones-labels.md)
+  * [Anforderungsanalyse](dokumentationen/anforderungsanalyse.md)
+  * [Comment Style Guide](dokumentationen/comment-style-guide.md)
+  * [Reflexion aller Teammitglieder](dokumentationen/reflexion-aller-teammitglieder/README.md)
+    * [Lars](dokumentationen/reflexion-aller-teammitglieder/lars.md)
+    * [Julia](dokumentationen/reflexion-aller-teammitglieder/julia.md)
+    * [Maike](dokumentationen/reflexion-aller-teammitglieder/maike.md)
+    * [Joel](dokumentationen/reflexion-aller-teammitglieder/joel.md)
+  * [Architecture Decision Record - ADRs](dokumentationen/architecture-decision-record-adrs.md)
+* [Frontend](frontend/README.md)
+  * [Package structure](frontend/package-structure.md)
+  * [VS Code Extensions](frontend/vs-code-extensions.md)
+* [Backend](backend/README.md)
+  * [Package Structure](backend/package-structure.md)
+  * [Rest API´s](backend/rest-api-s.md)
+* [Mitwirkende](mitwirkende.md)
