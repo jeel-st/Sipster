@@ -6,7 +6,7 @@ POST {{host}}/events HTTP/1.1
 Content-Type: application/json
 
 {
-    "date": "01.10/20:00",
+    "date": "07.04.2024/20:00",
     "name": "Unithekle",
     "header": "Vaihingen • 7 Apr 2024",
     "desc": "Imagine a drinking night with Jordine...",
@@ -21,10 +21,10 @@ POST {{host}}/events HTTP/1.1
 Content-Type: application/json
 
 {
-    "date": "07.04/19:00",
-    "name": "AprilApril",
-    "header": "Vaihingen • 7 Apr 2024",
-    "desc": "Imagine a night full of unforgettable pranks and laughter, where every moment holds a new surprise - that's our April Fool's party!",
+    "date": "18.06.2024/19:00",
+    "name": "Straussi-3",
+    "header": "Vaihingen • 18 06 2024",
+    "desc": "The legendary Straussi 3 Sommerfest returns! This time on whole new Level!!! Don't miss out",
     "tags": ["community", "100 sips"]
 }
 
@@ -34,12 +34,11 @@ POST {{host}}/events HTTP/1.1
 Content-Type: application/json
 
 {
-    "date": "25.05",
-    "name": "Bartour",
-    "time": "ab 19 Uhr",
-    "header": "Vaihingen • 7 Apr 2024",
-    "desc": "Imagine a night full of unforgettable pranks and laughter, where every moment holds a new surprise - that's our April Fool's party!",
-    "tags": ["community", "100 sips"]
+    "date": "19.07.2024/16:00",
+    "name": "Campus-Beach-Bar",
+    "header": "Vaihingen • 19 07 2024",
+    "desc": "Ihr seit Student*innen und habt kein Geld für Urlaub? Gar kein Problem wir bringen den Strand zu euch bei unserer Beach Party zwischen Palmen und Pinã Coladãs!",
+    "tags": ["community", "150 sips"]
 }
 
 ###
@@ -48,12 +47,11 @@ POST {{host}}/events HTTP/1.1
 Content-Type: application/json
 
 {
-    "date": "13.06",
-    "name": "Straussi II",
-    "time": "ab 19 Uhr",
-    "header": "Vaihingen • 7 Apr 2024",
-    "desc": "Imagine a night full of unforgettable pranks and laughter, where every moment holds a new surprise - that's our April Fool's party!",
-    "tags": ["community", "100 sips"]
+    "date": "27.07.2024/20:00",
+    "name": "Jazz Festival",
+    "header": "jazzopen stuttgart 2024",
+    "desc": "Freue dich! Die Jazzopen werden das Event dieses Jahres! Sichere dir Tickets jetzt!",
+    "tags": ["community", "priced"]
 }
 
 ###

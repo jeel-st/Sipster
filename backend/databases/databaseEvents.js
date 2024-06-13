@@ -25,16 +25,16 @@ async function getEvents() {
 
 async function postEvents(req) {
     const {date, name, header, desc, tags} = req.body
-    const [dayMonth, time] = date.split('/') // Format of date = "02.04/20:30"
+    const [dayMonth, time] = date.split('/') // Format of date = "02.04.2024/20:30"
     const [hours, minutes] = time.split(':').map(Number)
-    const [day, month] = dayMonth.split('.').map(Number)
-    //const year = new Date().getFullYear()
+    const [day, month, year] = dayMonth.split('.').map(Number)
     
     const realDate = new Date() // new Date(year, month - 1, day, hours, minutes) fand ich schlecht lesbar
     realDate.setMonth(month - 1) //because january is 0: have to add 1 if accessing by getMonth() method
     realDate.setDate(day)
     realDate.setHours(hours)
     realDate.setMinutes(minutes)
+    realDate.setFullYear(year)
     const eventsData = {Date: realDate, name, time, header, desc, tags}
     let result = await database.getDB().collection("events").insertOne(eventsData)
     if(result){

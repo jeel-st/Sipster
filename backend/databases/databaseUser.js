@@ -53,6 +53,10 @@ async function postNewUsername(req){
     log.info(username + " + " + newUsername)
     const sipsterID = await database.getSipsterID(username);
     const personalInformation = (await database.initializeCollections()).personalInformation;
+    const checkForUsername = await personalInformation.findOne({ username: newUsername });
+    if (checkForUsername !== null){
+        return "This username is already used!"
+    }
     const filter = {_id: sipsterID}
     const update = {$set: {username: newUsername}}
 

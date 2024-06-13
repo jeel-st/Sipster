@@ -59,7 +59,11 @@ async function getEvents(req, res) {
 async function postNewUsername(req, res) {
     try{
         const postNewUsername = await database.postNewUsername(req)
+        if(postNewUsername == "This username is already used!"){
+            res.status(400).json("This username is already used!")
+        }
         res.send("Username was succesfully posted!")
+        
     }catch(err){
         if (err instanceof database.UsernameNotFoundError) {
             res.status(400).send(err.message)
