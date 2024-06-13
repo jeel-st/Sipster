@@ -79,11 +79,11 @@ async function getActivitiesFromUser(req) {
     const userIDObj = new ObjectId(userID)
     try {
     const activities = (await database.initializeCollections()).activities
-    const activitiesFromUser = activities.find(
+    const activitiesFromUser = await activities.find(
         {userID: userIDObj}
     ).toArray()
 
-    console.log(activitiesFromUser.length)
+
     if (activitiesFromUser.length === undefined){
 
         return ("no activity was found by that user!")

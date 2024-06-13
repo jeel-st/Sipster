@@ -17,7 +17,7 @@ GET {{host}}/activities/661d09ba6671060e01a4fd3e
 
 ###
 
-GET {{host}}/activities/getActivitiesFromUser/661d09ba6671060e01a4fd3e
+GET {{host}}/activities/getActivitiesFromUser/661d07706671060e01a4fd3d
 
 ###
 
