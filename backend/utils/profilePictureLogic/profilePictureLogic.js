@@ -48,7 +48,7 @@ async function uploadProfilePicture(req, res) {
 
             const filePath = path.join(uploadOptions.uploadDir, newFilename);   //-> neuer Filename wird erstellt
 
-            const pictureURL = await database.getProfilePictureURL(userID, "0");
+            const pictureURL = await database.getProfilePictureURL(userIDObj, "0");
 
             
             if (pictureURL != null) {
