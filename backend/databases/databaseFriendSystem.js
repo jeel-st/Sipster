@@ -39,6 +39,7 @@ async function checkIfOtherUserAlreadySentFriendRequest(userData, invitations) {
         { fromID: userData.toID },
         { toID: userData.fromID }
       ]} )
+    console.log(foundFriendRequest)
 
     if (foundFriendRequest !== null) {
         return true;
