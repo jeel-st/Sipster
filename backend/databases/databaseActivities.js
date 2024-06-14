@@ -94,9 +94,23 @@ async function getActivitiesFromUser(req) {
     const userIDObj = new ObjectId(userID)
     try {
     const activities = (await database.initializeCollections()).activities
+    const personalInformation = (await database.initializeCollections()).personalInformation
     const activitiesFromUser = await activities.find(
         {userID: userIDObj}
     ).toArray()
+
+    for (const activity of activitiesFromUser) {
+
+        try {
+            const user = await personalInformation.find({_id: activity.userID})
+                .project({_id: 1, username: 1, profilePicture: 1, email: 1, firstName: 1, lastName: 1, friends: 1, sips: 1, events: 1})
+                .toArray()
+            delete activity.userID
+            activity.user = user[0]
+        }catch (err) {
+            return "Something went wrong with getting the user! + " + err
+        }
+    }
 
     if (activitiesFromUser.length === undefined){
 
