@@ -60,8 +60,8 @@ async function postFriendRequest(req){
     return await dbFriendSystem.postFriendRequest(req)
 }
 
-async function acceptFriendRequest(req){
-    return await dbFriendSystem.acceptFriendRequest(req)
+async function acceptFriendRequest(fromUsername, toUsername){
+    return await dbFriendSystem.acceptFriendRequest(fromUsername, toUsername)
 }
 
 async function declineFriendRequest(req){

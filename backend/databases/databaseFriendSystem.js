@@ -12,7 +12,7 @@ const { checkForFriendsInRecommendations } = require("../utils/friendSystemLogic
  * @throws:     Error (Bei Fehler) -> "Database disconnected + err"
  */
 async function postFriendRequest(req){
-    const invitations = await database.getDB().collection("invitations")
+    const invitations = (await database.initializeCollections()).invitations
     const {fromSipsterID, toSipsterID} = req.body
     const fromID = await database.getSipsterID(fromSipsterID)
     const toID = await database.getSipsterID(toSipsterID)
@@ -21,12 +21,26 @@ async function postFriendRequest(req){
 
 
     const userData = {fromID, toID, sendAt}
+    if (checkIfOtherUserAlreadySentFriendRequest(userData, invitations)) {
+        acceptFriendRequest(toSipsterID, fromSipsterID)
+        return "Request rerouted!"
+    }
 
     try{
         let result = await invitations.insertOne(userData)
         return result
     }catch(err){
         throw new Error("Database disconnected" + err)
+    }
+}
+
+async function checkIfOtherUserAlreadySentFriendRequest(userData, invitations) {
+    const foundFriendRequest = await invitations.findOne( {$AND:{fromID: userData.toID, toID: userData.fromID}} )
+
+    if (foundFriendRequest !== null) {
+        return true;
+    }else {
+        return false;
     }
 }
 
@@ -38,11 +52,9 @@ async function postFriendRequest(req){
  * @throws:     Error (Bei Fehler) -> "Benutzername nicht gefunden" oder "Anfrage nicht gefunden"
  */
 
-async function acceptFriendRequest(req){
+async function acceptFriendRequest(fromUsername, toUsername){
     const personalInformation = (await database.initializeCollections()).personalInformation
     const invitations = (await database.initializeCollections()).invitations
-    const fromUsername = req.params.fromUsername
-    const toUsername = req.params.toUsername
 
     const fromSipsterID = await database.getSipsterID(fromUsername)
     const toSipsterID = await database.getSipsterID(toUsername)

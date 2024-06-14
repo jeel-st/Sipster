@@ -15,6 +15,9 @@ const log = require("../logging/logger")
 async function postFriendRequest(req, res){
     try{
         const friendRequestPost = await database.postFriendRequest(req)
+        if (friendRequestPost == "Request rerouted!"){
+            res.send("The user you trying to invite has already invited you. So the users invite was accepted and the invitation was deleted")
+        }
         res.send("Friend request was send successfully!")
     }catch(err){
         log.error("Database request failed! " + err)
@@ -42,7 +45,10 @@ async function deleteFriendRequest(req, res){
         }
 
         if(req.query.status == "true"){
-            const friendRequestDel = await database.acceptFriendRequest(req)
+            const fromUsername = req.params.fromUsername
+            const toUsername = req.params.toUsername
+
+            const friendRequestDel = await database.acceptFriendRequest(fromUsername, toUsername)
             res.send("User was accepted!")
 
         }else if(req.query.status == "false"){
