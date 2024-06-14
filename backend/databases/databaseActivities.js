@@ -98,8 +98,6 @@ async function getActivitiesFromUser(req) {
         {userID: userIDObj}
     ).toArray()
 
-    console.log(activitiesFromUser)
-
     if (activitiesFromUser.length === undefined){
 
         return ("no activity was found by that user!")
