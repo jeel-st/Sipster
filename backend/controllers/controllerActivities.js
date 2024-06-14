@@ -49,7 +49,6 @@ async function getActivitiesFromUser(req, res) {
         if (activities == 'no activity was found by that user!'){
             res.status(400).json("no activity was found by that user!")
         }else if (activities != null){
-            log.info(activities)
             res.send(activities)
         }else {
             res.status(404).json("Something went wrong here!")
