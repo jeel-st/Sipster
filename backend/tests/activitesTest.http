@@ -25,8 +25,8 @@ PUT {{host}}/activities/addReaction HTTP/1.1
 Content-Type: application/json
 
 {
-    "userID": "661d09ba6671060e01a4fd3e",
-    "activityID": "666b427d862f539d60f295a7",
+    "userID": "661d07706671060e01a4fd3d",
+    "activityID": "666754e698172b6ff4c27abe",
     "reactionType": "barf"
 }
 

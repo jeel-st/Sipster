@@ -232,12 +232,19 @@ async function addReaction(req) {
         const activityIDObj = new ObjectId(activityID)
         const userIDObj = new ObjectId(userID)
 
+
         const reactionsTemplate = database.reactionsTemplate
-        const queryConditions = reactionsTemplate.map(reaction => {
+        console.log(reactionsTemplate)
+        const queryConditions = Object.keys(reactionsTemplate).map(reaction => {
             return { [`reactions.${reaction}`]: userIDObj };
         });
 
-        const alreadyReacted = await activities.findOne( {$AND:[{ _id: activityIDObj}, {$OR:queryConditions }]} )
+        const alreadyReacted = await activities.findOne( {
+            $and: [
+                { _id: activityIDObj },
+                { $or: queryConditions }
+              ]
+        } )
         if (alreadyReacted) {
             const deleteResult = await activities.updateOne( {_id: activityIDObj }, {$pull: queryConditions})
             if (deleteResult.deletedCount == 0) {
@@ -261,6 +268,7 @@ async function addReaction(req) {
             return "error"
         }
     }catch (err) {
+        console.log(err)
         return ("Error")
     }
 }
