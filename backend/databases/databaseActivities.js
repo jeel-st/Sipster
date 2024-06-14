@@ -3,7 +3,11 @@ const log = require("../logging/logger")
 const { ObjectId, Timestamp } = require('mongodb');
 const sharp = require('sharp')
 
-
+/**
+ * In this method you can post an Activity in 
+ * @param {caption, userID, gameID} req 
+ * @returns 
+ */
 async function postActivity(req) {
     const {caption, userID, gameID} = req.body
 
@@ -35,6 +39,12 @@ async function postActivity(req) {
     }
 }
 
+/**
+ * In this method you can get all the Activities from your friends
+ * @param {userID as String} req 
+ * @returns all activities from the friends in an Array and the user who created the Activity is also returned as the user
+ * and not only the userID
+ */
 async function getActivities(req) {
     const userID = req.params.userID
     const userIDObj = new ObjectId(userID)
@@ -74,6 +84,11 @@ async function getActivities(req) {
    }
 }
 
+/**
+ * In this method you can get all activities that the given user created
+ * @param {userID as a String} req 
+ * @returns the activities in an array 
+ */
 async function getActivitiesFromUser(req) {
     const userID = req.params.userID
     const userIDObj = new ObjectId(userID)
@@ -83,6 +98,7 @@ async function getActivitiesFromUser(req) {
         {userID: userIDObj}
     ).toArray()
 
+    console.log(activitiesFromUser)
 
     if (activitiesFromUser.length === undefined){
 
@@ -186,6 +202,12 @@ async function uploadAfterPicture(activityID, fileExtension, filePathOriginal) {
     }
 }
 
+/**
+ * This method adds a reaction by checking if the user already reacted to this activity if yes
+ * the reaction gets deleted and the new on is added
+ * @param {userID, activityID, reactionType} req 
+ * @returns in cas of succes "Reaction added succesfully"
+ */
 async function addReaction(req) {
     try {
         const {userID, activityID, reactionType} = req.body
@@ -227,6 +249,11 @@ async function addReaction(req) {
     }
 }
 
+/**
+ * In this method you can delete a reaction 
+ * @param {userID, activityID, reactionType} req
+ * @returns "reaction deleted!" if success "reaction couldnt be deleted if method fails"
+ */
 async function deleteReaction(req) {
     try {
         const userID = req.params.userID
