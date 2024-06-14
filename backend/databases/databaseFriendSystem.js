@@ -35,7 +35,10 @@ async function postFriendRequest(req){
 }
 
 async function checkIfOtherUserAlreadySentFriendRequest(userData, invitations) {
-    const foundFriendRequest = await invitations.findOne( {$AND:{fromID: userData.toID, toID: userData.fromID}} )
+    const foundFriendRequest = await invitations.findOne( {$and: [
+        { fromID: userData.toID },
+        { toID: userData.fromID }
+      ]} )
 
     if (foundFriendRequest !== null) {
         return true;
