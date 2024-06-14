@@ -77,7 +77,7 @@ async function acceptFriendRequest(fromUsername, toUsername){
         { _id: toUser._id },
         { $addToSet: { friends: fromUser._id } }
     );
-    if (req.params.toUsername != "Sipster"){
+    if (toUsername != "Sipster"){
         let result = await invitations.deleteOne({fromID: fromSipsterID, toID: toSipsterID})
 
         if (result.deletedCount === 0) {
