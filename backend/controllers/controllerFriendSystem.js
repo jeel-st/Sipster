@@ -17,8 +17,9 @@ async function postFriendRequest(req, res){
         const friendRequestPost = await database.postFriendRequest(req)
         if (friendRequestPost == "Request rerouted!"){
             res.send("The user you trying to invite has already invited you. So the users invite was accepted and the invitation was deleted")
+        }else {
+            res.send("Friend request was send successfully!")
         }
-        res.send("Friend request was send successfully!")
     }catch(err){
         log.error("Database request failed! " + err)
         res.status(500).send("Something went wrong")
