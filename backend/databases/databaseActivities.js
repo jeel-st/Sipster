@@ -99,16 +99,20 @@ async function getActivitiesFromUser(req) {
         {userID: userIDObj}
     ).toArray()
 
+    const games = (await database.initializeCollections()).games
     for (const activity of activitiesFromUser) {
 
         try {
             const user = await personalInformation.find({_id: activity.userID})
                 .project({_id: 1, username: 1, profilePicture: 1, email: 1, firstName: 1, lastName: 1, friends: 1, sips: 1, events: 1})
-                .toArray()
+                .toArray();
+            const game = await games.findOne({_id: activity.gameID})
             delete activity.userID
+            delete activity.gameID
             activity.user = user[0]
+            activity.game = game
         }catch (err) {
-            return "Something went wrong with getting the user! + " + err
+            return "Something went wrong with getting the user and the game! + " + err
         }
     }
 
