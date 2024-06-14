@@ -237,10 +237,10 @@ async function addReaction(req) {
             return { [`reactions.${reaction}`]: userIDObj };
         });
 
-        const alreadyReacted = await activities.findOne( {$AND:{ _id: activityIDObj, $OR:queryConditions }} )
+        const alreadyReacted = await activities.findOne( {$AND:[{ _id: activityIDObj}, {$OR:queryConditions }]} )
         if (alreadyReacted) {
             const deleteResult = await activities.updateOne( {_id: activityIDObj }, {$pull: queryConditions})
-            if (deleteResult == null) {
+            if (deleteResult.deletedCount == 0) {
                 return "Couldn't delete old Reaction please try again!"
             }
         }

@@ -26,8 +26,8 @@ Content-Type: application/json
 
 {
     "userID": "661d09ba6671060e01a4fd3e",
-    "activityID": "6666311b8663e5335a54e9b4",
-    "reactionType": "beer"
+    "activityID": "666b427d862f539d60f295a7",
+    "reactionType": "barf"
 }
 
 ###
