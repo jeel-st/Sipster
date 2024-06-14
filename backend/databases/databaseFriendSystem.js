@@ -44,7 +44,6 @@ async function checkIfOtherUserAlreadySentFriendRequest(userData, invitations) {
     if (foundFriendRequest === null) {
         return false;
     }else {
-        console.log("why tf es ist doch null du penner")
         return true;
     }
 }

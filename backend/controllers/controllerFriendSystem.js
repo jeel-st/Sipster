@@ -16,7 +16,7 @@ async function postFriendRequest(req, res){
     try{
         const friendRequestPost = await database.postFriendRequest(req)
         if (friendRequestPost == "Request rerouted!"){
-            res.send("The user you trying to invite has already invited you. So the users invite was accepted and the invitation was deleted")
+            res.status(204).send("The user you trying to invite has already invited you. So the users invite was accepted and the invitation was deleted")
         }else {
             res.send("Friend request was send successfully!")
         }
