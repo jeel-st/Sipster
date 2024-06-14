@@ -21,8 +21,8 @@ async function postFriendRequest(req){
 
 
     const userData = {fromID, toID, sendAt}
-    if (checkIfOtherUserAlreadySentFriendRequest(userData, invitations)) {
-        acceptFriendRequest(toSipsterID, fromSipsterID)
+    if (await checkIfOtherUserAlreadySentFriendRequest(userData, invitations)) {
+        await acceptFriendRequest(toSipsterID, fromSipsterID)
         return "Request rerouted!"
     }
 
@@ -41,7 +41,7 @@ async function checkIfOtherUserAlreadySentFriendRequest(userData, invitations) {
       ]} )
     console.log(foundFriendRequest)
 
-    if (foundFriendRequest == null) {
+    if (foundFriendRequest === null) {
         return false;
     }else {
         console.log("why tf es ist doch null du penner")
