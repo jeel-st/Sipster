@@ -21,7 +21,6 @@ export function player(){
 
     /* 
     sets the input that is entered  
-    
     @param text: string -> input
     */
     const handleInputChange = (text) => {
@@ -97,22 +96,22 @@ export function player(){
 
    /* 
    delet Player   
-   funktioniert noch nicht richtig löscht zuviel 
+  
    */
 
 
    const handleDeletPlayer = (player) => {
-      console.log(player + 'Wer raus soll')
+      console.log(player + ' Wer raus soll')
       const indexToDelete = players.indexOf(player);
-      console.log(indexToDelete + 'Wer raus soll als index')
+      console.log(indexToDelete + ' Wer raus soll als index')
       let newArray = [];
-      newArray = [
-        ...players.slice(0, indexToDelete),
-        ...players.slice(indexToDelete + 1)
-      ];
 
-
-      
+      for(let i = 0; i < players.length; i++){
+        if(i != indexToDelete){
+            newArray.push(players[i])
+        }
+      }
+      if(player != inputValue){newArray.push(inputValue)}
       console.log(newArray + 'neuer Array')
       setPlayers(newArray);
       handleList(newArray);
