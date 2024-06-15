@@ -96,7 +96,9 @@ export function player(){
 
    /* 
    delet Player   
-  
+   @param player: string -> player to be deleted
+   @param indexToDelet: number -> index from player to be deleted
+   @param newArray: array -> array without player to be deleted 
    */
 
 
