@@ -1,17 +1,17 @@
 // Imports
 import { SafeAreaView, Pressable, Text, StatusBar, Image } from "react-native";
-import { styles } from '../constants'; 
-import React, { useEffect, useState } from 'react'; ; 
+import { styles } from '../constants';
+import React, { useEffect, useState } from 'react'; ;
 import { router } from 'expo-router'
 import { NativeBaseProvider, View } from "native-base";
 import { FriendsScrollView, FriendsSkeleton, IconButton, SavedEvents } from "../components";
 import { classNames } from "../utils";
 import { fetchProfilePictureCompressed } from '../utils/database/imageFetcher';
-import { navBarColor } from "../utils/navBarColor"; 
+import { navBarColor } from "../utils/navBarColor";
 import { usePathname } from "expo-router";
-import { useUser } from "../utils/hooks/useUser"; 
+import { useEventDisplay } from '../utils';
+import { useUser } from "../utils/hooks/useUser";
 import { useAccount } from "../utils/hooks/useAccount";
-import { useEventDisplay } from '../utils'; 
 
 /*
 Front end of the AccountPage.
@@ -32,7 +32,7 @@ export default function AccountPage() {
         setUser(useUser())
     }, [path]);
 
-    // import of the logik 
+    // import of the logik
     const { level, levelInfo } = useAccount();
     const { displayEvent, handleEventSelection } = useEventDisplay();
 

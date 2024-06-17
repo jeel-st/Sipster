@@ -1,13 +1,13 @@
 // Imports
 import { userLog } from '../logger/config';
-import useUser from '../database/userFetcher';
 import { useEffect, useState } from "react";
+import { useUser } from './useUser';
 
 /*
 The logic of the AccountPage is processed here
 Typ: hook from settings
 
-@return:    object -> An object containing the user's level and information about the current level, 
+@return:    object -> An object containing the user's level and information about the current level,
 including image, header, and text.
 */
 
@@ -21,7 +21,7 @@ export function useAccount() {
     const [level, setLevel] = useState('');
     const [levelInfo, setLevelInfo] = useState({});
 
-    // The method uses the React hook useEffect to calculate the level of a user based on their ‘sips’ 
+    // The method uses the React hook useEffect to calculate the level of a user based on their ‘sips’
     // when the user object changes and to update the corresponding information.
     useEffect(() => {
         if (user) {
@@ -57,7 +57,7 @@ export function useAccount() {
         }
     }
 
-    // this function gives different badge information depending on the level 
+    // this function gives different badge information depending on the level
     const getLevelInfo = (level) => {
         switch (level) {
             case '1':
