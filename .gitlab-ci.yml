@@ -10,4 +10,6 @@ build-backend:
   stage: build
   image: node:20-alpine
   script:
-    - "node backend/app.js"
+    - "cd backend"
+    - "npm i"
+    - "node app.js"
