@@ -8,10 +8,11 @@ import { classNames } from '../../utils';
 This component renders a button with an icon and text.
 Typ: Component from settings 
 
-@ title
-@ icon
-@ color
-@ content     -> Executes a specific function.
+@param title:       string -> title of the button 
+@param icon:        string -> a specific icon 
+@param color:       string -> color of the button and icon 
+@param content:     function -> Executes a specific function.
+@return:            JSX -> returns a TextButton with a specific icon
 */
 export default function TextButton({ title, icon, color, content }) {
     return (

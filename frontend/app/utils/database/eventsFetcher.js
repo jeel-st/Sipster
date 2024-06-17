@@ -13,3 +13,16 @@ export function useEvents() {
 
     return events;
 }
+
+export function useSavedEvents() {
+    const [events, setEvents] = useState([]);
+
+    useEffect(() => {
+        axiosInstance.get('/user/events')
+            .then(response => setEvents(response.data))
+            .catch(error => eventLog.error("Error loading events:", error))
+    }, []);
+
+    return events;
+}
+

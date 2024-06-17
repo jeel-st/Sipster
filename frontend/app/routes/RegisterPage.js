@@ -12,6 +12,8 @@ import { useNavBarColor } from '../utils/hooks/useNavBarColor';
 /*
 Front end of the RegisterPage.
 Typ: Page/route
+
+@return:    JSX -> returns the RegisterPage component
 */
 export default function RegisterPage() {
 
