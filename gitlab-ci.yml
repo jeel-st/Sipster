@@ -1,0 +1,13 @@
+
+stages:
+  - build
+  - test
+  - package
+  - release
+
+
+build-backend:
+  stage: build
+  image: node:20-alpine
+  script:
+    - "node backend/app.js"
