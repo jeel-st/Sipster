@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { fetchFriendsData, fetchFriendsInvitations } from '../../database/friendsFetcher';
 import { useUser } from '../useUser';
+import UserManager from '../../../entitys/UserManager';
 
 export function useFriends() {
     const [searchText, setSearchText] = useState('')
@@ -36,8 +37,9 @@ export function useFriends() {
         if (selectedTab !== 0) {
             const invitations = await fetchFriendsInvitations(user.username);
             friends = invitations[selectedTab - 1] || []
-        }else {
-            friends = await fetchFriendsData(user.username)
+        } else {
+            const userManager = UserManager.getInstance()
+            friends = await userManager.updateFriends(user.username)
         }
         setViewFriends(friends)
     }

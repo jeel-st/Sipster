@@ -45,6 +45,25 @@ export default class UserManager {
         userLog.debug(this._user.present())
     }
 
+    async updateFriends(username) {
+        const friendsData = await fetchFriends(username)
+
+        if (!friendsData) {
+            userLog.error("User could not be updated.")
+            return
+        }
+
+        let friends = []
+        if (friendsData.length > 0) {
+            friends = friendsData.map(friend => new Friend(friend));
+        }
+
+        this._user.friends = friends
+        userLog.info("Friends have been added to the user.")
+
+        return friends
+    }
+
     async storeUser(userData) {
         try {
             const userJsonValue = JSON.stringify(userData);
@@ -59,27 +78,31 @@ export default class UserManager {
         }
     }
 
-    async loadUser(){
+    async loadUser() {
         try {
             const userJsonValue = await AsyncStorage.getItem('user');
             if (userJsonValue !== null) {
                 const userData = JSON.parse(userJsonValue)
+                this._user = new User(userData)
+
+                await this.updateFriends(userData.username)
+
                 userLog.info("User has been loaded successfully.")
-                return new User(userData)
-            }else{
+                return this._user
+            } else {
                 userLog.error("User could not be loaded.")
             }
-        } catch (error){
+        } catch (error) {
             userLog.error("User could not be loaded.", error)
         }
     }
 
-    async deleteUser(){
+    async deleteUser() {
         try {
             await AsyncStorage.removeItem('user');
             userLog.info("User has been deleted successfully.")
             return true
-        } catch (error){
+        } catch (error) {
             userLog.error("User could not be deleted.", error)
             return false
         }

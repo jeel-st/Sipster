@@ -51,7 +51,7 @@ export default function HomePage() {
                 <RefreshContext.Provider value={refreshDate}>
                     <FlatList
                         data={displayFriendActivities}
-                        renderItem={({ activity }) => <HomeActivityCard activity={activity} />}
+                        renderItem={({ item, index }) => <HomeActivityCard activity={item} />}
                         keyExtractor={(item, index) => index.toString()}
                         refreshControl={
                             <RefreshControl

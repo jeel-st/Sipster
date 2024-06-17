@@ -15,14 +15,17 @@ const useCam = (cameraRef, activity) => {
 
     // useEffect Hook to check camera and media library permissions
     useEffect(() => {
-        (async () => {
+        const requestPermissions = async () => {
             // Request permissions for media library
-            MediaLibrary.requestPermissionsAsync()
+            await MediaLibrary.requestPermissionsAsync();
+
             // Request camera permissions and update state
-            const cameraStatus = await Camera.requestCameraPermissionsAsync()
-            setHasCameraPermission(cameraStatus.status === 'granted')
-        })
-    }, [])
+            const cameraStatus = await Camera.requestCameraPermissionsAsync();
+            setHasCameraPermission(cameraStatus.status === 'granted');
+        };
+
+        requestPermissions();
+    }, []);
 
     // Function to capture a picture with the camera
     const takePicture = async () => {

@@ -12,7 +12,7 @@ import useReactionCard from '../../utils/hooks/useReactionCard'
     @return:       JSX -> returns the HomeReactionCard component
 */
 export default function HomeReactionCard({ reaction, activity }) {
-    const { emoji, handleReaction, reactionCount, hasReacted } = useReactionCard(reaction, activity)
+    const { emoji, handleReaction, hasReacted } = useReactionCard(reaction, activity)
 
     return (
         <TouchableOpacity
@@ -28,7 +28,7 @@ export default function HomeReactionCard({ reaction, activity }) {
             <Text className={classNames(
                 'text-xl', // styling
                 hasReacted ? 'text-black' : 'text-white' // styling
-            )}>{reactionCount}</Text>
+            )}>{reaction[1].length}</Text>
         </TouchableOpacity>
     )
 }

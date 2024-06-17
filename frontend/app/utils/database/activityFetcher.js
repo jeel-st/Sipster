@@ -1,5 +1,5 @@
 import FormData from "form-data";
-import { activityLog } from "../logger/config";
+import { activityLog, userLog } from "../logger/config";
 import axiosInstance, { HOST } from "./axiosConfig";
 import { getMimeType } from "../mimeType";
 
@@ -33,7 +33,6 @@ export async function sendActivity(activity) {
             }
         })
         activityLog.info("ActivityBeforeImage has been sent successfully.")
-        activityLog.debug(response2.data)
 
         return activity.ID
     } catch (error) {
@@ -55,7 +54,6 @@ export async function sendActivityAfterImage(activity) {
             }
         })
         activityLog.info("ActivityAfterImage has been sent successfully.")
-        activityLog.debug(response.data)
     }
     catch (error) {
         activityLog.error("ActivityAfterImage could not be sent.", error)
@@ -64,7 +62,7 @@ export async function sendActivityAfterImage(activity) {
 
 export async function fetchActivity(user) {
     try {
-        const response = await axiosInstance.get(`/activities/${user.userID}`)
+        const response = await axiosInstance.get(`/homepage/${user.userID}`)
         activityLog.debug("Activity has been fetched successfully.")
 
         return response.data
@@ -127,11 +125,11 @@ export function fetchActivityPictureCompressed(activity, refreshDate, isBeforeIm
 function getActivityFileName(activityImage) {
     if (activityImage === null) return "unknown.webp"
 
-    //get the name of the file without the extension
-    const name = activityImage.split("/").pop().split(".").slice(0, -1).join(".");
+    //get the name of the file
+    const name = activityImage.split("/").pop()
 
-    //return the name with the webp extension
-    return name + ".webp"
+    //return the name
+    return name
 }
 
 export async function addReaction(user, activity, emoji) {
@@ -150,5 +148,15 @@ export async function addReaction(user, activity, emoji) {
         activityLog.debug(response.data)
     } catch (error) {
         activityLog.error("Reaction could not be added.", error)
+    }
+}
+
+export async function removeReaction(user, activity, emoji) {
+    try {
+        const response = await axiosInstance.delete(`/activities/removeReaction/${user.userID}/${activity._id}/${emoji}`)
+        activityLog.info("Reaction has been removed successfully.")
+        activityLog.debug(response.data)
+    } catch (error) {
+        activityLog.error("Reaction could not be removed.", error)
     }
 }

@@ -1,12 +1,11 @@
 import { useCallback, useContext, useEffect, useState } from "react";
-import { addReaction } from "../database/activityFetcher";
+import { addReaction, removeReaction } from "../database/activityFetcher";
 import { UserContext } from "../../components/provider/UserProvider";
 
 const useReactionCard = (reaction, activity) => {
     const user = useContext(UserContext)
 
     const [emoji, setEmoji] = useState(null);
-    const [reactionCount, setReactionCount] = useState(0);
     const [hasReacted, setHasReacted] = useState(false);
 
     useEffect(() => {
@@ -26,21 +25,25 @@ const useReactionCard = (reaction, activity) => {
             default:
                 return
         }
-        setReactionCount(reaction[1].length)
 
         const hasReacted = reaction[1].some((reactor) => reactor === user.userID);
         setHasReacted(hasReacted);
     }, [reaction])
 
     const handleReaction = () => {
-        if(hasReacted) return
-        // Handle reaction
+        if(!hasReacted) {
         addReaction(user, activity, reaction[0])
-        setReactionCount(reaction[1].length + 1)
+        reaction[1].length += 1
         setHasReacted(true)
+        } else {
+            removeReaction(user, activity, reaction[0])
+            reaction[1].length -= 1
+            setHasReacted(false)
+        }
+
     }
 
-    return { emoji, handleReaction, reactionCount, hasReacted }
+    return { emoji, handleReaction, hasReacted }
 }
 
 export default useReactionCard;

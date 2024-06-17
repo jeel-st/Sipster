@@ -9,7 +9,7 @@ import { emojis } from '../../constants/games';
 import useCam from '../../utils/hooks/useCam';
 
 export default function GameAcitvityCam({ activity, cameraRef, handlePress }) {
-    const { image, setImage, type, setType, flash, setFlash, takePicture, caption, setCaption } = useCam(cameraRef, activity);
+    const { image, setImage, type, setType, flash, setFlash, takePicture, caption, setCaption, hasCameraPermission } = useCam(cameraRef, activity);
     return (<>
         <View className={classNames(
             'justify-between', // position
@@ -46,7 +46,7 @@ export default function GameAcitvityCam({ activity, cameraRef, handlePress }) {
                 'h-[90%]', // sizing
                 'rounded-2xl' // styling
             )}>
-                {image ?
+                {hasCameraPermission && image ?
                     <Image
                         source={{ uri: image }}
                         className='w-full h-full rounded-2xl' /> :

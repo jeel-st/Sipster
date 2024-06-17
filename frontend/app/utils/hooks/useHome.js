@@ -13,7 +13,9 @@ const useHome = () => {
 
   async function fetchActivities(user) {
     const activities = await fetchActivity(user)
-    setActivities(activities)
+
+    const filteredActivities = activities.filter(activity => activity.type === "activity");
+    setActivities(filteredActivities);
   }
 
   useEffect(() => {

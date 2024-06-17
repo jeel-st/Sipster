@@ -8,6 +8,7 @@ import TextButton from './TextButton';
 import CheckButton from './CheckButton';
 import { userLog } from '../../utils/logger/config';
 import { useUser } from '../../utils/hooks/useUser';
+import UserManager from '../../entitys/UserManager';
 
 /*
 This component can be used to upload your own and new profile pictures.
@@ -46,6 +47,12 @@ export default function Picker({ change }) {
                 if (!result.canceled) {
                     setImage(result.assets[0].uri);
                     await uploadProfilePicture(result.assets[0], user);
+
+                    setTimeout(async () => {
+                        userLog.debug("Profile picture has been uploaded successfully.")
+                        const userManager = UserManager.getInstance()
+                        userManager.instantiateUser(user.username)
+                    }, 1000);
                 }
             } catch (error) {
                 userLog.error("Error during image upload:", error)
