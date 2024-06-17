@@ -31,7 +31,6 @@ export function useLoginLogic() {
             const user = await userManager.loadUser();
             if(!user) return;
 
-            userManager.setUser(user)
             await SplashScreen.hideAsync()
             router.replace('(tabs)')
         };
