@@ -12,21 +12,22 @@ import truth from '../constants/truth'
 truthPage displays the current question 
 
 @return -> returns the truthPage components 
+@param category: string -> the truth question
 
 */
 
 
-
-
-
 export default function truthPage() {
-    const navigation = useNavigation(); // Zugriff auf die Navigationsfunktionen
 
+    
+
+    const navigation = useNavigation(); 
+
+    // Header ausblenden
     React.useLayoutEffect(() => {
-    navigation.setOptions({ headerShown: false }); // Header ausblenden
+    navigation.setOptions({ headerShown: false }); 
     }, [navigation]);
- 
-    const { handleInputChange, handlePlayer, players, inputValue, handleNextPlayer} = player();
+
 
     const randomIndex = Math.floor(Math.random() * truth.length);
     const category = truth[randomIndex];
@@ -35,12 +36,14 @@ export default function truthPage() {
 
      return (
          <View className={classNames(
-             'flex-1 bg-primary',
-         )}>
+                'flex-1',//position
+                ' bg-primary',//styling
+                )}>
              {/* Header Text and Close Button */}
              <View className={classNames(
-                 'flex-row justify-between',
-                 'mt-16 mx-6')}>
+                    'flex-row justify-between',//position
+                    'mt-16 mx-6'//spaceing
+                    )}>
  
                  {/* Sipster Logo */}
                  <Image source={require('../assets/images/logo-small.png')} />
@@ -49,7 +52,8 @@ export default function truthPage() {
                  <TouchableOpacity
                      onPress={() => { router.navigate('(tabs)/games')}}
                      className={classNames(
-                         'justify-center items-center')}>
+                         'justify-center items-center'//position
+                         )}>
  
                      <AntDesign name="close" size={34} color="white" />
                  </TouchableOpacity>
@@ -58,34 +62,43 @@ export default function truthPage() {
 
 
              <View className={classNames(
-                 'mt-4 mx-6 ')}>
+                    'mt-4 mx-6 '//spaceing
+                    )}>
 
                     
-                 <Text className={classNames(
-                         'font-bold text-3xl text-white',
-                     )}>
-                         Wahrheit oder Pflicht 
-                 </Text>
+                <Text className={classNames(
+                        'font-bold text-3xl text-white',//styling
+                        )}>
+                        Wahrheit oder Pflicht 
+                </Text>
 
 
                  <View className={classNames(
-                            ' mt-6 bg-yellow rounded-3xl shadow-md shadow-black w-100% h-[450px]  items-center',
+                        'items-center', // position
+                        'mt-6',// spaceing 
+                        'w-100% h-[450px]', // sizing
+                        'bg-yellow rounded-3xl shadow-md shadow-black ', //styling 
                         )}>
                     <Text className={classNames(
-                            'font-bold text-3xl mt-6 ',
-                        )}> Wahrheit </Text>
+                            'mt-6', //spacing
+                            'font-bold text-3xl', //styling
+                            )}> 
+                            Wahrheit 
+                    </Text>
                     <View className={classNames(
-                            ' mt-44 mr-4 ml-4',
-                        )}>
+                            ' mt-44 mr-4 ml-4', //spacing 
+                            )}>
                          {/* display the current question */}
-                        <Text className={classNames('text-2xl text-black font-light')}>
+                        <Text className={classNames(
+                            'text-2xl text-black font-light'//styling
+                            )}>
                             {category}
                         </Text>
                     </View>
                  </View>
                      
                 <View className={classNames(
-                            'items-center',
+                        'items-center', //position
                         )}>
 
                     {/* button to get to the next player */}

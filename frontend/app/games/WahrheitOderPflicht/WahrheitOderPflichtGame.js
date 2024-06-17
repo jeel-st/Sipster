@@ -12,6 +12,11 @@ WahrheitOderPflichtGame starts the Game and allow the player to add all other pl
 
 @return  -> returns the WahrheitOderPflichtGame components 
 @param list: component -> list of players who have been added
+@param inputValue: string -> input from the user
+@param handleInputChange: function -> function is called when inputValue is change
+@param handlePlayer: function -> function is called when enter pressed ???
+@param handleAllPlayer: function -> function saves all Player which play in an Array
+
 
 */
 
@@ -22,12 +27,14 @@ export default function WahrheitOderPflichtGame() {
     return (
 
         <View className={classNames(
-            'flex-1 bg-primary',
-        )}>
+                'flex-1', //position
+                ' bg-primary', //styling
+                )}>
             {/* Header Text and Close Button */}
             <View className={classNames(
-                'flex-row justify-between',
-                'mt-4 mx-6')}>
+                    'flex-row justify-between', //position
+                    'mt-4 mx-6' // spacing 
+                    )}>
 
                 {/* Sipster Logo */}
                 <Image source={require('../WahrheitOderPflicht/assets/images/logo-small.png')} />
@@ -36,7 +43,8 @@ export default function WahrheitOderPflichtGame() {
                 <TouchableOpacity
                     onPress={() => { router.navigate('(tabs)/games')}}
                     className={classNames(
-                        'justify-center items-center')}>
+                        'justify-center items-center'//position
+                        )}>
 
                     <AntDesign name="close" size={34} color="white" />
                 </TouchableOpacity>
@@ -46,19 +54,21 @@ export default function WahrheitOderPflichtGame() {
 
             {/* Game Header */}
             <View className={classNames(
-            'flex-1 ',)}>
+                    'flex-1 ', //position
+                    )}>
 
                 <View className={classNames(
-                'mt-4 mx-6')}>
-                    <Text className={classNames(
-                            'font-bold text-3xl text-white',
+                        'mt-4 mx-6' // spaciing
                         )}>
+                    <Text className={classNames(
+                            'font-bold text-3xl text-white', //styling
+                            )}>
                             Wahrheit oder Pflicht 
                     </Text>
                     
                     <Text className={classNames(
-                            'font-bold text-xl text-white',
-                        )}>
+                            'font-bold text-xl text-white', //styling
+                            )}>
                             Wer spielt mit? 
                     </Text>
                 </View>
@@ -66,17 +76,23 @@ export default function WahrheitOderPflichtGame() {
 
                 
 
-                <ScrollView showsVerticalScrollIndicator={false} className={classNames(
-                'mt-4 mx-6 mb-20 w-100% ')}>
+                <ScrollView showsVerticalScrollIndicator={false} 
+                            className={classNames(
+                                'mt-4 mx-6 mb-20', //spacing
+                                ' w-100% ' //sizing
+                                )}> 
                     <Text className={classNames(
-                            'font-bold text-xl text-white',
-                        )}>Mitspieler:</Text>
+                            'font-bold text-xl text-white', //styling
+                            )}>
+                            Mitspieler:
+                    </Text>
                         
+
                     {/* current List of Players */}    
                     <Text> {list} </Text>
 
-                    {/* Input Field for the Players name  */}
 
+                    {/* Input Field for the Players name  */}
                     <TextInput className={classNames(
                     'pl-2 m-1 mt-4', // spacing 
                     'h-10 w-100%', // sizing
@@ -102,13 +118,13 @@ export default function WahrheitOderPflichtGame() {
                         )}
                         onPress={() => {
                             handleAllPlayer();
-                            router.navigate('/games/WahrheitOderPflicht/routes/choose')}}
-                        >
+                            router.navigate('/games/WahrheitOderPflicht/routes/choose')}}>
                             <Text className={classNames(
                                 'text-center', // position
                                 'font-bold' // styling
-                            )}>
-                                Start the Game  </Text>
+                                )}>
+                                Start the Game  
+                            </Text>
                     </TouchableOpacity>
 
 

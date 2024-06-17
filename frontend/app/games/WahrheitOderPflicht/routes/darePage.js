@@ -16,7 +16,8 @@ import dare from '../constants/dare'
 darePage displays the current question 
 
 @return -> returns the darePage components 
-
+@param category: string -> The dare task 
+ 
 */
 
 
@@ -28,8 +29,6 @@ export default function darePage() {
     React.useLayoutEffect(() => {
     navigation.setOptions({ headerShown: false }); // Header ausblenden
     }, [navigation]);
- 
-    const { handleInputChange, handlePlayer, players, inputValue, handleNextPlayer} = player();
 
    
     const randomIndex = Math.floor(Math.random() * dare.length);
@@ -40,12 +39,14 @@ export default function darePage() {
 
      return (
         <View className={classNames(
-            'flex-1 bg-primary',
-        )}>
+                'flex-1', //position
+                ' bg-primary', //styling
+                )}>
             {/* Header Text and Close Button */}
             <View className={classNames(
-                'flex-row justify-between',
-                'mt-16 mx-6')}>
+                'flex-row justify-between', //position
+                'mt-16 mx-6' //spacing
+                )}>
 
                 {/* Sipster Logo */}
                 <Image source={require('../assets/images/logo-small.png')} />
@@ -54,25 +55,29 @@ export default function darePage() {
                 <TouchableOpacity
                     onPress={() => { router.navigate('(tabs)/games')}}
                     className={classNames(
-                        'justify-center items-center')}>
+                        'justify-center items-center' //position
+                        )}>
 
                     <AntDesign name="close" size={34} color="white" />
                 </TouchableOpacity>
             </View>
 
             <View className={classNames(
-                
-                'mt-4 mx-6 ')}>
+                    'mt-4 mx-6 ' //spacing 
+                    )}>
                 <Text className={classNames(
-                        'font-bold text-3xl text-white',
+                        'font-bold text-3xl text-white', //styling
                     )}>
                         Wahrheit oder Pflicht 
                 </Text>
 
 
                 <View className={classNames(
-                           ' mt-6 bg-purple rounded-3xl shadow-md shadow-black w-100% h-[450px]  items-center',
-                       )}>
+                        'items-center', //position
+                        'mt-6 ', //spacing
+                        'w-100% h-[450px]', //sizeing
+                        ' bg-purple rounded-3xl shadow-md shadow-black ', //styling
+                        )}>
                    <Text className={classNames(
                            'font-bold text-3xl mt-6 ',
                        )}> Pflicht </Text>
@@ -80,14 +85,16 @@ export default function darePage() {
                            ' mt-44 mr-4 ml-4',
                        )}>
                         {/* display the current question */}
-                        <Text className={classNames('text-2xl text-black font-light')}>
+                        <Text className={classNames(
+                                'text-2xl text-black font-light'//styling
+                                )}>
                             {category}
                         </Text>
                    </View>
                 </View>
                     
                <View className={classNames(
-                           'items-center',
+                           'items-center', //position
                        )}>
 
                     {/* button to get to the next player */}
