@@ -42,12 +42,7 @@ async function postUser(req){
                 return "Duplicate Email"
             } else {
                 await database.getDB().collection('personalInformation').insertOne(personalData)
-                await databaseFriend.acceptFriendRequest({
-                    params: {
-                    fromUsername: username,
-                    toUsername: "Sipster"
-                    }
-                })
+                await databaseFriend.acceptFriendRequest(username,"Sipster")
 
                 return "Success!"
             }
