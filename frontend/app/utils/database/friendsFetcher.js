@@ -2,6 +2,18 @@ import Friend from "../../entitys/friend"
 import { friendLog } from "../logger/config";
 import axiosInstance from "./axiosConfig"
 
+export async function fetchFriends(username) {
+    try {
+        const reponse = await axiosInstance.get(`/friends/${username}`);
+        friendLog.info("Friends has been fetched successfully.")
+
+        return reponse.data
+    } catch (error) {
+        friendLog.error("Friends could not been fetched.", error)
+        throw error;
+    }
+}
+
 export async function fetchFriendsData(username) {
     try {
         const response = await axiosInstance.get(`/friends/${username}`);

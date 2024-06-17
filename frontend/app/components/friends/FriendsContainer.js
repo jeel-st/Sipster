@@ -13,14 +13,13 @@ import { useFriendContainer } from '../../utils/hooks/friends/useFriendsContaine
 
     @param friends:             array -> the list of friends
     @param searchText:          string -> the search text
-    @param user:                object -> the user
     @param selectedTab:         number -> the selected tab in the friends page
     @param handleReloadFriends: function -> the function to call when the friends list should be reloaded
     @return:                    JSX -> returns the FriendsContainer component
 */
-export default function FriendsContainer({ friends, searchText, user, selectedTab, handleReloadFriends }) {
+export default function FriendsContainer({ friends, searchText, selectedTab, handleReloadFriends }) {
     if (!friends) return
-    const { searchFriendsVisible, searchFriends, filteredFriends } = useFriendContainer({ friends, searchText, user, selectedTab })
+    const { searchFriendsVisible, searchFriends, filteredFriends } = useFriendContainer({ friends, searchText })
 
     return (
         <NativeBaseProvider>
@@ -58,7 +57,6 @@ export default function FriendsContainer({ friends, searchText, user, selectedTa
                                 friend={friend}
                                 key={index}
                                 selectedTab={selectedTab}
-                                user={user}
                                 handleReloadFriends={handleReloadFriends}
                             />
                         )
@@ -71,7 +69,6 @@ export default function FriendsContainer({ friends, searchText, user, selectedTa
                                 friend={friend}
                                 key={index}
                                 selectedTab={selectedTab}
-                                user={user}
                                 handleReloadFriends={handleReloadFriends}
                             />
                         ))

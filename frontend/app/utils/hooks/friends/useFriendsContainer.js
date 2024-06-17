@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { fetchRecommendationFriendsData } from '../../database/friendsFetcher';
 import { friendLog } from '../../logger/config';
+import { useUser } from '../useUser';
 
-export function useFriendContainer({ friends, searchText, user, selectedTab }) {
+export function useFriendContainer({ friends, searchText }) {
     const [searchFriendsVisible, setSearchFriendsVisible] = useState(false);
     const [searchFriends, setSearchFriends] = useState([]);
+
+    const user = useUser();
 
     const filteredFriends = friends.filter(friend => {
         return (

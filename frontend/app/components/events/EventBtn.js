@@ -2,6 +2,7 @@ import React from 'react'
 import { View, Text, Pressable } from 'react-native'
 import { styles } from '../../constants'
 import { classNames } from '../../utils/classNames'
+import { formatEventDate } from '../../utils/formDate'
 
 /*
     EventBtn is a component that represents a single event in the event list.
@@ -28,7 +29,7 @@ export default function EventBtn({ event, onClick, isSelected }) {
             }
         ]}>
             <View className="flex flex-row justify-between items-center mx-5">
-                <Text className={styles.H3Text}>{event.date}</Text>
+                <Text className={styles.H3Text}>{formatEventDate(event)}</Text>
                 <Text className={styles.H3Text}>{event.name}</Text>
                 <Text className={styles.H3Text}>{event.time}</Text>
             </View>

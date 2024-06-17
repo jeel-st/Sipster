@@ -155,7 +155,7 @@ export default function SettingsPage() {
 
                         {/* Logout Button*/}
                         <View className={classNames('items-center')}>
-                            <SipsterButton title="Logout" navigation={() => router.navigate('routes/LoginPage')} />
+                            <SipsterButton title="Logout" navigation={handleLogout} />
                         </View>
 
                         {/* Error Message */}

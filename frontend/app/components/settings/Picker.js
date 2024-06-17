@@ -2,12 +2,13 @@
 import React, { useEffect, useState } from 'react';
 import { Image, View, SafeAreaView, StyleSheet } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
-import useUser from '../../utils/database/userFetcher';
 import { uploadProfilePicture } from '../../utils/database/imageFetcher';
 import { classNames } from '../../utils';
 import TextButton from './TextButton';
 import CheckButton from './CheckButton';
 import { userLog } from '../../utils/logger/config';
+import { useUser } from '../../utils/hooks/useUser';
+import UserManager from '../../entitys/UserManager';
 
 /*
 This component can be used to upload your own and new profile pictures.
@@ -48,7 +49,13 @@ export default function Picker({ change }) {
 
                 if (!result.canceled) {
                     setImage(result.assets[0].uri);
-                    await uploadProfilePicture(result.assets[0], user.username);
+                    await uploadProfilePicture(result.assets[0], user);
+
+                    setTimeout(async () => {
+                        userLog.debug("Profile picture has been uploaded successfully.")
+                        const userManager = UserManager.getInstance()
+                        userManager.instantiateUser(user.username)
+                    }, 1000);
                 }
             } catch (error) {
                 userLog.error("Error during image upload:", error)

@@ -5,7 +5,7 @@ import { CameraType, FlashMode } from 'expo-camera/build/legacy/Camera.types';
 import { useRouter } from 'expo-router'
 import { gameLog } from '../logger/config';
 
-const useCam = (cameraRef) => {
+const useCam = (cameraRef, activity) => {
     // State variables for camera permission, captured image, camera type, flash mode, and caption
     const [hasCameraPermission, setHasCameraPermission] = useState(null)
     const [image, setImage] = useState(null)
@@ -15,14 +15,17 @@ const useCam = (cameraRef) => {
 
     // useEffect Hook to check camera and media library permissions
     useEffect(() => {
-        (async () => {
+        const requestPermissions = async () => {
             // Request permissions for media library
-            MediaLibrary.requestPermissionsAsync()
+            await MediaLibrary.requestPermissionsAsync();
+
             // Request camera permissions and update state
-            const cameraStatus = await Camera.requestCameraPermissionsAsync()
-            setHasCameraPermission(cameraStatus.status === 'granted')
-        })
-    }, [])
+            const cameraStatus = await Camera.requestCameraPermissionsAsync();
+            setHasCameraPermission(cameraStatus.status === 'granted');
+        };
+
+        requestPermissions();
+    }, []);
 
     // Function to capture a picture with the camera
     const takePicture = async () => {
@@ -30,6 +33,9 @@ const useCam = (cameraRef) => {
             // Capture picture and update URI
             const photo = await cameraRef.current.takePictureAsync()
             setImage(photo.uri)
+            activity.caption = caption
+            activity.image = photo
+
             // Turn off flash
             setFlash(FlashMode.off)
             gameLog.info('Picture taken')

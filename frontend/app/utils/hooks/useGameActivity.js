@@ -1,14 +1,17 @@
 import { useRouter } from 'expo-router'
 import { gameLog } from '../logger/config';
 import { useState } from 'react';
+import { sendActivity } from '../database/activityFetcher';
 
 const useGameActivity = (activity) => {
     const [withSips, setWithSips] = useState(false)
     const router = useRouter()
 
     // Function to handle navigation back to previous screen
-    const handlePress = () => {
+    async function handlePress(){
         activity.withSips = withSips
+        const id = await sendActivity(activity)
+        activity.ID = id
         router.navigate({ pathname: "/routes/GameFactory", params: { activity: JSON.stringify(activity) } })
     }
 

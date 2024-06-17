@@ -1,8 +1,8 @@
 // Imports
 import { useState } from 'react';
-import useUser from '../database/userFetcher';
 import axiosInstance from './axiosConfig';
 import { userLog } from '../logger/config';
+import { updateUser, useUser } from '../hooks/useUser';
 
 /*
 Database request to change user information in database
@@ -34,7 +34,7 @@ export function settingsFetcher() {
             .then(response => {
                 userLog.debug("The new username has been successfully changed.", response.data)
                 setSettingsError('');
-                user.username = newUsername;
+                updateUser(user.username)
             })
             .catch(error => {
                 userLog.error("Error changing the username:", error)
@@ -62,7 +62,7 @@ export function settingsFetcher() {
             .then(response => {
                 userLog.debug("The new firstname has been successfully changed.", response.data)
                 setSettingsError('');
-                user.firstName = firstName;
+                updateUser(user.username)
             })
             .catch(error => {
                 userLog.error("Error changing the firstname:", error)
@@ -90,7 +90,7 @@ export function settingsFetcher() {
             .then(response => {
                 userLog.debug("The new lastname has been successfully changed.", response.data)
                 setSettingsError('');
-                user.lastName = lastName;
+                updateUser(user.username)
             })
             .catch(error => {
                 userLog.error("Error changing the lastname:", error)
@@ -118,7 +118,7 @@ export function settingsFetcher() {
             .then(response => {
                 userLog.debug("The new password has been successfully changed.", response.data)
                 setSettingsError('');
-                user.password = password;
+                updateUser(user.username)
             })
             .catch(error => {
                 userLog.error("Error changing the password:", error)
@@ -146,7 +146,7 @@ export function settingsFetcher() {
             .then(response => {
                 userLog.debug("The new email has been successfully changed.", response.data)
                 setSettingsError('');
-                user.email = email;
+                updateUser(user.username)
             })
             .catch(error => {
                 userLog.error("Error changing the email:", error)

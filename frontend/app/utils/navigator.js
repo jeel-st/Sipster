@@ -10,6 +10,6 @@ export function quitGame(activity, router){
   if (activity.withSips) {
     router.navigate({ pathname: "/routes/GameQuitPage", params: { activity: JSON.stringify(activity) } })
   } else {
-    router.navigate('(tabs)/games')
+    router.navigate('(tabs)/game')
   }
 }

@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { fetchFriendsInvitations, removeFriend, sendFriendInvite, declineFriendInvite } from '../database/friendsFetcher';
-import useUser from '../database/userFetcher';
 import { useDisclose } from 'native-base';
 import { friendLog } from '../logger/config';
+import { useUser } from './useUser';
 
 const useProfileHeaderButton = (friend) => {
     const [isFriend, setIsFriend] = useState(false);

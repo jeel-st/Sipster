@@ -1,6 +1,6 @@
 export const games = [
     {
-        _id: 0,
+        _id: "66426b45d764161a9c336ee6",
         name: "Bomb Party",
         thumbnail: "http://85.215.71.124/static/gamePictures/Bombparty.jpg",
         playtime: "ca. 2min",
@@ -10,7 +10,7 @@ export const games = [
         status: "available"
     },
     {
-        _id: 1,
+        _id: "66426b81d764161a9c336ee7",
         name: "Wahrheit oder Pflicht",
         thumbnail: "http://85.215.71.124/static/gamePictures/TruthOrDare.jpg",
         playtime: "so lang du willst",
@@ -20,7 +20,7 @@ export const games = [
         status: "available"
     },
     {
-        _id: 2,
+        _id: "66426b8ed764161a9c336ee8",
         name: "Beer Pong",
         thumbnail: "http://85.215.71.124/static/gamePictures/BeerPong.jpg",
         playtime: "ca. 20 min",
