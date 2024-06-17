@@ -159,13 +159,13 @@ export function settingsFetcher() {
     };
 
     // function to delete the account 
-    const deleteAccount = () => {
+    const deleteAccount = (onDeleteSuccess) => {
         userLog.debug(user.userID, user.password)
         axiosInstance.delete(`/user/${user.userID}`)
             .then(response => {
                 userLog.debug("The user has been successfully deleted.", response.data)
                 setSettingsError('');
-                () => router.navigate('routes/LoginPage');
+                if (onDeleteSuccess) { onDeleteSuccess() };
 
             })
             .catch(error => {

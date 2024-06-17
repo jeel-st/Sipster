@@ -148,7 +148,7 @@ export function useSettings() {
         if (isChecked) {
             /* If the Checkbox filled in, the account will be deleted. */
             userLog.debug("DeleteAccount details have been entered.")
-            deleteAccount();
+            deleteAccount(() => router.navigate('routes/LoginPage'));
 
         } else {
             /* The system checks whether the Checkbox is filled. */
