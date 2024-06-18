@@ -46,14 +46,14 @@ async function deleteFriendRequest(req, res){
         }
 
         if(req.query.status == "true"){
-            const fromUsername = req.params.fromUsername
-            const toUsername = req.params.toUsername
+            const fromUserID = req.params.fromUserID
+            const toUserID = req.params.toUserID
 
-            const friendRequestDel = await database.acceptFriendRequest(fromUsername, toUsername)
+            const friendRequestDel = await database.acceptFriendRequest(fromUserID, toUserID)
             res.send("User was accepted!")
 
         }else if(req.query.status == "false"){
-            const friendRequestDel = await database.declineFriendRequest(req)
+            const friendRequestDel = await database.declineFriendRequest(fromUserID, toUserID)
             res.send("User was declined")
 
         }

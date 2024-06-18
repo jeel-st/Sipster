@@ -64,8 +64,8 @@ async function acceptFriendRequest(fromUsername, toUsername){
     return await dbFriendSystem.acceptFriendRequest(fromUsername, toUsername)
 }
 
-async function declineFriendRequest(req){
-    return await dbFriendSystem.declineFriendRequest(req)
+async function declineFriendRequest(fromUserID, toUserID){
+    return await dbFriendSystem.declineFriendRequest(fromUserID, toUserID)
 }
 
 async function removeFriend(req){

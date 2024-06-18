@@ -2,7 +2,9 @@
 const database = require("./databaseMain")
 const log = require("../logging/logger")
 const { ObjectId } = require('mongodb');
-const { checkForFriendsInRecommendations } = require("../utils/friendSystemLogic/FriendsRecommendationLogic")
+const { checkForFriendsInRecommendations } = require("../utils/friendSystemLogic/FriendsRecommendationLogic");
+const { deleteFriendRequest } = require("../controllers/controllerFriendSystem");
+const SipsterID = "663bd3b7969fc6302facf1ee";
 
 /**
  * Hier wird eine Freundesanfrage, mithilfe der SenderID, der EmpfängerID und eines Zeitstempels, erstellt
@@ -13,37 +15,49 @@ const { checkForFriendsInRecommendations } = require("../utils/friendSystemLogic
  */
 async function postFriendRequest(req){
     const invitations = (await database.initializeCollections()).invitations
-    const {fromSipsterID, toSipsterID} = req.body
-    const fromID = await database.getSipsterID(fromSipsterID)
-    const toID = await database.getSipsterID(toSipsterID)
+    const {fromUserID, toUserID} = req.body
+    const fromUserIDObj = new ObjectId(fromUserID)
+    const toUserIDObj = new ObjectId(toUserID)
     const timestamp = Date.now(); 
-    const sendAt = new Date(timestamp).toISOString();
+    const sendAt = new Date(timestamp);
 
 
-    const userData = {fromID, toID, sendAt}
+    const userData = {"fromUserID": fromUserIDObj, "toUserID": toUserIDObj, "timestamp": sendAt}
     if (await checkIfOtherUserAlreadySentFriendRequest(userData, invitations)) {
-        await acceptFriendRequest(toSipsterID, fromSipsterID)
+        log.info("Request rerouted to acceptFriendRequest!")
+        await acceptFriendRequest(toUserID, fromUserID)
+        await deleteFriendRequest(toUserID, fromUserID)
         return "Request rerouted!"
     }
 
     try{
         let result = await invitations.insertOne(userData)
+        log.info("Following invitation got stored: ")
+        log.info(userData)
         return result
     }catch(err){
+        log.error("an error occured: " + err)
         throw new Error("Database disconnected" + err)
     }
 }
 
+/**
+ * 
+ * @param userData from userData we need fromUserID and toUserID to check if an invitation was already sent by the other user
+ * @param invitations so that the invitations collection doesn't need to be initialized again
+ * @returns true if the other user already sent an friend request and returns false otherwise
+ */
 async function checkIfOtherUserAlreadySentFriendRequest(userData, invitations) {
     const foundFriendRequest = await invitations.findOne( {$and: [
-        { fromID: userData.toID },
-        { toID: userData.fromID }
+        { fromUserID: userData.toUserID },
+        { toUserID: userData.fromUserID }
       ]} )
-    console.log(foundFriendRequest)
+    
 
     if (foundFriendRequest === null) {
         return false;
     }else {
+        log.info("The other user of the friend request (fq) already sent an fq: rerouting now ")
         return true;
     }
 }
@@ -56,35 +70,50 @@ async function checkIfOtherUserAlreadySentFriendRequest(userData, invitations) {
  * @throws:     Error (Bei Fehler) -> "Benutzername nicht gefunden" oder "Anfrage nicht gefunden"
  */
 
-async function acceptFriendRequest(fromUsername, toUsername){
-    const personalInformation = (await database.initializeCollections()).personalInformation
-    const invitations = (await database.initializeCollections()).invitations
+async function acceptFriendRequest(fromUserID, toUserID){
+    const { personalInformation, invitations } = await database.initializeCollections();
 
-    const fromSipsterID = await database.getSipsterID(fromUsername)
-    const toSipsterID = await database.getSipsterID(toUsername)
+    const fromUserIDObj = new ObjectId(fromUserID)
+    const toUserIDObj = new ObjectId(toUserID)
 
-    const fromUser = await personalInformation.findOne({ _id: fromSipsterID });
-    const toUser = await personalInformation.findOne({ _id: toSipsterID });
+    const fromUser = await personalInformation.findOne({ _id: fromUserIDObj });
+    const toUser = await personalInformation.findOne({ _id: toUserIDObj });
     if (!fromUser || !toUser) {
-        throw new Error("Benutzer nicht gefunden");
+        log.error("User was not found!")
+        throw new Error("Benutzer nicht gefunden")
     }
 
-    await personalInformation.updateOne(
-        { _id: fromUser._id },
-        { $addToSet: { friends: toUser._id } }
+    const updateFromUser = await personalInformation.updateOne(
+        { _id: fromUserIDObj },
+        { $addToSet: { friends: toUserIDObj } }
     );
     
-    await personalInformation.updateOne(
-        { _id: toUser._id },
-        { $addToSet: { friends: fromUser._id } }
+    const updateToUser = await personalInformation.updateOne(
+        { _id: toUserIDObj },
+        { $addToSet: { friends: fromUserIDObj } }
     );
-    if (toUsername != "Sipster"){
-        let result = await invitations.deleteOne({fromID: fromSipsterID, toID: toSipsterID})
+
+    if (updateFromUser.modifiedCount == 1){
+        log.info(`to User: ${fromUser.username} was added to friends ${toUser.username} `)
+        if (updateToUser.modifiedCount == 1){
+            log.info(`to User: ${toUser.username} was added to friends ${fromUser.username} `)
+            log.info("Operation was succesfull")
+        }else {
+            log.error("update ToUser failed!")
+        }
+    }else {
+        log.error("update fromUser failed!")
+    }
+
+
+    if (toUserID != SipsterID){
+        let result = await invitations.deleteOne({fromUserID: fromUserIDObj, toUserID: toUserIDObj})
 
         if (result.deletedCount === 0) {
+            log.error("The deletion was unsuccussfull")
             throw new Error("Anfrage nicht gefunden")
         } else {
-
+            log.info("Invitation was deleted succesfully")
             return("Anfrage erfolgreich gelöscht")
         }
     }
@@ -99,29 +128,28 @@ async function acceptFriendRequest(fromUsername, toUsername){
  * @throws:     Error (Bei Fehler) -> "Benutzer nicht gefunden" oder "Anfrage nicht gefunden"
  */
 
-async function declineFriendRequest(req){
-    const invitations = await database.getDB().collection("invitations")
-    const personalInformation = await database.getDB().collection("personalInformation")
+async function declineFriendRequest(fromUserID, toUserID){
+    const { personalInformation, invitations } = await database.initializeCollections();
 
-    const fromUsername = req.params.fromUsername
-    const toUsername = req.params.toUsername
 
-    const fromSipsterID = await database.getSipsterID(fromUsername)
-    const toSipsterID = await database.getSipsterID(toUsername)
 
-    const fromUser = await personalInformation.findOne({ _id: fromSipsterID });
-    const toUser = await personalInformation.findOne({ _id: toSipsterID });
+    const fromUserIDObj = new ObjectId(fromUserID)
+    const toUserIDObj = new ObjectId(toUserID)
+
+    const fromUser = await personalInformation.findOne({ _id: fromUserIDObj });
+    const toUser = await personalInformation.findOne({ _id: toUserIDObj });
     
     if (!fromUser || !toUser) {
         throw new Error("Benutzer nicht gefunden");
     }
 
-    let result = await invitations.deleteOne({fromID: fromSipsterID, toID: toSipsterID})
+    let result = await invitations.deleteOne({fromUserID: fromUserIDObj, toUserID: toUserIDObj})
 
     if (result.deletedCount === 0) {
+        log.error("invitation couldn't be deleted or doesn't exist")
         throw new Error("Anfrage nicht gefunden")
     } else {
-
+        log.info("Invitation deleted successfully")
         return("Anfrage erfolgreich gelöscht")
     }
 }
@@ -136,28 +164,40 @@ async function declineFriendRequest(req){
 
 async function removeFriend(req){
     
-    const personalInformation = await database.getDB().collection("personalInformation")
+    const { personalInformation }= await database.initializeCollections()
 
     try {
-        const fromUsername = req.params.fromUsername
-        const toUsername = req.params.toUsername
+        const fromUserID = req.params.fromUserID
+        const toUserID = req.params.toUserID
 
-        if (toUsername == "Sipster" || fromUsername == "Sipster"){
+        if (toUserID == SipsterID || fromUserID == SipsterID){
             return false
         }
 
-        const fromSipsterID = await database.getSipsterID(fromUsername)
-        const toSipsterID = await database.getSipsterID(toUsername)
+        const fromUserIDObj = new ObjectId(fromUserID)
+        const toUserIDObj = new ObjectId(toUserID)
         
-        await personalInformation.updateOne(
-            { _id: fromSipsterID },
-            { $pull: { friends: toSipsterID } }
+        const deleteToUser =  await personalInformation.updateOne(
+            { _id: fromUserIDObj },
+            { $pull: { friends: toUserIDObj } }
         )
 
-        await personalInformation.updateOne(
-            { _id: toSipsterID },
-            { $pull: { friends: fromSipsterID } }
+        const deleteFromUser = await personalInformation.updateOne(
+            { _id: toUserIDObj },
+            { $pull: { friends: fromUserIDObj } }
         )
+
+        if(deleteToUser.modifiedCount == 1){
+            log.info(`The UserID ${toUserID} was pulled from the Friends of the UserID ${fromUserID}`)
+            if(deleteFromUser.modifiedCount == 1){
+                log.info(`The UserID ${fromUserID} was pulled from the Friends of the UserID ${toUserID}`)
+                log.info("Operation was successfull")
+            }else {
+                log.error("Operation unseccussful because of deleteFromUser")
+            }
+        }else {
+            log.error("Operation unseccussful because of deleteToUser")
+        }
 
         return true
     } catch (error) {
@@ -176,13 +216,14 @@ async function removeFriend(req){
  */
 
 async function getFriendList(req){
-    const personalInformation = await database.getDB().collection("personalInformation")
-    const username = req.params.username;
+    const { personalInformation } = await database.initializeCollections()
+    const userID = req.params.userID;
+    const userIDObj = new ObjectId(userID)
     let friendList = new Array();
 
     try {
 
-        const user = await personalInformation.findOne({ username });
+        const user = await personalInformation.findOne({ _id: userIDObj });
 
         if (!user) {
             throw new Error("Benutzer nicht gefunden");
@@ -223,9 +264,10 @@ async function getFriendList(req){
 async function getFriendRecommendations(req) {
     let friendRecommendations = [];
     try {
-    const personalInformation = await database.getDB().collection("personalInformation");
+    const { personalInformation } = await database.initializeCollections()
     const input = req.params.input;
-    const username = req.params.username;
+    const userID = req.params.userID;
+    const userIDObj = new ObjectId(userID)
 
     const regex = new RegExp(input, "i"); // "i" für Case-Insensitive-Suche
     friendRecommendations = await personalInformation.find({ username: { $regex: regex } }).limit(20).toArray();
@@ -243,6 +285,7 @@ async function getFriendRecommendations(req) {
  * 
  * @param req: Request-Objekt -> hier muss der Benutzername übergeben werden
  * @param getReceivedInvitations: Funktion, die unten weiter beschrieben wird
+ * 
  * @return: Array mit zwei Arrays -> [receivedFromUsers, sentToUsers] 
  *          receivedFromUsers: Benutzer, die Einladungen gesendet haben
  *          sentToUsers: Benutzer, die Einladungen erhalten haben
@@ -250,14 +293,13 @@ async function getFriendRecommendations(req) {
 
 async function getInvitations(req) {
     try {
-        const username = req.params.username;
-        const invitations = await database.getDB().collection("invitations");
+        const userID = req.params.userID;
+        const {invitations} = await database.initializeCollections()
 
-        const userID = await database.getSipsterID(username)
+        const userIDObj = new ObjectId(userID)
 
-        const receivedInvitations = await invitations.find({ toID: userID }).toArray();
-
-        const sentInvitations = await invitations.find({ fromID: userID }).toArray();
+        const receivedInvitations = await invitations.find({ toUserID: userIDObj }).toArray();
+        const sentInvitations = await invitations.find({ fromUserID: userIDObj }).toArray();
         const receivedFromUsers = await getReceivedInvitations(receivedInvitations);
         const sentToUsers = await getSentInvitations(sentInvitations);
         return [receivedFromUsers, sentToUsers];
@@ -275,8 +317,8 @@ async function getInvitations(req) {
  */
 
 async function getReceivedInvitations(invitations) {
-    const personalInformation = await database.getDB().collection("personalInformation")
-    const userIds = invitations.map(invitation => invitation.fromID)
+    const { personalInformation } = await database.initializeCollections();
+    const userIds = invitations.map(invitation => invitation.fromUserID)
 
     const users = await personalInformation.find({ _id: { $in: userIds } }).toArray()
     return users
@@ -290,37 +332,18 @@ async function getReceivedInvitations(invitations) {
  */
 
 async function getSentInvitations(invitations) {
-    const personalInformation = await database.getDB().collection("personalInformation")
-    const userIds = invitations.map(invitation => invitation.toID)
+    const { personalInformation }  = await database.initializeCollections()
+    const userIds = invitations.map(invitation => invitation.toUserID)
 
     const users = await personalInformation.find({ _id: { $in: userIds } }).toArray()
     return users
 }
-
-/*
-async function getUsers(usernames) {
-    const personalInformation = await database.getDB().collection("personalInformation");
-    let users = [];
-        for (let usernamee of usernames){
-            let user = await personalInformation.find({username: usernamee}).project({_id: 0, encryptedPassword: 0, salt: 0}).toArray()
-            if (user == null){
-                log.warn(`${username} was not found in the database!`)
-                continue;
-            }
-            users.push(user[0])
-            //log.info(`pushed User: ${user}`)
-        }
-
-    return users;
-}
-*/
 
 module.exports = {
     postFriendRequest,
     acceptFriendRequest,
     declineFriendRequest,
     removeFriend,
-    //getFriendNameList,
     getFriendList,
     getFriendRecommendations,
     getInvitations
