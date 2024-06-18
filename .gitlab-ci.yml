@@ -9,7 +9,10 @@ stages:
 build-backend:
   stage: build
   image: node:20-alpine
+  services:
+    - 
+  variables:
   script:
     - "cd backend"
     - "npm i"
-    - "node app.js"
+    - "timeout 30s node app.js"
