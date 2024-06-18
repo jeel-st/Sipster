@@ -34,10 +34,9 @@ export function useRegisterLogic() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmedPassword] = useState('');
-    const [registerError, setRegisterError] = useState('');
 
     // Import of fetcher functions
-    const { register } = useRegister();
+    const { register, registerError, setRegisterError } = useRegister();
 
 
     const handleRegister = async () => {

@@ -173,11 +173,12 @@ export function settingsFetcher() {
             });
     };
 
+    // function with which the user can save an event
     const saveEvent = (event) => {
         
         axiosInstance.post('/user/addEvent',
             {
-                "userID": user.userID,
+                "username": user.username,
                 "eventID": event.eventID
             },
             {
@@ -186,12 +187,12 @@ export function settingsFetcher() {
                 }
             })
             .then(response => {
-                userLog.debug("The user .", response.data)
+                userLog.debug("The event has been successfully added.", response.data)
                 setSettingsError('');
             })
             .catch(error => {
-                userLog.error("Error deleting the user:", error)
-                setSettingsError('Delete account failed.');
+                userLog.error("Error adding the event:", error)
+                setSettingsError('Save Event failed.');
             });
     }
 
