@@ -6,6 +6,7 @@ const fs = require('fs');
 const path = require('path');
 const log = require("../logging/logger")
 const logicFile = require("../utils/profilePictureLogic/profilePictureLogic")
+const { ObjectId } = require('mongodb');
 
 /**
  * Diese Methode ist der Controller zum Hochladen der Profilbilder und leitet an die Logik weiter.
@@ -38,13 +39,11 @@ async function uploadProfilePicture(req, res){
  */
 
 async function getProfilePicture(req, res){
-        const username = req.params.username
+        const userID = req.params.userID
 
         const original = req.query.original
+        const userIDObj = new ObjectId(userID)
 
-        const userIDObj = await database.getSipsterID(username)
-
-        console.log("Name, der für das Profilbild genommen wird" + username)
         const pictureURL = await database.getProfilePictureURL(userIDObj, original)
         console.log("url: "+ pictureURL)
         if (!pictureURL) {
