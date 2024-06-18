@@ -1,30 +1,33 @@
 export const games = [
     {
-        _id: 0,
+        _id: "66426b45d764161a9c336ee6",
         name: "Bomb Party",
         thumbnail: "http://85.215.71.124/static/gamePictures/Bombparty.jpg",
         playtime: "ca. 2min",
         description: "Ein Spieler bekommt eine Bombe und muss sie so schnell wie möglich weitergeben, bevor sie explodiert",
         category: "Q&A",
         sips: "100",
+        status: "available"
     },
     {
-        _id: 1,
+        _id: "66426b81d764161a9c336ee7",
         name: "Wahrheit oder Pflicht",
         thumbnail: "http://85.215.71.124/static/gamePictures/TruthOrDare.jpg",
         playtime: "so lang du willst",
         description: "Es wird gewählt zwischen Wahrheit und Pflicht und dan bekommt man eine Frage oder Aufgabe die man erfüllen muss",
         category: "Q&A",
         sips: "100",
+        status: "available"
     },
     {
-        _id: 2,
-        name: "Bierpong",
+        _id: "66426b8ed764161a9c336ee8",
+        name: "Beer Pong",
         thumbnail: "http://85.215.71.124/static/gamePictures/BeerPong.jpg",
         playtime: "ca. 20 min",
         description: "Bierpong ist ein beliebtes Trinkspiel, das oft auf Partys, Veranstaltungen und in Bars gespielt wird. Es wird üblicherweise von zwei Teams gespielt, die jeweils an gegenüberliegenden Enden eines Tisches stehen. Auf jeder Seite des Tisches werden Becher mit Bier gefüllt aufgestellt, die in einer Dreiecksformation angeordnet sind.",
         category: "Q&A",
         sips: "100",
+        status: "available"
     },
     {
         _id: 3,
@@ -34,6 +37,7 @@ export const games = [
         description: "Ring of Fire, auch bekannt als Kings, ist ein weiteres beliebtes Trinkspiel, das oft in größeren Gruppen gespielt wird. Es erfordert ein Kartenspiel und wird am besten an einem Tisch gespielt, um die Karten zu platzieren. Die Karten werden in einem Kreis um ein leeres Glas oder eine Flasche gelegt.",
         category: "Q&A",
         sips: "100",
+        status: "unavailable"
     },
     {
         _id: 4,
@@ -43,6 +47,7 @@ export const games = [
         description: "Einer kniet sich hin und macht Vogelbewegungen, der andere spuckt ihm die mische in den Mund",
         category: "Q&A",
         sips: "100",
+        status: "unavailable"
     },
     {
         _id: 5,
@@ -51,7 +56,8 @@ export const games = [
         playtime: "unbegrenzt",
         description: "Die ultimative Version des beliebten Partyspiels mit noch verrückteren Fragen und Aufgaben",
         category: "Party Game",
-        sips: "200"
+        sips: "200",
+        status: "unavailable"
     },
     {
         _id: 6,
@@ -60,7 +66,8 @@ export const games = [
         playtime: "30 Minuten pro Runde",
         description: "Eine Hardcore-Version des Spiels mit extrem peinlichen Fragen und herausfordernden Aufgaben",
         category: "Q&A",
-        sips: "300"
+        sips: "300",
+        status: "unavailable"
     },
     {
         _id: 7,
@@ -69,7 +76,8 @@ export const games = [
         playtime: "variabel",
         description: "Ein klassisches Trinkspiel, bei dem Karten gezogen werden und je nach Karte eine Aktion ausgeführt werden muss",
         category: "Kartenspiel",
-        sips: "150"
+        sips: "150",
+        status: "unavailable"
     },
     {
         _id: 8,
@@ -78,7 +86,8 @@ export const games = [
         playtime: "30 Minuten pro Runde",
         description: "Ein Spiel, bei dem die Spieler reihum Aussagen machen und diejenigen trinken müssen, die diese Aussage schon einmal erlebt haben",
         category: "Party Game",
-        sips: "100"
+        sips: "100",
+        status: "unavailable"
     },
     {
         _id: 9,
@@ -87,7 +96,8 @@ export const games = [
         playtime: "kurz und intensiv",
         description: "Ein Wettkampf-Trinkspiel, bei dem Teams gegeneinander antreten und versuchen, Becher umzudrehen und auszutrinken",
         category: "Team Game",
-        sips: "200"
+        sips: "200",
+        status: "unavailable"
     },
     {
         _id: 10,
@@ -96,7 +106,8 @@ export const games = [
         playtime: "variabel",
         description: "Ein beliebtes Partyspiel, bei dem Teams versuchen, Ping-Pong-Bälle in Becher auf der gegenüberliegenden Seite des Tisches zu werfen",
         category: "Team Game",
-        sips: "250"
+        sips: "250",
+        status: "unavailable"
     },
     {
         _id: 11,
@@ -105,7 +116,8 @@ export const games = [
         playtime: "1 Stunde",
         description: "Ein Trinkspiel, bei dem alle 60 Sekunden ein Shot Bier getrunken wird, bis eine Stunde vergangen ist",
         category: "Adult Game",
-        sips: "300"
+        sips: "300",
+        status: "unavailable"
     },
     {
         _id: 12,
@@ -114,7 +126,8 @@ export const games = [
         playtime: "variabel",
         description: "Eine Variation des klassischen Jenga-Spiels, bei dem auf den Bausteinen Aufgaben oder Regeln stehen, die ausgeführt werden müssen",
         category: "Q&A",
-        sips: "200"
+        sips: "200",
+        status: "unavailable"
     },
     {
         _id: 13,
@@ -123,7 +136,8 @@ export const games = [
         playtime: "variabel",
         description: "Ein einfaches Trinkspiel, bei dem versucht wird, einen Vierteldollar in ein Glas zu werfen und dann zu trinken",
         category: "Skill Game",
-        sips: "150"
+        sips: "150",
+        status: "unavailable"
     }
 ]
 

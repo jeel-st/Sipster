@@ -1,37 +1,44 @@
 // Imports
 import { SafeAreaView, Pressable, Text, StatusBar, Image } from "react-native";
 import { styles } from '../constants';
-import React from 'react';
+import React, { useEffect, useState } from 'react'; ;
 import { router } from 'expo-router'
-import useUser from '../utils/database/userFetcher';
 import { NativeBaseProvider, View } from "native-base";
-import { FriendsScrollView, FriendsSkeleton, IconButton } from "../components";
-
+import { FriendsScrollView, FriendsSkeleton, IconButton, SavedEvents } from "../components";
 import { classNames } from "../utils";
 import { fetchProfilePictureCompressed } from '../utils/database/imageFetcher';
 import { navBarColor } from "../utils/navBarColor";
+import { usePathname } from "expo-router";
+import { useEventDisplay } from '../utils';
+import { useUser } from "../utils/hooks/useUser";
+import { useAccount } from "../utils/hooks/useAccount";
 
 /*
 Front end of the AccountPage.
 All user information is displayed and managed here.
 Typ: Page/route
+
+@return:    JSX -> returns the AccountPage component.
 */
 
-// Background is set depending on the operating system
 export default function AccountPage() {
+
+    // Background is set depending on the operating system
     navBarColor(styles.Colors.secondary)
+    const [user, setUser] = useState(null)
 
-    // logged in user is called
-    const user = useUser();
+    const path = usePathname()
+    useEffect(() => {
+        setUser(useUser())
+    }, [path]);
 
-    // Styling: Tailwind rendering as a constant because we use it more then one.
-    const text = classNames(
-        'text-center text-2xl font-bold' // styling
-    );
+    // import of the logik
+    const { level, levelInfo } = useAccount();
+    const { displayEvent, handleEventSelection } = useEventDisplay();
 
     return (
         <NativeBaseProvider>
-            <SafeAreaView className="flex-1 bg-primary">
+            <SafeAreaView className={classNames('flex-1 bg-primary')} contentContainerStyle={{ flexGrow: 1 }}>
 
                 <View>
 
@@ -64,7 +71,12 @@ export default function AccountPage() {
                             'h-40 w-40', // sizing
                             'rounded-3xl shadow-md shadow-black bg-yellow' // styling
                         )}>
-                            <Text className={text}>1000 sips</Text>
+                            <Text className='text-center text-xl font-bold'>Level {level}</Text>
+                            <Text className='text-center'>______</Text>
+                            <View className="flex-row items-center">
+                                <Text className='text-center text-3xl font-bold mt-2 mr-2'>{user && user.sips}</Text>
+                                <Text className='text-center text-xl mt-2'>sips</Text>
+                            </View>
                         </View>
 
                         {/* Profile Picture */}
@@ -82,20 +94,24 @@ export default function AccountPage() {
                         </View>
                     </View>
 
-                    {/* Map */}
+                    {/* Badges */}
                     <View className={classNames(
                         'flex items-center justify-center', // position
                         'mt-6 mx-6', // spacing
                         'h-40', // sizing
                         'rounded-3xl shadow-md shadow-black bg-purple' // styling
                     )}>
-                        <Text className={text}>Map</Text>
+                        <View className='flex-row items-center'>
+                            <Image style={{ width: 100, height: 80, resizeMode: 'contain' }} source={levelInfo.image} />
+                            <View className='ml-4'>
+                            <Text className='text-2xl font-bold'>{levelInfo.header}</Text>
+                            <Text className='text-xl'>{levelInfo.text}</Text>
+                            </View>
+                        </View>
                     </View>
 
                     {/* Events */}
-                    <View className={styles.spaceText}>
-                        <Text className={styles.categoryText}>saved events</Text>
-                    </View>
+                    <SavedEvents onSelectEvent={handleEventSelection} selectedEvent={displayEvent} />
 
                     {/* Friends */}
                     <Pressable className={styles.spaceText}

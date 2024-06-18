@@ -1,13 +1,15 @@
 import { useLocalSearchParams } from "expo-router";
-import useUser from "../database/userFetcher";
 import { useEffect, useState } from "react";
 import { BackHandler } from "react-native";
+import Activity from "../../entitys/activity";
+import { useUser } from "./useUser";
 
 export function useGame() {
     const game = new useLocalSearchParams();
     const user = useUser();
 
     const [friends, setFriends] = useState([]);
+    const [activity, setActivity] = useState(null);
 
     useEffect(() => {
         // Update friends when user data is available
@@ -38,6 +40,8 @@ export function useGame() {
     const [isPressed, setIsPressed] = useState(false);
 
     const handlePress = () => {
+        const act = new Activity(game, user, taggedFriends);
+        setActivity(act);
         // Toggle the press state
         setIsPressed(!isPressed);
     }
@@ -60,5 +64,5 @@ export function useGame() {
         return () => BackHandler.removeEventListener('hardwareBackPress', onBackPress);
     }, [isPressed]);
 
-    return { user, game, friends, taggedFriends, handleTaggedFriends, isTagged, isPressed, handlePress };
+    return { user, game, friends, taggedFriends, handleTaggedFriends, isTagged, isPressed, handlePress, activity };
 }

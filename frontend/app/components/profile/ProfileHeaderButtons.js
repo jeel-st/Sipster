@@ -6,6 +6,7 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import useProfileHeaderButton from '../../utils/hooks/useProfileHeaderButton'
 import ProfileStagger from './ProfileStagger'
 import ProfileInviteBtn from './ProfileInviteBtn'
+import { friendLog } from '../../utils/logger/config'
 
 /*
     ProfileHeaderButtons is a component that represents the header buttons in the profile page.
@@ -50,7 +51,7 @@ export default function ProfileHeaderButtons({ friend }) {
                     />
 
                     {/* Settings Button*/}
-                    <TouchableOpacity onPress={() => console.log("Profile Settings Button")} className="w-10 h-10">
+                    <TouchableOpacity onPress={() => friendLog.debug("Profile Settings Button")} className="w-10 h-10">
                         {<ProfileStagger isOpen={isOpen} onToggle={onToggle} />}
                     </TouchableOpacity>
                 </View>

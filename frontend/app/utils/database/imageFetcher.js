@@ -1,11 +1,12 @@
 import FormData from 'form-data'
 import axiosInstance, { HOST } from './axiosConfig'
+import { userLog } from '../logger/config'
 
-export async function uploadProfilePicture(file, username) {
+export async function uploadProfilePicture(file, user) {
     const filename = file.uri.split("/").pop()
 
     let data = new FormData()
-    data.append('username', username)
+    data.append('userID', user.userID)
     data.append('file', { uri: file.uri, name: filename, type: file.mimeType })
 
     try {
@@ -15,18 +16,19 @@ export async function uploadProfilePicture(file, username) {
             }
         })
 
-        console.log("[uploadProfilePicture] upload profile picture successfully")
+        userLog.debug("Profile picture has been uploaded successfully.")
 
         return response.data
     } catch (error) {
-        console.log(error)
+        userLog.error("Profile picture could not be uploaded.", error)
         throw error
     }
 }
 
 export function fetchProfilePicture(friend, refreshDate) {
+    if(!refreshDate) refreshDate = friend.lastLogin
     try {
-        const endPoint = `${HOST}/static/profilePictures/${getProfileFileName(friend)}?${refreshDate}`
+        const endPoint = `${HOST}/static/profilePictures/compressed1080/${getProfileFileName(friend)}?${refreshDate}`
         return endPoint
     } catch (error) {
         throw error;
@@ -34,8 +36,9 @@ export function fetchProfilePicture(friend, refreshDate) {
 }
 
 export function fetchProfilePictureCompressed(friend, refreshDate) {
+    if(!refreshDate) refreshDate = friend.lastLogin
     try {
-        const endPoint = `${HOST}/static/profilePictures/compressed/${getProfileFileName(friend)}?${refreshDate}`
+        const endPoint = `${HOST}/static/profilePictures/compressed200/${getProfileFileName(friend)}?${refreshDate}`
         return endPoint
     } catch (error) {
         throw error;
@@ -43,7 +46,12 @@ export function fetchProfilePictureCompressed(friend, refreshDate) {
 }
 
 function getProfileFileName(friend) {
-    if(friend.profilePicture == null) return "unknown.jpg"
-    const name = friend.profilePicture.split("/")
-    return name[name.length - 1]
+    //if the friend has no profile picture, return the default image
+    if(friend.profilePicture == null) return "unknown.webp"
+
+    //get the name of the file without the extension
+    const name = friend.profilePicture.split("/").pop().split(".").slice(0, -1).join(".");
+
+    //return the name with the webp extension
+    return name + ".webp"
 }

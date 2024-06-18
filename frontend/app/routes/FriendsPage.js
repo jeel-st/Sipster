@@ -14,7 +14,7 @@ import { navBarColor } from '../utils/navBarColor'
     @return: JSX -> returns the FriendsPage component
 */
 export default function FriendsPage() {
-    const { user, searchText, selectedTab, viewFriends, viewCategorys, handleSearchTextChange, handleTabChange, handleReloadFriends } = useFriends();
+    const { searchText, selectedTab, viewFriends, viewCategorys, handleSearchTextChange, handleTabChange, handleReloadFriends } = useFriends();
 
     navBarColor(styles.Colors.primary)
 
@@ -24,23 +24,19 @@ export default function FriendsPage() {
                 'flex-1',
                 'bg-primary',
             )}>
-                {user && (
-                    <>
-                        {/* Header Buttons*/}
-                        <FriendsHeaderButtons onSearchTextChange={handleSearchTextChange} />
+                {/* Header Buttons*/}
+                <FriendsHeaderButtons onSearchTextChange={handleSearchTextChange} />
 
-                        {/* Heading Text*/}
-                        <View className={classNames('px-4 pt-4')}>
-                            <Text className={styles.brandingText}>Friends</Text>
-                        </View>
+                {/* Heading Text*/}
+                <View className={classNames('px-4 pt-4')}>
+                    <Text className={styles.brandingText}>Friends</Text>
+                </View>
 
-                        {/* Friends Categorys*/}
-                        {viewCategorys && <FriendsCategorys selectedTab={selectedTab} onTabChange={handleTabChange} />}
+                {/* Friends Categorys*/}
+                {viewCategorys && <FriendsCategorys selectedTab={selectedTab} onTabChange={handleTabChange} />}
 
-                        {/* Friends Content*/}
-                        <FriendsContainer friends={viewFriends} searchText={searchText} user={user} selectedTab={selectedTab} handleReloadFriends={handleReloadFriends} />
-                    </>
-                )}
+                {/* Friends Content*/}
+                <FriendsContainer friends={viewFriends} searchText={searchText} selectedTab={selectedTab} handleReloadFriends={handleReloadFriends} />
             </SafeAreaView>
         </TouchableWithoutFeedback>
     )

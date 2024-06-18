@@ -1,10 +1,23 @@
 import Friend from "../../entitys/friend"
+import { friendLog } from "../logger/config";
 import axiosInstance from "./axiosConfig"
+
+export async function fetchFriends(username) {
+    try {
+        const reponse = await axiosInstance.get(`/friends/${username}`);
+        friendLog.info("Friends has been fetched successfully.")
+
+        return reponse.data
+    } catch (error) {
+        friendLog.error("Friends could not been fetched.", error)
+        throw error;
+    }
+}
 
 export async function fetchFriendsData(username) {
     try {
         const response = await axiosInstance.get(`/friends/${username}`);
-        console.log("[fetchFriendsData] fetch friends successfully");
+        friendLog.debug("Friends have been loaded successfully.")
 
         return createFriends(response.data);
     } catch (error) {
@@ -15,7 +28,7 @@ export async function fetchFriendsData(username) {
 export async function fetchFriendsInvitations(username) {
     try {
         const response = await axiosInstance.get(`/friends/invitations/${username}`);
-        console.log("[fetchFriendsInvitations] fetch friends invitations successfully");
+        friendLog.debug("Friends invitations have been loaded successfully.")
 
         return response.data
     } catch (error) {
@@ -26,7 +39,7 @@ export async function fetchFriendsInvitations(username) {
 export async function fetchRecommendationFriendsData(username, inputText) {
     try {
         const response = await axiosInstance.get(`/friends/${username}/${inputText}`);
-        console.log("[fetchRecommendationFriendsData] fetch recommended friends successfully");
+        friendLog.debug("Recommendation Friends have been loaded successfully.")
 
         return createFriends(response.data);
     } catch (error) {
@@ -46,17 +59,16 @@ export async function sendFriendInvite(username, friendUsername) {
                     'Content-Type': 'application/json'
                 }
             })
-        console.log("[sendFriendInvite] send Friend Invite successfully");
+        friendLog.debug("Friend invite has been sent successfully.")
     } catch (error) {
         throw error;
     }
 }
 
 export async function acceptFriendInvite(fromUsername, toUsername) {
-    console.log(fromUsername, toUsername)
     try {
         const response = await axiosInstance.delete(`/friends/${fromUsername}/${toUsername}?status=true`);
-        console.log("[acceptFriendInvite] accept Friend Invite successfully");
+        friendLog.debug("Friend invite has been accepted successfully.")
 
         return true
     } catch (error) {
@@ -67,7 +79,7 @@ export async function acceptFriendInvite(fromUsername, toUsername) {
 export async function declineFriendInvite(fromUsername, toUsername) {
     try {
         const response = await axiosInstance.delete(`/friends/${fromUsername}/${toUsername}?status=false`);
-        console.log("[declineFriendInvite] decline Friend Invite successfully");
+        friendLog.debug("Friend invite has been declined successfully.")
 
         return false
     } catch (error) {
@@ -78,7 +90,7 @@ export async function declineFriendInvite(fromUsername, toUsername) {
 export async function removeFriend(username, friendUsername) {
     try {
         const response = await axiosInstance.delete(`/friends/${username}/${friendUsername}?remove=true`);
-        console.log("[removeFriend] remove Friend successfully");
+        friendLog.debug("Friend has been removed successfully.")
     } catch (error) {
         throw error;
     }

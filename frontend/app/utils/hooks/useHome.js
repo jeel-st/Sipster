@@ -1,30 +1,49 @@
-import { useCallback, useContext, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { UserContext } from "../../components/provider/UserProvider";
+import { fetchActivity, fetchActivityFromUser } from "../database/activityFetcher";
 
 const useHome = () => {
-    const [displayFriend, setDisplayFriend] = useState(0);
-    const [refreshing, setRefreshing] = useState(false);
-    const [refreshDate, setRefreshDate] = useState(new Date());
+  const [displayFriend, setDisplayFriend] = useState(0);
+  const [refreshing, setRefreshing] = useState(false);
+  const [refreshDate, setRefreshDate] = useState(new Date());
+  const [activities, setActivities] = useState(null);
+  const [displayFriendActivities, setDisplayFriendActivities] = useState([]);
 
-    const user = useContext(UserContext)
+  const user = useContext(UserContext)
 
-    // Function to handle friend selection
-    const handleFriendSelection = (selectedFriend) => {
-        if (selectedFriend !== displayFriend) {
-            // Update displayFriend state with selected friend
-            setDisplayFriend(selectedFriend)
-        }
+  async function fetchActivities(user) {
+    const activities = await fetchActivity(user)
+
+    const filteredActivities = activities.filter(activity => activity.type === "activity");
+    setActivities(filteredActivities);
+  }
+
+  useEffect(() => {
+    // Fetch activities from database
+    fetchActivities(user)
+  }, [user])
+
+  // Function to handle friend selection
+  const handleFriendSelection = async (selectedFriend) => {
+    if (selectedFriend !== displayFriend) {
+      // Update displayFriend state with selected friend
+      setDisplayFriend(selectedFriend)
+
+      if(selectedFriend === 0) return
+      const activities = await fetchActivityFromUser(user.friends[selectedFriend])
+      setDisplayFriendActivities(activities)
     }
+  }
 
-    const onRefresh = useCallback(() => {
-        setRefreshing(true);
-        setRefreshDate(new Date());
-        setTimeout(() => {
-          setRefreshing(false);
-        }, 2000);
-      }, []);
+  const onRefresh = useCallback(async () => {
+    setRefreshing(true);
+    setRefreshDate(new Date());
+    await fetchActivities(user);
 
-    return {user, displayFriend, handleFriendSelection, onRefresh, refreshing, refreshDate}
+    setRefreshing(false);
+}, []);
+
+  return { user, displayFriend, handleFriendSelection, onRefresh, refreshing, refreshDate, activities, displayFriendActivities }
 }
 
 export default useHome;

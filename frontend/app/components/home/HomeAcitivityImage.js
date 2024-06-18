@@ -1,8 +1,8 @@
 import { View, Image, Dimensions } from 'react-native'
 import React, { useContext, useState } from 'react'
 import { classNames } from '../../utils'
-import { fetchProfilePicture, fetchProfilePictureCompressed } from '../../utils/database/imageFetcher'
 import { RefreshContext } from '../provider/RefreshProvider'
+import { fetchActivityPicture, fetchActivityPictureCompressed } from '../../utils/database/activityFetcher'
 
 /*
     HomeActivityImage is a component that represents the image of a friend in the home activity.
@@ -12,7 +12,7 @@ import { RefreshContext } from '../provider/RefreshProvider'
     @param friend: object -> the friend to display
     @return:       JSX -> returns the HomeActivityImage component
 */
-export default function HomeActivityImage({ friend }) {
+export default function HomeActivityImage({ activity, index }) {
     const [imageLoaded, setImageLoaded] = useState(false)
 
     const windowWidth = Dimensions.get('window').width
@@ -22,6 +22,7 @@ export default function HomeActivityImage({ friend }) {
     }
 
     const refreshDate = useContext(RefreshContext)
+    const isBeforeImage = index % 2 === 0
 
     return (
         <View style={{
@@ -31,15 +32,16 @@ export default function HomeActivityImage({ friend }) {
             resizeMode: 'cover',
         }}>
             <Image
-                source={{ uri: fetchProfilePicture(friend, refreshDate) }}
+                source={{ uri: fetchActivityPicture(activity, refreshDate, isBeforeImage) }}
                 style={{ width: '100%', height: '100%', opacity: imageLoaded ? 1 : 0, position: 'absolute', zIndex: 20 }}
                 className={classNames('rounded-2xl')}
             />
             <Image
-                source={{ uri: fetchProfilePictureCompressed(friend, refreshDate) }}
+                source={{ uri: fetchActivityPictureCompressed(activity, refreshDate, isBeforeImage) }}
                 style={{ width: '100%', height: '100%' }}
                 onLoadEnd={handleImageLoad}
                 className={classNames('rounded-2xl')}
+                blurRadius={10}
             />
         </View>
     )

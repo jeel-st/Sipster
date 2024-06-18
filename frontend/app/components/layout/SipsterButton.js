@@ -8,8 +8,9 @@ This button displays a customised text and navigates to a new page.
 This is the main button, which is assigned the CI colours of the Sipster brand.
 Typ: Component from layout
 
-@ title
-@ navigation 
+@param title:           string -> title of the button
+@param navigation:      function -> navigates to a new page
+@return:                JSX -> returns a sispter button
 */
 export default function SipsterButton({ title, navigation }) {
     return (

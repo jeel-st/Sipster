@@ -1,4 +1,5 @@
 import axios from "axios";
+import { rootLog } from "../logger/config";
 
 export const HOST = "http://85.215.71.124"
 
@@ -9,7 +10,7 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.response.use(
     response => response,
     error => {
-        console.error("Request failed:", error)
+        rootLog.error("Request failed:", error)
         throw error
     }
 );
