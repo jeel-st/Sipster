@@ -26,10 +26,10 @@ Content-Type: application/json
 
 {
     "userID": "661d07706671060e01a4fd3d",
-    "activityID": "666754e698172b6ff4c27abe",
-    "reactionType": "party"
+    "activityID": "666b427d862f539d60f295a7",
+    "reactionType": "beer"
 }
 
 ###
 
-DELETE {{host}}/activities/661d5aeb7caebb258991f758/666b427d862f539d60f295a7/love
+DELETE {{host}}/activities/661d07706671060e01a4fd3d/666b427d862f539d60f295a7/party

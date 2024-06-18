@@ -92,13 +92,15 @@ async function addReaction(req, res) {
     try{
         const result = await database.addReaction(req)
 
-        if (result !== null) {
+        if (result == "Reaction added succesfully") {
             res.json("Reaction added successfully")
         }else if (result == "Couldn't delete old Reaction please try again!") {
             res.status(400).json("Couldn't delete old Reaction please try again!")
+        }else if (result == "The reaction couldn't be added.") {
+            res.status(400).json("The reaction couldn't be added.")
         }
     }catch (err) {
-        res.status(404).json('Something went wrong!: ', error);
+        res.status(404).json('Something went wrong!: ' + err);
     }
 }
 

@@ -238,23 +238,35 @@ async function addReaction(req) {
         const queryConditions = Object.keys(reactionsTemplate).map(reaction => {
             return { [`reactions.${reaction}`]: userIDObj };
         });
-
         const alreadyReacted = await activities.findOne( {
             $and: [
                 { _id: activityIDObj },
-                { $or: queryConditions }
+                { $or: queryConditions}
               ]
-        } )
+        })
+        console.log(alreadyReacted)
         if (alreadyReacted) {
-            const deleteResult = await activities.updateOne( {_id: activityIDObj }, {$pull: queryConditions})
-            if (deleteResult.deletedCount == 0) {
-                return "Couldn't delete old Reaction please try again!"
+            log.info("The user already reacted before so the old reaction is going to be deleted.")
+        
+            let bool = false;
+            for (const condition of queryConditions) {
+                console.log(condition)
+                const result = await activities.updateOne( {_id: activityIDObj }, {$pull: condition })
+                console.log(result)
+                if (result.modifiedCount == 1){
+                    bool = true;
+                }
             }
+            if (!bool){
+                return "Couldn't delete old Reaction please try again!"    
+            }else {
+                log.info("Old reaction deleted!")
+            }
+      
         }
-
         const update = {
             $addToSet: {
-              [`reactions.${reactionType}`]: userIDObj
+                [`reactions.${reactionType}`]: userIDObj
             }
           };
         
@@ -262,13 +274,15 @@ async function addReaction(req) {
             {_id: activityIDObj},
             update
         )
-        if (result != null) {
+        if (result.modifiedCount !== 0) {
+        log.info("Reaction added succesfully")
         return ("Reaction added succesfully")
         }else {
-            return "error"
+            log.info("The reaction couldn't be added.")
+            return "The reaction couldn't be added."
         }
     }catch (err) {
-        console.log(err)
+        log.error(err)
         return ("Error")
     }
 }
