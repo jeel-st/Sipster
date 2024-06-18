@@ -15,4 +15,4 @@ build-backend:
   script:
     - "cd backend"
     - "npm i"
-    - "timeout 30s node app.js"
+    - "timeout 30s node app.js || [[ $? -eq 143 ]]"
