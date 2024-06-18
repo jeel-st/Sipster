@@ -40,14 +40,14 @@ async function postFriendRequest(req, res){
 
 async function deleteFriendRequest(req, res){
     try{
+        const fromUserID = req.params.fromUserID
+        const toUserID = req.params.toUserID
         if(req.query.status == null && (req.query.remove == null || req.query.remove !== "true")){
             res.status(404).send("Status and remove are null or wrong")
             return;
         }
 
         if(req.query.status == "true"){
-            const fromUserID = req.params.fromUserID
-            const toUserID = req.params.toUserID
 
             const friendRequestDel = await database.acceptFriendRequest(fromUserID, toUserID)
             res.send("User was accepted!")

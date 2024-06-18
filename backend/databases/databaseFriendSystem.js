@@ -16,6 +16,7 @@ const SipsterID = "663bd3b7969fc6302facf1ee";
 async function postFriendRequest(req){
     const invitations = (await database.initializeCollections()).invitations
     const {fromUserID, toUserID} = req.body
+    console.log(fromUserID + " : " + toUserID)
     const fromUserIDObj = new ObjectId(fromUserID)
     const toUserIDObj = new ObjectId(toUserID)
     const timestamp = Date.now(); 
