@@ -17,11 +17,11 @@ const loadGameComponent = (activity) => {
         case 'Bomb Party':
             gameLog.info('Loading Bomb Party Game')
             return lazy(() => import('../games/bombparty/BombPartyGame'));
+        case 'Wahrheit oder Pflicht':
+            return lazy(() => import('../games/WahrheitOderPflicht/WahrheitOderPflichtGame'));
         case 'Beer Pong':
             gameLog.info('Loading Beer Pong Game')
             return lazy(() => import('../games/beerpongExtreme/BeerpongExtreme'));
-        case 'gameC':
-            return lazy(() => import('../games/bombparty/BombPartyGame'));
         default:
             return () => <Fallback text={"Dieses Game ist uns nicht bekannt"} />;
     }
