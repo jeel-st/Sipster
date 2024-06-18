@@ -2,7 +2,7 @@ export const games = [
     {
         _id: "66426b45d764161a9c336ee6",
         name: "Bomb Party",
-        thumbnail: "http://85.215.71.124/static/gamePictures/Bombparty.jpg",
+        thumbnail: "http://85.215.71.124/static/gamePictures/BombParty.jpg",
         playtime: "ca. 2min",
         description: "A player receives a bomb and must pass it on as quickly as possible before it explodes",
         category: "Q&A",
@@ -142,7 +142,7 @@ export const games = [
     {
         _id: 14,
         name: "20 Fragen",
-        thumbnail: "", // Bild noch hinzufügen
+        thumbnail: "http://85.215.71.124/static/gamePictures/20Fragen.jpg",
         playtime: "ca. 20 min",
         description: "A game in which one player tries to guess the object the other player is thinking of by asking yes/no questions.",
         category: "Q&A",
@@ -152,7 +152,7 @@ export const games = [
     {
         _id: 15,
         name: "Flunkyball",
-        thumbnail: "", // Bild noch hinzufügen
+        thumbnail: "http://85.215.71.124/static/gamePictures/Flunkyball.jpg",
         playtime: "ca. 15 min",
         description: "A fun outdoor drinking game in which two teams try to knock over a can with a ball and drink at the same time.",
         category: "Team Game",
@@ -161,18 +161,18 @@ export const games = [
     },
     {
         _id: 16,
-        name:"Strip Poker",
-        thumbnail:"", // Bild noch hinzufügen
-        playtime:"ca. 35 min",
-        description:"An exciting card game for adults in which items of clothing are used as inserts.",
-        category:"18+ Game",
-        sips:"250",
-        status:"unavailable"
+        name: "Strip Poker",
+        thumbnail: "http://85.215.71.124/static/gamePictures/StripPoker.jpg",
+        playtime: "ca. 35 min",
+        description: "An exciting card game for adults in which items of clothing are used as inserts.",
+        category: "18+ Game",
+        sips: "250",
+        status: "unavailable"
     },
     {
         _id: 17,
         name: "Shot Roulette",
-        thumbnail: "", // Bild noch hinzufügen
+        thumbnail: "http://85.215.71.124/static/gamePictures/ShotRoulette.jpg",
         playtime: "ca. 5 min",
         description: "A game where players have to select random shots arranged in a roulette style.",
         category: "18+ Game",
@@ -182,7 +182,7 @@ export const games = [
     {
         _id: 18,
         name: "Bierkastenlauf",
-        thumbnail: "", // Bild noch hinzufügen
+        thumbnail: "http://85.215.71.124/static/gamePictures/Bierkastenlauf.jpg",
         playtime: "until the beer crate is empty",
         description: "A competition in which players carry a beer crate and have to complete various tasks.",
         category: "Team Game",
@@ -192,7 +192,7 @@ export const games = [
     {
         _id: 19,
         name: "Trinkspiel Bingo",
-        thumbnail: "", // Bild noch hinzufügen
+        thumbnail: "http://85.215.71.124/static/gamePictures/TrinkspielBingo.jpg",
         playtime: "ca. 15 min",
         description: "A variant of the classic bingo game in which numbers are combined with drinking tasks.",
         category: "Skill Game",
@@ -201,69 +201,66 @@ export const games = [
     },
     {
         _id: 20,
-        name:"Musikstühle mit Shots",
-        thumbnail:"", // Bild noch hinzufügen
-        playtime:"ca. 20 min",
-        description:"A fun version of the classic musical chair where losers have to drink shots.",
-        category:"Skill Game",
-        sips:"150",
-        status:"unavailable"
+        name: "Musikstühle mit Shots",
+        thumbnail: "http://85.215.71.124/static/gamePictures/MusikstuehleMitShots.jpg",
+        playtime: "ca. 20 min",
+        description: "A fun version of the classic musical chair where losers have to drink shots.",
+        category: "Skill Game",
+        sips: "150",
+        status: "unavailable"
     },
     {
         _id: 21,
-        name:"Trinkspiel Twister",
-        thumbnail:"", // Bild noch hinzufügen
-        playtime:"ca. 20 min",
-        description:"A drunker version of the popular game Twister, where rules are combined with drinking tasks.",
-        category:"Skill Game",
-        sips:"200",
-        status:"unavailable"
-        },
-        
-        {
+        name: "Trinkspiel Twister",
+        thumbnail: "http://85.215.71.124/static/gamePictures/TrinkspielTwister.jpg",
+        playtime: "ca. 20 min",
+        description: "A drunker version of the popular game Twister, where rules are combined with drinking tasks.",
+        category: "Skill Game",
+        sips: "200",
+        status: "unavailable"
+    },
+    {
         _id: 22,
-        name:"Kamasutra-Karten",
-        thumbnail:"", // Bild noch hinzufügen
-        playtime:"ca 15 min",
-        description:"A card game for adults that contains Kamasutra positions and offers couples new ideas.",
-        category:"18+ Game",
-        sips:"250",
-        status:"unavailable"
-        },
-        
-        {
+        name: "Kamasutra-Karten",
+        thumbnail: "http://85.215.71.124/static/gamePictures/KamasutraKarten.jpg",
+        playtime: "ca 15 min",
+        description: "A card game for adults that contains Kamasutra positions and offers couples new ideas.",
+        category: "18+ Game",
+        sips: "250",
+        status: "unavailable"
+    },
+    {
         _id: 23,
-        name:"Heiße Schokolade",
-        thumbnail:"", // Bild noch hinzufügen
-        playtime:"as long as you like",
-        description:"A relaxed drinking game in which players drink hot chocolate while chatting comfortably.",
-        category:"Q&A",
-        sips:"100",
-        status:"unavailable"
-        },
-        
-        {
+        name: "Heiße Schokolade",
+        thumbnail: "http://85.215.71.124/static/gamePictures/HeisseSchokolade.jpg",
+        playtime: "as long as you like",
+        description: "A relaxed drinking game in which players drink hot chocolate while chatting comfortably.",
+        category: "Q&A",
+        sips: "100",
+        status: "unavailable"
+    },
+    {
         _id: 24,
-        name:"Busfahren",
-        thumbnail:"", // Bild noch hinzufügen
-        playtime:"ca. 30 min",
-        description:"A challenging card game in which players must try to memorize and drink a certain sequence of cards.",
-        category:"Card Game",
-        sips:"200",
-        status:"unavailable"
-        },
-        
-        {
+        name: "Busfahren",
+        thumbnail: "http://85.215.71.124/static/gamePictures/Busfahren.jpg",
+        playtime: "ca. 30 min",
+        description: "A challenging card game in which players must try to memorize and drink a certain sequence of cards.",
+        category: "Card Game",
+        sips: "200",
+        status: "unavailable"
+    },
+    {
         _id: 25,
-        name:"Hoch oder Tief",
-        thumbnail:"", // Bild noch hinzufügen
-        playtime:"ca. 20 min",
-        description:"A simple card game in which players have to guess whether the next card is higher or lower than the previous one.",
-        category:"Card Game",
-        sips:"100", 
-        status:"unavailable", 
-        }
-]
+        name: "Hoch oder Tief",
+        thumbnail: "http://85.215.71.124/static/gamePictures/HochOderTief.jpg",
+        playtime: "ca. 20 min",
+        description: "A simple card game in which players have to guess whether the next card is higher or lower than the previous one.",
+        category: "Card Game",
+        sips: "100",
+        status: "unavailable"
+    }
+];
+
 
 export const categorys = [
     "Q&A", // 7

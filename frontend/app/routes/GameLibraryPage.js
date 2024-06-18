@@ -19,7 +19,7 @@ export default function GameLibraryPage() {
       const {handleSearch, filteredGames, searchInput} = useGameSearch(games);
 
       const gameList = filteredGames === undefined ? games.map((game) => new Game(game)) : filteredGames.map((game) => new Game(game));
-     
+
 
 
   useNavBarColor(styles.Colors.secondary)
@@ -63,8 +63,8 @@ export default function GameLibraryPage() {
               <Text className="text-center text-2xl font-bold px-4">1000 sips</Text>
           </View>
           <TextInput className={classNames(
-                    'pl-2 m-1 mt-4', // spacing 
-                    'h-10 w-128', // sizing
+                    'pl-2 mt-4', // spacing
+                    'h-10', // sizing
                     'rounded-xl shadow-md shadow-black text-white bg-secondary' // styling
                 )}
               placeholder={'search'}
@@ -72,8 +72,8 @@ export default function GameLibraryPage() {
               onChangeText={handleSearch}
        />
       </View>
-      
-      
+
+
 
       {/* Separation line */}
       <View className={classNames(
