@@ -10,8 +10,7 @@ build-backend:
   stage: build
   image: node:20-alpine
   services:
-    - 
-  variables:
+    - mongo:latest
   script:
     - "cd backend"
     - "npm i"
