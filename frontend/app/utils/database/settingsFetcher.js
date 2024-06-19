@@ -158,14 +158,14 @@ export function settingsFetcher() {
             });
     };
 
-    // function to delete the account
-    const deleteAccount = () => {
-        userLog.debug(user._id, user.password)
-        axiosInstance.delete(`/user/${user._id}`)
+    // function to delete the account 
+    const deleteAccount = (onDeleteSuccess) => {
+        userLog.debug(user.userID, user.password)
+        axiosInstance.delete(`/user/${user.userID}`)
             .then(response => {
                 userLog.debug("The user has been successfully deleted.", response.data)
                 setSettingsError('');
-                () => router.navigate('routes/LoginPage');
+                if (onDeleteSuccess) { onDeleteSuccess() };
 
             })
             .catch(error => {
@@ -173,6 +173,7 @@ export function settingsFetcher() {
             });
     };
 
+    // function with which the user can save an event
     const saveEvent = (event) => {
 
         axiosInstance.post('/user/addEvent',
@@ -186,12 +187,12 @@ export function settingsFetcher() {
                 }
             })
             .then(response => {
-                userLog.debug("The user .", response.data)
+                userLog.debug("The event has been successfully added.", response.data)
                 setSettingsError('');
             })
             .catch(error => {
-                userLog.error("Error deleting the user:", error)
-                setSettingsError('Delete account failed.');
+                userLog.error("Error adding the event:", error)
+                setSettingsError('Save Event failed.');
             });
     }
 
