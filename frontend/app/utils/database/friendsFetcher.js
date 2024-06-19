@@ -2,9 +2,9 @@ import Friend from "../../entitys/friend"
 import { friendLog } from "../logger/config";
 import axiosInstance from "./axiosConfig"
 
-export async function fetchFriends(username) {
+export async function fetchFriends(user) {
     try {
-        const reponse = await axiosInstance.get(`/friends/${username}`);
+        const reponse = await axiosInstance.get(`/friends/${user._id}`);
         friendLog.info("Friends has been fetched successfully.")
 
         return reponse.data
@@ -14,9 +14,9 @@ export async function fetchFriends(username) {
     }
 }
 
-export async function fetchFriendsData(username) {
+export async function fetchFriendsData(user) {
     try {
-        const response = await axiosInstance.get(`/friends/${username}`);
+        const response = await axiosInstance.get(`/friends/${user._id}`);
         friendLog.debug("Friends have been loaded successfully.")
 
         return createFriends(response.data);
@@ -25,9 +25,9 @@ export async function fetchFriendsData(username) {
     }
 }
 
-export async function fetchFriendsInvitations(username) {
+export async function fetchFriendsInvitations(user) {
     try {
-        const response = await axiosInstance.get(`/friends/invitations/${username}`);
+        const response = await axiosInstance.get(`/friends/invitations/${user._id}`);
         friendLog.debug("Friends invitations have been loaded successfully.")
 
         return response.data
@@ -36,9 +36,9 @@ export async function fetchFriendsInvitations(username) {
     }
 }
 
-export async function fetchRecommendationFriendsData(username, inputText) {
+export async function fetchRecommendationFriendsData(user, inputText) {
     try {
-        const response = await axiosInstance.get(`/friends/${username}/${inputText}`);
+        const response = await axiosInstance.get(`/friends/${user._id}/${inputText}`);
         friendLog.debug("Recommendation Friends have been loaded successfully.")
 
         return createFriends(response.data);
@@ -47,12 +47,12 @@ export async function fetchRecommendationFriendsData(username, inputText) {
     }
 }
 
-export async function sendFriendInvite(username, friendUsername) {
+export async function sendFriendInvite(user, friend) {
     try {
         const response = await axiosInstance.post('/friends',
             {
-                "fromSipsterID": username,
-                "toSipsterID": friendUsername
+                "fromUserID": user._id,
+                "toUserID": friend._id
             },
             {
                 headers: {
@@ -65,9 +65,9 @@ export async function sendFriendInvite(username, friendUsername) {
     }
 }
 
-export async function acceptFriendInvite(fromUsername, toUsername) {
+export async function acceptFriendInvite(fromUser, toUser) {
     try {
-        const response = await axiosInstance.delete(`/friends/${fromUsername}/${toUsername}?status=true`);
+        const response = await axiosInstance.delete(`/friends/${fromUser._id}/${toUser._id}?status=true`);
         friendLog.debug("Friend invite has been accepted successfully.")
 
         return true
@@ -76,9 +76,9 @@ export async function acceptFriendInvite(fromUsername, toUsername) {
     }
 }
 
-export async function declineFriendInvite(fromUsername, toUsername) {
+export async function declineFriendInvite(fromUser, toUser) {
     try {
-        const response = await axiosInstance.delete(`/friends/${fromUsername}/${toUsername}?status=false`);
+        const response = await axiosInstance.delete(`/friends/${fromUser._id}/${toUser._id}?status=false`);
         friendLog.debug("Friend invite has been declined successfully.")
 
         return false
@@ -87,9 +87,9 @@ export async function declineFriendInvite(fromUsername, toUsername) {
     }
 }
 
-export async function removeFriend(username, friendUsername) {
+export async function removeFriend(user, friend) {
     try {
-        const response = await axiosInstance.delete(`/friends/${username}/${friendUsername}?remove=true`);
+        const response = await axiosInstance.delete(`/friends/${user._id}/${friend._id}?remove=true`);
         friendLog.debug("Friend has been removed successfully.")
     } catch (error) {
         throw error;

@@ -1,6 +1,6 @@
 class Friend {
     constructor(friend) {
-        this.userID = friend._id;
+        this._id = friend._id;
         this.firstName = friend.firstName;
         this.lastName = friend.lastName;
         this.fullName = `${friend.firstName} ${friend.lastName}`;
@@ -11,7 +11,7 @@ class Friend {
     }
 
     present() {
-        return `User ID: ${this.userID}\n` +
+        return `User ID: ${this._id}\n` +
             `Name: ${this.firstName} ${this.lastName}\n` +
             `Username: ${this.username}\n` +
             `Register Date: ${this.registerDate}`;

@@ -20,7 +20,7 @@ export default class UserManager {
 
     async instantiateUser(username) {
         const userData = await fetchUser(username)
-        const friendsData = await fetchFriends(username)
+        const friendsData = await fetchFriends(userData)
 
         if (!userData || !friendsData) {
             userLog.error("User could not be initialized.")
@@ -45,8 +45,8 @@ export default class UserManager {
         userLog.debug(this._user.present())
     }
 
-    async updateFriends(username) {
-        const friendsData = await fetchFriends(username)
+    async updateFriends(user) {
+        const friendsData = await fetchFriends(user)
 
         if (!friendsData) {
             userLog.error("User could not be updated.")
@@ -85,7 +85,7 @@ export default class UserManager {
                 const userData = JSON.parse(userJsonValue)
                 this._user = new User(userData)
 
-                await this.updateFriends(userData.username)
+                await this.updateFriends(userData)
 
                 userLog.info("User has been loaded successfully.")
                 return this._user
