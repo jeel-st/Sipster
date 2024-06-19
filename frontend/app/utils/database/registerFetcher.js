@@ -37,11 +37,7 @@ export function useRegister() {
             })
             .catch(error => {
                 userLog.error("Error during registration:", error)
-                if (error.response && error.response.status === "404") {
-                    setRegisterError('This user already exists.');
-                } else {
-                    setRegisterError('Register failed. Please check your register information.');
-                }
+                setRegisterError('Register failed. Please check your email or username information.');
             });
     };
 

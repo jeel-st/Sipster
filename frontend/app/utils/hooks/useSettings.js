@@ -144,11 +144,12 @@ export function useSettings() {
         }
     }
 
+    // Delete Account
     const handleDeleteAccount = async (isChecked) => {
         if (isChecked) {
             /* If the Checkbox filled in, the account will be deleted. */
             userLog.debug("DeleteAccount details have been entered.")
-            deleteAccount();
+            deleteAccount(() => router.navigate('routes/LoginPage'));
 
         } else {
             /* The system checks whether the Checkbox is filled. */
@@ -158,6 +159,7 @@ export function useSettings() {
         }
     }
 
+    // Logout
     const handleLogout = () => {
         const userManager = UserManager.getInstance();
         if(userManager.deleteUser()) {
