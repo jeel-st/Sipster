@@ -17,9 +17,15 @@ async function getLogin(req, res) {
         console.log("DatabaseResponse:"+ usernameFinder)
         if(usernameFinder == true){
             res.send(true)
+        }else if (usernameFinder == "Benutzer nicht gefunden!") {
+            res.status(400).json("Benutzer nicht gefunden!")
+        }else if (usernameFinder == "Ungültige Anmeldedaten."){
+            res.status(400).json("Ungültige Anmeldedaten.")
+        }else {
+            res.status(404).json("Something unexpected happen")
         }
     } catch {
-        res.status(401).send("User not found")
+        res.status(404).send("Something went wrong!")
     }
 
 }

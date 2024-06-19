@@ -34,12 +34,12 @@ Content-Type: application/json
 
 ###
 
-POST {{host}}/user/addEvent HTTP/1.1
+PUT {{host}}/user/addEvent HTTP/1.1
 Content-Type: application/json
 
 {
     "userID": "661d07706671060e01a4fd3d",
-    "eventID": "666ab2f5fdddd3a93373a2a2"
+    "eventID": "666ab2f5fdddd3a93373e2r2"
 }
 
 ###

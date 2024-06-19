@@ -8,6 +8,6 @@ router.use(logMiddleware);
 const loginController = require('../controllers/controllerLogin')
 
 //Router, die an Controller weiterleiten
-router.get('/:username/:password', loginController.getLogin)
+router.post('/', loginController.getLogin) //post da wir einen Body mitgeben und nicht params
 
 module.exports = router
