@@ -4,7 +4,7 @@ import { styles } from '../constants';
 import React, { useEffect, useState } from 'react'; ;
 import { router } from 'expo-router'
 import { NativeBaseProvider, View } from "native-base";
-import { FriendsScrollView, FriendsSkeleton, IconButton, SavedEvents } from "../components";
+import { FriendsScrollView, FriendsSkeleton, IconButton, SavedEvents, ShowFriends} from "../components";
 import { classNames } from "../utils";
 import { fetchProfilePictureCompressed } from '../utils/database/imageFetcher';
 import { navBarColor } from "../utils/navBarColor";
@@ -12,6 +12,7 @@ import { usePathname } from "expo-router";
 import { useEventDisplay } from '../utils';
 import { useUser } from "../utils/hooks/useUser";
 import { useAccount } from "../utils/hooks/useAccount";
+import useHome from "../utils/hooks/useHome";
 
 /*
 Front end of the AccountPage.
@@ -35,6 +36,7 @@ export default function AccountPage() {
     // import of the logik
     const { level, levelInfo } = useAccount();
     const { displayEvent, handleEventSelection } = useEventDisplay();
+    const { displayFriend, handleFriendSelection } = useHome();
 
     return (
         <NativeBaseProvider>
@@ -121,12 +123,8 @@ export default function AccountPage() {
                         <Text className={styles.categoryText}>friends</Text>
                     </Pressable>
 
-                    {
-                        user && user.friends.length > 0 && (<FriendsScrollView friends={user.friends} user={user} />)
-                    }
-                    {
-                        user && user.friends.length == 0 && FriendsSkeleton()
-                    }
+                    {/* Friend controller tab bar */}
+                    <ShowFriends/>
                 </View>
             </SafeAreaView>
         </NativeBaseProvider >
