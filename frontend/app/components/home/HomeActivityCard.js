@@ -5,6 +5,7 @@ import HomeReactionCard from './HomeReactionCard'
 import HomeActivityImage from './HomeAcitivityImage'
 import { fetchProfilePictureCompressed } from '../../utils/database/imageFetcher'
 import { RefreshContext } from '../provider/RefreshProvider'
+import useHomeActitivityCard from '../../utils/hooks/useHomeActivityCard'
 
 /*
     HomeActivityCard is a component that represents the activity of a friend in the home screen.
@@ -26,6 +27,8 @@ export default function HomeActivityCard({ activity }) {
         const visibleIndex = Math.floor(contentOffset.x / layoutMeasurement.width)
         setVisibleIndex(visibleIndex)
     }
+
+    const { displayReaction, handleReaction, emojis } = useHomeActitivityCard(activity)
 
     return (
         <View className={classNames(
@@ -86,7 +89,9 @@ export default function HomeActivityCard({ activity }) {
                             <HomeReactionCard
                                 key={index}
                                 reaction={reaction}
-                                activity={activity}
+                                displayReaction={displayReaction}
+                                handleReaction={handleReaction}
+                                emoji={emojis[index]}
                             />
                         )}
                     </View>

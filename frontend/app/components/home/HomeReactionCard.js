@@ -11,23 +11,21 @@ import useReactionCard from '../../utils/hooks/useReactionCard'
     @param emoji: string -> the emoji to display
     @return:       JSX -> returns the HomeReactionCard component
 */
-export default function HomeReactionCard({ reaction, activity }) {
-    const { emoji, handleReaction, hasReacted } = useReactionCard(reaction, activity)
-
+export default function HomeReactionCard({ reaction, displayReaction, handleReaction, emoji }) {
     return (
         <TouchableOpacity
-            onPress={handleReaction}
+            onPress={() => handleReaction(reaction)}
             className={classNames(
                 'flex-row justify-between items-center', // position
                 'px-3 mt-1', // spacing
                 'w-[70px] h-[35px]', // sizing
                 'rounded-full', // styling
-                hasReacted ? 'bg-yellow' : 'bg-primary' // styling
+                displayReaction && displayReaction[0] === reaction[0] ? 'bg-yellow' : 'bg-primary' // styling
             )}>
             <Text className={classNames('text-xl')}>{emoji}</Text>
             <Text className={classNames(
                 'text-xl', // styling
-                hasReacted ? 'text-black' : 'text-white' // styling
+                displayReaction && displayReaction[0] === reaction[0] ? 'text-black' : 'text-white' // styling
             )}>{reaction[1].length}</Text>
         </TouchableOpacity>
     )

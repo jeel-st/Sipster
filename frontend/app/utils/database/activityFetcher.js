@@ -153,7 +153,7 @@ export async function addReaction(user, activity, emoji) {
 
 export async function removeReaction(user, activity, emoji) {
     try {
-        const response = await axiosInstance.delete(`/activities/removeReaction/${user._id}/${activity._id}/${emoji}`)
+        const response = await axiosInstance.delete(`/activities/${user._id}/${activity._id}/${emoji}`)
         activityLog.info("Reaction has been removed successfully.")
         activityLog.debug(response.data)
     } catch (error) {
