@@ -142,6 +142,9 @@ export default function SettingsPage() {
                             </View>
                         )}
 
+                        {/* Error Message */}
+                        <ErrorMessage error={settingsError} />
+
                         <View className={classNames('mt-6')}>
                             {/*Help*/}
                             <Help />
@@ -157,9 +160,6 @@ export default function SettingsPage() {
                         <View className={classNames('items-center')}>
                             <SipsterButton title="Logout" navigation={handleLogout} />
                         </View>
-
-                        {/* Error Message */}
-                        <ErrorMessage error={settingsError} />
 
                         {/* Distance */}
                         <View className={classNames('h-20 mt-16')} />
