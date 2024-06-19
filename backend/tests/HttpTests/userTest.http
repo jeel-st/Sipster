@@ -22,8 +22,8 @@ POST {{host}}/user/addEvent HTTP/1.1
 Content-Type: application/json
 
 {
-    "username": "Cryptoooo",
-    "eventID": "6615c7d7b30f73c8ba10bead"
+    "userID": "661d07706671060e01a4fd3d",
+    "eventID": "666ab2f5fdddd3a93373a2a2"
 }
 
 ###

@@ -135,18 +135,21 @@ async function postNewEmail(req){
  */
 
 async function addEvent(req){
-    const {username, eventID} = req.body
-    const personalInformation = (await database.initializeCollections()).personalInformation;
-    const sipsterID = await database.getSipsterID(username)
-    const filter = {_id: sipsterID}
+    console.log("Whasss upppp")
+    const {userID, eventID} = req.body
+    const { personalInformation } = (await database.initializeCollections());
+    const userIDObj = new ObjectId(userID)
+    const filter = {_id: userIDObj}
     const update =  {$addToSet: { events: eventID }}
 
     const addingData = await personalInformation.updateOne(filter, update)
 
-    if (addingData != 0){
-        log.info(`Event with ${eventID} added to User ${username}`)
+    if (addingData.modifiedCount !== 0){
+        log.info(`Event with ${eventID} added to User ${userID}`)
         return true;
     }else {
+        log.error("Something went wrong! the update was not completed")
+        log.error(addingData)
         return false;
     }
 

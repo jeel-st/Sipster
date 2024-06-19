@@ -161,6 +161,10 @@ async function changeLastName(userID, newName){
     return await dbUser.changeLastName(userID, newName)
 }
 
+async function addEvent(req) {
+    return await dbUser.addEvent(req)
+}
+
 async function getHomepage(req) {
     return await dbHomepage.getHomepage(req)
 }
@@ -238,6 +242,7 @@ Object.assign(exports, {
     postNewEmail,
     postNewPassword,
     postNewUsername,
+    addEvent,
     getProfilePictureURL,
     deleteProfilePictureURL,
     getSipsterID,
