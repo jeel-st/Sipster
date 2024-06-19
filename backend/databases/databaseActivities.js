@@ -250,9 +250,8 @@ async function addReaction(req) {
         
             let bool = false;
             for (const condition of queryConditions) {
-                console.log(condition)
                 const result = await activities.updateOne( {_id: activityIDObj }, {$pull: condition })
-                console.log(result)
+             
                 if (result.modifiedCount == 1){
                     bool = true;
                 }
