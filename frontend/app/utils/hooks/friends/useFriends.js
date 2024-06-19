@@ -35,11 +35,11 @@ export function useFriends() {
     const updateViewFriends = async () => {
         let friends = user.friends
         if (selectedTab !== 0) {
-            const invitations = await fetchFriendsInvitations(user.username);
+            const invitations = await fetchFriendsInvitations(user);
             friends = invitations[selectedTab - 1] || []
         } else {
             const userManager = UserManager.getInstance()
-            friends = await userManager.updateFriends(user.username)
+            friends = await userManager.updateFriends(user)
         }
         setViewFriends(friends)
     }

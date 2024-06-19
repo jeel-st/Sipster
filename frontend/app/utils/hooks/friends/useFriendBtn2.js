@@ -7,22 +7,22 @@ export function useFriendBtn2({ friend, handleReloadFriends}) {
     const userManager = UserManager.getInstance()
 
     const handleAcceptInvite = async () => {
-        await acceptFriendInvite(friend.username, user.username)
-        userManager.updateFriends(user.username)
+        await acceptFriendInvite(friend, user)
+        userManager.updateFriends(user)
 
         handleReloadFriends()
     }
 
     const handleDeclineInvite = async () => {
-        await declineFriendInvite(friend.username, user.username)
-        userManager.updateFriends(user.username)
+        await declineFriendInvite(friend, user)
+        userManager.updateFriends(user)
 
         handleReloadFriends()
     }
 
     const handleCancelInvite = async () => {
-        await declineFriendInvite(user.username, friend.username)
-        userManager.updateFriends(user.username)
+        await declineFriendInvite(user, friend)
+        userManager.updateFriends(user)
 
         handleReloadFriends()
     }

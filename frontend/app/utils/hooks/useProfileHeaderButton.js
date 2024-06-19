@@ -14,7 +14,7 @@ const useProfileHeaderButton = (friend) => {
 
     const handleIsFriend = async () => {
         const isFriend = user.friends.some(element => element.username === friend.username);
-        const invites = await fetchFriendsInvitations(user.username);
+        const invites = await fetchFriendsInvitations(user);
         const inviteReceived = invites[0].some(element => element.username === friend.username);
         const sentReceived = invites[1].some(element => element.username === friend.username);
 
@@ -29,7 +29,7 @@ const useProfileHeaderButton = (friend) => {
 
     const removeFriendHandler = async () => {
         try {
-            await removeFriend(user.username, friend.username);
+            await removeFriend(user, friend);
             await handleIsFriend();
 
             setIsFriend(false)
@@ -41,7 +41,7 @@ const useProfileHeaderButton = (friend) => {
 
     const inviteFriendHandler = async () => {
         try {
-            await sendFriendInvite(user.username, friend.username);
+            await sendFriendInvite(user, friend);
             await handleIsFriend();
         } catch (error) {
             friendLog.error("Send friendrequest failed", error)
@@ -50,7 +50,7 @@ const useProfileHeaderButton = (friend) => {
 
     const closeInviteHandler = async () => {
         try {
-            await declineFriendInvite(user.username, friend.username);
+            await declineFriendInvite(user, friend);
             await handleIsFriend();
         } catch (error) {
             friendLog.error("Decline friendrequest failed", error)

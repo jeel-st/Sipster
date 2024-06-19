@@ -21,6 +21,7 @@ import GameActivity from './games/GameActivity';
 import GameCameraBtn from './games/GameCameraBtn';
 import GameGoBtn from './games/GameGoBtn';
 import GameAcitvityPost from './games/GameAcitvityCam';
+import GameInfoCard from './games/GameInfoCard';
 
 
 // Layout imports
@@ -73,7 +74,7 @@ export {
   FriendBtn, FriendBtn2, FriendsCategorys, FriendsContainer, FriendsHeaderButtons, FriendsScrollView, FriendsTabButton,
 
   // Games
-  GameCard, Games, GameFriendBtn, GameActivity, GameCameraBtn, GameGoBtn, GameAcitvityPost,
+  GameCard, Games, GameFriendBtn, GameActivity, GameCameraBtn, GameGoBtn, GameAcitvityPost, GameInfoCard,
 
   // Layout
   IconButton, SipsterButton, SmallTextField, TagCard, TextField, ErrorMessage,

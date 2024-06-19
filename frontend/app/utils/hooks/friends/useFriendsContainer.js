@@ -18,7 +18,7 @@ export function useFriendContainer({ friends, searchText }) {
 
     const fetchData = async () => {
         try {
-            const recommendedFriends = await fetchRecommendationFriendsData(user.username, searchText);
+            const recommendedFriends = await fetchRecommendationFriendsData(user, searchText);
             setSearchFriends(recommendedFriends);
         } catch (error) {
             friendLog.error(error)

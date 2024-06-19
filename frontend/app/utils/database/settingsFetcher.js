@@ -8,7 +8,7 @@ import { updateUser, useUser } from '../hooks/useUser';
 Database request to change user information in database
 Typ: utils from settings
 
-@return: object ->  An object containing functions for changing username, password, email, 
+@return: object ->  An object containing functions for changing username, password, email,
 last name, and first name, as well as functions for managing settings errors and deleting the account.
 */
 export function settingsFetcher() {
@@ -34,7 +34,7 @@ export function settingsFetcher() {
             .then(response => {
                 userLog.debug("The new username has been successfully changed.", response.data)
                 setSettingsError('');
-                updateUser(user.username)
+                updateUser(user)
             })
             .catch(error => {
                 userLog.error("Error changing the username:", error)
@@ -51,7 +51,7 @@ export function settingsFetcher() {
 
         axiosInstance.put('/user/changeFirstName',
             {
-                "userID": user.userID,
+                "userID": user._id,
                 "newName": firstName
             },
             {
@@ -62,7 +62,7 @@ export function settingsFetcher() {
             .then(response => {
                 userLog.debug("The new firstname has been successfully changed.", response.data)
                 setSettingsError('');
-                updateUser(user.username)
+                updateUser(user)
             })
             .catch(error => {
                 userLog.error("Error changing the firstname:", error)
@@ -79,7 +79,7 @@ export function settingsFetcher() {
 
         axiosInstance.put('/user/changeLastName',
             {
-                "userID": user.userID,
+                "userID": user._id,
                 "newName": lastName
             },
             {
@@ -90,7 +90,7 @@ export function settingsFetcher() {
             .then(response => {
                 userLog.debug("The new lastname has been successfully changed.", response.data)
                 setSettingsError('');
-                updateUser(user.username)
+                updateUser(user)
             })
             .catch(error => {
                 userLog.error("Error changing the lastname:", error)
@@ -118,7 +118,7 @@ export function settingsFetcher() {
             .then(response => {
                 userLog.debug("The new password has been successfully changed.", response.data)
                 setSettingsError('');
-                updateUser(user.username)
+                updateUser(user)
             })
             .catch(error => {
                 userLog.error("Error changing the password:", error)
@@ -130,7 +130,7 @@ export function settingsFetcher() {
             });
     };
 
-    // function to change the email 
+    // function to change the email
     const changeEmail = (email) => {
 
         axiosInstance.post('/user/changeEmail',
@@ -146,7 +146,7 @@ export function settingsFetcher() {
             .then(response => {
                 userLog.debug("The new email has been successfully changed.", response.data)
                 setSettingsError('');
-                updateUser(user.username)
+                updateUser(user)
             })
             .catch(error => {
                 userLog.error("Error changing the email:", error)
@@ -175,10 +175,10 @@ export function settingsFetcher() {
 
     // function with which the user can save an event
     const saveEvent = (event) => {
-        
+
         axiosInstance.post('/user/addEvent',
             {
-                "username": user.username,
+                "userID": user._id,
                 "eventID": event.eventID
             },
             {

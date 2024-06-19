@@ -26,7 +26,7 @@ const useReactionCard = (reaction, activity) => {
                 return
         }
 
-        const hasReacted = reaction[1].some((reactor) => reactor === user.userID);
+        const hasReacted = reaction[1].some((reactor) => reactor === user._id);
         setHasReacted(hasReacted);
     }, [reaction])
 

@@ -8,7 +8,7 @@ export async function sendActivity(activity) {
         const response = await axiosInstance.post('/activities/postActivity',
             {
                 "caption": activity.caption,
-                "userID": activity.user.userID,
+                "userID": activity.user._id,
                 "gameID": activity.game.ID
             },
             {
@@ -62,7 +62,7 @@ export async function sendActivityAfterImage(activity) {
 
 export async function fetchActivity(user) {
     try {
-        const response = await axiosInstance.get(`/homepage/${user.userID}`)
+        const response = await axiosInstance.get(`/homepage/${user._id}`)
         activityLog.debug("Activity has been fetched successfully.")
 
         return response.data
@@ -73,7 +73,7 @@ export async function fetchActivity(user) {
 
 export async function fetchActivityFromUser(user) {
     try {
-        const response = await axiosInstance.get(`/activities/getActivitiesFromUser/${user.userID}`)
+        const response = await axiosInstance.get(`/activities/getActivitiesFromUser/${user._id}`)
         activityLog.debug("Activity has been fetched successfully.")
 
         return response.data
@@ -135,7 +135,7 @@ function getActivityFileName(activityImage) {
 export async function addReaction(user, activity, emoji) {
     try {
         const response = await axiosInstance.put(`/activities/addReaction`, {
-            "userID": user.userID,
+            "userID": user._id,
             "activityID": activity._id,
             "reactionType": emoji
         },
@@ -153,7 +153,7 @@ export async function addReaction(user, activity, emoji) {
 
 export async function removeReaction(user, activity, emoji) {
     try {
-        const response = await axiosInstance.delete(`/activities/removeReaction/${user.userID}/${activity._id}/${emoji}`)
+        const response = await axiosInstance.delete(`/activities/removeReaction/${user._id}/${activity._id}/${emoji}`)
         activityLog.info("Reaction has been removed successfully.")
         activityLog.debug(response.data)
     } catch (error) {

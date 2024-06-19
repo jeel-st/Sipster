@@ -1,7 +1,7 @@
 class User {
     constructor(userData) {
         {/* User Information */ }
-        this.userID = userData._id;
+        this._id = userData._id;
         this.firstName = userData.firstName;
         this.lastName = userData.lastName;
         this.fullName = `${userData.firstName} ${userData.lastName}`;
@@ -18,7 +18,7 @@ class User {
 
     present() {
         const friendNames = this.friends.map(friend => friend.fullName).join(', ');
-        return `\nUser ID: ${this.userID}\n` +
+        return `\nUser ID: ${this._id}\n` +
             `Name: ${this.firstName} ${this.lastName}\n` +
             `Username: ${this.username}\n` +
             `Email: ${this.email}\n` +

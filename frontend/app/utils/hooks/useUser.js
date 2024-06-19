@@ -5,7 +5,7 @@ export function useUser() {
     return userManager.getUser();
 }
 
-export async function updateUser(username) {
+export async function updateUser(user) {
     const userManager = UserManager.getInstance()
     await userManager.instantiateUser(username);
 }

@@ -2,9 +2,9 @@ export const games = [
     {
         _id: "66426b45d764161a9c336ee6",
         name: "Bomb Party",
-        thumbnail: "http://85.215.71.124/static/gamePictures/Bombparty.jpg",
+        thumbnail: "http://85.215.71.124/static/gamePictures/BombParty.jpg",
         playtime: "ca. 2min",
-        description: "Ein Spieler bekommt eine Bombe und muss sie so schnell wie möglich weitergeben, bevor sie explodiert",
+        description: "A player receives a bomb and must pass it on as quickly as possible before it explodes",
         category: "Q&A",
         sips: "100",
         status: "available"
@@ -13,8 +13,8 @@ export const games = [
         _id: "66426b81d764161a9c336ee7",
         name: "Wahrheit oder Pflicht",
         thumbnail: "http://85.215.71.124/static/gamePictures/TruthOrDare.jpg",
-        playtime: "so lang du willst",
-        description: "Es wird gewählt zwischen Wahrheit und Pflicht und dan bekommt man eine Frage oder Aufgabe die man erfüllen muss",
+        playtime: "as long as you like",
+        description: "You have to choose between truth and duty and then you get a question or task that you have to fulfill",
         category: "Q&A",
         sips: "100",
         status: "available"
@@ -24,8 +24,8 @@ export const games = [
         name: "Beer Pong",
         thumbnail: "http://85.215.71.124/static/gamePictures/BeerPong.jpg",
         playtime: "ca. 20 min",
-        description: "Bierpong ist ein beliebtes Trinkspiel, das oft auf Partys, Veranstaltungen und in Bars gespielt wird. Es wird üblicherweise von zwei Teams gespielt, die jeweils an gegenüberliegenden Enden eines Tisches stehen. Auf jeder Seite des Tisches werden Becher mit Bier gefüllt aufgestellt, die in einer Dreiecksformation angeordnet sind.",
-        category: "Q&A",
+        description: "Beer pong is a popular drinking game that is often played at parties, events and in bars. It is usually played by two teams, each standing at opposite ends of a table. Cups filled with beer are placed on each side of the table, arranged in a triangular formation.",
+        category: "Team Game",
         sips: "100",
         status: "available"
     },
@@ -34,8 +34,8 @@ export const games = [
         name: "Ring of Fire",
         thumbnail: "http://85.215.71.124/static/gamePictures/Kingscup.jpg",
         playtime: "ca. 35 min",
-        description: "Ring of Fire, auch bekannt als Kings, ist ein weiteres beliebtes Trinkspiel, das oft in größeren Gruppen gespielt wird. Es erfordert ein Kartenspiel und wird am besten an einem Tisch gespielt, um die Karten zu platzieren. Die Karten werden in einem Kreis um ein leeres Glas oder eine Flasche gelegt.",
-        category: "Q&A",
+        description: "Ring of Fire, also known as Kings, is another popular drinking game that is often played in larger groups. It requires a deck of cards and is best played at a table to place the cards. The cards are placed in a circle around an empty glass or bottle.",
+        category: "Card Game",
         sips: "100",
         status: "unavailable"
     },
@@ -44,8 +44,8 @@ export const games = [
         name: "BabyChicken",
         thumbnail: "http://85.215.71.124/static/gamePictures/BabyChicken.jpg",
         playtime: "ca. 2 min",
-        description: "Einer kniet sich hin und macht Vogelbewegungen, der andere spuckt ihm die mische in den Mund",
-        category: "Q&A",
+        description: "One kneels down and makes bird movements, the other spits the mixture into his mouth",
+        category: "18+ Game",
         sips: "100",
         status: "unavailable"
     },
@@ -53,9 +53,9 @@ export const games = [
         _id: 5,
         name: "Wahrheit oder Pflicht Deluxe",
         thumbnail: "http://85.215.71.124/static/gamePictures/TruthOrDareDeluxe.jpg",
-        playtime: "unbegrenzt",
-        description: "Die ultimative Version des beliebten Partyspiels mit noch verrückteren Fragen und Aufgaben",
-        category: "Party Game",
+        playtime: "as long as you like",
+        description: "The ultimate version of the popular party game with even crazier questions and tasks",
+        category: "Q&A",
         sips: "200",
         status: "unavailable"
     },
@@ -63,8 +63,8 @@ export const games = [
         _id: 6,
         name: "Wahrheit oder Pflicht Extreme",
         thumbnail: "http://85.215.71.124/static/gamePictures/TruthOrDareExtreme.jpg",
-        playtime: "30 Minuten pro Runde",
-        description: "Eine Hardcore-Version des Spiels mit extrem peinlichen Fragen und herausfordernden Aufgaben",
+        playtime: "as long as you like",
+        description: "A hardcore version of the game with extremely embarrassing questions and challenging tasks",
         category: "Q&A",
         sips: "300",
         status: "unavailable"
@@ -73,9 +73,9 @@ export const games = [
         _id: 7,
         name: "Kings Cup",
         thumbnail: "http://85.215.71.124/static/gamePictures/Kingscup.jpg",
-        playtime: "variabel",
-        description: "Ein klassisches Trinkspiel, bei dem Karten gezogen werden und je nach Karte eine Aktion ausgeführt werden muss",
-        category: "Kartenspiel",
+        playtime: "ca. 20 min",
+        description: "A classic drinking game in which cards are drawn and an action must be carried out depending on the card",
+        category: "Card Game",
         sips: "150",
         status: "unavailable"
     },
@@ -83,9 +83,9 @@ export const games = [
         _id: 8,
         name: "Never Have I Ever",
         thumbnail: "http://85.215.71.124/static/gamePictures/NeverHaveIEver.jpg",
-        playtime: "30 Minuten pro Runde",
-        description: "Ein Spiel, bei dem die Spieler reihum Aussagen machen und diejenigen trinken müssen, die diese Aussage schon einmal erlebt haben",
-        category: "Party Game",
+        playtime: "as long as you like",
+        description: "A game in which the players take turns to make statements and those who have already experienced this statement have to drink",
+        category: "Q&A",
         sips: "100",
         status: "unavailable"
     },
@@ -93,8 +93,8 @@ export const games = [
         _id: 9,
         name: "Flip Cup",
         thumbnail: "http://85.215.71.124/static/gamePictures/FlipCup.jpg",
-        playtime: "kurz und intensiv",
-        description: "Ein Wettkampf-Trinkspiel, bei dem Teams gegeneinander antreten und versuchen, Becher umzudrehen und auszutrinken",
+        playtime: "short and intensive",
+        description: "A competitive drinking game in which teams compete against each other and try to turn cups upside down and drink them down",
         category: "Team Game",
         sips: "200",
         status: "unavailable"
@@ -103,8 +103,8 @@ export const games = [
         _id: 10,
         name: "Beer Pong",
         thumbnail: "http://85.215.71.124/static/gamePictures/BeerPong.jpg",
-        playtime: "variabel",
-        description: "Ein beliebtes Partyspiel, bei dem Teams versuchen, Ping-Pong-Bälle in Becher auf der gegenüberliegenden Seite des Tisches zu werfen",
+        playtime: "ca. 30 min",
+        description: "A popular party game in which teams try to throw ping-pong balls into cups on the opposite side of the table",
         category: "Team Game",
         sips: "250",
         status: "unavailable"
@@ -114,8 +114,8 @@ export const games = [
         name: "Power Hour",
         thumbnail: "http://85.215.71.124/static/gamePictures/PowerHour.jpg",
         playtime: "1 Stunde",
-        description: "Ein Trinkspiel, bei dem alle 60 Sekunden ein Shot Bier getrunken wird, bis eine Stunde vergangen ist",
-        category: "Adult Game",
+        description: "A drinking game in which a shot of beer is drunk every 60 seconds until an hour has passed",
+        category: "18+ Game",
         sips: "300",
         status: "unavailable"
     },
@@ -123,9 +123,9 @@ export const games = [
         _id: 12,
         name: "Drunk Jenga",
         thumbnail: "http://85.215.71.124/static/gamePictures/DrunkJenga.jpg",
-        playtime: "variabel",
-        description: "Eine Variation des klassischen Jenga-Spiels, bei dem auf den Bausteinen Aufgaben oder Regeln stehen, die ausgeführt werden müssen",
-        category: "Q&A",
+        playtime: "30 min",
+        description: "a variation of the classic Jenga game, in which there are tasks or rules on the building blocks that have to be carried out",
+        category: "Skill Game",
         sips: "200",
         status: "unavailable"
     },
@@ -133,21 +133,141 @@ export const games = [
         _id: 13,
         name: "Quarters",
         thumbnail: "http://85.215.71.124/static/gamePictures/Quarters.jpg",
-        playtime: "variabel",
-        description: "Ein einfaches Trinkspiel, bei dem versucht wird, einen Vierteldollar in ein Glas zu werfen und dann zu trinken",
+        playtime: "ca. 10 min",
+        description: "A simple drinking game where you try to throw a quarter into a glass and then drink it",
         category: "Skill Game",
         sips: "150",
         status: "unavailable"
+    },
+    {
+        _id: 14,
+        name: "20 Fragen",
+        thumbnail: "http://85.215.71.124/static/gamePictures/20Fragen.jpg",
+        playtime: "ca. 20 min",
+        description: "A game in which one player tries to guess the object the other player is thinking of by asking yes/no questions.",
+        category: "Q&A",
+        sips: "100",
+        status: "unavailable"
+    },
+    {
+        _id: 15,
+        name: "Flunkyball",
+        thumbnail: "http://85.215.71.124/static/gamePictures/Flunkyball.jpg",
+        playtime: "ca. 15 min",
+        description: "A fun outdoor drinking game in which two teams try to knock over a can with a ball and drink at the same time.",
+        category: "Team Game",
+        sips: "150",
+        status: "unavailable"
+    },
+    {
+        _id: 16,
+        name: "Strip Poker",
+        thumbnail: "http://85.215.71.124/static/gamePictures/StripPoker.jpg",
+        playtime: "ca. 35 min",
+        description: "An exciting card game for adults in which items of clothing are used as inserts.",
+        category: "18+ Game",
+        sips: "250",
+        status: "unavailable"
+    },
+    {
+        _id: 17,
+        name: "Shot Roulette",
+        thumbnail: "http://85.215.71.124/static/gamePictures/ShotRoulette.jpg",
+        playtime: "ca. 5 min",
+        description: "A game where players have to select random shots arranged in a roulette style.",
+        category: "18+ Game",
+        sips: "200",
+        status: "unavailable"
+    },
+    {
+        _id: 18,
+        name: "Bierkastenlauf",
+        thumbnail: "http://85.215.71.124/static/gamePictures/Bierkastenlauf.jpg",
+        playtime: "until the beer crate is empty",
+        description: "A competition in which players carry a beer crate and have to complete various tasks.",
+        category: "Team Game",
+        sips: "150",
+        status: "unavailable"
+    },
+    {
+        _id: 19,
+        name: "Trinkspiel Bingo",
+        thumbnail: "http://85.215.71.124/static/gamePictures/TrinkspielBingo.jpg",
+        playtime: "ca. 15 min",
+        description: "A variant of the classic bingo game in which numbers are combined with drinking tasks.",
+        category: "Skill Game",
+        sips: "100",
+        status: "unavailable"
+    },
+    {
+        _id: 20,
+        name: "Musikstühle mit Shots",
+        thumbnail: "http://85.215.71.124/static/gamePictures/MusikstuehleMitShots.jpg",
+        playtime: "ca. 20 min",
+        description: "A fun version of the classic musical chair where losers have to drink shots.",
+        category: "Skill Game",
+        sips: "150",
+        status: "unavailable"
+    },
+    {
+        _id: 21,
+        name: "Trinkspiel Twister",
+        thumbnail: "http://85.215.71.124/static/gamePictures/TrinkspielTwister.jpg",
+        playtime: "ca. 20 min",
+        description: "A drunker version of the popular game Twister, where rules are combined with drinking tasks.",
+        category: "Skill Game",
+        sips: "200",
+        status: "unavailable"
+    },
+    {
+        _id: 22,
+        name: "Kamasutra-Karten",
+        thumbnail: "http://85.215.71.124/static/gamePictures/KamasutraKarten.jpg",
+        playtime: "ca 15 min",
+        description: "A card game for adults that contains Kamasutra positions and offers couples new ideas.",
+        category: "18+ Game",
+        sips: "250",
+        status: "unavailable"
+    },
+    {
+        _id: 23,
+        name: "Heiße Schokolade",
+        thumbnail: "http://85.215.71.124/static/gamePictures/HeisseSchokolade.jpg",
+        playtime: "as long as you like",
+        description: "A relaxed drinking game in which players drink hot chocolate while chatting comfortably.",
+        category: "Q&A",
+        sips: "100",
+        status: "unavailable"
+    },
+    {
+        _id: 24,
+        name: "Busfahren",
+        thumbnail: "http://85.215.71.124/static/gamePictures/Busfahren.jpg",
+        playtime: "ca. 30 min",
+        description: "A challenging card game in which players must try to memorize and drink a certain sequence of cards.",
+        category: "Card Game",
+        sips: "200",
+        status: "unavailable"
+    },
+    {
+        _id: 25,
+        name: "Hoch oder Tief",
+        thumbnail: "http://85.215.71.124/static/gamePictures/HochOderTief.jpg",
+        playtime: "ca. 20 min",
+        description: "A simple card game in which players have to guess whether the next card is higher or lower than the previous one.",
+        category: "Card Game",
+        sips: "100",
+        status: "unavailable"
     }
-]
+];
+
 
 export const categorys = [
-    "Q&A",
-    "Kartenspiel",
-    "Team Game",
-    "Party Game",
-    "Adult Game",
-    "Skill Game"
+    "Q&A", // 7
+    "Card Game", // 4
+    "Team Game", // 5
+    "18+ Game", // 5
+    "Skill Game" // 5
 ]
 
 export const emojis = ['🍻', '😍', '🤮', '🥳'];

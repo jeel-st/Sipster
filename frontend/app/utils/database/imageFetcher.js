@@ -6,7 +6,7 @@ export async function uploadProfilePicture(file, user) {
     const filename = file.uri.split("/").pop()
 
     let data = new FormData()
-    data.append('userID', user.userID)
+    data.append('userID', user._id)
     data.append('file', { uri: file.uri, name: filename, type: file.mimeType })
 
     try {
