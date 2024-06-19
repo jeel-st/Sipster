@@ -15,7 +15,16 @@ export function useLogin() {
     const [loginError, setLoginError] = useState('');
 
     const login = (username, password, setLoginError, onLoginSuccess) => {
-        axiosInstance.get(`/login/${username}/${password}`)
+        axiosInstance.post(`/login`,
+            {
+                "username": username,
+                "password": password
+            },
+            {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
             .then(response => {
                 userLog.debug("A suitable user has been found.")
                 setLoginError('');

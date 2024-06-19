@@ -3,6 +3,7 @@ import React from 'react'
 import { ScrollView, View, Text } from 'react-native'
 import { useSavedEvents } from '../../utils/database/eventsFetcher';
 import EventBtn from './EventBtn';
+import { styles } from '../../constants';
 
 /*
     SavedEvents is a component that represents the list of events that the user has saved.
@@ -29,8 +30,8 @@ export default function SavedEvents({ onSelectEvent, selectedEvent }) {
             <View className={styles.spaceText}>
                 <Text className={styles.categoryText}>saved events</Text>
             </View>
-            <ScrollView
-                className="mt-4 max-h-48 bg-primary"
+            <ScrollView>
+                {/*className="mt-4 max-h-48 bg-primary"
                 showsVerticalScrollIndicator={false}>
                 {
                     events.map((event, index) =>
@@ -40,7 +41,7 @@ export default function SavedEvents({ onSelectEvent, selectedEvent }) {
                             onClick={() => handleEventClick(event)}
                             isSelected={selectedEvent === event}
                         />)
-                }
+                */}
             </ScrollView>
         </View>
     )
