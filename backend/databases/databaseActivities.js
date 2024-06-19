@@ -300,17 +300,22 @@ async function deleteReaction(req) {
         const userIDObj = new ObjectId(userID)
         const activityIDObj = new ObjectId(activityID)
 
-        const activities = (await database.initializeCollections()).activities
+        const {activities} = await database.initializeCollections()
+
         const result = await activities.updateOne( {_id: activityIDObj }, {$pull: {[`reactions.${reactionType}`]: userIDObj}} )
-        console.log(result)
+    
         if (result.modifiedCount == 0){
+            log.error(result)
+            log.error("reaction couldn't be deleted!")
             return "reaction couldn't be deleted!"
         }else {
+            log.info("reaction deleted!")
             return "reaction deleted!"
         }
 
     }catch (err) {
-        return err
+        log.error("Error occured: " + err)
+        return "Something went wrong!"
     }
 }
 
