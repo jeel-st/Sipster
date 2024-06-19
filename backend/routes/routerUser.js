@@ -10,7 +10,7 @@ const registerController = require('../controllers/controllerRegister')
 
 //Router, die an Controller weiterleiten
 router.get('/:username', userController.getUserData)
-router.get('/:username/events', userController.getEvents)
+router.get('/events/:userID', userController.getEvents)
 router.put('/changeFirstName', userController.changeFirstName)
 router.put('/changeLastName', userController.changeLastName)
 router.post('/changeUsername', userController.postNewUsername)

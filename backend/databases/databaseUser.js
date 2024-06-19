@@ -30,10 +30,10 @@ async function getUserData(req) {
  */
 
 async function getEventsData(req) {
-    const username = req.params.username
-    const sipsterID = await database.getSipsterID(username)
-    const personalInformation = (await database.initializeCollections()).personalInformation;
-    const userData = await personalInformation.findOne({_id: sipsterID})
+    const userID = req.params.userID
+    const userIDObj = new ObjectId(userID)
+    const { personalInformation } = (await database.initializeCollections());
+    const userData = await personalInformation.findOne({_id: userIDObj})
 
     log.info(userData.events)
     return userData.events;
@@ -49,22 +49,29 @@ async function getEventsData(req) {
  */
 
 async function postNewUsername(req){
-    const {username, newUsername} = req.body
-    log.info(username + " + " + newUsername)
-    const sipsterID = await database.getSipsterID(username);
-    const personalInformation = (await database.initializeCollections()).personalInformation;
+    const {userID, newUsername} = req.body
+    log.info(`given Userid: ${userID} tries to change username to ${newUsername}`);
+    const userIDObj = new ObjectId(userID)
+    const {personalInformation} = await database.initializeCollections();
+    const user = await personalInformation.findOne({_id: userIDObj})
+    if (user == null) {
+        log.error("There was no user found with that id")
+        return "There was no User found with that id!"
+    }
     const checkForUsername = await personalInformation.findOne({ username: newUsername });
     if (checkForUsername !== null){
         return "This username is already used!"
     }
-    const filter = {_id: sipsterID}
+    const filter = {_id: userIDObj}
     const update = {$set: {username: newUsername}}
+    log.info(`changing ${user.username} to ${newUsername}`)
 
     const result = await personalInformation.updateOne(filter, update)
-    console.log(result)
     if (result.modifiedCount == 0){
-        throw new Error("There was no User found with that id!")
+        log.error("The update couldn't be completed")
+        return("The update couldn't be completed")
     }else {
+        log.info("Update to new Username complete!")
         return true;
     }
 
@@ -79,26 +86,28 @@ async function postNewUsername(req){
  */
 
 async function postNewPassword(req){
-    const {username, newPassword} = req.body
-    const sipsterID = await database.getSipsterID(username)
+    const {userID, newPassword} = req.body
+    const userIDObj = new ObjectId(userID)
     const encryptedPasswordAndSalt = await encryptPassword(newPassword);
     const encryptedPassword = encryptedPasswordAndSalt[0]
     const salt = encryptedPasswordAndSalt[1]
-    const personalInformation = (await database.initializeCollections()).personalInformation;
-    const filter = {_id: sipsterID}
+    const {personalInformation} = (await database.initializeCollections());
+    const filter = {_id: userIDObj}
     const update = {$set: {encryptedPassword: encryptedPassword, salt: salt}}
 
-    if (!isValidPassword(newPassword)) return false;
+    if (!isValidPassword(newPassword)){
+        log.error("Password is not valid!")
+        return false;
+    }
 
     let result = await personalInformation.updateOne(filter, update)
-    if (result.modifiedCount != 0){
+    if (result.modifiedCount !== 0){
         log.info(`Password changed to: ${encryptedPassword}`)
         log.info("You thought you would get the real Password Muhahahahaha!")
         return true;
     }else {
         throw new Error("The update couldn't be completed!")
     }
-
 }
 
 /**
@@ -110,10 +119,10 @@ async function postNewPassword(req){
  */
 
 async function postNewEmail(req){
-    const {username, newEmail} = req.body
-    const personalInformation = (await database.initializeCollections()).personalInformation;
-    const sipsterID = await database.getSipsterID(username);
-    const filter = {_id: sipsterID}
+    const {userID, newEmail} = req.body
+    const {personalInformation} = (await database.initializeCollections());
+    const userIDObj = new ObjectId(userID)
+    const filter = {_id: userIDObj}
     const update = {$set: {email: newEmail}}
 
     if (!isValidEmail(newEmail)) return false
@@ -123,7 +132,8 @@ async function postNewEmail(req){
         log.info(`Email changed to: ${newEmail}`)
         return true;
     }else {
-        throw new Error("The update couldn't be completed!")
+        log.error("The update couldn't be completed!")
+        return "The update couldn't be completed!"
     }
 }
 
@@ -135,7 +145,6 @@ async function postNewEmail(req){
  */
 
 async function addEvent(req){
-    console.log("Whasss upppp")
     const {userID, eventID} = req.body
     const { personalInformation } = (await database.initializeCollections());
     const userIDObj = new ObjectId(userID)
@@ -164,14 +173,16 @@ async function addEvent(req){
  */
 
 async function changeFirstName(userID, newName){
-    const personalInformation = (await database.initializeCollections()).personalInformation
+    const {personalInformation} = await database.initializeCollections()
     const filter = {_id: userID}
     const update = {$set: {"firstName": newName}}
 
     const postName = await personalInformation.updateOne(filter, update)
     if(postName.modifiedCount === 1){
+        log.info(`First Name changed succesfully to: ${newName}`)
         return true
     }else{
+        log.error("First Name change failed!")
         return false
     }
 }
@@ -185,14 +196,16 @@ async function changeFirstName(userID, newName){
  */
 
 async function changeLastName(userID, newName){
-    const personalInformation = (await database.initializeCollections()).personalInformation
+    const {personalInformation} = (await database.initializeCollections())
     const filter = {_id: userID}
     const update = {$set: {"lastName": newName}}
 
     const postName = await personalInformation.updateOne(filter, update)
     if(postName.modifiedCount === 1){
+        log.info(`Last Name changed succesfully to: ${newName}`)
         return true
     }else{
+        log.info("change lastName failed!")
         return false
     }
 }
