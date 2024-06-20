@@ -1,5 +1,5 @@
-import { ScrollView, Dimensions, View, Image } from 'react-native';
-import React, { useEffect, useState, useContext } from 'react';
+import { ScrollView, View, Image } from 'react-native';
+import React from 'react';
 import { classNames } from '../../utils';
 import { fetchProfilePictureCompressed } from '../../utils/database/imageFetcher';
 import { useUser } from '../../utils/hooks/useUser';
@@ -9,32 +9,12 @@ import { useUser } from '../../utils/hooks/useUser';
     It displays a list of friends in a horizontal scroll view.
     Typ: Component from settings
 
-    @return: JSX -> returns the HomeFriends component
+    @return: JSX -> returns the ShowFriends component
 */
 export default function ShowFriends() {
+
+    // User information is loaded
     const user = useUser();
-
-    const [scrollEnable, setScrollEnable] = useState(false);
-
-    // Getting the width of the screen
-    const screenWidth = Dimensions.get('window').width;
-
-    // useEffect to update scrollEnable based on the number of friends
-    useEffect(() => {
-        if (user && user.friends) {
-            setScrollEnable(user.friends.length > 5);
-        }
-    }, [user]);
-
-    // Constants for calculating content width
-    const FRIEND_CARD_WIDTH = 91;
-    const contentWidth = user && user.friends ? Math.max(screenWidth, user.friends.length * FRIEND_CARD_WIDTH) : screenWidth;
-
-    // Debugging log
-    console.log('User:', user);
-    if (user && user.friends) {
-        console.log('Friends:', user.friends);
-    }
 
     return (
         <ScrollView
@@ -42,13 +22,10 @@ export default function ShowFriends() {
                 'mt-4 px-2'
             )}
             horizontal
-            showsHorizontalScrollIndicator={false}
-            contentContainerStyle={{ width: contentWidth }}
-            scrollEnabled={scrollEnable}>
+            showsHorizontalScrollIndicator={false}>
             {
                 user && user.friends && user.friends.map((friend, index) => {
                     const profilePictureUri = fetchProfilePictureCompressed(friend);
-                    console.log(`Friend ${index} profile picture URI:`, profilePictureUri);
 
                     return (
                         <View
