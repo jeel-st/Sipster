@@ -49,12 +49,10 @@ async function getActivities(req, internalCall) {
     let userID;
     if (internalCall){
         userID = req.body.userID
-        console.log(userID)
     }else {
         userID = req.params.userID
     }
     const userIDObj = new ObjectId(userID)
-    console.log(userIDObj)
     const activities = (await database.initializeCollections()).activities
     const personalInformation = (await database.initializeCollections()).personalInformation
     const user = await personalInformation.findOne({_id: userIDObj})
