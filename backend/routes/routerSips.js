@@ -9,7 +9,7 @@ const sipsController = require("../controllers/controllerSips")
 
 //Router, die an Controller weiterleiten
 router.put("/friends", sipsController.changeSipsForFriends)
-router.route("/:username")
+router.route("/:userID")
     .get(sipsController.getSips)
     .put(sipsController.changeSips);
 

@@ -149,12 +149,12 @@ async function uploadAfterPicture(activityID, fileExtension, filePathOriginal){
     return await dbActivities.uploadAfterPicture(activityID, fileExtension, filePathOriginal)
 }
 
-async function getSips(username){
-    return await dbSips.getSips(username)
+async function getSips(userID){
+    return await dbSips.getSips(userID)
 }
 
-async function changeSips(username, sipsNew){
-    return await dbSips.changeSips(username, sipsNew)
+async function changeSips(userID, sipsNew){
+    return await dbSips.changeSips(userID, sipsNew)
 }
 
 async function changeFirstName(userID, newName){
