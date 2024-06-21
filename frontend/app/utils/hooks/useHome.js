@@ -16,30 +16,43 @@ const useHome = () => {
     setActivities(activities);
   }
 
+  async function fetchActivitiesFromUser(user) {
+    const activities = await fetchActivityFromUser(user)
+    setDisplayFriendActivities(activities)
+  }
+
+  // Function to handle friend selection
+  const handleFriendSelection = (selectedFriend) => {
+    if (selectedFriend !== displayFriend) {
+      // Update displayFriend state with selected friend
+      setDisplayFriend(selectedFriend);
+    }
+  };
+
   useEffect(() => {
     // Fetch activities from database
     fetchActivities(user)
   }, [user])
 
-  // Function to handle friend selection
-  const handleFriendSelection = async (selectedFriend) => {
-    if (selectedFriend !== displayFriend) {
-      // Update displayFriend state with selected friend
-      setDisplayFriend(selectedFriend)
-
-      if(selectedFriend === 0) return
-      const activities = await fetchActivityFromUser(user.friends[selectedFriend])
-      setDisplayFriendActivities(activities)
+  // Fetch activities whenever displayFriend changes
+  useEffect(() => {
+    if (displayFriend !== 0) {
+      fetchActivitiesFromUser(user.friends[displayFriend]);
     }
-  }
+  }, [displayFriend]);
 
   const onRefresh = useCallback(async () => {
     setRefreshing(true);
     setRefreshDate(new Date());
-    await fetchActivities(user);
+
+    if (displayFriend === 0) {
+      await fetchActivities(user);
+    } else {
+      await fetchActivitiesFromUser(user.friends[displayFriend]);
+    }
 
     setRefreshing(false);
-}, []);
+  }, [displayFriend, user]);
 
   return { user, displayFriend, handleFriendSelection, onRefresh, refreshing, refreshDate, activities, displayFriendActivities }
 }

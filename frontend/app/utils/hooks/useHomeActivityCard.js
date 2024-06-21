@@ -15,7 +15,7 @@ const useHomeActitivityCard = (activity) => {
                 break;
             }
         }
-    }, [activity.reactions, user._id]);
+    }, [activity, user]);
 
     const handleReaction = (reaction) => {
         if (displayReaction[0] === reaction[0]) {

@@ -1,7 +1,6 @@
 import React from 'react'
 import { View, Text, TouchableOpacity } from 'react-native'
 import { classNames } from '../../utils'
-import useReactionCard from '../../utils/hooks/useReactionCard'
 
 /*
     HomeReactionCard is a component that represents a reaction in the home activity tab.
