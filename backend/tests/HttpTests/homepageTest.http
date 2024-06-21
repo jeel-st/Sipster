@@ -1,4 +1,4 @@
-@host = http://localhost:3000
+@host = http://85.215.71.124
 
 ###
 
@@ -30,7 +30,7 @@ GET {{host}}/homepage HTTP/1.1
 Content-Type: application/json
 
 {
-    "userID": "661d5aeb7caebb258991f758",
+    "userID": "661d07706671060e01a4fd3d",
     "usedIDs": null
 }
 
