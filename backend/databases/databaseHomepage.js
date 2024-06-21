@@ -42,7 +42,7 @@ async function getHomepage(req) {
 }
 
 function sortAlreadySeenIDs(alreadySeenIDs, type) {
-    if (alreadySeenIDs === null){
+    if (alreadySeenIDs === null || alreadySeenIDs === undefined){
         return [];
     }
     const usedIDs = new Array();
