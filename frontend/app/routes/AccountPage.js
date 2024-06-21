@@ -25,8 +25,11 @@ export default function AccountPage() {
 
     // Background is set depending on the operating system
     navBarColor(styles.Colors.secondary)
+
+    // Declare a state variable 'user' with a default value of 'null' and a setter function 'setUser'
     const [user, setUser] = useState(null)
 
+    // useEffect hook to update the user state whenever the pathname changes
     const path = usePathname()
     useEffect(() => {
         setUser(useUser())

@@ -1,5 +1,5 @@
 // Imports
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { settingsFetcher } from '../database/settingsFetcher'
 import { userLog } from '../logger/config';
 import UserManager from '../../entitys/UserManager';
@@ -53,12 +53,12 @@ export function useSettings() {
     const handleChangeUsername = async () => {
         if (username == '') {
             /* The system checks whether the text field has been filled in */
-            userLog.debug("Username information is missing.")
+            userLog.error("Username information is missing.")
             setSettingsError('Please enter your new username.')
             return;
         } else {
             /* If the text field is filled in, the new username is saved */
-            userLog.debug("changeUsername details have been entered.")
+            userLog.info("changeUsername details have been entered.")
 
             // removes blank
             trimmedUsername = username.trim()
@@ -72,12 +72,12 @@ export function useSettings() {
     const handleChangeFirstName = async () => {
         if (firstName == '') {
             /* The system checks whether the text field has been filled in */
-            userLog.debug("First name information is missing.")
+            userLog.error("First name information is missing.")
             setSettingsError('Please enter your new firstname.')
             return;
         } else {
             /* If the text field is filled in, the new lastname is saved */
-            userLog.debug("changeFirstName details have been entered.")
+            userLog.info("changeFirstName details have been entered.")
 
             // removes blank
             trimmedFirstname = firstName.trim()
@@ -91,12 +91,12 @@ export function useSettings() {
     const handleChangeLastName = async () => {
         if (lastName == '') {
             /* The system checks whether the text field has been filled in */
-            userLog.debug("Last name information is missing.")
+            userLog.error("Last name information is missing.")
             setSettingsError('Please enter your new lastname.')
             return;
         } else {
             /* If the text field is filled in, the new lastname is saved */
-            userLog.debug("changeLastName details have been entered.")
+            userLog.info("changeLastName details have been entered.")
 
             // removes blank
             trimmedLastname = lastName.trim()
@@ -120,7 +120,7 @@ export function useSettings() {
             return;
         } else {
             /* If the text field is filled in, the new password is saved */
-            userLog.debug("changePassword details have been entered.")
+            userLog.info("changePassword details have been entered.")
 
             changePassword(newPassword)
         }
@@ -130,12 +130,12 @@ export function useSettings() {
     const handleChangeEmail = async () => {
         if (email == '') {
             /* The system checks whether the text field has been filled in */
-            userLog.debug("Email information is missing.")
+            userLog.error("Email information is missing.")
             setSettingsError('Please enter your new email.')
             return;
         } else {
             /* If the text field is filled in, the new email is saved */
-            userLog.debug("changeEmail details have been entered.")
+            userLog.info("changeEmail details have been entered.")
 
             // removes blank
             trimmedEmail = email.trim()
@@ -148,7 +148,7 @@ export function useSettings() {
     const handleDeleteAccount = async (isChecked) => {
         if (isChecked) {
             /* If the Checkbox filled in, the account will be deleted. */
-            userLog.debug("DeleteAccount details have been entered.")
+            userLog.info("DeleteAccount details have been entered.")
             deleteAccount(() => router.navigate('routes/LoginPage'));
 
         } else {
@@ -163,7 +163,7 @@ export function useSettings() {
     const handleLogout = () => {
         const userManager = UserManager.getInstance();
         if(userManager.deleteUser()) {
-            userLog.debug("User has been logged out.")
+            userLog.info("User has been logged out.")
             router.replace('routes/LoginPage')
             return
         }

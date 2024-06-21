@@ -1,3 +1,4 @@
+// Import
 import { useState } from 'react';
 import axiosInstance from './axiosConfig';
 import { userLog } from '../logger/config';
@@ -29,7 +30,7 @@ export function useRegister() {
                 }
             })
             .then(response => {
-                userLog.debug("The user was successfully created", response.data);
+                userLog.info("The user was successfully created", response.data);
                 setRegisterError('');
                 if (onRegisterSuccess) {
                     onRegisterSuccess();

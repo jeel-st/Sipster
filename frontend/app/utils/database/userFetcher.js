@@ -1,9 +1,7 @@
 // imports
-import { useEffect, useState } from "react";
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import User from "../../entitys/user";
 import axiosInstance from "./axiosConfig";
 import { userLog } from "../logger/config";
+
 
 export async function fetchUser(username) {
     try {

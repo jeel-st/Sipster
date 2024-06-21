@@ -1,3 +1,4 @@
+// Import
 import { useEffect, useState } from "react";
 import { getUser } from "../database/userFetcher";
 import { router } from 'expo-router'

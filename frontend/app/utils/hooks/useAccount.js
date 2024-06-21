@@ -29,7 +29,7 @@ export function useAccount() {
             const calculatedLevel = calculateLevel(sips);
             setLevel(calculatedLevel);
             setLevelInfo(getLevelInfo(calculatedLevel));
-            userLog.debug("Level information was calculated.")
+            userLog.info("Level information was calculated.")
         }
     }, [user]);
 
@@ -37,22 +37,22 @@ export function useAccount() {
     const calculateLevel = (sips) => {
         switch (true) {
             case (sips < 100):
-                userLog.debug("The user is in level 1")
+                userLog.info("The user is in level 1")
                 return '1';
             case (sips < 250):
-                userLog.debug("The user is in level 2")
+                userLog.info("The user is in level 2")
                 return '2';
             case (sips < 500):
-                userLog.debug("The user is in level 3")
+                userLog.info("The user is in level 3")
                 return '3';
             case (sips < 750):
-                userLog.debug("The user is in level 4")
+                userLog.info("The user is in level 4")
                 return '4';
             case (sips < 1000):
-                userLog.debug("The user is in level 5")
+                userLog.info("The user is in level 5")
                 return '5';
             default:
-                userLog.debug("The user is in level 6")
+                userLog.info("The user is in level 6")
                 return '6';
         }
     }

@@ -26,7 +26,7 @@ export function useLogin() {
                 }
             })
             .then(response => {
-                userLog.debug("A suitable user has been found.")
+                userLog.info("A suitable user has been found.")
                 setLoginError('');
                 if (onLoginSuccess) { onLoginSuccess() };
             })

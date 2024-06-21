@@ -32,7 +32,7 @@ export function settingsFetcher() {
                 }
             })
             .then(response => {
-                userLog.debug("The new username has been successfully changed.", response.data)
+                userLog.info("The new username has been successfully changed.", response.data)
                 setSettingsError('');
                 updateUser(user)
             })
@@ -56,7 +56,7 @@ export function settingsFetcher() {
                 }
             })
             .then(response => {
-                userLog.debug("The new firstname has been successfully changed.", response.data)
+                userLog.info("The new firstname has been successfully changed.", response.data)
                 setSettingsError('');
                 updateUser(user)
             })
@@ -80,7 +80,7 @@ export function settingsFetcher() {
                 }
             })
             .then(response => {
-                userLog.debug("The new lastname has been successfully changed.", response.data)
+                userLog.info("The new lastname has been successfully changed.", response.data)
                 setSettingsError('');
                 updateUser(user)
             })
@@ -104,17 +104,13 @@ export function settingsFetcher() {
                 }
             })
             .then(response => {
-                userLog.debug("The new password has been successfully changed.", response.data)
+                userLog.info("The new password has been successfully changed.", response.data)
                 setSettingsError('');
                 updateUser(user)
             })
             .catch(error => {
                 userLog.error("Error changing the password:", error)
-                if (error.response && error.response.status === "404") {
-                    setSettingsError('This password already exists.'); // notwendig?
-                } else {
-                    setSettingsError('Changing password failed. Please check your password information.');
-                }
+                setSettingsError('Changing password failed. Please check your password information.');
             });
     };
 
@@ -132,7 +128,7 @@ export function settingsFetcher() {
                 }
             })
             .then(response => {
-                userLog.debug("The new email has been successfully changed.", response.data)
+                userLog.info("The new email has been successfully changed.", response.data)
                 setSettingsError('');
                 updateUser(user)
             })
@@ -146,7 +142,7 @@ export function settingsFetcher() {
     const deleteAccount = (onDeleteSuccess) => {
         axiosInstance.delete(`/user/${user._id}`)
             .then(response => {
-                userLog.debug("The user has been successfully deleted.", response.data)
+                userLog.info("The user has been successfully deleted.", response.data)
                 setSettingsError('');
                 if (onDeleteSuccess) { onDeleteSuccess() };
 
@@ -159,7 +155,6 @@ export function settingsFetcher() {
     // function with which the user can save an event
     const saveEvent = (event) => {
 
-        userLog.debug(event._id, user._id)
         axiosInstance.put('/user/addEvent',
             {
                 "userID": `${user._id}`,
@@ -171,7 +166,7 @@ export function settingsFetcher() {
                 }
             })
             .then(response => {
-                userLog.debug("The event has been successfully added.", response.data)
+                userLog.info("The event has been successfully added.", response.data)
                 setSettingsError('');
             })
             .catch(error => {

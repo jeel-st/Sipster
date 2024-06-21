@@ -23,14 +23,16 @@ export default function SettingsPage() {
     // Background is set depending on the operating system
     navBarColor(styles.Colors.primary)
 
+    // Declare a state variable 'user' with a default value of 'null' and a setter function 'setUser'
     const [user, setUser] = useState(null)
 
+    // useEffect hook to update the user state whenever the pathname changes
     const path = usePathname()
     useEffect(() => {
         setUser(useUser())
     }, [path]);
 
-    // CSS properties of the ChangeButtons
+    // CSS properties that are used frequently
     const design = classNames(
         'flex-row items-center',
         'mt-6 mb-6 ml-3');

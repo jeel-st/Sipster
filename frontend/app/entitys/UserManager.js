@@ -1,3 +1,4 @@
+// Import
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { fetchFriends } from "../utils/database/friendsFetcher";
 import { fetchUser } from "../utils/database/userFetcher";

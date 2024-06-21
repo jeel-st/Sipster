@@ -1,11 +1,19 @@
+// Imports
 import { Stack } from 'expo-router/stack'
 import { NativeWindStyleSheet } from "nativewind";
 import 'react-native-reanimated';
 
+// Setting the output for NativeWind styles to "native"
 NativeWindStyleSheet.setOutput({
     default: "native",
 });
 
+/*
+ AppLayout Component
+ This component sets up the main navigation stack for the app, defining different routes/screens.
+  
+ @return:       JSX.Element -> The layout for the app's navigation stack
+ */
 export default function AppLayout() {
     return (
         <Stack>
