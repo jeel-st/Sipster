@@ -11,6 +11,9 @@ const { ObjectId } = require('mongodb');
 async function getHomepage(req) {
     const userID = req.body.userID
     const alreadySeenIDs = req.body.usedIDs
+    console.log("first: ")
+    console.log(alreadySeenIDs)
+    console.log("second: ")
     const userIDObj = new ObjectId(userID)
     const limit = 3; //The Limit of how many results should be returned per thing
 
