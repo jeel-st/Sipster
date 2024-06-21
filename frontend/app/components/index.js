@@ -31,6 +31,7 @@ import SmallTextField from './layout/SmallTextField';
 import TagCard from './layout/TagCard';
 import TextField from './layout/TextField';
 import ErrorMessage from './layout/ErrorMessage';
+import ShowFriends from './settings/ShowFriends.js';
 
 // Settings Import
 import SettingsButton from './settings/SettingsButton';
@@ -80,7 +81,7 @@ export {
   IconButton, SipsterButton, SmallTextField, TagCard, TextField, ErrorMessage,
 
   // Settings
-  SettingsButton, CheckButton, AboutUs, TextButton, Help, Picker, DeleteAccount,
+  SettingsButton, CheckButton, AboutUs, TextButton, Help, Picker, DeleteAccount, ShowFriends,
 
   // Profile
   ProfileCard, ProfileHeaderButtons, ProfileStagger, ProfileInviteBtn,

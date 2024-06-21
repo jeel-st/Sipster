@@ -60,7 +60,7 @@ export function useRegisterLogic() {
 
         /* If text fields are filled in, a new user is created */
         register(trimmedFirstname, trimmedLastname, trimmedUsername, trimmedEmail, password, () => {
-            userLog.debug("Registration successful.")
+            userLog.info("Registration successful.")
             router.navigate('routes/LoginPage');
         });
     };

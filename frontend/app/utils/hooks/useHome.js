@@ -1,3 +1,4 @@
+// Import
 import { useCallback, useContext, useEffect, useState } from "react";
 import { UserContext } from "../../components/provider/UserProvider";
 import { fetchActivity, fetchActivityFromUser } from "../database/activityFetcher";

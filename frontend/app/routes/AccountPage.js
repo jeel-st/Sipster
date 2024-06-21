@@ -4,7 +4,7 @@ import { styles } from '../constants';
 import React, { useEffect, useState } from 'react'; ;
 import { router } from 'expo-router'
 import { NativeBaseProvider, View } from "native-base";
-import { FriendsScrollView, FriendsSkeleton, IconButton, SavedEvents } from "../components";
+import { IconButton, SavedEvents, ShowFriends} from "../components";
 import { classNames } from "../utils";
 import { fetchProfilePictureCompressed } from '../utils/database/imageFetcher';
 import { navBarColor } from "../utils/navBarColor";
@@ -25,8 +25,11 @@ export default function AccountPage() {
 
     // Background is set depending on the operating system
     navBarColor(styles.Colors.secondary)
+
+    // Declare a state variable 'user' with a default value of 'null' and a setter function 'setUser'
     const [user, setUser] = useState(null)
 
+    // useEffect hook to update the user state whenever the pathname changes
     const path = usePathname()
     useEffect(() => {
         setUser(useUser())
@@ -121,12 +124,8 @@ export default function AccountPage() {
                         <Text className={styles.categoryText}>friends</Text>
                     </Pressable>
 
-                    {
-                        user && user.friends.length > 0 && (<FriendsScrollView friends={user.friends} user={user} />)
-                    }
-                    {
-                        user && user.friends.length == 0 && FriendsSkeleton()
-                    }
+                    {/* Friend controller tab bar */}
+                    <ShowFriends/>
                 </View>
             </SafeAreaView>
         </NativeBaseProvider >

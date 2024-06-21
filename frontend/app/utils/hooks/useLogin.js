@@ -25,6 +25,8 @@ export function useLoginLogic() {
     const [password, setPassword] = useState('');
     const [loginError, setLoginError] = useState('');
 
+    // fetching the current user using the UserManager, 
+    // If a user is found, it hides the splash screen and redirects to the main tabs screen.
     useEffect(() => {
         const fetchUser = async () => {
             const userManager = UserManager.getInstance();
@@ -40,6 +42,7 @@ export function useLoginLogic() {
     // Import of fetcher functions
     const { login } = useLogin();
 
+    // function to handle the login
     const handleLogin = () => {
 
         if (username === '' || password === '') {
@@ -50,12 +53,12 @@ export function useLoginLogic() {
 
         } else {
             /* If text fields are filled in, the system checks whether there is a matching user */
-            userLog.debug("Login details have been entered.")
+            userLog.info("Login details have been entered.")
             login(username, password, setLoginError, async () => {
                 const userManager = UserManager.getInstance()
                 await userManager.instantiateUser(username)
                 router.replace('(tabs)')
-                userLog.debug("Login successful.")
+                userLog.info("Login successful.")
                 setLoginError('')
             });
         }

@@ -21,9 +21,9 @@ export function settingsFetcher() {
     // function to change the username
     const changeUsername = (newUsername) => {
 
-        axiosInstance.post('/user/changeUsername',
+        axiosInstance.put('/user/changeUsername',
             {
-                "username": user.username,
+                "userID": `${user._id}`,
                 "newUsername": newUsername
             },
             {
@@ -32,17 +32,13 @@ export function settingsFetcher() {
                 }
             })
             .then(response => {
-                userLog.debug("The new username has been successfully changed.", response.data)
+                userLog.info("The new username has been successfully changed.", response.data)
                 setSettingsError('');
                 updateUser(user)
             })
             .catch(error => {
                 userLog.error("Error changing the username:", error)
-                if (error.response && error.response.status === "404") {
-                    setSettingsError('This username already exists.');
-                } else {
-                    setSettingsError('Changing username failed. Please check your username information.');
-                }
+                setSettingsError('Changing username failed. Please check your username information.');
             });
     };
 
@@ -51,7 +47,7 @@ export function settingsFetcher() {
 
         axiosInstance.put('/user/changeFirstName',
             {
-                "userID": user._id,
+                "userID": `${user._id}`,
                 "newName": firstName
             },
             {
@@ -60,17 +56,13 @@ export function settingsFetcher() {
                 }
             })
             .then(response => {
-                userLog.debug("The new firstname has been successfully changed.", response.data)
+                userLog.info("The new firstname has been successfully changed.", response.data)
                 setSettingsError('');
                 updateUser(user)
             })
             .catch(error => {
                 userLog.error("Error changing the firstname:", error)
-                if (error.response && error.response.status === "404") {
-                    setSettingsError('This firstname already exists.');
-                } else {
-                    setSettingsError('Changing firstname failed. Please check your firstname information.');
-                }
+                setSettingsError('Changing firstname failed. Please check your firstname information.');
             });
     };
 
@@ -79,7 +71,7 @@ export function settingsFetcher() {
 
         axiosInstance.put('/user/changeLastName',
             {
-                "userID": user._id,
+                "userID": `${user._id}`,
                 "newName": lastName
             },
             {
@@ -88,26 +80,22 @@ export function settingsFetcher() {
                 }
             })
             .then(response => {
-                userLog.debug("The new lastname has been successfully changed.", response.data)
+                userLog.info("The new lastname has been successfully changed.", response.data)
                 setSettingsError('');
                 updateUser(user)
             })
             .catch(error => {
                 userLog.error("Error changing the lastname:", error)
-                if (error.response && error.response.status === "404") {
-                    setSettingsError('This lastname already exists.');
-                } else {
-                    setSettingsError('Changing lastname failed. Please check your lastname information.');
-                }
+                setSettingsError('Changing lastname failed. Please check your lastname information.');
             });
     };
 
     // function to change the password
     const changePassword = (password) => {
 
-        axiosInstance.post('/user/changePassword',
+        axiosInstance.put('/user/changePassword',
             {
-                "username": user.username,
+                "userID": `${user._id}`,
                 "newPassword": password
             },
             {
@@ -116,26 +104,22 @@ export function settingsFetcher() {
                 }
             })
             .then(response => {
-                userLog.debug("The new password has been successfully changed.", response.data)
+                userLog.info("The new password has been successfully changed.", response.data)
                 setSettingsError('');
                 updateUser(user)
             })
             .catch(error => {
                 userLog.error("Error changing the password:", error)
-                if (error.response && error.response.status === "404") {
-                    setSettingsError('This password already exists.'); // notwendig?
-                } else {
-                    setSettingsError('Changing password failed. Please check your password information.');
-                }
+                setSettingsError('Changing password failed. Please check your password information.');
             });
     };
 
     // function to change the email
     const changeEmail = (email) => {
 
-        axiosInstance.post('/user/changeEmail',
+        axiosInstance.put('/user/changeEmail',
             {
-                "username": user.username,
+                "userID": `${user._id}`,
                 "newEmail": email
             },
             {
@@ -144,26 +128,21 @@ export function settingsFetcher() {
                 }
             })
             .then(response => {
-                userLog.debug("The new email has been successfully changed.", response.data)
+                userLog.info("The new email has been successfully changed.", response.data)
                 setSettingsError('');
                 updateUser(user)
             })
             .catch(error => {
                 userLog.error("Error changing the email:", error)
-                if (error.response && error.response.status === "404") {
-                    setSettingsError('This email already exists.');
-                } else {
-                    setSettingsError('Changing email failed. Please check your email.');
-                }
+                setSettingsError('Changing email failed. Please check your email.');
             });
     };
 
     // function to delete the account 
     const deleteAccount = (onDeleteSuccess) => {
-        userLog.debug(user.userID, user.password)
-        axiosInstance.delete(`/user/${user.userID}`)
+        axiosInstance.delete(`/user/${user._id}`)
             .then(response => {
-                userLog.debug("The user has been successfully deleted.", response.data)
+                userLog.info("The user has been successfully deleted.", response.data)
                 setSettingsError('');
                 if (onDeleteSuccess) { onDeleteSuccess() };
 
@@ -176,10 +155,10 @@ export function settingsFetcher() {
     // function with which the user can save an event
     const saveEvent = (event) => {
 
-        axiosInstance.post('/user/addEvent',
+        axiosInstance.put('/user/addEvent',
             {
-                "userID": user._id,
-                "eventID": event.eventID
+                "userID": `${user._id}`,
+                "eventID": event._id
             },
             {
                 headers: {
@@ -187,7 +166,7 @@ export function settingsFetcher() {
                 }
             })
             .then(response => {
-                userLog.debug("The event has been successfully added.", response.data)
+                userLog.info("The event has been successfully added.", response.data)
                 setSettingsError('');
             })
             .catch(error => {
