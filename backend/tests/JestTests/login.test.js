@@ -17,7 +17,7 @@ test('successful login', async () => {
     expect(response.data).toBe(true);
 });
 
-test('user not found', async () => {
+test("Ungültige Anmeldedaten.", async () => {
     const username = 'gamsa';
     const password = 'Ansaf86!!mm';
     try {
@@ -30,8 +30,8 @@ test('user not found', async () => {
             }
         });
     } catch (error) {
-        expect(error.response.status).toBe(401);
-        expect(error.response.data).toBe('User not found');
+        expect(error.response.status).toBe(400);
+        expect(error.response.data).toBe("Ungültige Anmeldedaten.");
     }
 });
 

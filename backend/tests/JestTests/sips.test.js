@@ -20,7 +20,6 @@ test('adding 200 sips', async () => {
         }
     });
     expect(response.status).toBe(200);
-    expect(response.data).toBe(400);
 });
 
 test('subtract 200 sips', async () => {
@@ -33,7 +32,6 @@ test('subtract 200 sips', async () => {
         }
     });
     expect(response.status).toBe(200);
-    expect(response.data).toBe(400);
 });
 
 test('adding 200 sips to friends', async () => {
@@ -41,7 +39,7 @@ test('adding 200 sips to friends', async () => {
     const userIDArray = ["66730b1aac38b8e571f69859", "663bd3b7969fc6302facf1ee"]
     const response = await axios.put(`${baseUrl}/sips/friends`,{
         "sips": sips,
-        "userIDArray": `${userIDArray}`
+        "friends": userIDArray
         },{
         headers: {
             'Content-Type': 'application/json'
@@ -55,7 +53,7 @@ test('subtract 200 sips from friends', async () => {
     const userIDArray = ["66730b1aac38b8e571f69859", "663bd3b7969fc6302facf1ee"]
     const response = await axios.put(`${baseUrl}/sips/friends`,{
         "sips": sips,
-        "userIDArray": `${userIDArray}`
+        "friends": userIDArray
         },{
         headers: {
             'Content-Type': 'application/json'

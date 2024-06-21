@@ -30,9 +30,11 @@ async function getLoginData(req) {
         const encryptedPassword = await encryptPasswordWithSalt(salt, password);
 
         const result = await personalInformation.findOne({ username, encryptedPassword });
-        log.info("Ergebnis, dass in der Datenbank gefunden wurde(username + passwort): "+ result)
-        if (result.username == username && result.encryptedPassword == encryptedPassword) {
-            return true;
+        log.info("Ergebnis, dass in der Datenbank gefunden wurde(username + passwort): " + result)
+        if (result) {
+            if (result.username == username && result.encryptedPassword == encryptedPassword) {
+                return true;
+            }
         } else {
             log.error("Ungültige Anmeldedaten")
             return ("Ungültige Anmeldedaten.");
