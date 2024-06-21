@@ -13,8 +13,8 @@ const database = require('../databases/databaseMain')
 
 async function getSips(req, res){
     try {
-        const username = req.params.username
-        const sips = await database.getSips(username)
+        const userID = req.params.userID
+        const sips = await database.getSips(userID)
         
         res.json(sips)
     } catch (error) {
@@ -37,10 +37,10 @@ async function getSips(req, res){
 
 async function changeSips(req, res){
     try {
-        const username = req.params.username
+        const userID = req.params.userID
         const sipsNew = req.body.sips
 
-        const sips = await database.changeSips(username, sipsNew)
+        const sips = await database.changeSips(userID, sipsNew)
         res.json(sips)
     } catch (error) {
         if(error.message === "No sips found for the specified username"){
@@ -63,18 +63,18 @@ async function changeSips(req, res){
  */
 
 async function changeSipsForFriends(req, res){
-    const usernameArray = req.body.friends
+    const userIDArray = req.body.friends
     const sips = req.body.sips
     
     let result = []
     let oneResult
-    if (!usernameArray || usernameArray.length === 0) {
+    if (!userIDArray || userIDArray.length === 0) {
         return res.status(204).send("No friends there...");
     }
     try{
-        for (let username of usernameArray) {
-            if (username) {
-                oneResult = await database.changeSips(username, sips);
+        for (let userID of userIDArray) {
+            if (userID) {
+                oneResult = await database.changeSips(userID, sips);
                 result.push(oneResult);
             }
         }
