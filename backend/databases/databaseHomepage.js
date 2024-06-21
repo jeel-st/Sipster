@@ -67,7 +67,9 @@ async function getTheFriendActivities(req, alreadySeenIDs, limit){
     let reqModified = req
     reqModified.alreadySeenIDsObj = alreadySeenIDsObj
     reqModified.limit = limit
+    console.log(reqModified)
     let friendsActivities = await database.getActivities(reqModified, true); //bedingter call = true
+    console.log(friendsActivities)
     friendsActivities.sort((a, b) => b.timestamp - a.timestamp);
     friendsActivities.forEach(activity => activity.type = "activity")
     return friendsActivities
