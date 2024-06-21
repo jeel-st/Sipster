@@ -8,7 +8,7 @@ router.use(logMiddleware);
 const homepageController = require('../controllers/controllerHomepage')
 
 //Router, die an Controller weiterleiten
-router.get('/:userID', homepageController.getHomepage)
+router.get('/', homepageController.getHomepage)
 
 
 module.exports = router

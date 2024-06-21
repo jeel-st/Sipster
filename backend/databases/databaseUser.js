@@ -32,12 +32,73 @@ async function getUserData(req) {
 async function getEventsData(req) {
     const userID = req.params.userID
     const userIDObj = new ObjectId(userID)
-    const { personalInformation } = (await database.initializeCollections());
+    const { personalInformation, events } = (await database.initializeCollections());
     const userData = await personalInformation.findOne({_id: userIDObj})
 
-    log.info(userData.events)
-    return userData.events;
+    const eventList = new Array();
+    for (const eventID of userData.events) {
+        const eventIDObj = new ObjectId(eventID);
+        console.log(eventIDObj);
+        const event = await events.findOne({ _id: eventIDObj });
+        log.info(event);
+        if (event !== null) {
+            eventList.push(event);
+        } else {
+            return "That shouldn't have happened please contact the backend team!";
+        }
+    }
+
+    log.info(eventList)
+    return eventList;
     
+}
+
+/**
+ * gets The EventIds of the user in ObjectIds
+ * @param {*} userIDObj 
+ * @returns EventIdsObj
+ */
+async function getEventIDs(userIDObj) {
+    const { personalInformation } = await database.initializeCollections();
+    const eventIDs = await personalInformation.findOne( {_id: userIDObj} );
+    if (eventIDs !== null) {
+        if (eventIDs.events.Count !== 0) {
+            const eventIDsObj = eventIDs.events.map(eventID => new ObjectId(eventID));
+            log.info("EventIDs were found!")
+            return eventIDsObj
+        }else {
+            log.info("There are no Events stored by that User")
+            return [];
+        }
+    }else {
+        log.info("No User found with that ID!")
+        return ("No User Found")
+    }
+}
+
+/**
+ * hier kriegst du alle Events die sich der User noch nicht gespeichert hat.
+ * @param {*} userID 
+ * @returns Events
+ */
+async function getNotStoredEvents(userID) {
+    const userIDObj = new ObjectId(userID)
+    const { events } = await database.initializeCollections();
+    const eventIDs = await getEventIDs(userIDObj)
+
+    if (eventIDs == "No User Found"){
+        return "No User found"
+    }
+
+    const notStoredEvents = await events.find({ _id: { $nin: eventIDs } }).toArray();
+
+    if (notStoredEvents !== null){
+        log.info("retrieving of not Stored Events succesfull returning...")
+        return notStoredEvents
+    }else {
+        log.info("No Events found! returning...")
+        return "No Events found!"
+    }
 }
 
 /**
@@ -218,6 +279,7 @@ module.exports = {
     postNewEmail,
     addEvent,
     getEventsData,
+    getNotStoredEvents,
     changeFirstName,
     changeLastName
 }

@@ -34,17 +34,35 @@ async function getUserData(req, res) {
 
 async function getEvents(req, res) {
     try {
-        log.info("in Controller")
         const eventData = await database.getEventsData(req)
         res.send(eventData)
     }catch (err){
         if (err instanceof database.UsernameNotFoundError) {
             res.status(400).send(err.message)
         }else {
-            res.status(404).send("Something went horribly wrong!")
+            res.status(404).send("Something went horribly wrong!" + err)
         }
     }
 
+}
+
+/**
+ * Diese Methode ruft alle Eventdaten ab die noch nicht von einem User gespeichert wurden
+ * @param {*} req 
+ * @param {*} res 
+ */
+async function getNotStoredEvents(req, res) {
+    try {
+        const userID = req.params.userID
+        const events = await database.getNotStoredEvents(userID)
+        res.send(events)
+    }catch (err) {
+        if (err instanceof database.UsernameNotFoundError) {
+            res.status(400).send(err.message)
+        }else {
+            res.status(404).send("Something went horribly wrong!" + err)
+        }
+    }
 }
 
 /**
@@ -220,6 +238,7 @@ module.exports = {
     postNewPassword,
     postNewEmail,
     addEvent,
+    getNotStoredEvents,
     getEvents,
     changeFirstName,
     changeLastName

@@ -10,6 +10,10 @@ GET {{host}}/user/events/661d07706671060e01a4fd3d HTTP/1.1
 
 ###
 
+GET {{host}}/user/events/notStored/661d07706671060e01a4fd3d HTTP/1.1
+
+###
+
 POST {{host}}/user/cah/Cryptoooo HTTP/1.1
 
 ###

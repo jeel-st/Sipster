@@ -45,8 +45,13 @@ async function postActivity(req) {
  * @returns all activities from the friends in an Array and the user who created the Activity is also returned as the user
  * and not only the userID
  */
-async function getActivities(req) {
-    const userID = req.params.userID
+async function getActivities(req, internalCall) {
+    let userID;
+    if (internalCall){
+        userID = req.body.userID
+    }else {
+        userID = req.params.userID
+    }
     const userIDObj = new ObjectId(userID)
     const activities = (await database.initializeCollections()).activities
     const personalInformation = (await database.initializeCollections()).personalInformation
@@ -57,9 +62,22 @@ async function getActivities(req) {
     }else {
         friends = user.friends
     }
-    const activitiesData = await activities.find({ userID: { $in: friends } })
-    .project({_id: 1, beforeImage: 1, afterImage: 1, reactions: 1, caption: 1, userID: 1, gameID: 1, timestamp: 1})
-    .toArray()
+    let activitiesData;
+    if (internalCall){
+        const alreadySeenIDsObj = req.alreadySeenIDsObj
+        const limit = req.limit
+        activitiesData = await activities.find({
+            userID: { $in: friends },
+            _id: { $nin: alreadySeenIDsObj }
+            })
+            .project({_id: 1, beforeImage: 1, afterImage: 1, reactions: 1, caption: 1, userID: 1, gameID: 1, timestamp: 1})
+            .limit(limit)
+            .toArray()
+    }else {
+        activitiesData = await activities.find({ userID: { $in: friends } })
+            .project({_id: 1, beforeImage: 1, afterImage: 1, reactions: 1, caption: 1, userID: 1, gameID: 1, timestamp: 1})
+            .toArray()
+    }
 
     const games = (await database.initializeCollections()).games
     for (const activity of activitiesData) {
@@ -234,7 +252,6 @@ async function addReaction(req) {
 
 
         const reactionsTemplate = database.reactionsTemplate
-        console.log(reactionsTemplate)
         const queryConditions = Object.keys(reactionsTemplate).map(reaction => {
             return { [`reactions.${reaction}`]: userIDObj };
         });
@@ -244,7 +261,6 @@ async function addReaction(req) {
                 { $or: queryConditions}
               ]
         })
-        console.log(alreadyReacted)
         if (alreadyReacted) {
             log.info("The user already reacted before so the old reaction is going to be deleted.")
         

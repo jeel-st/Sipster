@@ -11,6 +11,7 @@ const registerController = require('../controllers/controllerRegister')
 //Router, die an Controller weiterleiten
 router.get('/:username', userController.getUserData)
 router.get('/events/:userID', userController.getEvents)
+router.get('/events/notStored/:userID', userController.getNotStoredEvents)
 router.put('/changeFirstName', userController.changeFirstName)
 router.put('/changeLastName', userController.changeLastName)
 router.put('/changeUsername', userController.postNewUsername)

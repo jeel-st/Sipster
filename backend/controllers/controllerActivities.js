@@ -24,7 +24,7 @@ async function postActivity(req, res) {
 
 async function getActivities(req, res) {
     try {
-        const activities = await database.getActivities(req)
+        const activities = await database.getActivities(req, false) //bedingter call = false : siehe databaseHomepage.getHomepage()
 
         if (activities == 'The User does not exist in the database!'){
             res.status(400).json("The User does not exist in the database!")

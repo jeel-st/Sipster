@@ -96,6 +96,10 @@ async function getEventsData(req){
     return await dbUser.getEventsData(req)
 }
 
+async function getNotStoredEvents(userID) {
+    return await dbUser.getNotStoredEvents(userID)
+}
+
 async function postNewUsername(req){
     return await dbUser.postNewUsername(req)
 }
@@ -121,8 +125,8 @@ async function postActivity(req) {
     return await dbActivities.postActivity(req)
 }
 
-async function getActivities(req) {
-    return await dbActivities.getActivities(req)
+async function getActivities(req, internalCall) {
+    return await dbActivities.getActivities(req, internalCall)
 }
 
 async function getActivitiesFromUser(req) {
@@ -239,6 +243,7 @@ Object.assign(exports, {
     uploadProfilePicture,
     getUserData,
     getEventsData,
+    getNotStoredEvents,
     postNewEmail,
     postNewPassword,
     postNewUsername,
