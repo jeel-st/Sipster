@@ -15,7 +15,7 @@ async function getSips(req, res){
     try {
         const userID = req.params.userID
         const sips = await database.getSips(userID)
-        
+        console.log("Sips, die den user zurückgesendet werden: "+ sips)
         res.json(sips)
     } catch (error) {
         if(error.message === "No sips found for the specified username"){
@@ -39,7 +39,7 @@ async function changeSips(req, res){
     try {
         const userID = req.params.userID
         const sipsNew = req.body.sips
-
+        
         const sips = await database.changeSips(userID, sipsNew)
         res.json(sips)
     } catch (error) {

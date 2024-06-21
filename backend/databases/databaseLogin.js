@@ -17,6 +17,7 @@ async function getLoginData(req) {
     const {personalInformation} = await database.initializeCollections();
 
     const user = await personalInformation.findOne({ username });
+    log.info("User, der gefunden wurde: "+ user)
     if (!user) {
         log.error("Benutzer nicht gefunden!")
         return("Benutzer nicht gefunden!");
@@ -29,7 +30,7 @@ async function getLoginData(req) {
         const encryptedPassword = await encryptPasswordWithSalt(salt, password);
 
         const result = await personalInformation.findOne({ username, encryptedPassword });
-
+        log.info("Ergebnis, dass in der Datenbank gefunden wurde(username + passwort): "+ result)
         if (result.username == username && result.encryptedPassword == encryptedPassword) {
             return true;
         } else {

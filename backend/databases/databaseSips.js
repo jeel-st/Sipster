@@ -18,6 +18,7 @@ async function getSips(userID){
     if (!result) {
         throw new Error("No sips found for the specified username")
     }
+    console.log("Sips, die in der Datenbank waren:"+ result.sips)
     return result.sips
 }
 
@@ -43,7 +44,7 @@ async function changeSips(userID, sipsNew){
     let sips = sipsOld + sipsNew
     log.info("new Sips: "+ sips)
     let updateSips = await coll.updateOne({"_id": userIDObj}, {$set: {"sips": sips}})
-
+    
     return updateSips
 }
 module.exports = {

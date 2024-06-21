@@ -11,9 +11,9 @@ test('getting users sips', async () => {
 });
 
 test('adding 200 sips', async () => {
-    const sipsNew = 200
+    const sips = 200
     const response = await axios.put(`${baseUrl}/sips/${userID}`,{
-        "sipsNew": `${sipsNew}`
+        "sips": sips
         },{
         headers: {
             'Content-Type': 'application/json'
@@ -24,9 +24,9 @@ test('adding 200 sips', async () => {
 });
 
 test('subtract 200 sips', async () => {
-    const sipsNew = -200
+    const sips = -200
     const response = await axios.put(`${baseUrl}/sips/${userID}`,{
-        "sipsNew": `${sipsNew}`
+        "sips": sips
         },{
         headers: {
             'Content-Type': 'application/json'
@@ -40,7 +40,7 @@ test('adding 200 sips to friends', async () => {
     const sips = 200
     const userIDArray = ["66730b1aac38b8e571f69859", "663bd3b7969fc6302facf1ee"]
     const response = await axios.put(`${baseUrl}/sips/friends`,{
-        "sips": `${sips}`,
+        "sips": sips,
         "userIDArray": `${userIDArray}`
         },{
         headers: {
@@ -54,7 +54,7 @@ test('subtract 200 sips from friends', async () => {
     const sips = -200
     const userIDArray = ["66730b1aac38b8e571f69859", "663bd3b7969fc6302facf1ee"]
     const response = await axios.put(`${baseUrl}/sips/friends`,{
-        "sips": `${sips}`,
+        "sips": sips,
         "userIDArray": `${userIDArray}`
         },{
         headers: {
