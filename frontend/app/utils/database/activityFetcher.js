@@ -60,9 +60,18 @@ export async function sendActivityAfterImage(activity) {
     }
 }
 
-export async function fetchActivity(user) {
+export async function fetchActivity(user, idSet) {
     try {
-        const response = await axiosInstance.get(`/homepage/${user._id}`)
+        const response = await axiosInstance.put(`/homepage`,
+            {
+                "userID": user._id,
+                "usedIDs": idSet,
+            },
+            {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
         activityLog.debug("Activity has been fetched successfully.")
 
         return response.data

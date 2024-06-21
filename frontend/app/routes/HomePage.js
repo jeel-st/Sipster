@@ -15,7 +15,7 @@ import { rootLog } from '../utils/logger/config';
     @return: JSX -> returns the HomePage component
 */
 export default function HomePage() {
-    const { user, displayFriend, handleFriendSelection, onRefresh, refreshing, refreshDate, activities, displayFriendActivities } = useHome();
+    const { user, displayFriend, handleFriendSelection, onRefresh, refreshing, refreshDate, activities, displayFriendActivities, loadMoreData } = useHome();
 
     useNavBarColor(styles.Colors.secondary)
 
@@ -65,8 +65,4 @@ export default function HomePage() {
             }
         </SafeAreaView>
     );
-
-    function loadMoreData(){
-        rootLog.debug('Load more data');
-    };
 }

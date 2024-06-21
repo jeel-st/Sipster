@@ -8,19 +8,34 @@ const useHome = () => {
   const [refreshing, setRefreshing] = useState(false);
   const [refreshDate, setRefreshDate] = useState(new Date());
   const [activities, setActivities] = useState(null);
+  const [idSet, setIdSet] = useState([]);
   const [displayFriendActivities, setDisplayFriendActivities] = useState([]);
 
   const user = useContext(UserContext)
 
   async function fetchActivities(user) {
-    const activities = await fetchActivity(user)
-    setActivities(activities);
+    newActivities = await fetchActivity(user, [])
+
+    const newIdSet = newActivities.map((content) => obj = { type: content.type, id: content._id });
+    setIdSet(newIdSet);
+    setActivities(newActivities)
   }
 
   async function fetchActivitiesFromUser(user) {
     const activities = await fetchActivityFromUser(user)
     setDisplayFriendActivities(activities)
   }
+
+  const loadMoreData = async () => {
+    newActivities = await fetchActivity(user, idSet)
+
+    if (!activities) return
+
+    const combinedActivities = activities.concat(newActivities);
+    const newIdSet = combinedActivities.map((content) => obj = { type: content.type, id: content._id });
+    setIdSet(newIdSet);
+    setActivities(combinedActivities);
+  };
 
   // Function to handle friend selection
   const handleFriendSelection = (selectedFriend) => {
@@ -53,9 +68,9 @@ const useHome = () => {
     }
 
     setRefreshing(false);
-  }, [displayFriend, user]);
+  }, [displayFriend, user, activities]);
 
-  return { user, displayFriend, handleFriendSelection, onRefresh, refreshing, refreshDate, activities, displayFriendActivities }
+  return { user, displayFriend, handleFriendSelection, onRefresh, refreshing, refreshDate, activities, displayFriendActivities, loadMoreData }
 }
 
 export default useHome;
