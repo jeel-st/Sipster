@@ -98,7 +98,7 @@ async function getTheEvents(events, alreadySeenIDs, limit) {
     const inSixMonths = new Date()
         inSixMonths.setMonth(new Date().getMonth()+6)
         const comingEvents = await events.find({
-            Date: { $lte: inSixMonths },
+            date: { $lte: inSixMonths },
             _id: { $nin: alreadySeenIDsObj }
             }).limit(limit).toArray();
         
