@@ -42,6 +42,7 @@ async function getHomepage(req) {
 }
 
 function sortAlreadySeenIDs(alreadySeenIDs, type) {
+    console.log(alreadySeenIDs)
     const usedIDs = new Array();
     for (const alreadySeenID of alreadySeenIDs) {
         if (alreadySeenID.type == type){

@@ -86,6 +86,8 @@ async function getNotStoredEvents(userID) {
     const { events } = await database.initializeCollections();
     const eventIDs = await getEventIDs(userIDObj)
 
+    
+
     if (eventIDs == "No User Found"){
         return "No User found"
     }
