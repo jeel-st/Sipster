@@ -26,11 +26,11 @@ Content-Type: application/json
 ###
 
 
-GET {{host}}/homepage HTTP/1.1
+PUT {{host}}/homepage HTTP/1.1
 Content-Type: application/json
 
 {
-    "userID": "661d07706671060e01a4fd3d",
+    "userID": "663bd3b7969fc6302facf1ee",
     "usedIDs": null
 }
 
