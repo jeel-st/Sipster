@@ -1,8 +1,14 @@
+// Imports
 import React from 'react';
 import { render } from '@testing-library/react-native';
 import { useAccount } from '../utils/hooks/useAccount';
 import { useUser } from '../utils/hooks/useUser';
 import { userLog } from '../utils/logger/config';
+
+/*
+This file tests useAccount.js, which contains the logic for calculating levels and levelinfo.
+Type: Test file
+*/
 
 // Mock the useUser hook
 jest.mock('../utils/hooks/useUser');
@@ -30,6 +36,7 @@ describe('useAccount Hook Tests', () => {
     jest.clearAllMocks();
   });
 
+  // Integration test / postive case -> Testing both functions
   test('calculate level correctly when user has sips', () => {
     useUser.mockReturnValue({ sips: 300 });
 
@@ -44,6 +51,7 @@ describe('useAccount Hook Tests', () => {
     expect(userLog.info).toHaveBeenCalledWith("The user is in level 3");
   });
 
+  // Testing the null case -> negativ case
   test('handle null user object', () => {
     useUser.mockReturnValue(null);
 
@@ -53,6 +61,7 @@ describe('useAccount Hook Tests', () => {
     expect(getByTestId('levelInfo').props.children).toEqual('{}')
   });
 
+  // Testing zero sips -> negativ case
   test('handle no sips', () => {
     useUser.mockReturnValue({});
 
@@ -66,6 +75,7 @@ describe('useAccount Hook Tests', () => {
     }));
   });
 
+  // testing boundary conditions and positive cases
   test('calculate level correctly on boundary conditions', () => {
     const boundaryTests = [
       { sips: 99, expectedLevel: '1' },
