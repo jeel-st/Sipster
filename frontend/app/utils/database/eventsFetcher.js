@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import axiosInstance from './axiosConfig';
 import { eventLog } from '../logger/config';
 import { useUser } from '../hooks/useUser';
+import { userLog } from '../logger/config';
 
 export function useEvents() {
 
@@ -24,7 +25,9 @@ export function useSavedEvents() {
 
     useEffect(() => {
         axiosInstance.get(`/user/events/${user._id}`)
-            .then(response => setEvents(response.data))
+            .then(response => {
+                userLog.info('The savedEvents fetched successfully')
+                setEvents(response.data)})
             .catch(error => eventLog.error("Error loading events:", error))
     }, []);
 
