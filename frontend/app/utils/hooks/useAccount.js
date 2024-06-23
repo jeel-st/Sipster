@@ -51,9 +51,12 @@ export function useAccount() {
             case (sips < 1000):
                 userLog.info("The user is in level 5")
                 return '5';
-            default:
+            case (sips < 1250):
                 userLog.info("The user is in level 6")
                 return '6';
+            default:
+                userLog.info("The user is in level 0")
+                return '0';
         }
     }
 
@@ -61,7 +64,7 @@ export function useAccount() {
     const getLevelInfo = (level) => {
         switch (level) {
             case '1':
-                return { image: require('../../assets/images/level1.png'), header:'Keep going!' ,text: "You're on the right track." };
+                return { image: require('../../assets/images/level1.png'), header: 'Keep going!', text: "You're on the right track." };
             case '2':
                 return { image: require('../../assets/images/level2.png'), header: 'Great start!', text: "You're making progress." };
             case '3':
@@ -70,8 +73,10 @@ export function useAccount() {
                 return { image: require('../../assets/images/level4.png'), header: 'Well done!', text: "You're getting closer." };
             case '5':
                 return { image: require('../../assets/images/level5.png'), header: 'Almost there!', text: "Keep going!" };
-            default:
+            case '6':
                 return { image: require('../../assets/images/level6.png'), header: "Congratulations,", text: "you are the beer king!" };
+            default:
+                return { image: require('../../assets/images/level0.png'), header: "Perfect,", text: "now it can start!" };
         }
     }
 
