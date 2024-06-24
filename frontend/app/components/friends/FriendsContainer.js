@@ -17,7 +17,7 @@ import FriendBtn2 from './FriendBtn2'
     @return:                    JSX -> returns the FriendsContainer component
 */
 export default function FriendsContainer({ friends, selectedTab, handleReloadFriends, searchFriendsVisible, searchFriends, filteredFriends }) {
-    if (!friends) return
+    if (!friends) return  
 
     return (
         <NativeBaseProvider>
@@ -25,7 +25,7 @@ export default function FriendsContainer({ friends, selectedTab, handleReloadFri
 
                 {/*Friends Counter Text*/}
                 <Text className='text-white font-thin'>
-                    {searchFriendsVisible ? `Found ${searchFriends.length} user` : `Found ${filteredFriends.length} user`}
+                    {searchFriendsVisible ? `Found ${searchFriends.length + filteredFriends.length} user` : `Found ${filteredFriends.length} user`}
                 </Text>
 
                 {/*Friend Invite Button*/}

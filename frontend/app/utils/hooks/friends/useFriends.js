@@ -121,7 +121,7 @@ export function useFriends() {
             }
         }
 
-        setSearchFriendsVisible(searchText.length >= 4 || filteredFriends.length === 0);
+        setSearchFriendsVisible(searchText.length >= 1);
 
         // Fetch data if nothing is typed in the search bar so the recommended friends are not shown
         if (searchText.length !== 0) {
