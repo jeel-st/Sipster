@@ -66,6 +66,16 @@ async function deleteFriendRequest(req, res){
     }
 }
 
+/**
+ * Diese Methode dient dazu, eine Freundesanfrage zu akzeptieren.
+ * 
+ * @param req: Object -> Die Anfrage
+ * @param res: Object -> Die Antwort
+ * @param acceptFriendRequest: Function -> Funktion zum Akzeptieren einer Freundesanfrage in der Datenbank
+ * @return: String -> Eine Bestätigungsmeldung oder eine entsprechende Fehlermeldung
+ * @throws Error -> Wenn ein interner Serverfehler auftritt oder die Anfrage nicht korrekt ist
+ */
+
 async function acceptFriendRequest(req, res){
     try{
         const fromUserID = req.params.fromUserID
