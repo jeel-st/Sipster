@@ -1,0 +1,372 @@
+@startuml
+
+skinparam backgroundColor #242424
+skinparam PackageBackgroundColor #C0C1FF
+skinparam ClassBackgroundColor #DFFA54
+skinparam ArrowColor #DFFA54
+skinparam ArrowThickness 2
+skinparam PackageBorderColor #DFFA54
+skinparam PackageBorderThickness 3
+
+
+class app {
+    + loginRouter()
+    + registerRouter()
+    + eventsRouter()
+    + friendsRouter()
+    + profilePictureRouter()
+    + userRouter()
+    + sipsRouter()
+    + activitiesRouter()
+    + homepageRouter()
+}
+
+app --> routes.routerActivities
+app --> routes.routerEvents
+app --> routes.routerFriendSystem
+app --> routes.routerHomepage
+app --> routes.routerLogin
+app --> routes.routerProfilePicture
+app --> routes.routerRegister
+app --> routes.routerSips
+app --> routes.routerUser
+app --> uploadLogic.config
+
+package routes {
+    class routerActivities {
+        - router
+        + postActivity(req, res)
+        + addReaction(req, res)
+        + getActivities(req, res)
+        + getActivitiesFromUser(req, res)
+        + postBeforePicture(req, res)
+        + postAfterPicture(req, res)
+        + deleteReaction(req, res)
+    }
+
+    class routerEvents {
+        - router
+        + getEvents(req, res)
+        + postEvents(req, res)
+        + deleteEvents(req, res)
+    }
+
+    class routerFriendSystem {
+        - router
+        + getInvitations(req, res)
+        + postFriendRequest(req, res)
+        + deleteFriendRequest(req, res)
+        + getFriendList(req, res)
+        + getFriendRecommendations(req, res)
+    }
+
+    class routerHomepage {
+        - router
+        + getHomepage(req, res)
+    }
+
+    class routerLogin {
+        - router
+        + getLogin(req, res)
+    }
+
+    class routerRegister {
+        - router
+        + postRegister(req, res)
+        + deleteRegister(req, res)
+    }
+
+    class routerProfilePicture {
+        - router
+        + uploadProfilePicture(req, res)
+        + getProfilePicture(req, res)
+    }
+
+    class routerSips {
+        - router
+        + changeSipsForFriends(req, res)
+        + getSips(req, res)
+        + changeSips(req, res)
+    }
+
+    class routerUser {
+        - router
+        + getUserData(req, res)
+        + getEvents(req, res)
+        + getNotStoredEvents(req, res)
+        + changeFirstName(req, res)
+        + changeLastName(req, res)
+        + postNewUsername(req, res)
+        + postNewPassword(req, res)
+        + postNewEmail(req, res)
+        + addEvent(req, res)
+        + deleteRegister(req, res)
+    }
+
+    class logMiddleware {
+        + logMiddleware(req, res, next)
+    }
+
+    routerActivities --> Controllers.controllerActivity
+    routerEvents --> Controllers.controllerEvents
+    routerFriendSystem --> Controllers.controllerFriendSystem
+    routerHomepage --> Controllers.controllerHomepage
+    routerLogin --> Controllers.controllerLogin
+    routerProfilePicture --> Controllers.controllerProfilePicture
+    routerRegister --> Controllers.controllerRegister
+    routerSips --> Controllers.controllerSips
+    routerUser --> Controllers.controllerUser
+    routerUser --> Controllers.controllerRegister
+
+    routerActivities --> logMiddleware
+    routerEvents --> logMiddleware
+    routerFriendSystem --> logMiddleware
+    routerHomepage --> logMiddleware
+    routerLogin --> logMiddleware
+    routerProfilePicture --> logMiddleware
+    routerRegister --> logMiddleware
+    routerSips --> logMiddleware
+    routerUser --> logMiddleware
+    
+}
+
+package Controllers {
+    class controllerActivity {
+        + postActivity(req, res)
+        + getActivities(req, res)
+        + getActivitiesFromUser(req, res)
+        + uploadBeforePicture(req, res)
+        + uploadAfterPicture(req, res)
+        + addReaction(req, res)
+        + deleteReaction(req, res)
+    }
+
+    class controllerEvents {
+        + getEvents(req, res)
+        + getNotStoredEvents(req, res)
+        + addEvent(req, res)
+    }
+
+    class controllerFriendSystem {
+        + postFriendRequest(req, res)
+        + acceptFriendRequest(req, res)
+        + declineFriendRequest(req, res)
+        + removeFriend(req, res)
+        + getFriendList(req, res)
+        + getFriendRecommendations(req, res)
+        + getInvitations(req, res)
+    }
+
+    class controllerHomepage {
+        + getHomepageData(req, res)
+    }
+
+    class controllerLogin {
+        + loginUser(req, res)
+        + logoutUser(req, res)
+    }
+
+    class controllerProfilePicture {
+        + uploadProfilePicture(req, res)
+        + getProfilePicture(req, res)
+    }
+
+    class controllerRegister {
+        + registerUser(req, res)
+    }
+
+    class controllerSips {
+        + getSips(req, res)
+        + changeSips(req, res)
+        + changeSipsForFriends(req, res)
+    }
+
+    class controllerUser {
+        + getUserData(req, res)
+        + postNewUsername(req, res)
+        + postNewPassword(req, res)
+        + postNewEmail(req, res)
+        + addEvent(req, res)
+        + getNotStoredEvents(req, res)
+        + getEvents(req, res)
+        + changeFirstName(req, res)
+        + changeLastName(req, res)
+    }
+    controllerActivity --> Databases.databaseMain
+    controllerActivity --> activitiesLogic.activitiesLogic
+    controllerEvents --> Databases.databaseMain
+    controllerFriendSystem --> Databases.databaseMain
+    controllerHomepage --> Databases.databaseMain
+    controllerLogin --> Databases.databaseMain
+    controllerProfilePicture --> Databases.databaseMain
+    controllerProfilePicture --> profilePictureLogic.profilePictureLogic
+    controllerProfilePicture --> uploadLogic.config
+    controllerRegister --> Databases.databaseMain
+    controllerSips --> Databases.databaseMain
+    controllerUser --> Databases.databaseMain
+}
+
+package Databases {
+    
+    class databaseActivity {
+        + postActivity(req)
+        + getActivities(req, internalCall)
+        + getActivitiesFromUser(req)
+        + uploadBeforePicture(activityID, fileExtension, filePathOriginal)
+        + uploadAfterPicture(activityID, fileExtension, filePathOriginal)
+        + addReaction(req)
+        + deleteReaction(req)
+    }
+
+    class databaseEvents {
+        + getEvents()
+        + postEvents(req)
+        + deleteEvents(req)
+    }
+
+    class databaseFriendSystem {
+        + postFriendRequest(req)
+        + acceptFriendRequest(fromUserID, toUserID)
+        + declineFriendRequest(fromUserID, toUserID)
+        + removeFriend(req)
+        + getFriendList(req)
+        + getFriendRecommendations(req)
+        + getInvitations(req)
+        + getReceivedInvitations(invitations)
+        + getSentInvitations(invitations)
+    }
+
+    class databaseHomepage {
+        + getHomepage(req)
+        + getTheFriendActivities(req, alreadySeenIDs, limit)
+        + getTheGames(games, alreadySeenIDs, limit)
+        + getTheEvents(events, alreadySeenIDs, limit)
+    }
+
+    class databaseLogin {
+        + getLoginData(req)
+    }
+
+    class databaseMain {
+        + connectToDB()
+        + getDB()
+        + postEvents(req)
+        + deleteEvents(req)
+        + getEvents()
+        + getLoginData(req)
+        + postUser(req)
+        + deleteUser(req)
+        + postFriendRequest(req)
+        + acceptFriendRequest(fromUsername, toUsername)
+        + declineFriendRequest(fromUserID, toUserID)
+        + removeFriend(req)
+        + getFriendList(req)
+        + getFriendRecommendations(req)
+        + getInvitations(req)
+        + uploadProfilePicture(userID, fileExtension, filePathOriginal)
+        + getUserData(req)
+        + getEventsData(req)
+        + getNotStoredEvents(userID)
+        + postNewUsername(req)
+        + postNewPassword(req)
+        + postNewEmail(req)
+        + getProfilePictureURL(username, original)
+        + deleteProfilePictureURL(username)
+        + postActivity(req)
+        + getActivities(req, internalCall)
+        + getActivitiesFromUser(req)
+        + addReaction(req)
+        + deleteReaction(req)
+        + uploadBeforePicture(activityID, fileExtension, filePathOriginal)
+        + uploadAfterPicture(activityID, fileExtension, filePathOriginal)
+        + getSips(userID)
+        + changeSips(userID, sipsNew)
+        + changeFirstName(userID, newName)
+        + changeLastName(userID, newName)
+        + addEvent(req)
+        + getHomepage(req)
+        + getSipsterID(username)
+        + initializeCollections()
+    }
+
+    class databaseProfilePicture {
+        + uploadProfilePicture(userID, fileExtension, filePathOriginal)
+        + getProfilePictureURL(userIDObj, original)
+        + deleteProfilePictureURL(userIDObj)
+    }
+
+    class databaseRegister {
+        + postUser(req)
+        + deleteUser(req)
+    }
+
+    class databaseSips {
+        + getSips(userID)
+        + changeSips(userID, sipsNew)
+    }
+
+    class databaseUser {
+        + getUserData(req)
+        + getEventsData(req)
+        + getNotStoredEvents(userID)
+        + postNewUsername(req)
+        + postNewPassword(req)
+        + postNewEmail(req)
+        + addEvent(req)
+        + changeFirstName(userID, newName)
+        + changeLastName(userID, newName)
+    }
+
+    databaseActivity --> databaseMain
+    databaseEvents --> databaseMain
+    databaseFriendSystem --> databaseMain
+    databaseHomepage --> databaseMain
+    databaseLogin --> databaseMain
+    databaseLogin --> registerLogic.registerPatterns
+    databaseProfilePicture --> databaseMain
+    databaseRegister --> databaseMain
+    databaseRegister --> registerLogic.registerPatterns
+    databaseSips --> databaseMain
+    databaseUser --> databaseMain
+    databaseUser --> registerLogic.registerPatterns
+    databaseMain --> databaseActivity
+    databaseMain --> databaseEvents
+    databaseMain --> databaseFriendSystem
+    databaseMain --> databaseHomepage
+    databaseMain --> databaseLogin
+    databaseMain --> databaseProfilePicture
+    databaseMain --> databaseRegister
+    databaseMain --> databaseSips
+    databaseMain --> databaseUser
+}
+
+package activitiesLogic {
+    class activitiesLogic {
+        + uploadBeforePicture(req, res)
+        + uploadAfterPicture(req, res)
+    }
+    activitiesLogic --> uploadLogic.config
+}
+
+package profilePictureLogic {
+    class profilePictureLogic {
+        + uploadProfilePicture(req, res)
+    }
+    profilePictureLogic --> uploadLogic.config
+}
+
+package registerLogic {
+    class registerPatterns {
+        + isValidEmail(email)
+        + isValidPassword(password)
+        + encryptPassword(password)
+        + encryptPasswordWithSalt(salt, password)
+    }
+}
+
+package uploadLogic {
+    class config {
+    }
+}
+
+@enduml

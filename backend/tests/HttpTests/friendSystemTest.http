@@ -1,0 +1,44 @@
+@host = http://localhost:3000
+
+###
+
+POST {{host}}/friends HTTP/1.1
+Content-Type: application/json
+
+{
+    "fromUserID": "661d09ba6671060e01a4fd3e",
+    "toUserID": "661d07706671060e01a4fd3d"
+}
+
+###
+
+POST {{host}}/friends HTTP/1.1
+Content-Type: application/json
+
+{
+    "fromUserID": "661d07706671060e01a4fd3d",
+    "toUserID": "661d09ba6671060e01a4fd3e"
+}
+
+###
+DELETE {{host}}/friends/gamsa/jeel?status=true HTTP/1.1 
+
+###
+
+DELETE {{host}}/friends/gamsa/jeel?status=false HTTP/1.1
+
+###
+
+DELETE {{host}}/friends/661d09ba6671060e01a4fd3e/661d07706671060e01a4fd3d?remove=true
+
+###
+
+GET {{host}}/friends/661d07706671060e01a4fd3d
+
+###
+
+GET {{host}}/friends/661d09ba6671060e01a4fd3e/th
+
+###
+
+GET {{host}}/friends/invitations/661d07706671060e01a4fd3d

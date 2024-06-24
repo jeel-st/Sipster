@@ -1,0 +1,37 @@
+const axios = require("axios")
+
+const baseUrl = 'http://85.215.71.124';
+
+test('successful login', async () => {
+    const username = 'Sipster';
+    const password = 'JoelStinkt*100';
+    const response = await axios.post(`${baseUrl}/login`,{
+        "username": `${username}`,
+        "password": `${password}`
+    },{
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+    expect(response.status).toBe(200);
+    expect(response.data).toBe(true);
+});
+
+test("Ungültige Anmeldedaten.", async () => {
+    const username = 'gamsa';
+    const password = 'Ansaf86!!mm';
+    try {
+        await axios.post(`${baseUrl}/login`,{
+            "username": `${username}`,
+            "password": `${password}`
+        },{
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+    } catch (error) {
+        expect(error.response.status).toBe(400);
+        expect(error.response.data).toBe("Ungültige Anmeldedaten.");
+    }
+});
+

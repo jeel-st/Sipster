@@ -1,3 +1,0 @@
-@host = http://85.215.71.124
-
-GET {{host}}/imageUpload/gingerbread_joe?original=true
