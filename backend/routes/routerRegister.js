@@ -9,6 +9,5 @@ const registerController = require('../controllers/controllerRegister')
 
 //Router, die an Controller weiterleiten
 router.post('/', registerController.postRegister)
-router.delete('/:username/:password', registerController.deleteRegister)
 
 module.exports = router
