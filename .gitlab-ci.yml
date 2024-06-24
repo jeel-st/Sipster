@@ -1,12 +1,11 @@
 stages:
-  - build
+  - smoke
   - test
   - package
-  - release
 
 
-build-backend:
-  stage: build
+smoke-backend:
+  stage: smoke
   image: node:20-alpine
   services:
     - mongo:latest

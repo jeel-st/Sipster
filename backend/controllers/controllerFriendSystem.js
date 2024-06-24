@@ -43,7 +43,7 @@ async function deleteFriendRequest(req, res){
         const fromUserID = req.params.fromUserID
         const toUserID = req.params.toUserID
         if(req.query.remove == null){
-            res.status(404).send("Status and remove are null or wrong")
+            res.status(404).send("Remove is null")
             return;
         }
 
@@ -65,6 +65,16 @@ async function deleteFriendRequest(req, res){
         res.status(500).send("Something went wrong " + err)
     }
 }
+
+/**
+ * Diese Methode dient dazu, eine Freundesanfrage zu akzeptieren.
+ * 
+ * @param req: Object -> Die Anfrage
+ * @param res: Object -> Die Antwort
+ * @param acceptFriendRequest: Function -> Funktion zum Akzeptieren einer Freundesanfrage in der Datenbank
+ * @return: String -> Eine Bestätigungsmeldung oder eine entsprechende Fehlermeldung
+ * @throws Error -> Wenn ein interner Serverfehler auftritt oder die Anfrage nicht korrekt ist
+ */
 
 async function acceptFriendRequest(req, res){
     try{
