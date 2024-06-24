@@ -5,6 +5,7 @@ const { ObjectId } = require('mongodb');
  * In this Method you get the fully assembled Homepage
  *  and can load that directly in the hompage by differentiate between the types of
  * the given Object the types are homepage.type = ["game" || "activity" || "event"] 
+ * 
  * @param req includes the userID is given as a param in the Get request from frontend 
  * @returns an array of Objects which contains all the loaded activities events and games
  */
@@ -42,6 +43,13 @@ async function getHomepage(req) {
     }
 }
 
+/**
+ * changes every ID in the given Object to an ObjectID
+ * 
+ * @param alreadySeenIDs: Object --> the IDs with a type
+ * @param type: String --> the Type of the ID
+ * @returns 
+ */
 function sortAlreadySeenIDs(alreadySeenIDs, type) {
     if (alreadySeenIDs === null || alreadySeenIDs === undefined){
         return [];
@@ -55,6 +63,11 @@ function sortAlreadySeenIDs(alreadySeenIDs, type) {
     return usedIDs
 }
 
+/**
+ * This method gets an Array and shuffles it randomly
+ * @param array:    Array --> the array to be shuffled
+ * @returns:        Array -> the shuffled Array
+ */
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -63,6 +76,15 @@ function shuffleArray(array) {
     return array;
 }
 
+/**
+ * This Method gets All the Activites from the users friends
+ * which were not be shown before in the homepage of the user.
+ * 
+ * @param req:              Object --> Data given by API Call 
+ * @param alreadySeenIDs:   Object --> All IDs that should be excluded in the following request with their type
+ * @param limit:            Integer --> The Limit of how many results should be returned of the activties
+ * @returns:                Object --> FriendActivities
+ */
 async function getTheFriendActivities(req, alreadySeenIDs, limit){
     const alreadySeenIDsObj = sortAlreadySeenIDs(alreadySeenIDs, "activity")
     let reqModified = req
@@ -74,6 +96,13 @@ async function getTheFriendActivities(req, alreadySeenIDs, limit){
     return friendsActivities
 }
 
+/**
+ * 
+ * @param games:    Object --> the Collection games
+ * @param alreadySeenIDs:   Object --> All IDs that should be excluded in the following request with their type
+ * @param limit: Integer --> The Limit of how many results should be returned of the activties
+ * @returns: Object --> FriendActivities
+ */
 async function getTheGames(games, alreadySeenIDs, limit) {
     const alreadySeenIDsObj = sortAlreadySeenIDs(alreadySeenIDs, "game")
     const sixMonthsAgo = new Date()
@@ -93,6 +122,13 @@ async function getTheGames(games, alreadySeenIDs, limit) {
     }
 }
 
+/**
+ * 
+ * @param events: Object --> the Collection events
+ * @param alreadySeenIDs: Object --> All IDs that should be excluded in the following request with their type
+ * @param limit: Integer --> The Limit of how many results should be returned of the activties
+ * @returns: Object --> FriendActivities
+ */
 async function getTheEvents(events, alreadySeenIDs, limit) {
     const alreadySeenIDsObj = sortAlreadySeenIDs(alreadySeenIDs, "event")
     const inSixMonths = new Date()

@@ -2,6 +2,13 @@ const database = require('../databases/databaseMain')
 const log = require("../logging/logger")
 const logicFile = require("../utils/activitiesLogic/activitiesLogic")
 
+/**
+ * This methods manages the incoming request and forwards it to the database methods
+ * here it forwards to database.postActivity(req) which posts a new Activity in the database
+ * 
+ * @param req: Object --> The request
+ * @param res: Object --> The answer
+ */
 async function postActivity(req, res) {
     try {
         console.log("Went to database postActitity")
@@ -22,6 +29,14 @@ async function postActivity(req, res) {
     }
 }
 
+/**
+ * This methods manages the incoming request and forwards it to the database methods
+ * here it forwards to database.getActivities(req, false) which 
+ * gets all activities from the friends of the given user
+ * 
+ * @param req: Object --> The request
+ * @param res: Object --> The answer
+ */
 async function getActivities(req, res) {
     try {
         const activities = await database.getActivities(req, false) //bedingter call = false : siehe databaseHomepage.getHomepage()
@@ -42,6 +57,14 @@ async function getActivities(req, res) {
     }
 }
 
+/**
+ * This methods manages the incoming request and forwards it to the database methods
+ * here it forwards to database.getActivitiesFromUser(req) which 
+ * gets all activities from the given user
+ * 
+ * @param req: Object --> The request
+ * @param res: Object --> The answer
+ */
 async function getActivitiesFromUser(req, res) {
     try {
         const activities = await database.getActivitiesFromUser(req)
@@ -62,15 +85,14 @@ async function getActivitiesFromUser(req, res) {
     }
 }
 
-async function deleteEvents(req, res){
-    try{
-        const event = await database.deleteEvents(req)
-        res.json(event)
-    }catch{
-        res.status(500).json('Internal Server Error')
-    }
-}
-
+/**
+ * This methods manages the incoming request and forwards it to the logic method
+ * here it forwards to database.uploadBeforePicture(req, res) which 
+ * does all the necessary logic to post the Before Picture of an activity
+ * 
+ * @param req: Object --> The request
+ * @param res: Object --> The answer
+ */
 async function postBeforePicture(req, res){
     try{
         const result = await logicFile.uploadBeforePicture(req, res)
@@ -79,6 +101,14 @@ async function postBeforePicture(req, res){
     }
 }
 
+/**
+ * This methods manages the incoming request and forwards it to the logic method
+ * here it forwards to database.uploadAfterPicture(req, res) which 
+ * does all the necessary logic to post the after Picture of an activity
+ * 
+ * @param req: Object --> The request
+ * @param res: Object --> The answer
+ */
 async function postAfterPicture(req, res){
     try{
         const result = await logicFile.uploadAfterPicture(req, res)
@@ -88,6 +118,14 @@ async function postAfterPicture(req, res){
     }
 }
 
+/**
+ * This methods manages the incoming request and forwards it to the database methods
+ * here it forwards to database.getActivities(req, false) which 
+ * gets all activities from the friends of the given user
+ * 
+ * @param req: Object --> The request
+ * @param res: Object --> The answer
+ */
 async function addReaction(req, res) {
     try{
         const result = await database.addReaction(req)
@@ -104,6 +142,14 @@ async function addReaction(req, res) {
     }
 }
 
+/**
+ * This methods manages the incoming request and forwards it to the database methods
+ * here it forwards to database.deleteReaction(req) which 
+ * deletes all reactions from the given activity
+ * 
+ * @param req: Object --> The request
+ * @param res: Object --> The answer
+ */
 async function deleteReaction(req, res) {
     try {
         const result = await database.deleteReaction(req);

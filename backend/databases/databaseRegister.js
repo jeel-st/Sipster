@@ -95,7 +95,7 @@ async function deleteUser(req){
             ${deletedInvitations} Invitation(s) deleted.
             `)
             }catch (err) {
-                console.error(err)
+                log.error(err)
                 return ("Something went wrong with the connected deletions")
             }
             return "Benutzer erfolgreich gelöscht"
@@ -110,7 +110,7 @@ async function deleteUser(req){
  * Diese Methode dient dazu, einen Benutzer aus den Freundeslisten anderer Benutzer zu entfernen.
  * 
  * @param usernameToRemove: String -> Der Benutzername des zu entfernenden Benutzers
- * @return: void
+ * @return: Integer --> The number of users that got updated
  */
 
 async function deleteUserFromFriends(userIDToRemove) {
@@ -118,8 +118,17 @@ async function deleteUserFromFriends(userIDToRemove) {
         { friends: userIDToRemove},
         { $pull: { friends: userIDToRemove} }
     );
+
+    return result.modifiedCount
 }
 
+/**
+ * This method deletes all the invitations of a user 
+ * (happens if a user gets deleted)
+ * 
+ * @param userIDToRemove: ObjectID --> the id from which the invitations get removed
+ * @returns INT --> the number of deleted invitations
+ */
 async function deleteUserFromInvitation(userIDToRemove) {
     const invitations = (await database.initializeCollections()).invitations
 
@@ -132,17 +141,30 @@ async function deleteUserFromInvitation(userIDToRemove) {
     return result.deletedCount 
 }
 
+/**
+ * This method deletes all the Activites of a user 
+ * (happens if a user gets deleted)
+ * 
+ * @param userIDToRemove:  ObjectID --> the id from which the activities get removed
+ * @returns integer --> Number of deleted Activities
+ */
 async function deleteActivitiesFromDeletedUser(userIDToRemove) {
         const activities = (await database.initializeCollections()).activities
         const result = await activities.deleteMany(
             { userID: userIDToRemove}
         )
-        console.log(result)
 
         return result.deletedCount
 
 }
 
+/**
+ * This method deletes all the Reactions of Activities of a user 
+ * (happens if a user gets deleted)
+ * 
+ * @param userIDToRemove:  ObjectID --> the id from which the reactions get removed
+ * @returns integer --> Number of deleted reactions
+ */
 async function deleteReactionsFromDeletedUser(userIDToRemove) {
         const activities = (await database.initializeCollections()).activities
 
@@ -157,7 +179,6 @@ async function deleteReactionsFromDeletedUser(userIDToRemove) {
                   }, {})
             }
         )
-        console.log(result)
         return result.deletedCount
 }
 
