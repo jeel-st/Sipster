@@ -17,7 +17,7 @@ test('successful login', async () => {
     expect(response.data).toBe(true);
 });
 
-test("Ungültige Anmeldedaten.", async () => {
+test("Falsches Passwort!", async () => {
     const username = 'gamsa';
     const password = 'Ansaf86!!mm';
     try {
@@ -31,7 +31,7 @@ test("Ungültige Anmeldedaten.", async () => {
         });
     } catch (error) {
         expect(error.response.status).toBe(400);
-        expect(error.response.data).toBe("Ungültige Anmeldedaten.");
+        expect(error.response.data).toBe("Falsches Passwort!");
     }
 });
 
