@@ -42,23 +42,16 @@ async function deleteFriendRequest(req, res){
     try{
         const fromUserID = req.params.fromUserID
         const toUserID = req.params.toUserID
-        if(req.query.status == null && (req.query.remove == null || req.query.remove !== "true")){
+        if(req.query.remove == null){
             res.status(404).send("Status and remove are null or wrong")
             return;
         }
 
-        if(req.query.status == "true"){
-
-            const friendRequestDel = await database.acceptFriendRequest(fromUserID, toUserID)
-            res.send("User was accepted!")
-
-        }else if(req.query.status == "false"){
+        if(req.query.remove == "false"){
             const friendRequestDel = await database.declineFriendRequest(fromUserID, toUserID)
             res.send("User was declined")
 
-        }
-
-        if(req.query.remove == "true"){
+        }else if(req.query.remove == "true"){
             const friendRequestDel = await database.removeFriend(req)
             if (friendRequestDel == false) {
                 res.status(400).send("Sipster can't be removed as a friend")
@@ -70,6 +63,19 @@ async function deleteFriendRequest(req, res){
     }catch(err){
         console.error(err)
         res.status(500).send("Something went wrong " + err)
+    }
+}
+
+async function acceptFriendRequest(req, res){
+    try{
+        const fromUserID = req.params.fromUserID
+        const toUserID = req.params.toUserID
+
+            const friendRequestDel = await database.acceptFriendRequest(fromUserID, toUserID)
+            res.send("User was accepted!")
+
+    }catch(err){
+            res.status(500).send("Internal Server Error")
     }
 }
 
@@ -159,5 +165,6 @@ module.exports = {
     //getFriendNameList,
     getFriendList,
     getFriendRecommendations,
-    getInvitations
+    getInvitations,
+    acceptFriendRequest
 }

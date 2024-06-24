@@ -10,7 +10,8 @@ const friendSystemController = require('../controllers/controllerFriendSystem')
 //Router, die an Controller weiterleiten
 router.get('/invitations/:userID', friendSystemController.getInvitations)
 router.post('/', friendSystemController.postFriendRequest)
-router.delete('/:fromUserID/:toUserID', friendSystemController.deleteFriendRequest)
+router.delete('/delete/:fromUserID/:toUserID', friendSystemController.deleteFriendRequest)
+router.put('/accept/:fromUserID/:toUserID', friendSystemController.acceptFriendRequest)
 router.get('/:userID', friendSystemController.getFriendList)
 router.get('/:userID/:input', friendSystemController.getFriendRecommendations)
 
