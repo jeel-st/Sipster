@@ -7,6 +7,7 @@ import { router } from 'expo-router';
 import { useNavigation } from '@react-navigation/native';
 import { player } from '../utils/player';
 import truth from '../constants/truth'
+import { quitGame } from '../../utils/navigator';
 
 /*
 truthPage displays the current question 
@@ -50,7 +51,7 @@ export default function truthPage() {
  
                  {/* Close Button */}
                  <TouchableOpacity
-                     onPress={() => { router.navigate('(tabs)/games')}}
+                     onPress={() => quitGame(activity, router)}
                      className={classNames(
                          'justify-center items-center'//position
                          )}>
