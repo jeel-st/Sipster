@@ -2,7 +2,6 @@
 const database = require("./databaseMain")
 const log = require("../logging/logger")
 const { ObjectId } = require('mongodb');
-const { checkForFriendsInRecommendations } = require("../utils/friendSystemLogic/FriendsRecommendationLogic");
 const { deleteFriendRequest } = require("../controllers/controllerFriendSystem");
 const SipsterID = "663bd3b7969fc6302facf1ee";
 
@@ -263,21 +262,40 @@ async function getFriendList(req){
  * @return: Array mit Freundesvorschlägen, die den Suchbegriff im Benutzernamen enthalten
  */
 async function getFriendRecommendations(req) {
-    let friendRecommendations = [];
     try {
     const { personalInformation } = await database.initializeCollections()
     const input = req.params.input;
     const userID = req.params.userID;
     const userIDObj = new ObjectId(userID)
 
+    const user = await personalInformation.findOne( {_id: userIDObj} )
+    if (!user) {
+        return "User not Found"
+    }
+    const userFriends = user.friends
+
     const regex = new RegExp(input, "i"); // "i" für Case-Insensitive-Suche
-    friendRecommendations = await personalInformation.find({ username: { $regex: regex } }).limit(20).toArray();
-    friendRecommendations = await checkForFriendsInRecommendations(friendRecommendations, username)
+    const friendRecommendations = await personalInformation.find({ 
+        $and: [
+            { _id: { $ne: userIDObj } }, // Bedingung, um den Benutzer mit der bestimmten userID auszuschließen
+            { _id: { $nin: userFriends } },
+            { $or: [
+              { username: { $regex: regex } },
+              { firstName: { $regex: regex } },
+              { lastName: { $regex: regex } }
+            ]}
+          ]
+     }).limit(20).toArray();
+
+     if (friendRecommendations.length !== null) {
+        return friendRecommendations
+     }else {
+        throw new Error()
+     }
+
     } catch (err) {
         console.error("Something went wrong in the Method getFriendReccommendations() " + err)
     }
-    //console.log(friendRecommendations)
-    return friendRecommendations;
 }
 
 

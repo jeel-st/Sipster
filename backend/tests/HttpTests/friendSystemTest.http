@@ -37,7 +37,7 @@ GET {{host}}/friends/661d07706671060e01a4fd3d
 
 ###
 
-GET {{host}}/friends/661d07706671060e01a4fd3d/m
+GET {{host}}/friends/661d09ba6671060e01a4fd3e/th
 
 ###
 

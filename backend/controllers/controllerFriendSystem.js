@@ -116,8 +116,10 @@ async function getFriendRecommendations(req, res) {
         const friendReccommendations = await database.getFriendRecommendations(req)
         if (friendReccommendations == 0) {
             res.status(204).send("There are no friend Reccommendations with that input...")
+        }else if (friendReccommendations == "User not found"){
+            res.status(400).json("User not found")
         }else {
-            res.send(friendReccommendations)
+            res.send(friendReccommendations);
         }
     }catch (err) {
         console.log("Something went wrong in this file")

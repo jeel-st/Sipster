@@ -320,7 +320,6 @@ package Databases {
     databaseActivity --> databaseMain
     databaseEvents --> databaseMain
     databaseFriendSystem --> databaseMain
-    databaseFriendSystem --> friendSystemLogic.FriendsRecommendationLogic
     databaseHomepage --> databaseMain
     databaseLogin --> databaseMain
     databaseLogin --> registerLogic.registerPatterns
@@ -347,12 +346,6 @@ package activitiesLogic {
         + uploadAfterPicture(req, res)
     }
     activitiesLogic --> uploadLogic.config
-}
-
-package friendSystemLogic {
-    class FriendsRecommendationLogic {
-        + checkForFriendsInRecommendations(friendRecommendations, username)
-    }
 }
 
 package profilePictureLogic {
