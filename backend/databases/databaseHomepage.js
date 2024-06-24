@@ -14,21 +14,23 @@ async function getHomepage(req) {
     console.log(userID)
     const alreadySeenIDs = req.body.usedIDs
     const userIDObj = new ObjectId(userID)
-    const limit = 3; //The Limit of how many results should be returned per thing
+    const activityLimit = 3; //The Limit of how many results should be returned for activities
+    const eventLimit = 1; //The Limit of how many results should be returned for activities
+    const gameLimit = 1; //The Limit of how many results should be returned for activities
 
     try {
         const startTime = new Date().getTime();
         const {games, events} = await database.initializeCollections()
         //find activities from users friends und filter nach Timestamp
-        const friendsActivities = await getTheFriendActivities(req, alreadySeenIDs, limit)
+        const friendsActivities = await getTheFriendActivities(req, alreadySeenIDs, activityLimit)
         log.info("Friends Activities loaded")
 
         //search for new games
-        const newGames = await getTheGames(games, alreadySeenIDs, limit)
+        const newGames = await getTheGames(games, alreadySeenIDs, gameLimit)
         log.info("New Games loaded")
 
         //search for new Events
-        const comingEvents = await getTheEvents(events, alreadySeenIDs, limit)
+        const comingEvents = await getTheEvents(events, alreadySeenIDs, eventLimit)
         log.info("Coming Events loaded")
         
         let combinedArray = [...friendsActivities, ...comingEvents, ...newGames]
