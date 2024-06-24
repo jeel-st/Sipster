@@ -152,10 +152,10 @@ async function getActivitiesFromUser(req) {
 This method uploads and processes the "before" picture for an activity.
 It compresses the picture to two different sizes and saves both the original
 and compressed image paths in the database.
-@param {String} activityID - The ID of the activity to which the picture belongs.
-@param {String} fileExtension - The file extension of the uploaded picture.
-@param {String} filePathOriginal - The file path of the original uploaded picture.
-@returns {String} "Success" if the operation is successful, otherwise an error message.
+@param activityID: String -> The ID of the activity to which the picture belongs.
+@param fileExtension: String -> The file extension of the uploaded picture.
+@param filePathOriginal: String -> The file path of the original uploaded picture.
+@returns "Success": String -> if the operation is successful, otherwise an error message.
 */
 
 async function uploadBeforePicture(activityID, fileExtension, filePathOriginal) {

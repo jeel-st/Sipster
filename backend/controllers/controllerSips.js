@@ -44,9 +44,9 @@ async function changeSips(req, res){
         res.json(sips)
     } catch (error) {
         if(error.message === "No sips found for the specified username"){
-            res.status(204).send("No sips found, maybe wrong username"+ error.message)
+            res.status(204).send("No sips found, maybe wrong username")
         }else if(error.message === "No sips found for this user"){
-            res.status(204).send("No sips found for this user"+ error.message)
+            res.status(204).send("No sips found, maybe wrong username")
         }else{
             res.status(500).send('Internal Server Error'+ error)
         }

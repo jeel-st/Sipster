@@ -20,7 +20,7 @@ async function getLogin(req, res) {
         }else if (usernameFinder == "Benutzer nicht gefunden!") {
             res.status(400).json("Benutzer nicht gefunden!")
         }else if (usernameFinder == "Ungültige Anmeldedaten."){
-            res.status(400).json("Ungültige Anmeldedaten.")
+            res.status(400).json("Falsches Passwort!")
         }else {
             res.status(500).json("Something unexpected happen")
         }
