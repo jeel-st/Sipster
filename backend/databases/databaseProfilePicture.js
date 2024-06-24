@@ -99,7 +99,7 @@ async function deleteProfilePictureURL(userIDObj){
             { _id: userIDObj }, 
             { $set: { profilePicture: null, profilePictureCom200: null, profilePictureCom1080:null  } }
         )
-        
+
         if (result.modifiedCount === 1) {
             console.log(`Profilbild für Benutzer ${userIDObj} erfolgreich gelöscht.`)
             return "Success"

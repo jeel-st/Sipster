@@ -1,9 +1,9 @@
 
-import Picker from '../routes/Picker';
+import AccountPage from '../routes/AccountPage';
 
 export default function Tab() {
   return (
-    <Picker />
+    <AccountPage />
   )
 
 }

@@ -1,28 +1,137 @@
 export const games = [
     {
+        _id: 0,
+        name: "Bomb Party",
+        thumbnail: "http://85.215.71.124/static/gamePictures/Bombparty.jpg",
+        playtime: "ca. 2min",
+        description: "Ein Spieler bekommt eine Bombe und muss sie so schnell wie möglich weitergeben, bevor sie explodiert",
+        category: "Q&A",
+        sips: "100",
+    },
+    {
+        _id: 1,
         name: "Wahrheit oder Pflicht",
-        profile: "https://images.thalia.media/03/-/3bfe01ecf5234c95acfd59d23f320489/wahrheit-oder-pflicht-die-edition-fuer-alle-ab-18-jahren-taschenbuch-emma-hegemann.jpeg",
+        thumbnail: "http://85.215.71.124/static/gamePictures/TruthOrDare.jpg",
         playtime: "so lang du willst",
-        desc: "Es wird gewählt zwischen Wahrheit und Pflicht und dan bekommt man eine Frage oder Aufgabe die man erfüllen muss",
-        start: "'routes/RegisterPage'"
+        description: "Es wird gewählt zwischen Wahrheit und Pflicht und dan bekommt man eine Frage oder Aufgabe die man erfüllen muss",
+        category: "Q&A",
+        sips: "100",
     },
     {
+        _id: 2,
         name: "Bierpong",
-        profile: "https://cdn.discordapp.com/attachments/1223359277662736476/1224823618156892253/OIG4.jpg?ex=661ee4e2&is=660c6fe2&hm=74adb0fdcafc440d645e1a53bb12b58c3839950f7670d085f997e7bf49b03896&",
+        thumbnail: "http://85.215.71.124/static/gamePictures/BeerPong.jpg",
         playtime: "ca. 20 min",
-        desc: "Bierpong ist ein beliebtes Trinkspiel, das oft auf Partys, Veranstaltungen und in Bars gespielt wird. Es wird üblicherweise von zwei Teams gespielt, die jeweils an gegenüberliegenden Enden eines Tisches stehen. Auf jeder Seite des Tisches werden Becher mit Bier gefüllt aufgestellt, die in einer Dreiecksformation angeordnet sind."
+        description: "Bierpong ist ein beliebtes Trinkspiel, das oft auf Partys, Veranstaltungen und in Bars gespielt wird. Es wird üblicherweise von zwei Teams gespielt, die jeweils an gegenüberliegenden Enden eines Tisches stehen. Auf jeder Seite des Tisches werden Becher mit Bier gefüllt aufgestellt, die in einer Dreiecksformation angeordnet sind.",
+        category: "Q&A",
+        sips: "100",
     },
     {
+        _id: 3,
         name: "Ring of Fire",
-        profile: "https://cdn.discordapp.com/attachments/1223359277662736476/1224823618400419890/OIG2.jpg?ex=661ee4e2&is=660c6fe2&hm=41c10951617b3eb5a36e1b39e7a086fc3c42877eb0a6471665495fcf3512d670&",
+        thumbnail: "http://85.215.71.124/static/gamePictures/Kingscup.jpg",
         playtime: "ca. 35 min",
-        desc: "Ring of Fire, auch bekannt als Kings, ist ein weiteres beliebtes Trinkspiel, das oft in größeren Gruppen gespielt wird. Es erfordert ein Kartenspiel und wird am besten an einem Tisch gespielt, um die Karten zu platzieren. Die Karten werden in einem Kreis um ein leeres Glas oder eine Flasche gelegt."
+        description: "Ring of Fire, auch bekannt als Kings, ist ein weiteres beliebtes Trinkspiel, das oft in größeren Gruppen gespielt wird. Es erfordert ein Kartenspiel und wird am besten an einem Tisch gespielt, um die Karten zu platzieren. Die Karten werden in einem Kreis um ein leeres Glas oder eine Flasche gelegt.",
+        category: "Q&A",
+        sips: "100",
     },
     {
+        _id: 4,
         name: "BabyChicken",
-        profile: "https://cdn.discordapp.com/attachments/1223359277662736476/1224823618752483409/OIG1_1.jpg?ex=661ee4e2&is=660c6fe2&hm=5268d69ca42b0d25fbdeca5610b16a8bccd1d76b6125480f9cc72cc1ce93d62f&",
+        thumbnail: "http://85.215.71.124/static/gamePictures/BabyChicken.jpg",
         playtime: "ca. 2 min",
-        desc: "Einer kniet sich hin und macht Vogelbewegungen, der andere spuckt ihm die mische in den Mund"
+        description: "Einer kniet sich hin und macht Vogelbewegungen, der andere spuckt ihm die mische in den Mund",
+        category: "Q&A",
+        sips: "100",
+    },
+    {
+        _id: 5,
+        name: "Wahrheit oder Pflicht Deluxe",
+        thumbnail: "http://85.215.71.124/static/gamePictures/TruthOrDareDeluxe.jpg",
+        playtime: "unbegrenzt",
+        description: "Die ultimative Version des beliebten Partyspiels mit noch verrückteren Fragen und Aufgaben",
+        category: "Party Game",
+        sips: "200"
+    },
+    {
+        _id: 6,
+        name: "Wahrheit oder Pflicht Extreme",
+        thumbnail: "http://85.215.71.124/static/gamePictures/TruthOrDareExtreme.jpg",
+        playtime: "30 Minuten pro Runde",
+        description: "Eine Hardcore-Version des Spiels mit extrem peinlichen Fragen und herausfordernden Aufgaben",
+        category: "Q&A",
+        sips: "300"
+    },
+    {
+        _id: 7,
+        name: "Kings Cup",
+        thumbnail: "http://85.215.71.124/static/gamePictures/Kingscup.jpg",
+        playtime: "variabel",
+        description: "Ein klassisches Trinkspiel, bei dem Karten gezogen werden und je nach Karte eine Aktion ausgeführt werden muss",
+        category: "Kartenspiel",
+        sips: "150"
+    },
+    {
+        _id: 8,
+        name: "Never Have I Ever",
+        thumbnail: "http://85.215.71.124/static/gamePictures/NeverHaveIEver.jpg",
+        playtime: "30 Minuten pro Runde",
+        description: "Ein Spiel, bei dem die Spieler reihum Aussagen machen und diejenigen trinken müssen, die diese Aussage schon einmal erlebt haben",
+        category: "Party Game",
+        sips: "100"
+    },
+    {
+        _id: 9,
+        name: "Flip Cup",
+        thumbnail: "http://85.215.71.124/static/gamePictures/FlipCup.jpg",
+        playtime: "kurz und intensiv",
+        description: "Ein Wettkampf-Trinkspiel, bei dem Teams gegeneinander antreten und versuchen, Becher umzudrehen und auszutrinken",
+        category: "Team Game",
+        sips: "200"
+    },
+    {
+        _id: 10,
+        name: "Beer Pong",
+        thumbnail: "http://85.215.71.124/static/gamePictures/BeerPong.jpg",
+        playtime: "variabel",
+        description: "Ein beliebtes Partyspiel, bei dem Teams versuchen, Ping-Pong-Bälle in Becher auf der gegenüberliegenden Seite des Tisches zu werfen",
+        category: "Team Game",
+        sips: "250"
+    },
+    {
+        _id: 11,
+        name: "Power Hour",
+        thumbnail: "http://85.215.71.124/static/gamePictures/PowerHour.jpg",
+        playtime: "1 Stunde",
+        description: "Ein Trinkspiel, bei dem alle 60 Sekunden ein Shot Bier getrunken wird, bis eine Stunde vergangen ist",
+        category: "Adult Game",
+        sips: "300"
+    },
+    {
+        _id: 12,
+        name: "Drunk Jenga",
+        thumbnail: "http://85.215.71.124/static/gamePictures/DrunkJenga.jpg",
+        playtime: "variabel",
+        description: "Eine Variation des klassischen Jenga-Spiels, bei dem auf den Bausteinen Aufgaben oder Regeln stehen, die ausgeführt werden müssen",
+        category: "Q&A",
+        sips: "200"
+    },
+    {
+        _id: 13,
+        name: "Quarters",
+        thumbnail: "http://85.215.71.124/static/gamePictures/Quarters.jpg",
+        playtime: "variabel",
+        description: "Ein einfaches Trinkspiel, bei dem versucht wird, einen Vierteldollar in ein Glas zu werfen und dann zu trinken",
+        category: "Skill Game",
+        sips: "150"
     }
-    
+]
+
+export const categorys = [
+    "Q&A",
+    "Kartenspiel",
+    "Team Game",
+    "Party Game",
+    "Adult Game",
+    "Skill Game"
 ]

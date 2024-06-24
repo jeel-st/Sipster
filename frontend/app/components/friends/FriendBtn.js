@@ -1,0 +1,17 @@
+import { View, Text, Image, Pressable } from 'react-native'
+import { styles } from '../../constants';
+import { router } from 'expo-router'
+import React from 'react'
+import { fetchProfilePictureCompressed } from '../../utils/database/imageFetcher';
+
+export default function FriendBtn({ friend, user }) {
+    return (friend &&
+        <Pressable className="mx-1 w-20 items-center"
+            onPress={() => router.navigate({ pathname: "/routes/ProfilePage", params: friend })}>
+            <View className="h-20 w-20 rounded-full shadow-md shadow-black justify-center items-center" style={{ backgroundColor: styles.Colors.yellow }}>
+                <Image className="w-5/6 h-5/6 rounded-full" source={{ uri: fetchProfilePictureCompressed(friend) }} />
+            </View>
+            <Text className="mt-1 text-white font-bold text-xs">{friend.username}</Text>
+        </Pressable>
+    )
+}

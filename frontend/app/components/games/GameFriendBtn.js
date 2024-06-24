@@ -1,0 +1,39 @@
+import { View, Text, Image, TouchableOpacity } from 'react-native'
+import React from 'react'
+import { classNames } from '../../utils'
+import { fetchProfilePictureCompressed } from '../../utils/database/imageFetcher'
+import { AntDesign } from '@expo/vector-icons'
+
+export default function GameFriendBtn({ friend, handleTaggedFriends, isTagged}) {
+    return (
+        <View className={classNames(
+            'flex-row justify-between items-center',
+            'pl-2 pr-4 mb-2',
+            'w-full h-14',
+            'bg-secondary rounded-full'
+        )}>
+            <View className={classNames(
+                'flex-row items-center',
+                'space-x-4'
+            )}>
+                <View className="w-12 h-12 rounded-full bg-primary">
+                    <Image className="w-full h-full rounded-full" source={{ uri: fetchProfilePictureCompressed(friend) }} />
+                </View>
+
+                <View className="flex-1 self-center">
+                    <Text className="text-white font-bold">{friend.firstName + " " + friend.lastName}</Text>
+                    <Text className="text-neutral-400 font-thin">{friend.username}</Text>
+                </View>
+
+                { !isTagged ?
+                <TouchableOpacity onPress={handleTaggedFriends}>
+                    <AntDesign name="pluscircleo" size={30} color="#86efac" />
+                </TouchableOpacity> :
+                <TouchableOpacity onPress={handleTaggedFriends}>
+                    <AntDesign name="minuscircle" size={30} color="#ef4444" />
+                </TouchableOpacity>
+                }
+            </View>
+        </View>
+    )
+}

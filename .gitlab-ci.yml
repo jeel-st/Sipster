@@ -1,0 +1,17 @@
+
+stages:
+  - build
+  - test
+  - package
+  - release
+
+
+build-backend:
+  stage: build
+  image: node:20-alpine
+  services:
+    - mongo:latest
+  script:
+    - "cd backend"
+    - "npm i"
+    - "timeout 30s node app.js || [[ $? -eq 143 ]]"

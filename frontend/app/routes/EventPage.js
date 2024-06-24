@@ -1,12 +1,16 @@
-import { View, Text, SafeAreaView, StatusBar } from 'react-native';
-import { Events, EventInfoCard } from '../components';
+import { View, Text, SafeAreaView, StatusBar, Image, Platform } from 'react-native';
+import { Events, EventInfoCard, SipsterButton } from '../components';
 import { styles } from '../constants';
 import React from 'react';
 import { useEventDisplay } from '../utils';
-import Button from '../components/Button'
+import { setBackgroundColorAsync } from 'expo-navigation-bar';
 
 export default function EventPage() {
     const { displayEvent, handleEventSelection } = useEventDisplay();
+
+    if (Platform.OS === 'android') {
+        setBackgroundColorAsync(styles.Colors.secondary);
+    }
 
     return (
         <SafeAreaView className="flex-1" style={{ backgroundColor: styles.Colors.primary }}>
@@ -16,7 +20,7 @@ export default function EventPage() {
 
                 {/* Branding */}
                 <View className={styles.spaceText}>
-                    <Text className={styles.brandingText}>sipster</Text>
+                    <Image style={{ width: 100, height: 50, resizeMode: 'contain' }} source={require('../assets/images/logo-small.png')} />
                 </View>
 
                 {/* Event Info */}
@@ -30,7 +34,7 @@ export default function EventPage() {
 
                 {/* Button */}
                 <View className="items-center">
-                    <Button title="save the date >>" />
+                    <SipsterButton title="save the date >>" />
                 </View>
             </View>
         </SafeAreaView>
