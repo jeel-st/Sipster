@@ -1,4 +1,0 @@
-# VS Code Extensions
-
-* Name: ES7+ React/Redux/React-Native snippets Id: dsznajder.es7-react-js-snippets Description: Extensions for React, React-Native and Redux in JS/TS with ES7+ syntax. Customizable. Built-in integration with prettier. Version: 4.4.3 Publisher: dsznajder VS Marketplace Link: [https://marketplace.visualstudio.com/items?itemName=dsznajder.es7-react-js-snippets](https://marketplace.visualstudio.com/items?itemName=dsznajder.es7-react-js-snippets)
-* Name: React Native Tools Id: msjsdiag.vscode-react-native Description: Debugging and integrated commands for React Native Version: 1.13.0 Publisher: Microsoft VS Marketplace Link: [https://marketplace.visualstudio.com/items?itemName=msjsdiag.vscode-react-native](https://marketplace.visualstudio.com/items?itemName=msjsdiag.vscode-react-native)

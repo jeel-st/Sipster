@@ -27,16 +27,42 @@ Wir verwenden eine konsistente Namenskonvention für alle Branches, um damit die
 * **Regelmäßiges Committen**: Commits werden regelmäßg durchgeführt, um Änderungen besser nachverfolgen zu können
 * **Aussagekräftige Commit-Messages**: Commits enthalten aussagekräftige Commit-Nachrichten, die kurz beschreiben welche Änderungen vorgenommen wurden.
 
-### Issues
+### Issues-Workflow
 
-* to dos werden Issues
-* bekommen Label mit Kategorie
-* Issues kriegen Weight nach Wichtigkeit des Issues
-  * Wichtigkeit:
-  * niedrig = 10
-  * mittel = 20
-  * wichtig = 30
+* Bei den Issues achten wir darauf möglichst präzise zu formulieren was die Aufgabe ist. Wer die Aufgabe zu erledigen hat. welchem Milestone diese Aufgabe zugehört und wie wichtig die Aufgabe ist
+* To-Dos werden zu Issues umgewandelt und erhalten ein Label mit der entsprechenden Kategorie.&#x20;
+* Die Wichtigkeit der Issues wird durch ein Weight-Label ausgedrückt:&#x20;
+  * Niedrige Wichtigkeit: Weight 10
+  * Mittlere Wichtigkeit: Weight 20
+  * Hohe Wichtigkeit: Weight 30
 
-### Milestones
+### Milestones-Workflow
 
-jeden Montag ein neuer Milestone
+* Wöchentliche Ziele gesetzt und dafür eigene Milestones erstellt
+  * Aufgabe KW16 - KW23 und der letzte Datumsspezifische Milestone ProjektAbgabe
+* Spezielle Ziele gesetzt bei dem spezielle Issues zugeteilt wurden
+  * [**Implementierung des Friendssystem**](https://gitlab.mi.hdm-stuttgart.de/lg107/sipster/-/milestones/3)
+    * Dieses Große FriendSystem system bedarf eines eigenen Milestones
+  * [**Starting with frontend and backend**](https://gitlab.mi.hdm-stuttgart.de/lg107/sipster/-/milestones/1)
+    * Unser 1. Milestone um uns mit allem vertraut zu machen
+  * [**UI Animated Features**](https://gitlab.mi.hdm-stuttgart.de/lg107/sipster/-/milestones/4)
+    * Alles UI bedingte findet in diesem Milestone seinen Platz
+  * [**quality assurance**](https://gitlab.mi.hdm-stuttgart.de/lg107/sipster/-/milestones/11)
+    * CleanCoding testing und alles was die Qualität und wartbarkeit des Codes verbessern
+  * [**non important**](https://gitlab.mi.hdm-stuttgart.de/lg107/sipster/-/milestones/10)
+    * Alle Ideen die uns in den Kopf gekommen sind aber jetzt erstmal noch keine Priorität zur Umsetzung haben
+
+### Labels-Workflow
+
+* Backend
+* Bug
+* Frontend
+* Feature
+* Abgebrochen
+
+und auch für die Anforderungen haben wir uns für labels entschieden:
+
+* Funktionale Anforderung
+* Nicht Funktionale Anforderung
+* Technische Anforderung
+* fachliche Anforderung
