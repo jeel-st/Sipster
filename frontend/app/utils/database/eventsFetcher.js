@@ -1,11 +1,16 @@
+// Imports
 import { useState, useEffect } from 'react';
 import axiosInstance from './axiosConfig';
 import { eventLog } from '../logger/config';
 import { useUser } from '../hooks/useUser';
 import { userLog } from '../logger/config';
 
-export function useEvents() {
+/*
+    Hook to fetch all events
 
+    @return: array -> the events
+*/
+export function useEvents() {
     const [events, setEvents] = useState([]);
 
     useEffect(() => {
@@ -17,10 +22,13 @@ export function useEvents() {
     return events;
 }
 
+/*
+    Hook to fetch all saved events
+
+    @return: array -> the saved events
+*/
 export function useSavedEvents() {
-
     const user = useUser();
-
     const [events, setEvents] = useState([]);
 
     useEffect(() => {

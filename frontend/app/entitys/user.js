@@ -1,3 +1,8 @@
+/*
+    User Class to create a user object
+
+    @param userData: object -> the user object
+*/
 class User {
     constructor(userData) {
         {/* User Information */ }
@@ -16,6 +21,7 @@ class User {
         this.friends = userData.friends;
     }
 
+    // Method to log the details of the User
     present() {
         const friendNames = this.friends.map(friend => friend.fullName).join(', ');
         return `\nUser ID: ${this._id}\n` +

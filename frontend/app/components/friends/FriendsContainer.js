@@ -4,7 +4,6 @@ import { AntDesign } from '@expo/vector-icons';
 import { NativeBaseProvider } from "native-base";
 import FriendsH2Skeleton from '../skeletons/FriendsH2Skeleton';
 import FriendBtn2 from './FriendBtn2'
-import { useFriendContainer } from '../../utils/hooks/friends/useFriendsContainer';
 
 /*
     FriendsContainer is a component that is listing all friends in the friends list based on the tab selected.
@@ -17,9 +16,8 @@ import { useFriendContainer } from '../../utils/hooks/friends/useFriendsContaine
     @param handleReloadFriends: function -> the function to call when the friends list should be reloaded
     @return:                    JSX -> returns the FriendsContainer component
 */
-export default function FriendsContainer({ friends, searchText, selectedTab, handleReloadFriends }) {
+export default function FriendsContainer({ friends, selectedTab, handleReloadFriends, searchFriendsVisible, searchFriends, filteredFriends }) {
     if (!friends) return
-    const { searchFriendsVisible, searchFriends, filteredFriends } = useFriendContainer({ friends, searchText })
 
     return (
         <NativeBaseProvider>

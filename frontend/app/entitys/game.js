@@ -1,5 +1,10 @@
 const { gameLog } = require("../utils/logger/config");
 
+/*
+    Class representing a Game object
+
+    @param gameData: object -> object containing game data
+*/
 class Game{
     constructor(gameData){
         this.ID = gameData._id;
@@ -11,6 +16,7 @@ class Game{
         this.status = gameData.status;
     }
 
+    // Method to convert the Game object to a plain object
     toObject() {
         return {
             ID: this.ID ?? 0,
@@ -22,6 +28,7 @@ class Game{
         };
     }
 
+    // Static method to create a Game object from a plain object
     static fromObject(obj) {
         return new Game({
             _id: obj.ID,
@@ -33,6 +40,7 @@ class Game{
         });
     }
 
+    // Method to log the details of the Game
     present() {
         gameLog.debug(`ID: ${this.ID}` +
                     `\nName: ${this.name}` +

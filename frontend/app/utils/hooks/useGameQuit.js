@@ -1,11 +1,21 @@
-
+// Imports
 import { useRouter } from 'expo-router'
 import { sendActivityAfterImage } from '../database/activityFetcher';
 
+/*
+    Method to handle the game quit
+
+    @param activity: object -> the activity to handle
+    @return: object -> the object containing the hook methods
+*/
 const useGameQuit = (activity) => {
     const router = useRouter()
 
-    // Function to handle navigation back to previous screen
+    /*
+        Method to handle navigation back to previous screens
+
+        @return: void
+    */
     const handlePress = () => {
         sendActivityAfterImage(activity)
         router.navigate({ pathname: "(tabs)/game" })

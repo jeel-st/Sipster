@@ -5,6 +5,12 @@ import useGameQuit from '../utils/hooks/useGameQuit';
 import { useLocalSearchParams } from 'expo-router';
 import GameAcitvityCam from '../components/games/GameAcitvityCam';
 
+/*
+    GameQuitPage is a page that displays the camera for the user to quit a game.
+    Typ: Page/route
+
+    @return: JSX -> returns the GameQuitPage component
+*/
 export default function GameQuitPage() {
     const activity = JSON.parse(useLocalSearchParams().activity);
 

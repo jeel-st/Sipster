@@ -14,7 +14,16 @@ import { navBarColor } from '../utils/navBarColor'
     @return: JSX -> returns the FriendsPage component
 */
 export default function FriendsPage() {
-    const { searchText, selectedTab, viewFriends, viewCategorys, handleSearchTextChange, handleTabChange, handleReloadFriends } = useFriends();
+    const { searchText,
+        selectedTab,
+        viewFriends,
+        viewCategorys,
+        searchFriendsVisible,
+        searchFriends,
+        filteredFriends,
+        handleSearchTextChange,
+        handleTabChange,
+        handleReloadFriends } = useFriends();
 
     navBarColor(styles.Colors.primary)
 
@@ -36,7 +45,14 @@ export default function FriendsPage() {
                 {viewCategorys && <FriendsCategorys selectedTab={selectedTab} onTabChange={handleTabChange} />}
 
                 {/* Friends Content*/}
-                <FriendsContainer friends={viewFriends} searchText={searchText} selectedTab={selectedTab} handleReloadFriends={handleReloadFriends} />
+                <FriendsContainer
+                    friends={viewFriends}
+                    searchText={searchText}
+                    selectedTab={selectedTab}
+                    handleReloadFriends={handleReloadFriends}
+                    searchFriendsVisible={searchFriendsVisible}
+                    searchFriends={searchFriends}
+                    filteredFriends={filteredFriends} />
             </SafeAreaView>
         </TouchableWithoutFeedback>
     )

@@ -2,8 +2,9 @@
 import UserManager from "../../entitys/UserManager"
 
 /*
-useUser Hook
-This hook returns the current user instance.
+    Method to get the user
+
+    @return: object -> the user object
 */
 export function useUser() {
     const userManager = UserManager.getInstance()
@@ -11,8 +12,10 @@ export function useUser() {
 }
 
 /*
-updateUser Function
-This function updates the user information by instantiating the user with the given username.
+    Method to update the user
+
+    @param user: object -> the user to update
+    @return: void
 */
 export async function updateUser(user) {
     const userManager = UserManager.getInstance()
