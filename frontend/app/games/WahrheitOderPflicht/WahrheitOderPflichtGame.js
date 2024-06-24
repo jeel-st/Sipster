@@ -5,8 +5,7 @@ import { AntDesign } from '@expo/vector-icons';
 import classNames from '../WahrheitOderPflicht/utils/classNames'
 import { router } from 'expo-router';
 import { TextInput } from 'react-native';
-import { player } from './utils/player';
-import { quitGame } from '../../utils/navigator';
+import { player } from './utils/player'; 
 
 /*
 WahrheitOderPflichtGame starts the Game and allow the player to add all other players 

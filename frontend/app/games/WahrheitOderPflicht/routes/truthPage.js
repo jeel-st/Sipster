@@ -6,8 +6,7 @@ import classNames from '../utils/classNames'
 import { router } from 'expo-router';
 import { useNavigation } from '@react-navigation/native';
 import { player } from '../utils/player';
-import truth from '../constants/truth'
-import { quitGame } from '../../utils/navigator';
+import truth from '../constants/truth' 
 
 /*
 truthPage displays the current question 

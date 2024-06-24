@@ -5,8 +5,7 @@ import { AntDesign } from '@expo/vector-icons';
 import classNames from '../utils/classNames'
 import { router } from 'expo-router';
 import { useNavigation } from '@react-navigation/native';
-import currentPlayer from '../constants/currentPlayers';
-import { quitGame } from '../../utils/navigator';
+import currentPlayer from '../constants/currentPlayers'; 
 
 
 /*
