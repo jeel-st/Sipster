@@ -168,7 +168,6 @@ async function deleteReaction(req, res) {
 module.exports = {
     postActivity,
     getActivities,
-    deleteEvents,
     postBeforePicture,
     postAfterPicture,
     addReaction,
