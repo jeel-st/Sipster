@@ -1,69 +1,20 @@
-import { useEffect, useState } from "react";
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import User from "../../entitys/user";
+// Imports
 import axiosInstance from "./axiosConfig";
+import { userLog } from "../logger/config";
 
-export async function storeUser(username){
+/*
+    Method to fetch a user
+
+    @param username: string -> the username to fetch the user
+    @return: object -> the user
+*/
+export async function fetchUser(username) {
     try {
-        const response = await axiosInstance.get(`/user/${username}`)
-        console.log("[storeUser] store user successfully")
-        try{
-            const jsonValue = JSON.stringify(response.data);
-            await AsyncStorage.setItem('user', jsonValue)
-        } catch (error){
-            console.log("[storeUser Error] ",error)
-        }
+        const reponse = await axiosInstance.get(`/user/${username}`)
+        userLog.info("User data has been fetched successfully.")
+
+        return reponse.data
     } catch (error) {
-        console.log(error)
+        userLog.error("User data could not fetched successfully.", error)
     }
 }
-
-export async function getUser(){
-    try {
-        const jsonValue = await AsyncStorage.getItem('user');
-        if (jsonValue !== null) {
-            const userData = JSON.parse(jsonValue)
-            console.log("[getUser] loading user successfully")
-
-            const user = new User(userData)
-            await user.initializeFriends()
-
-            return(user)
-        }else{
-            console.log("[getUser] User is Null")
-        }
-    } catch (error){
-        console.log("[getUser Error] ",error)
-    }
-}
-
-export async function getUsername(){
-    try {
-        const jsonValue = await AsyncStorage.getItem('user');
-        if (jsonValue !== null) {
-            const value = JSON.parse(jsonValue)
-            console.log("[getUsername] loading user successfully")
-
-            return(value.username)
-        }else{
-            console.log("[getUsername] User is Null")
-        }
-    } catch (error){
-        console.log("[getUsername Error] ",error)
-    }
-}
-
-export default function useUser() {
-    const [user, setUser] = useState(null)
-
-    useEffect(() => {
-        async function fetchUser() {
-            const userData = await getUser()
-            setUser(userData);
-        }
-        fetchUser();
-    }, []);
-
-    return user;
-}
-

@@ -2,15 +2,20 @@
 import React, { useEffect, useState } from 'react';
 import { Image, View, SafeAreaView, StyleSheet } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
-import useUser from '../../utils/database/userFetcher';
 import { uploadProfilePicture } from '../../utils/database/imageFetcher';
 import { classNames } from '../../utils';
 import TextButton from './TextButton';
 import CheckButton from './CheckButton';
+import { userLog } from '../../utils/logger/config';
+import { useUser } from '../../utils/hooks/useUser';
+import UserManager from '../../entitys/UserManager';
 
 /*
 This component can be used to upload your own and new profile pictures.
 Typ: Component from settings
+
+@param change   function -> Passes a function to close the expanded element.
+@return         JSX -> returns a component to pick a new profil picture
 */
 export default function Picker({ change }) {
 
@@ -21,7 +26,7 @@ export default function Picker({ change }) {
     // logged in user is called
     const user = useUser()
 
-    // When the component is first rendered, this function checks whether the app 
+    // When the component is first rendered, this function checks whether the app
     // has authorisation to access the device's media library.
     useEffect(() => {
         (async () => {
@@ -30,8 +35,8 @@ export default function Picker({ change }) {
         })();
     }, []);
 
-    // The pickImage function starts a process to select an image from the device's media library, 
-    // provided authorisation has been granted. 
+    // The pickImage function starts a process to select an image from the device's media library,
+    // provided authorisation has been granted.
     const pickImage = async () => {
         if (hasPhotoPermission) {
             try {
@@ -44,10 +49,16 @@ export default function Picker({ change }) {
 
                 if (!result.canceled) {
                     setImage(result.assets[0].uri);
-                    await uploadProfilePicture(result.assets[0], user.username);
+                    await uploadProfilePicture(result.assets[0], user);
+
+                    setTimeout(async () => {
+                        userLog.debug("Profile picture has been uploaded successfully.")
+                        const userManager = UserManager.getInstance()
+                        userManager.instantiateUser(user.username)
+                    }, 1000);
                 }
             } catch (error) {
-                console.log("[pickImageError] ", error);
+                userLog.error("Error during image upload:", error)
             }
         }
     };

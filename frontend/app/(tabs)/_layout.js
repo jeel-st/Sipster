@@ -58,15 +58,15 @@ export default function TabLayout() {
           }}
         />
         <Tabs.Screen
-          name="games"
+          name="game"
           options={{
-            title: 'Games',
+            title: 'Game',
             tabBarIcon: ({ color, focused }) => (
               <TabIcon focused={focused}>
                 <SimpleLineIcons size={24} name="game-controller" color={color} />
               </TabIcon>
             ),
-            href: '/games',
+            href: '/game',
           }}
         />
         <Tabs.Screen
@@ -137,15 +137,15 @@ export default function TabLayout() {
           }}
         />
         <Tabs.Screen
-          name="games"
+          name="game"
           options={{
-            title: 'Games',
+            title: 'Game',
             tabBarIcon: ({ color, focused }) => (
               <TabIcon focused={focused}>
                 <SimpleLineIcons size={24} name="game-controller" color={color} />
               </TabIcon>
             ),
-            href: '/games',
+            href: '/game',
           }}
         />
         <Tabs.Screen

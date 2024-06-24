@@ -23,3 +23,5 @@ export const friendsReceived = [
 export const friendsSent = [
     { name: "juls", fullname: "Julia Ebert", sipsterid: "juuliaeb#5593", date: "09, Mar 2024", profile: "https://scontent.cdninstagram.com/v/t51.2885-19/66777828_381698965693886_3865568062157619200_n.jpg?_nc_ht=scontent.cdninstagram.com&_nc_cat=102&_nc_ohc=anWH0bLxn9EAX-6wRhc&edm=APs17CUBAAAA&ccb=7-5&oh=00_AfAmyj9fdKSmXeKptsL0zSPkRzYYCSHTbVhq-29JekPeMQ&oe=66123BA7&_nc_sid=10d13b", sips: "1502" },
 ]
+
+export const tabTitles = ["my friends", "received", "sent"]

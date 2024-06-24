@@ -1,16 +1,38 @@
 // Imports
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { settingsFetcher } from '../database/settingsFetcher'
+import { userLog } from '../logger/config';
+import UserManager from '../../entitys/UserManager';
+import { router } from 'expo-router';
 
 /*
 The logic of the settingsPage is processed here and forwarded to the backend
 Typ: utils from settings
 
-@ handleChangeUsername
-@ handleChangeFirstname
-@ handleChangeLastname
-@ handleChangePassword
-@ handleChangeEmail
+@return     object -> An object containing the following properties and functions:
+    - username: {string} -> The current value of the username input field.
+    - lastName: {string} -> The current value of the lastname input field.
+    - firstName: {string} -> The current value of the firstname input field.
+    - newPassword: {string} -> The current value of the new password input field.
+    - oldPassword: {string} -> The current value of the old password input field.
+    - confirmPassword: {string} -> The current value of the confirm password input field.
+    - email: {string} -> The current value of the email input field.
+    - setUsername: {function} -> A function to update the value of the username input field.
+    - setLastName: {function} -> A function to update the value of the lastname input field.
+    - setFirstName: {function} -> A function to update the value of the firstname input field.
+    - setNewPassword: {function} -> A function to update the value of the new password input field.
+    - setOldPassword: {function} -> A function to update the value of the old password input field.
+    - setConfirmPassword: {function} -> A function to update the value of the confirm password input field.
+    - setEmail: {function} -> A function to update the value of the email input field.
+    - settingsError: {string} -> The error message displayed during settings failure.
+    - setSettingsError: {function} -> A function to update the settings error message.
+    - handleChangeUsername: {function} -> A function to handle changing the username.
+    - handleChangePassword: {function} -> A function to handle changing the password.
+    - handleChangeEmail: {function} -> A function to handle changing the email.
+    - handleChangeLastName: {function} -> A function to handle changing the lastname.
+    - handleChangeFirstName: {function} -> A function to handle changing the firstname.
+    - handleDeleteAccount: {function} -> A function to handle deleting the account.
+    - handleLogout: {function} -> A function to handle logging out.
 */
 export function useSettings() {
 
@@ -31,13 +53,17 @@ export function useSettings() {
     const handleChangeUsername = async () => {
         if (username == '') {
             /* The system checks whether the text field has been filled in */
+            userLog.error("Username information is missing.")
             setSettingsError('Please enter your new username.')
             return;
         } else {
             /* If the text field is filled in, the new username is saved */
-            console.log("changeUsername details have been entered.")
+            userLog.info("changeUsername details have been entered.")
 
-            changeUsername(username)
+            // removes blank
+            trimmedUsername = username.trim()
+
+            changeUsername(trimmedUsername)
 
         }
     }
@@ -46,13 +72,17 @@ export function useSettings() {
     const handleChangeFirstName = async () => {
         if (firstName == '') {
             /* The system checks whether the text field has been filled in */
+            userLog.error("First name information is missing.")
             setSettingsError('Please enter your new firstname.')
             return;
         } else {
             /* If the text field is filled in, the new lastname is saved */
-            console.log("changeFirstName details have been entered.")
+            userLog.info("changeFirstName details have been entered.")
 
-            changeFirstName(firstName)
+            // removes blank
+            trimmedFirstname = firstName.trim()
+
+            changeFirstName(trimmedFirstname)
 
         }
     }
@@ -61,13 +91,17 @@ export function useSettings() {
     const handleChangeLastName = async () => {
         if (lastName == '') {
             /* The system checks whether the text field has been filled in */
+            userLog.error("Last name information is missing.")
             setSettingsError('Please enter your new lastname.')
             return;
         } else {
             /* If the text field is filled in, the new lastname is saved */
-            console.log("changeLastName details have been entered.")
+            userLog.info("changeLastName details have been entered.")
 
-            changeLastName(lastName)
+            // removes blank
+            trimmedLastname = lastName.trim()
+
+            changeLastName(trimmedLastname)
 
         }
     }
@@ -76,15 +110,17 @@ export function useSettings() {
     const handleChangePassword = async () => {
         if (oldPassword == '' && newPassword == '' && confirmPassword == '') {
             /* The system checks whether the text field has been filled in */
+            userLog.error("OldPassword, newPassword or confirmPassword information are missing.")
             setSettingsError('Please enter your password informations.')
             return;
         } else if (newPassword !== confirmPassword) {
             /* The system checks whether the passwords match */
+            userLog.error("The passwords do not match.")
             setSettingsError('The passwords do not match.');
             return;
         } else {
             /* If the text field is filled in, the new password is saved */
-            console.log("changePassword details have been entered.")
+            userLog.info("changePassword details have been entered.")
 
             changePassword(newPassword)
         }
@@ -94,28 +130,44 @@ export function useSettings() {
     const handleChangeEmail = async () => {
         if (email == '') {
             /* The system checks whether the text field has been filled in */
+            userLog.error("Email information is missing.")
             setSettingsError('Please enter your new email.')
             return;
         } else {
             /* If the text field is filled in, the new email is saved */
-            console.log("changeEmail details have been entered.")
+            userLog.info("changeEmail details have been entered.")
 
-            changeEmail(email);
+            // removes blank
+            trimmedEmail = email.trim()
+
+            changeEmail(trimmedEmail);
         }
     }
 
+    // Delete Account
     const handleDeleteAccount = async (isChecked) => {
         if (isChecked) {
             /* If the Checkbox filled in, the account will be deleted. */
-            console.log("DeleteAccount details have been entered.")
-
-            deleteAccount();
+            userLog.info("DeleteAccount details have been entered.")
+            deleteAccount(() => router.navigate('routes/LoginPage'));
 
         } else {
             /* The system checks whether the Checkbox is filled. */
+            userLog.error("The checkbox is unchecked.")
             setSettingsError('Please ckeck the box.')
             return;
         }
+    }
+
+    // Logout
+    const handleLogout = () => {
+        const userManager = UserManager.getInstance();
+        if(userManager.deleteUser()) {
+            userLog.info("User has been logged out.")
+            router.replace('routes/LoginPage')
+            return
+        }
+        userLog.error("User could not be logged out.")
     }
 
     return {
@@ -140,6 +192,7 @@ export function useSettings() {
         handleChangeEmail,
         handleChangeLastName,
         handleChangeFirstName,
-        handleDeleteAccount
+        handleDeleteAccount,
+        handleLogout
     };
 }

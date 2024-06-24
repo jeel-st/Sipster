@@ -1,3 +1,7 @@
 import BombPartyGame from "./bombparty/BombPartyGame";
+import WahrheitOderPflichtGame from "./WahrheitOderPflicht/WahrheitOderPflichtGame";
 
-export { BombPartyGame };
+import BeerpongExtreme from "./beerpongExtreme/BeerpongExtreme";
+
+export { BombPartyGame, BeerpongExtreme, WahrheitOderPflichtGame };
+

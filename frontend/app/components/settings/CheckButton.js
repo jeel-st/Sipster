@@ -8,7 +8,8 @@ import { classNames } from '../../utils';
 This component renders a Checkbutton.
 Typ: Component from settings 
 
-@ change     -> Executes a specific function.
+@param change:      function -> Executes a specific function.
+@return:            JSX -> returns a CheckButton component
 */
 export default function CheckButton({ change }) {
 

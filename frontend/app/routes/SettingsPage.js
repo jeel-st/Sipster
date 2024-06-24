@@ -1,29 +1,46 @@
 // Imports
-import { SafeAreaView, Text, StatusBar, View, Platform } from "react-native";
+import { SafeAreaView, Text, StatusBar, View } from "react-native";
 import { SettingsButton, SipsterButton, CheckButton, TextField, IconButton, AboutUs, Help, Picker, DeleteAccount, ErrorMessage } from '../components/';
 import { styles } from '../constants';
 import { router } from 'expo-router';
 import { useSettings } from '../utils/hooks/useSettings';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ScrollView, NativeBaseProvider } from "native-base"
 import { classNames } from '../utils';
-import { setBackgroundColorAsync } from "expo-navigation-bar";
+import { navBarColor } from "../utils/navBarColor";
+import { useUser } from "../utils/hooks/useUser";
+import { usePathname } from "expo-router";
 
 /*
 Front end of the SettingsPage.
 Typ: Page/route
+
+@return:    JSX -> returns the SettingsPage component
 */
 
-// Background is set depending on the operating system
 export default function SettingsPage() {
-    if (Platform.OS === 'android') {
-        setBackgroundColorAsync(styles.Colors.primary);
-    }
 
-    // CSS properties of the ChangeButtons
+    // Background is set depending on the operating system
+    navBarColor(styles.Colors.primary)
+
+    // Declare a state variable 'user' with a default value of 'null' and a setter function 'setUser'
+    const [user, setUser] = useState(null)
+
+    // useEffect hook to update the user state whenever the pathname changes
+    const path = usePathname()
+    useEffect(() => {
+        setUser(useUser())
+    }, [path]);
+
+    // CSS properties that are used frequently
     const design = classNames(
         'flex-row items-center',
         'mt-6 mb-6 ml-3');
+
+    const currentValueDesign = classNames(
+        'ml-2',
+        'text-yellow' 
+    );
 
     // useState() -> Hook function of React to trade states
     const [isChangeUsernameVisible, setChangeUsernameVisible] = useState(false);
@@ -55,7 +72,8 @@ export default function SettingsPage() {
         handleChangePassword,
         handleChangeEmail,
         handleChangeLastName,
-        handleChangeFirstName
+        handleChangeFirstName,
+        handleLogout
     } = useSettings();
 
     return (
@@ -82,7 +100,10 @@ export default function SettingsPage() {
                         {/* Expandable element for changing the username */}
                         {isChangeUsernameVisible && (
                             <View className={design}>
-                                <TextField placeholder="new username" value={username} onChangeText={(text) => { setUsername(text); setSettingsError('') }} />
+                                <View>
+                                    <Text className={currentValueDesign}>current username: {user.username}</Text>
+                                    <TextField placeholder="new username" value={username} onChangeText={(text) => { setUsername(text); setSettingsError('') }} />
+                                </View>
                                 <CheckButton change={() => handleChangeUsername().then(() => setChangeUsernameVisible(!isChangeUsernameVisible))} />
                             </View>
                         )}
@@ -105,10 +126,13 @@ export default function SettingsPage() {
                         <SettingsButton title="change firstname" onPress={() => setChangeFirstNameVisible(!isChangeFirstNameVisible)} />
                         {/* Expandable element for changing the firstname */}
                         {isChangeFirstNameVisible && (
-                            <View className={design}>
-                                <TextField placeholder="new firstname" value={firstName} onChangeText={(text) => { setFirstName(text); setSettingsError('') }} />
-                                <CheckButton change={() => handleChangeFirstName().then(() => setChangeFirstNameVisible(!isChangeFirstNameVisible))} />
-                            </View>
+                                <View className={design}>
+                                    <View>
+                                    <Text className={currentValueDesign}>current firstname: {user.firstName}</Text>
+                                    <TextField placeholder="new firstname" value={firstName} onChangeText={(text) => { setFirstName(text); setSettingsError('') }} />
+                                    </View>
+                                    <CheckButton change={() => handleChangeFirstName().then(() => setChangeFirstNameVisible(!isChangeFirstNameVisible))} />
+                                </View>
                         )}
 
                         {/* Change Lastname*/}
@@ -116,7 +140,10 @@ export default function SettingsPage() {
                         {/* Expandable element for changing the lastname */}
                         {isChangeLastNameVisible && (
                             <View className={design}>
-                                <TextField placeholder="new lastname" value={lastName} onChangeText={(text) => { setLastName(text); setSettingsError('') }} />
+                                <View>
+                                    <Text className={currentValueDesign}>current lastname: {user.lastName}</Text>
+                                    <TextField placeholder="new lastname" value={lastName} onChangeText={(text) => { setLastName(text); setSettingsError('') }} />
+                                </View>
                                 <CheckButton change={() => handleChangeLastName().then(() => setChangeLastNameVisible(!isChangeLastNameVisible))} />
                             </View>
                         )}
@@ -126,7 +153,10 @@ export default function SettingsPage() {
                         {/* Expandable element for changing the email */}
                         {isChangeEmailVisible && (
                             <View className={design}>
-                                <TextField placeholder="new email" value={email} onChangeText={(text) => { setEmail(text); setSettingsError('') }} />
+                                <View>
+                                    <Text className={currentValueDesign}>current email: {user.email}</Text>
+                                    <TextField placeholder="new email" value={email} onChangeText={(text) => { setEmail(text); setSettingsError('') }} />
+                                </View>
                                 <CheckButton change={() => handleChangeEmail().then(() => setChangeEmailVisible(!isChangeEmailVisible))} />
                             </View>
                         )}
@@ -139,6 +169,9 @@ export default function SettingsPage() {
                                 <Picker change={() => setChangePictureVisible(!isChangePictureVisible)} />
                             </View>
                         )}
+
+                        {/* Error Message */}
+                        <ErrorMessage error={settingsError} />
 
                         <View className={classNames('mt-6')}>
                             {/*Help*/}
@@ -153,11 +186,8 @@ export default function SettingsPage() {
 
                         {/* Logout Button*/}
                         <View className={classNames('items-center')}>
-                            <SipsterButton title="Logout" navigation={() => router.navigate('routes/LoginPage')} />
+                            <SipsterButton title="Logout" navigation={handleLogout} />
                         </View>
-
-                        {/* Error Message */}
-                        <ErrorMessage error={settingsError} />
 
                         {/* Distance */}
                         <View className={classNames('h-20 mt-16')} />

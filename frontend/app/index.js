@@ -1,17 +1,28 @@
+// Imports
 import React, { useCallback, useEffect } from 'react'
-import { Redirect, SplashScreen } from 'expo-router'
+import { SplashScreen } from 'expo-router'
 import { classNames } from './utils'
-import { Text, View } from 'react-native'
+import { View } from 'react-native'
 import { Asset } from 'expo-asset'
 import LoginPage from '../app/routes/LoginPage'
+import { rootLog } from './utils/logger/config'
 
 // Prevent the splash screen from automatically hiding (preventing White Screen)
 SplashScreen.preventAutoHideAsync()
 
+/*
+    Main component of the app
+
+    @return: object -> the main component of the app
+*/
 export default function index() {
   let [isLoaded, setIsLoaded] = React.useState(false)
 
-  // Function to cache image resources
+  /*
+      Method to cache the resources of the app
+
+      @return: void
+  */
   let cacheResourcesAsync = async () => {
     const images = [require('./assets/images/logo-small.png')]
 
@@ -22,18 +33,26 @@ export default function index() {
     return Promise.all(cacheImages)
   }
 
-  // useEffect to load resources when the component mounts
+  /*
+      UseEffect to load the resources of the app
+
+      @return: void
+  */
   useEffect(() => {
     const loadResourcesAsync = async () => {
       await cacheResourcesAsync()
-      console.log("App loaded")
+      rootLog.info("App loaded")
       setIsLoaded(true)
     }
 
     loadResourcesAsync()
   }, [])
 
-  // Function to hide the splash screen once we know the root view has already performed layout.
+  /*
+      Method to hide the splash screen once we know the root view has already performed layout
+
+      @return: void
+  */
   const onLayoutRootView = useCallback(async () => {
     await SplashScreen.hideAsync()
   }, [isLoaded])

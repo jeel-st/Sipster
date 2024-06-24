@@ -1,13 +1,26 @@
-import {ScrollView, Dimensions } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import { ScrollView, Dimensions } from 'react-native'
+import React, { useContext, useEffect, useState } from 'react'
 import { classNames } from '../../utils';
 import HomeFriendBtn from './HomeFriendBtn';
+import { UserContext } from '../provider/UserProvider';
 
-// Getting the width of the screen
-const screenWidth = Dimensions.get('window').width;
+/*
+    HomeFriends is a component that represents the list of friends as a tablist.
+    It displays a list of friends in a horizontal scroll view.
+    Typ: Component from home
 
-export default function HomeFriends({ user, displayFriend, handleFriendSelection }) {
+    @param user: object -> the user
+    @param displayFriend: function -> the function to display the friend
+    @param handleFriendSelection: function -> the function to handle the selection of a friend
+    @return: JSX -> returns the HomeFriends component
+*/
+export default function HomeFriends({ displayFriend, handleFriendSelection }) {
+    const user = useContext(UserContext)
+
     const [scrollEnable, setScrollEnable] = useState(false);
+
+    // Getting the width of the screen
+    const screenWidth = Dimensions.get('window').width;
 
     // useEffect to update scrollEnable based on the number of friends
     useEffect(() => {
@@ -28,7 +41,15 @@ export default function HomeFriends({ user, displayFriend, handleFriendSelection
             contentContainerStyle={{ width: contentWidth }}
             scrollEnabled={scrollEnable}>
             {
-                user.friends.map((friend, index) => <HomeFriendBtn friend={friend} displayFriend={displayFriend} handleFriendSelection={handleFriendSelection} friendId={index} key={index} />)
+                user.friends.map((friend, index) =>
+                    <HomeFriendBtn
+                        friend={friend}
+                        displayFriend={displayFriend}
+                        handleFriendSelection={handleFriendSelection}
+                        friendId={index}
+                        key={index}
+                    />
+                )
             }
         </ScrollView >
     )
