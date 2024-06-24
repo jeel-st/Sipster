@@ -27,6 +27,53 @@ async function postFriendRequest(req, res){
 }
 
 /**
+ * Diese Methode dient dazu, eine Freundesanfrage zu löschen, zu akzeptieren oder abzulehnen.
+ * 
+ * @param req: Object -> Die Anfrage
+ * @param res: Object -> Die Antwort
+ * @param acceptFriendRequest: Function -> Funktion zum Akzeptieren einer Freundesanfrage in der Datenbank
+ * @param declineFriendRequest: Function -> Funktion zum Ablehnen einer Freundesanfrage in der Datenbank
+ * @param removeFriend: Function -> Funktion zum Entfernen eines Freundes aus der Liste in der Datenbank
+ * @return: JSON -> Eine Bestätigungsmeldung oder eine entsprechende Fehlermeldung
+ * @throws Error -> Wenn ein interner Serverfehler auftritt oder die Anfrage nicht korrekt ist
+ */
+
+async function deleteFriendRequest(req, res){
+    try{
+        const fromUserID = req.params.fromUserID
+        const toUserID = req.params.toUserID
+        if(req.query.status == null && (req.query.remove == null || req.query.remove !== "true")){
+            res.status(404).send("Status and remove are null or wrong")
+            return;
+        }
+
+        if(req.query.status == "true"){
+
+            const friendRequestDel = await database.acceptFriendRequest(fromUserID, toUserID)
+            res.send("User was accepted!")
+
+        }else if(req.query.status == "false"){
+            const friendRequestDel = await database.declineFriendRequest(fromUserID, toUserID)
+            res.send("User was declined")
+
+        }
+
+        if(req.query.remove == "true"){
+            const friendRequestDel = await database.removeFriend(req)
+            if (friendRequestDel == false) {
+                res.status(400).send("Sipster can't be removed as a friend")
+            }else {
+                res.send("Friend was removed")
+            }
+        }
+
+    }catch(err){
+        console.error(err)
+        res.status(500).send("Something went wrong " + err)
+    }
+}
+
+/**
  * Diese Methode dient dazu, die Liste der Freunde abzurufen.
  * 
  * @param req: Object -> Die Anfrage
