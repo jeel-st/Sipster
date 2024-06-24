@@ -43,7 +43,7 @@ async function deleteFriendRequest(req, res){
         const fromUserID = req.params.fromUserID
         const toUserID = req.params.toUserID
         if(req.query.remove == null){
-            res.status(404).send("Status and remove are null or wrong")
+            res.status(404).send("Remove is null")
             return;
         }
 
