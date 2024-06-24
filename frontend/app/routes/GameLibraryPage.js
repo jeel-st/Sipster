@@ -7,7 +7,7 @@ import { categorys, games, styles } from '../constants'
 import Game from '../entitys/game'
 import GameCard from '../components/games/GameCard'
 import useGameSearch from '../utils/hooks/useGameSearch'
-
+import { useAccount } from "../utils/hooks/useAccount";
 
 /*
     GameLibraryPage is a page that displays all games in the library.
@@ -21,8 +21,21 @@ export default function GameLibraryPage() {
       const gameList = filteredGames === undefined ? games.map((game) => new Game(game)) : filteredGames.map((game) => new Game(game));
 
 
-
+  // Background is set depending on the operating system
   useNavBarColor(styles.Colors.secondary)
+
+  // Declare a state variable 'user' with a default value of 'null' and a setter function 'setUser'
+  const [user, setUser] = useState(null)
+
+  // useEffect hook to update the user state whenever the pathname changes
+  const path = usePathname()
+  useEffect(() => {
+      setUser(useUser())
+  }, [path]);
+
+  // import of the logik
+  const { level, levelInfo } = useAccount();
+
 
 
 
@@ -59,8 +72,13 @@ export default function GameLibraryPage() {
             'flex items-end justify-center', // position
             'h-20 ', // sizing
             'bg-yellow shadow-md shadow-black rounded-3xl', // styling
-          )}>
-              <Text className="text-center text-2xl font-bold px-4">1000 sips</Text>
+            )}>
+              <Text className='text-center text-xl font-bold'>Level {level}</Text>
+              <Text className='text-center'>______</Text>
+              <View className="flex-row items-center">
+                  <Text className='text-center text-3xl font-bold mt-2 mr-2'>{user && user.sips}</Text>
+                  <Text className='text-center text-xl mt-2'>sips</Text>
+              </View>
           </View>
           <TextInput className={classNames(
                     'pl-2 mt-4', // spacing

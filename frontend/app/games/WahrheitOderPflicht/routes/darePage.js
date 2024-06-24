@@ -7,6 +7,7 @@ import { router } from 'expo-router';
 import { useNavigation } from '@react-navigation/native';
 import { player } from '../utils/player';
 import dare from '../constants/dare'
+import { quitGame } from '../../utils/navigator';
 
 
 
@@ -53,7 +54,7 @@ export default function darePage() {
 
                 {/* Close Button */}
                 <TouchableOpacity
-                    onPress={() => { router.navigate('(tabs)/games')}}
+                    onPress={() => quitGame(activity, router)}
                     className={classNames(
                         'justify-center items-center' //position
                         )}>

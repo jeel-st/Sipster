@@ -6,6 +6,7 @@ import classNames from '../WahrheitOderPflicht/utils/classNames'
 import { router } from 'expo-router';
 import { TextInput } from 'react-native';
 import { player } from './utils/player';
+import { quitGame } from '../../utils/navigator';
 
 /*
 WahrheitOderPflichtGame starts the Game and allow the player to add all other players 
@@ -37,11 +38,11 @@ export default function WahrheitOderPflichtGame() {
                     )}>
 
                 {/* Sipster Logo */}
-                <Image source={require('../WahrheitOderPflicht/assets/images/logo-small.png')} />
+                <Image source={require('../WahrheitOderPflicht/assets/images/logo-small.png')}/>
 
                 {/* Close Button */}
                 <TouchableOpacity
-                    onPress={() => { router.navigate('(tabs)/games')}}
+                    onPress={() => quitGame(activity, router)}
                     className={classNames(
                         'justify-center items-center'//position
                         )}>
