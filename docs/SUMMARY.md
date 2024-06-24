@@ -18,7 +18,7 @@
   * [VS Code Extensions](frontend/vs-code-extensions.md)
 * [Backend](backend/README.md)
   * [Package Structure](backend/package-structure.md)
-  * [Rest API´s](backend/rest-api-s/README.md)
+  * [Rest API´s](backend/rest-api-s.md)
     * [Login](backend/rest-api-s/login.md)
     * [Registrierung](backend/rest-api-s/registrierung.md)
     * [Events](backend/rest-api-s/events.md)
