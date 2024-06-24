@@ -24,8 +24,8 @@ async function getLogin(req, res) {
         }else {
             res.status(500).json("Something unexpected happen")
         }
-    } catch {
-        res.status(500).send("Something went wrong!")
+    } catch (err){
+        res.status(500).send("Something went wrong!" + err)
     }
 
 }

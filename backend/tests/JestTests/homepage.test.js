@@ -20,7 +20,7 @@ test('getting Homepage for the first Time', async () => {
                 case "game": expect(element).toHaveProperty('playtime'); break;
                 case "event": expect(element).toHaveProperty('header'); break;
                 case "activtiy": expect(element).toHaveProperty('playtime'); break;
-                default: expect(response.data[0]).toHaveProperty('TestFailed'); break;
+                default: expect(response.data[0]).toHaveProperty('TestFailed'); break; //if the default value is reached the Test Failed!
             }
         }
     } catch (err) {

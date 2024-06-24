@@ -47,7 +47,7 @@ async function getProfilePicture(req, res){
         const pictureURL = await database.getProfilePictureURL(userIDObj, original)
         console.log("url: "+ pictureURL)
         if (!pictureURL) {
-            res.status(404).send('Profilbild nicht gefunden');
+            res.status(400).send('Profilbild nicht gefunden');
         } else {
             res.send(pictureURL)
             console.log(pictureURL)

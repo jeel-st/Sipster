@@ -19,7 +19,7 @@ async function getUserData(req, res) {
         if (err instanceof database.UsernameNotFoundError) {
             res.status(400).send(err.message)
         }else {
-            res.status(404).send("Something went horribly wrong!")
+            res.status(500).send("Something went horribly wrong!" + err)
         }
     }
 }
@@ -40,7 +40,7 @@ async function getEvents(req, res) {
         if (err instanceof database.UsernameNotFoundError) {
             res.status(400).send(err.message)
         }else {
-            res.status(404).send("Something went horribly wrong!" + err)
+            res.status(500).send("Something went horribly wrong!" + err)
         }
     }
 
@@ -60,7 +60,7 @@ async function getNotStoredEvents(req, res) {
         if (err instanceof database.UsernameNotFoundError) {
             res.status(400).send(err.message)
         }else {
-            res.status(404).send("Something went horribly wrong!" + err)
+            res.status(500).send("Something went horribly wrong!" + err)
         }
     }
 }
@@ -87,7 +87,7 @@ async function postNewUsername(req, res) {
         if (err instanceof database.UsernameNotFoundError) {
             res.status(400).send(err.message)
         }else {
-            res.status(404).send("Something went horribly wrong!")
+            res.status(500).send("Something went horribly wrong!" + err)
         }
     }
 }
@@ -113,7 +113,7 @@ async function postNewPassword(req, res) {
         if (err instanceof database.UsernameNotFoundError) {
             res.status(400).send(err.message)
         }else {
-            res.status(404).send("Something went horribly wrong!")
+            res.status(500).send("Something went horribly wrong!" + err)
         }
     }
 }
@@ -139,7 +139,7 @@ async function postNewEmail(req, res) {
         if (err instanceof database.UsernameNotFoundError) {
             res.status(400).send(err.message)
         }else {
-            res.status(404).send("Something went horribly wrong!")
+            res.status(500).send("Something went horribly wrong!" + err)
         }
     }
 }
@@ -159,13 +159,13 @@ async function addEvent(req, res) {
         if (addingData){
             res.send("Added Event succesfully to User!")
         }else {
-            res.status(404).send("Something went wrong!")
+            res.status(500).send("Something went wrong!")
         }
     }catch(err){
         if (err instanceof database.UsernameNotFoundError) {
             res.status(400).send(err.message)
         }else {
-            res.status(404).send("Something went horribly wrong!")
+            res.status(500).send("Something went horribly wrong!" + err)
         }
     }
 }
@@ -192,12 +192,12 @@ async function changeFirstName(req, res) {
             if (result == true) {
                 res.send("First Name changed successfully!")
             } else {
-                res.status(404).send("User not found")
+                res.status(400).send("User not found")
             }
         }
     } catch (error) {
         log.error(error)
-        res.status(500).send("Something went wrong.")
+        res.status(500).send("Something went wrong." + error)
     }
 }
 
@@ -224,12 +224,12 @@ async function changeLastName(req, res) {
             if (result == true) {
                 res.send("Last Name changed successfully!")
             } else {
-                res.status(404).send("User not found")
+                res.status(400).send("User not found")
             }
         }
     } catch (error) {
         log.error(error)
-        res.status(500).send("Something went wrong.")
+        res.status(500).send("Something went wrong." + error)
     }
 }
 module.exports = {

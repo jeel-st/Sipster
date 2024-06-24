@@ -19,7 +19,7 @@ async function getHomepage(req, res) {
             res.status(400).json("Wrong input!")
         }
     }catch (err) {
-        res.status(404).json(err)
+        res.status(500).json(err)
     }
 }
 
