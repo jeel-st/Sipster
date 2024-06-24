@@ -7,7 +7,7 @@ import { categorys, games, styles } from '../constants'
 import Game from '../entitys/game'
 import GameCard from '../components/games/GameCard'
 import useGameSearch from '../utils/hooks/useGameSearch'
-
+import { useAccount } from "../utils/hooks/useAccount";
 
 /*
     GameLibraryPage is a page that displays all games in the library.
@@ -26,6 +26,12 @@ export default function GameLibraryPage() {
 
   // Declare a state variable 'user' with a default value of 'null' and a setter function 'setUser'
   const [user, setUser] = useState(null)
+
+  // useEffect hook to update the user state whenever the pathname changes
+  const path = usePathname()
+  useEffect(() => {
+      setUser(useUser())
+  }, [path]);
 
   // import of the logik
   const { level, levelInfo } = useAccount();
