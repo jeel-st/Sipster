@@ -12,7 +12,7 @@ async function postActivity(req, res) {
         if (activityId){
             res.json({ _id: activityId });
         }else {
-            res.status(404).json("Something went wrong here!")
+            res.status(500).json("Internal Server Error!")
         }
         
         //res.json(activity)
@@ -31,7 +31,7 @@ async function getActivities(req, res) {
         }else if (activities != null){
             res.send(activities)
         }else {
-            res.status(404).json("Something went wrong here!")
+            res.status(500).json("Something went wrong here!")
         }
         
         //res.json(activity)
@@ -51,7 +51,7 @@ async function getActivitiesFromUser(req, res) {
         }else if (activities != null){
             res.send(activities)
         }else {
-            res.status(404).json("Something went wrong here!")
+            res.status(500).json("Something went wrong here!")
         }
         
         //res.json(activity)
@@ -100,7 +100,7 @@ async function addReaction(req, res) {
             res.status(400).json("The reaction couldn't be added.")
         }
     }catch (err) {
-        res.status(404).json('Something went wrong!: ' + err);
+        res.status(500).json('Something went wrong!: ' + err);
     }
 }
 
@@ -114,7 +114,7 @@ async function deleteReaction(req, res) {
             res.status(400).json("Bad request!")
         }
     }catch (err) {
-        res.status(404).json("Something went wrong here: ") + err
+        res.status(500).json("Something went wrong here: " + err)
     }
 }
 
