@@ -50,7 +50,7 @@ choose Page lets the player whose turn it is choose between truth and dare
  
                  {/* Close Button */}
                  <TouchableOpacity
-                     onPress={() => quitGame(activity, router)}
+                     onPress={() => { router.navigate('(tabs)/games')}}
                      className={classNames(
                         'justify-center items-center' //position
                         )}>

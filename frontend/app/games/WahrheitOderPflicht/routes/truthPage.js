@@ -51,7 +51,7 @@ export default function truthPage() {
  
                  {/* Close Button */}
                  <TouchableOpacity
-                     onPress={() => quitGame(activity, router)}
+                     onPress={() => { router.navigate('(tabs)/games')}}
                      className={classNames(
                          'justify-center items-center'//position
                          )}>
