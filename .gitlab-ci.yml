@@ -1,4 +1,3 @@
-
 stages:
   - build
   - test
@@ -15,3 +14,25 @@ build-backend:
     - "cd backend"
     - "npm i"
     - "timeout 30s node app.js || [[ $? -eq 143 ]]"
+
+test-backend:
+  stage: test
+  image: node:20-alpine
+  services:
+    - mongo:latest
+  script:
+    - cd backend
+    - npm i
+    - npm test
+
+package-project:
+  stage: package
+  image: alpine:latest
+  script:
+    - apk add zip
+    - zip -r project.zip .
+  artifacts:
+    paths:
+      - project.zip
+  only:
+    - develop

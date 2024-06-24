@@ -1,8 +1,17 @@
+// Imports
 import { useState, useEffect } from 'react';
 import { fetchFriendsInvitations, removeFriend, sendFriendInvite, declineFriendInvite } from '../database/friendsFetcher';
-import useUser from '../database/userFetcher';
 import { useDisclose } from 'native-base';
+import { friendLog } from '../logger/config';
+import { useUser } from './useUser';
+import UserManager from '../../entitys/UserManager';
 
+/*
+    Custom hook to handle the profile header button
+
+    @param friend: object -> the friend to handle
+    @return: object -> the object containing the hook methods
+*/
 const useProfileHeaderButton = (friend) => {
     const [isFriend, setIsFriend] = useState(false);
     const [isInvited, setIsInvited] = useState(false);
@@ -10,51 +19,80 @@ const useProfileHeaderButton = (friend) => {
     const { isOpen, onToggle } = useDisclose();
 
     const user = useUser();
+    const userManager = UserManager.getInstance()
 
+    /*
+        Method to handle the friend status
+
+        @return: void
+    */
     const handleIsFriend = async () => {
+        // Check if the friend is already a friend
         const isFriend = user.friends.some(element => element.username === friend.username);
-        const invites = await fetchFriendsInvitations(user.username);
+
+        // Fetch the friend invitations to check if the friend is invited or has invited the user
+        const invites = await fetchFriendsInvitations(user);
         const inviteReceived = invites[0].some(element => element.username === friend.username);
         const sentReceived = invites[1].some(element => element.username === friend.username);
 
+        // Set Status based on if the user is already a friend or has received or sent an invite
         setIsFriend(isFriend);
         setIsInvited(isFriend ? false : (inviteReceived || sentReceived));
     };
 
+    /*
+        Method to remove a friend
 
-    useEffect(() => {
-        if (user) handleIsFriend()
-    }, [user]);
-
+        @return: void
+    */
     const removeFriendHandler = async () => {
         try {
-            await removeFriend(user.username, friend.username);
+            await removeFriend(user, friend);
             await handleIsFriend();
 
             setIsFriend(false)
-            user.friends.filter(item => item.username !== friend.username);
+            userManager.updateFriends(user);
         } catch (error) {
-            console.log("[useFriendStatus.removeFriendHandler] ", error);
+            friendLog.error("Remove friendrequest failed", error)
         }
     };
 
+    /*
+        Method to invite a friend
+
+        @return: void
+    */
     const inviteFriendHandler = async () => {
         try {
-            await sendFriendInvite(user.username, friend.username);
+            await sendFriendInvite(user, friend);
             await handleIsFriend();
         } catch (error) {
-            console.log("[useFriendStatus.inviteFriendHandler] ", error);
+            friendLog.error("Send friendrequest failed", error)
         }
     };
 
+    /*
+        Method to decline the friend invite
+
+        @return: void
+    */
     const closeInviteHandler = async () => {
         try {
-            await declineFriendInvite(user.username, friend.username);
+            await declineFriendInvite(user, friend);
             await handleIsFriend();
         } catch (error) {
-            console.log("[useFriendStatus.closeInviteHandler] ", error);
+            friendLog.error("Decline friendrequest failed", error)
         }
     };
+
+    /*
+        UseEffect to handle the friend status when user changes or site loads
+
+        @return: void
+    */
+    useEffect(() => {
+        if (user) handleIsFriend()
+    }, [user]);
 
     return { isFriend, isInvited, removeFriendHandler, inviteFriendHandler, closeInviteHandler, isOpen, onToggle };
 };

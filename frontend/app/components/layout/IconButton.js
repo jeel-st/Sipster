@@ -8,8 +8,9 @@ import { classNames } from '../../utils';
 This button displays a customised icon and navigates to a new page.
 Typ: Component from layout
 
-@ icon 
-@ navigation 
+@param icon:            string -> Icon name is transferred
+@param navigation:      function -> navigates to a new page
+@return:                JSX -> returns a icon button
 */
 const IconButton = ({ icon, navigation }) => {
     return (

@@ -1,49 +1,26 @@
+/*
+    This class is used to represent an activity in the system. An activity is a post that a user makes in the system.
+    It contains the before and after images, the reactions, the caption, the game, the user, and the tagged friends.
+
+    @param game: object -> the game object
+    @param user: object -> the user object
+    @param taggedFriends: array -> the tagged friends
+*/
 class Activity {
-    constructor(ID, beforeImagePath, afterImagePath, emojis, caption, game, creator, taggedFriends) {
-        this.ID = ID;
-        this.beforeImagePath = beforeImagePath;
-        this.afterImagePath = afterImagePath;
-        this.emojis = emojis;
-        this.caption = caption;
+    constructor(game, user, taggedFriends) {
         this.game = game;
-        this.creator = creator;
+        this.user = user;
         this.taggedFriends = taggedFriends;
-    }
-
-    toObject() {
-        return {
-            ID: this.ID ?? 0,
-            beforeImagePath: this.beforeImagePath ?? '',
-            afterImagePath: this.afterImagePath ?? '',
-            emojis: this.emojis ?? [],
-            caption: this.caption ?? '',
-            game: this.game ?? {},
-            creator: this.creator ?? {},
-            taggedFriends: this.taggedFriends ?? []
-        };
-    }
-
-    static fromObject(obj) {
-        return new Activity(
-            obj.ID,
-            obj.beforeImagePath,
-            obj.afterImagePath,
-            obj.emojis,
-            obj.caption,
-            obj.game,
-            obj.creator,
-            obj.taggedFriends
-        );
     }
 
     present() {
         return `Activity ID: ${this.ID}` +
             `\nBefore Image Path: ${this.beforeImagePath}` +
             `\nAfter Image Path: ${this.afterImagePath}` +
-            `\nEmojis: ${this.emojis}` +
+            `\nReactions: ${this.reactions}` +
             `\nCaption: ${this.caption}` +
             `\nGame: ${this.game}` +
-            `\nCreator: ${this.creator}`
+            `\nUser: ${this.user}`
     }
 }
 

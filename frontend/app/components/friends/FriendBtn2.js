@@ -1,33 +1,38 @@
-import { View, Text, Image, TouchableOpacity } from 'react-native'
-import { styles } from '../../constants'
-import { router } from 'expo-router'
 import React from 'react'
-import { acceptFriendInvite, declineFriendInvite } from '../../utils/database/friendsFetcher'
+import { View, Text, Image, TouchableOpacity } from 'react-native'
+import { router } from 'expo-router'
 import { fetchProfilePictureCompressed } from '../../utils/database/imageFetcher'
+import { classNames } from '../../utils/classNames'
+import { useFriendBtn2 } from '../../utils/hooks/friends/useFriendBtn2'
 
-export default function FriendBtn2({ friend, selectedTab, user, handleReloadFriends }) {
-  const handleAcceptInvite = async () => {
-    await acceptFriendInvite(friend.username, user.username)
-    handleReloadFriends()
-  }
+/*
+    FriendBtn2 is a component that represents a single friend in the friend list.
+    It displays the profile picture, name, and username of the friend.
+    It also displays buttons to accept or decline friend requests.
+    Typ: Component from friends
 
-  const handleDeclineInvite = async () => {
-    await declineFriendInvite(friend.username, user.username)
-    handleReloadFriends()
-  }
-
-  const handleCancelInvite = async () => {
-    await declineFriendInvite(user.username, friend.username)
-    handleReloadFriends()
-  }
+    @param friend:          object -> the friend to display
+    @param selectedTab:     number -> the selected tab in the friends page
+    @param handleReloadFriends: function -> the function to call when the friends list should be reloaded
+    @return:                JSX -> returns the FriendBtn2 component
+*/
+export default function FriendBtn2({ friend, selectedTab, handleReloadFriends }) {
+  const { handleAcceptInvite, handleDeclineInvite, handleCancelInvite } = useFriendBtn2({ friend, handleReloadFriends })
 
   return (friend &&
     <TouchableOpacity
-      className="flex-1 flex-row items-center rounded-full shadow-md shadow-black h-20 space-x-4 mb-5"
-      style={{ backgroundColor: styles.Colors.secondary }}
+      className={classNames(
+        'flex-1 flex-row items-center', // position
+        'space-x-4 mb-5', // spacing
+        'h-20', // sizing
+        'rounded-full shadow-md shadow-black bg-secondary' // styling
+      )}
       onPress={() => router.navigate({ pathname: "/routes/ProfilePage", params: friend })}
     >
-      <View className="w-20 h-20 rounded-full bg-primary">
+      <View className={classNames(
+        'w-20 h-20', // sizing
+        'rounded-full bg-primary' // styling
+      )}>
         <Image className="w-full h-full rounded-full" source={{ uri: fetchProfilePictureCompressed(friend) }} />
       </View>
       <View className="flex-1 self-center">
@@ -39,12 +44,22 @@ export default function FriendBtn2({ friend, selectedTab, user, handleReloadFrie
         <>
           <TouchableOpacity
             onPress={handleAcceptInvite}
-            className="flex-1 h-10 rounded-full bg-primary justify-center ml-1">
+            className={classNames(
+              'flex-1 justify-center', // position
+              'ml-1', // spacing
+              'h-10', // sizing
+              'rounded-full bg-primary' // styling
+            )}>
             <Text className="text-center text-white font-bold">Accept</Text>
           </TouchableOpacity>
+
           <TouchableOpacity
             onPress={handleDeclineInvite}
-            className="w-10 h-10 rounded-full justify-center mr-2">
+            className={classNames(
+              'justify-center', // position
+              'mr-2', // spacing
+              'w-10 h-10' // sizing
+            )}>
             <Text className="text-center text-white font-bold">X</Text>
           </TouchableOpacity>
         </>
@@ -54,7 +69,12 @@ export default function FriendBtn2({ friend, selectedTab, user, handleReloadFrie
         <>
           <TouchableOpacity
             onPress={handleCancelInvite}
-            className="w-10 h-10 rounded-full justify-center mr-2">
+            className={classNames(
+              'justify-center', // position
+              'mr-2', // spacing
+              'w-10 h-10', // sizing
+              'rounded-full' // styling
+            )}>
             <Text className="text-center text-white font-bold">X</Text>
           </TouchableOpacity>
         </>

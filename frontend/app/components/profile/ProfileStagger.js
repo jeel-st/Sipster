@@ -1,6 +1,15 @@
 import { Box, Center, HStack, Icon, IconButton, Stagger } from 'native-base'
 import { MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons'
 
+/*
+    ProfileStagger is a component that represents the staggered buttons in the profile page.
+    It displays the microphone, video, and photo buttons.
+    Typ: Component from profile
+
+    @param isOpen:   boolean -> if the buttons are open
+    @param onToggle: function -> the function to call when the buttons are toggled
+    @return:         JSX -> returns the ProfileStagger component
+*/
 export default function ProfileStagger({ isOpen, onToggle }) {
     return (
         <Center position="absolute">

@@ -8,7 +8,8 @@ import { styles } from '../../constants';
 This component defines the layout of the ErrorMessages.
 Typ: Component from layout
 
-@ error 
+@param error:       string -> error message
+@return:            JSX -> returns the error message component
 */
 const ErrorMessage = ({ error }) => {
     return (

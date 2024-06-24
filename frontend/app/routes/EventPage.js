@@ -1,16 +1,22 @@
-import { View, Text, SafeAreaView, StatusBar, Image, Platform } from 'react-native';
-import { Events, EventInfoCard, SipsterButton } from '../components';
+import { View, Text, SafeAreaView, StatusBar, Image } from 'react-native';
+import { Events, EventInfoCard, SipsterButton, SavedEvents } from '../components';
 import { styles } from '../constants';
 import React from 'react';
 import { useEventDisplay } from '../utils';
-import { setBackgroundColorAsync } from 'expo-navigation-bar';
+import { navBarColor } from '../utils/navBarColor';
+import { settingsFetcher } from '../utils/database/settingsFetcher';
 
+/*
+    EventPage is a page that displays the event information and allows the user to save events and view more details.
+    Typ: Page/route
+
+    @return: JSX -> returns the EventPage component
+*/
 export default function EventPage() {
     const { displayEvent, handleEventSelection } = useEventDisplay();
+    const { saveEvent } = settingsFetcher();
 
-    if (Platform.OS === 'android') {
-        setBackgroundColorAsync(styles.Colors.secondary);
-    }
+    navBarColor(styles.Colors.secondary)
 
     return (
         <SafeAreaView className="flex-1" style={{ backgroundColor: styles.Colors.primary }}>
@@ -34,7 +40,7 @@ export default function EventPage() {
 
                 {/* Button */}
                 <View className="items-center">
-                    <SipsterButton title="save the date >>" />
+                    <SipsterButton title="save the date >>" navigation={() => saveEvent(displayEvent)}/>
                 </View>
             </View>
         </SafeAreaView>
