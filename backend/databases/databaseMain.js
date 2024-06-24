@@ -189,7 +189,8 @@ async function getSipsterID(username) {
     const personalInformation = (await initializeCollections()).personalInformation
     let sipsterID = await personalInformation.find({username: username}).project({_id: 1}).toArray()
     sipsterID = sipsterID.map(id => id._id)
-    if (!sipsterID) {
+    console.log(sipsterID)
+    if (sipsterID.length === 0) {
         throw new UsernameNotFoundError("This username was not found in the database")
     }
     return sipsterID[0]

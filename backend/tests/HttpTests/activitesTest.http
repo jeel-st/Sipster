@@ -13,7 +13,7 @@ Content-Type: application/json
 
 ###
 
-GET {{host}}/activities/661d09ba6671060e01a4fd3e
+GET {{host}}/activities/661d67b17e280ddfbcf6ec93
 
 ###
 

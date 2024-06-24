@@ -105,7 +105,7 @@ async function postNewPassword(req, res) {
     try{
         const isValidPassword = await database.postNewPassword(req)
         if(!isValidPassword) {
-            res.status(1001).json("The given password is invalid!")
+            res.status(400).json("The given password is invalid!")
         }else {
             res.send("Password was succesfully posted!")
         }
@@ -131,7 +131,7 @@ async function postNewEmail(req, res) {
     try{
         const isValidEmail = await database.postNewEmail(req)
         if (!isValidEmail){
-            res.status(1001).json("The given email is invalid!")
+            res.status(400).json("The given email is invalid!")
         }else {
             res.send("Email was succesfully posted!")
         }

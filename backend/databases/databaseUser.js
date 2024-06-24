@@ -18,7 +18,7 @@ async function getUserData(req) {
     const userID = await database.getSipsterID(username)
     const userData = await personalInformation.find({_id: userID}).project({_id: 1, username: 1, profilePicture: 1, email: 1, firstName: 1, lastName: 1, friends: 1, sips: 1, events: 1, profilePictureC: 1}).toArray()
 
-    log.info(userData[0])
+    log.info("User: " + userData[0])
     return userData[0];
 }
 
