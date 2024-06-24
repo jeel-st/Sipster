@@ -11,7 +11,8 @@ const categories = [
             "Es ist verboten, toten Kojoten die Hoden zu verknoten.",
             "Wer gegen Aluminium minimal immun ist, besitzt Aluminium-Minimal-Immunität.",
             "Bietet Brunhilde berauschende Brüste, buhlt Bodo brünstig beim Balle."
-        ]
+        ],
+        description: "Sprich den Zungenbrecher laut und deutlich aus."
     },
     {
         name: "Game Changer",
@@ -29,7 +30,8 @@ const categories = [
             "Vor jedem Wurf muss der Spieler eine philosophische oder tiefgründige Frage laut stellen.",
             "Der Spieler muss mit dem Rücken zum Tisch stehen und über die Schulter werfen.",
             "Der Spieler muss eine Textzeile aus einem bekannten Lied singen, bevor er wirft."
-        ]
+        ],
+        description: "Die Regeln ändern sich für die nächste Runde."
     },
     {
         name: "Fast Thinker",
@@ -55,7 +57,8 @@ const categories = [
             "Nenne 5 Namen, die mit dem Buchstaben 'G' beginnen.",
             "Nenne 4 Obstsorten, die mehr als 5 Buchstaben haben.",
             "Nenne 4 verschiedene Fachrichtungen für Informatiker."
-        ]
+        ],
+        description: "Schnelle Denkaufgaben, die sofort beantwortet werden müssen."
     },
     {
         name: "Trivia",
@@ -69,7 +72,8 @@ const categories = [
             "Was ist die Hauptzutat von traditionellem Sushi? (Reis)",
             "Welches Land gewann die Fußball-Weltmeisterschaft 2014? (Deutschland)",
             "Was ist das härteste natürlich vorkommende Material auf der Erde? (Diamant)"
-        ]
+        ],
+        description: "Beantworte die Frage so schnell wie möglich."
     },
     {
         name: "Musical",
@@ -87,7 +91,8 @@ const categories = [
             "Lotusblume. Tobee",
             "Layla. DJ Robin",
             "Bumsbar. Ikke Hüftgold"
-        ]
+        ],
+        description: "Summe den Refrain eines bekannten Liedes. Dein Team errät den Songtitel."
     },
     {
         name: "Rhyme Time",
@@ -99,7 +104,8 @@ const categories = [
             "Erfinde eine lustige Wortkombination, die sich reimt, wie 'Schlauer Bauer'.",
             "Erfinde einen kurzen, knackigen Werbeslogan, der sich auf das Wort 'Schnell' reimt.",
             "Erfinde einen Superheldennamen, der sich auf 'Flug' reimt."
-        ]
+        ],
+        description: "Finde Reimwörter oder reim dich frei."
     }
 ];
 

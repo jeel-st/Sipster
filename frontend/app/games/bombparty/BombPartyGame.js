@@ -8,7 +8,7 @@ import { quitGame } from '../../utils/navigator';
 
 export default function BombPartyGame({activity}) {
     const router = useRouter();
-    const { isPlaying, category, handleStartGame } = useBombParty()
+    const { isPlaying, category, countdown, handleStartGame } = useBombParty()
 
     return (
         <View className={classNames(
@@ -49,7 +49,8 @@ export default function BombPartyGame({activity}) {
                     </Text>
 
                     <TouchableOpacity onPress={handleStartGame} disabled={isPlaying}>
-                        <FontAwesome5 name="bomb" size={200} color="white" />
+                        {!isPlaying && <FontAwesome5 name="bomb" size={200} color="white" />}
+                        {isPlaying && <FontAwesome5 name="bomb" size={200} color="red" />}
                     </TouchableOpacity>
                 </View>
 
@@ -60,7 +61,9 @@ export default function BombPartyGame({activity}) {
                     'bg-primary rounded-3xl'
                 )}>
                     <Text className={classNames('text-7xl text-yellow font-bold')}>
-                        Go!
+                        {countdown === 0 && isPlaying && "Go!"}
+                        {countdown === 0 && !isPlaying && "^"}
+                        {countdown !== 0 && countdown}
                     </Text>
                     <Text className={classNames('text-2xl text-yellow font-light')}>
                         {isPlaying ? `Nenne: ${category}` : "Detonate the bomb"}

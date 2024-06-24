@@ -104,7 +104,7 @@ export async function sendFriendInvite(user, friend) {
 */
 export async function acceptFriendInvite(fromUser, toUser) {
     try {
-        const response = await axiosInstance.delete(`/friends/${fromUser._id}/${toUser._id}?status=true`);
+        const response = await axiosInstance.put(`/friends/accept/${fromUser._id}/${toUser._id}`);
         friendLog.debug("Friend invite has been accepted successfully.")
 
         return true
@@ -121,7 +121,7 @@ export async function acceptFriendInvite(fromUser, toUser) {
 */
 export async function declineFriendInvite(fromUser, toUser) {
     try {
-        const response = await axiosInstance.delete(`/friends/${fromUser._id}/${toUser._id}?status=false`);
+        const response = await axiosInstance.delete(`/friends/delete/${fromUser._id}/${toUser._id}?remove=false`);
         friendLog.debug("Friend invite has been declined successfully.")
 
         return false
@@ -138,7 +138,7 @@ export async function declineFriendInvite(fromUser, toUser) {
 */
 export async function removeFriend(user, friend) {
     try {
-        const response = await axiosInstance.delete(`/friends/${user._id}/${friend._id}?remove=true`);
+        const response = await axiosInstance.delete(`/friends/delete/${user._id}/${friend._id}?remove=true`);
         friendLog.debug("Friend has been removed successfully.")
     } catch (error) {
         throw error;
