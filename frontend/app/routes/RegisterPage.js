@@ -1,28 +1,24 @@
 // Imports
-import { View, Text, SafeAreaView, Pressable, Image, Platform } from 'react-native';
-import React, { useEffect } from 'react';
+import { View, Text, SafeAreaView, Pressable, Image } from 'react-native';
+import React from 'react';
 import { router } from 'expo-router';
 import { styles } from '../constants';
 import { Popover, NativeBaseProvider } from "native-base";
 import { ErrorMessage, SipsterButton, SmallTextField, TextField } from '../components';
 import { useRegisterLogic } from '../utils/hooks/useRegister/';
-import { setBackgroundColorAsync } from 'expo-navigation-bar';
-import { useIsFocused } from '@react-navigation/native';
 import { classNames } from '../utils';
+import { useNavBarColor } from '../utils/hooks/useNavBarColor';
 
 /*
 Front end of the RegisterPage.
 Typ: Page/route
+
+@return:    JSX -> returns the RegisterPage component
 */
 export default function RegisterPage() {
 
     // Background is set depending on the operating system
-    const isFocused = useIsFocused();
-    useEffect(() => {
-        if (Platform.OS === 'android') {
-            setBackgroundColorAsync(styles.Colors.primary);
-        }
-    }, [isFocused]);
+    useNavBarColor(styles.Colors.primary)
 
     // Import the logic for the RegisterPage from useRegister.js
     const {

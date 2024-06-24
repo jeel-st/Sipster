@@ -6,18 +6,22 @@ import { ProfileCard, ProfileHeaderButtons } from '../components'
 import { useLocalSearchParams } from 'expo-router'
 import { NativeBaseProvider } from 'native-base'
 import { fetchProfilePicture } from '../utils/database/imageFetcher'
-import { setBackgroundColorAsync } from 'expo-navigation-bar'
-import { styles } from '../constants'
 
-const { width, height } = Dimensions.get('window');
+/*
+    ProfilePage is a page that displays the profile of a friend.
+    Typ: Page/route
 
+    @return: JSX -> returns the ProfilePage component
+*/
 export default function ProfilePage() {
     const friend = useLocalSearchParams()
+    const { width, height } = Dimensions.get('window');
+
     return (
         <NativeBaseProvider>
             <SafeAreaView className={classNames(
-                'flex-1',
-                'bg-secondary',
+                'flex-1', // position
+                'bg-secondary', // styling
             )}>
                 {/* Header Buttons*/}
                 <ProfileHeaderButtons friend={friend} />

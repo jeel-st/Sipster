@@ -1,15 +1,24 @@
+import React from 'react';
 import { View } from 'react-native'
 import { classNames } from '../../utils'
 import FriendsTabButton from './FriendsTabButton'
-import React from 'react';
+import { tabTitles } from '../../constants/friends';
 
+/*
+    FriendsCategorys is a component that represents the tabs in the friends page.
+    It displays the tabs for "my friends", "received", and "sent" friend requests.
+    Typ: Component from friends
+
+    @param selectedTab:     number -> the selected tab
+    @param onTabChange:     function -> the function to call when the tab is changed
+    @return:                JSX -> returns the FriendsCategorys component
+*/
 export default function FriendsCategorys({ selectedTab, onTabChange }) {
-  const tabTitles = ["my friends", "received", "sent"];
 
   return (
     <View className={classNames(
-      'flex-row justify-start items-center',
-      'px-4 pt-4',
+      'flex-row justify-start items-center', // position
+      'px-4 pt-4', // spacing
     )}>
       {
         tabTitles.map((title, index) => (

@@ -1,11 +1,22 @@
+// Imports
 import FormData from 'form-data'
 import axiosInstance, { HOST } from './axiosConfig'
+import { userLog } from '../logger/config'
 
-export async function uploadProfilePicture(file, username) {
+/*
+    Method to upload a profile picture
+
+    @param file: object -> the image to upload
+    @param user: object -> the user to upload the image
+    @return: string -> the image name
+*/
+export async function uploadProfilePicture(file, user) {
+    // Get the filename from the URI
     const filename = file.uri.split("/").pop()
 
+    // Create FormData for the image upload
     let data = new FormData()
-    data.append('username', username)
+    data.append('userID', user._id)
     data.append('file', { uri: file.uri, name: filename, type: file.mimeType })
 
     try {
@@ -15,35 +26,64 @@ export async function uploadProfilePicture(file, username) {
             }
         })
 
-        console.log("[uploadProfilePicture] upload profile picture successfully")
+        userLog.debug("Profile picture has been uploaded successfully.")
 
         return response.data
     } catch (error) {
-        console.log(error)
+        userLog.error("Profile picture could not be uploaded.", error)
         throw error
     }
 }
 
+/*
+    Method to fetch a profile picture
+
+    @param friend: object -> the friend to fetch the profile picture
+    @param refreshDate: string -> the date to refresh the image
+    @return: string -> the profile picture
+*/
 export function fetchProfilePicture(friend, refreshDate) {
+    if(!refreshDate) refreshDate = friend.lastLogin
     try {
-        const endPoint = `${HOST}/static/profilePictures/${getProfileFileName(friend)}?${refreshDate}`
+        // Create the endpoint for the profile picture
+        const endPoint = `${HOST}/static/profilePictures/compressed1080/${getProfileFileName(friend)}?${refreshDate}`
         return endPoint
     } catch (error) {
         throw error;
     }
 }
 
+/*
+    Method to fetch a compressed profile picture
+
+    @param friend: object -> the friend to fetch the profile picture
+    @param refreshDate: string -> the date to refresh the image
+    @return: string -> the compressed profile picture
+*/
 export function fetchProfilePictureCompressed(friend, refreshDate) {
+    if(!refreshDate) refreshDate = friend.lastLogin
     try {
-        const endPoint = `${HOST}/static/profilePictures/compressed/${getProfileFileName(friend)}?${refreshDate}`
+        // Create the endpoint for the compressed profile picture
+        const endPoint = `${HOST}/static/profilePictures/compressed200/${getProfileFileName(friend)}?${refreshDate}`
         return endPoint
     } catch (error) {
         throw error;
     }
 }
 
+/*
+    Method to get the profile file name
+
+    @param friend: object -> the friend to get the profile file name
+    @return: string -> the profile file name
+*/
 function getProfileFileName(friend) {
-    if(friend.profilePicture == null) return "unknown.jpg"
-    const name = friend.profilePicture.split("/")
-    return name[name.length - 1]
+    //if the friend has no profile picture, return the default image
+    if(friend.profilePicture == null) return "unknown.webp"
+
+    //get the name of the file without the extension
+    const name = friend.profilePicture.split("/").pop().split(".").slice(0, -1).join(".");
+
+    //return the name with the webp extension
+    return name + ".webp"
 }

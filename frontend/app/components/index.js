@@ -2,6 +2,7 @@
 import EventBtn from './events/EventBtn';
 import EventInfoCard from './events/EventInfoCard';
 import Events from './events/Events';
+import SavedEvents from './events/savedEvents';
 
 // Friends imports
 import FriendBtn from './friends/FriendBtn';
@@ -17,8 +18,10 @@ import GameCard from './games/GameCard';
 import Games from './games/Games';
 import GameFriendBtn from './games/GameFriendBtn';
 import GameActivity from './games/GameActivity';
-import GamesPerCategory from './games/GamesPerCategory';
 import GameCameraBtn from './games/GameCameraBtn';
+import GameGoBtn from './games/GameGoBtn';
+import GameAcitvityPost from './games/GameAcitvityCam';
+import GameInfoCard from './games/GameInfoCard';
 
 
 // Layout imports
@@ -28,6 +31,7 @@ import SmallTextField from './layout/SmallTextField';
 import TagCard from './layout/TagCard';
 import TextField from './layout/TextField';
 import ErrorMessage from './layout/ErrorMessage';
+import ShowFriends from './settings/ShowFriends.js';
 
 // Settings Import
 import SettingsButton from './settings/SettingsButton';
@@ -54,6 +58,9 @@ import HomeActivityCard from './home/HomeActivityCard';
 import HomeReactionCard from './home/HomeReactionCard';
 import HomeFriendBtn from './home/HomeFriendBtn';
 import HomeActivityImage from './home/HomeAcitivityImage';
+import HomeFooter from './home/HomeFooter';
+import HomeHeader from './home/HomeHeader';
+import HomeActivityFactory from './home/HomeActivityFactory';
 
 // Provider Imports
 import { UserProvider } from './provider/UserProvider';
@@ -62,19 +69,19 @@ import { RefreshContext } from './provider/RefreshProvider';
 
 export {
   // Events
-  EventBtn, EventInfoCard, Events,
+  EventBtn, EventInfoCard, Events, SavedEvents,
 
   // Friends
   FriendBtn, FriendBtn2, FriendsCategorys, FriendsContainer, FriendsHeaderButtons, FriendsScrollView, FriendsTabButton,
 
   // Games
-  GameCard, Games, GameFriendBtn, GameActivity,  GamesPerCategory, GameCameraBtn,
+  GameCard, Games, GameFriendBtn, GameActivity, GameCameraBtn, GameGoBtn, GameAcitvityPost, GameInfoCard,
 
   // Layout
   IconButton, SipsterButton, SmallTextField, TagCard, TextField, ErrorMessage,
 
   // Settings
-  SettingsButton, CheckButton, AboutUs, TextButton, Help, Picker, DeleteAccount, 
+  SettingsButton, CheckButton, AboutUs, TextButton, Help, Picker, DeleteAccount, ShowFriends,
 
   // Profile
   ProfileCard, ProfileHeaderButtons, ProfileStagger, ProfileInviteBtn,
@@ -83,7 +90,7 @@ export {
   FriendsH2Skeleton, FriendsSkeleton,
 
   // Home
-  HomeFriends, HomeActivityCard, HomeReactionCard, HomeFriendBtn, HomeActivityImage,
+  HomeFriends, HomeActivityCard, HomeReactionCard, HomeFriendBtn, HomeActivityImage, HomeFooter, HomeHeader, HomeActivityFactory,
 
   // Provider
   UserProvider, RefreshContext

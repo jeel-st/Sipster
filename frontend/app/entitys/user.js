@@ -1,36 +1,36 @@
-const { fetchFriendsData } = require("../utils/database/friendsFetcher");
+/*
+    User Class to create a user object
 
+    @param userData: object -> the user object
+*/
 class User {
     constructor(userData) {
         {/* User Information */ }
-        this.userID = userData._id;
+        this._id = userData._id;
         this.firstName = userData.firstName;
         this.lastName = userData.lastName;
         this.fullName = `${userData.firstName} ${userData.lastName}`;
         this.username = userData.username;
-        this.email = userData.email;
         this.registerDate = userData.registerDate;
+        this.email = userData.email;
         this.profilePicture = userData.profilePicture;
+        this.sips = userData.sips;
+        this.lastLogin = new Date();
 
         {/* Friends Information */ }
-        this.friends = null;
+        this.friends = userData.friends;
     }
 
-    async initializeFriends() {
-        this.friends = await fetchFriendsData(this.username);
-    }
-
-    async present() {
-        // Ensure friends are initialized before presenting user data
-        if (!this.friends) {
-            await this.initializeFriends();
-        }
-        return `User ID: ${this.userID}\n` +
+    // Method to log the details of the User
+    present() {
+        const friendNames = this.friends.map(friend => friend.fullName).join(', ');
+        return `\nUser ID: ${this._id}\n` +
             `Name: ${this.firstName} ${this.lastName}\n` +
             `Username: ${this.username}\n` +
             `Email: ${this.email}\n` +
-            `Register Date: ${this.registerDate}\n` +
-            `Friends: ${this.friends}\n`;
+            `Profile Picture: ${this.profilePicture}\n` +
+            `Last Login: ${this.lastLogin}\n` +
+            `Friends: ${friendNames}\n`;
     }
 }
 
