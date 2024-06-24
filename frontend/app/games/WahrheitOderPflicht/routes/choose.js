@@ -6,6 +6,7 @@ import classNames from '../utils/classNames'
 import { router } from 'expo-router';
 import { useNavigation } from '@react-navigation/native';
 import currentPlayer from '../constants/currentPlayers';
+import { quitGame } from '../../utils/navigator';
 
 
 /*
@@ -49,7 +50,7 @@ choose Page lets the player whose turn it is choose between truth and dare
  
                  {/* Close Button */}
                  <TouchableOpacity
-                     onPress={() => { router.navigate('(tabs)/games')}}
+                     onPress={() => quitGame(activity, router)}
                      className={classNames(
                         'justify-center items-center' //position
                         )}>
