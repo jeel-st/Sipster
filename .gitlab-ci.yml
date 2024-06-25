@@ -7,8 +7,6 @@ stages:
 smoke-backend:
   stage: smoke
   image: node:20-alpine
-  services:
-    - mongo:latest
   script:
     - "cd backend"
     - "npm i"
@@ -17,8 +15,6 @@ smoke-backend:
 test-backend:
   stage: test
   image: node:20-alpine
-  services:
-    - mongo:latest
   script:
     - cd backend
     - npm i
