@@ -34,4 +34,4 @@ package-project:
     paths:
       - project.zip
   only:
-    - develop
+    - main
