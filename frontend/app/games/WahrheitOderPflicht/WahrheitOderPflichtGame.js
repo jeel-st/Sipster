@@ -116,6 +116,7 @@ export default function WahrheitOderPflichtGame() {
                         'w-[200px]', // sizing
                         'rounded-3xl shadow-md shadow-black bg-yellow' // styling
                         )}
+                        testID='Start Button'
                         onPress={() => {
                             handleAllPlayer();
                             router.navigate('/games/WahrheitOderPflicht/routes/choose')}}>
