@@ -132,9 +132,10 @@ export default function WahrheitOderPflichtGame({ activity }) {
                         'px-6 py-4 mt-5', // spacing
                         'w-[200px]', // sizing
                         'rounded-3xl shadow-md shadow-black bg-yellow' // styling
-                    )}
+                        )}
+                        testID='Start Button'
                         onPress={() => {
-                            router.navigate({ pathname: '/games/WahrheitOderPflicht/routes/choosePage', params: { activity: JSON.stringify(activity), players: JSON.stringify(players) } })
+                            router.navigate({ pathname: '/games/WahrheitOderPflicht/routes/choosePage', params: { activity: JSON.stringify      (activity), players: JSON.stringify(players) } })
                         }}>
                         <Text className={classNames(
                             'text-center', // position
