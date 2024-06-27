@@ -11,17 +11,31 @@ export default function Category({ handlePress, category, challenge, isReady }) 
             'bg-primary rounded-3xl'
         )}>
             <View className={classNames(
-                'flex justify-center items-center',
-                'w-full h-[69%]'
+                'flex-1 justify-evenly items-center',
+                'px-2',
+                'w-full'
             )}>
-                <Text className={classNames('text-9xl text-yellow font-bold')}>
-                    {!isReady && category.emoji}
-                </Text>
+                {!isReady && <>
+                    <Text className={classNames('text-4xl text-yellow font-bold')}>
+                        {category.emoji}
+                    </Text>
 
-                <Text className={classNames('text-4xl text-yellow font-bold')}>
-                    {!isReady && category.name}
-                    {isReady && challenge}
-                </Text>
+                    <Text className={classNames('text-4xl text-yellow font-bold')}>
+                        {category.name}
+                    </Text>
+
+                    <Text className={classNames('text-2xl text-white font-semithin')}>
+                        {category.description}
+                    </Text>
+                </>
+                }
+
+
+                {isReady &&
+                    <Text className={classNames('text-2xl text-yellow font-bold')}>
+                        {challenge}
+                    </Text>
+                }
             </View>
 
             <View className={classNames('w-full h-[1%]', 'bg-secondary',)} />

@@ -2,7 +2,11 @@
 import { logger, consoleTransport, fileAsyncTransport } from "react-native-logs";
 import * as FileSystem from 'expo-file-system';
 
-// Function to generate the file name for the log file based on the current date
+/*
+    Method to generate the file name for the log file based on the current date
+
+    @return: string -> the generated file name
+*/
 const generateLogFileName = () => {
     const today = new Date();
     const date = today.getDate();
@@ -11,6 +15,11 @@ const generateLogFileName = () => {
     return `app_logs_${year}-${month}-${date}.txt`;
 };
 
+/*
+    Method to print the files in the document directory
+
+    @return: void
+*/
 const printFilesInDocumentDirectory = async () => {
     try {
         // Document-Verzeichnis abrufen
@@ -25,8 +34,6 @@ const printFilesInDocumentDirectory = async () => {
         console.error('Error printing files in document directory:', error);
     }
 };
-
-//printFilesInDocumentDirectory()
 
 // Configuration of the logger
 const config = {

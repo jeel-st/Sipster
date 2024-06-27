@@ -1,3 +1,12 @@
+/*
+    Mehtod to get the MIME type of a file based on its extension.
+
+    Example:
+    getMimeType('image.jpg') -> 'image/jpeg'
+
+    @param string -> fileUri: Dateipfad
+    @return: string -> der MIME-Typ der Datei
+*/
 export async function getMimeType(fileUri) {
     const extensionIndex = fileUri.lastIndexOf('.');
     if (extensionIndex !== -1) {

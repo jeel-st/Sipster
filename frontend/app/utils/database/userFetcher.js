@@ -1,8 +1,13 @@
-// imports
+// Imports
 import axiosInstance from "./axiosConfig";
 import { userLog } from "../logger/config";
 
+/*
+    Method to fetch a user
 
+    @param username: string -> the username to fetch the user
+    @return: object -> the user
+*/
 export async function fetchUser(username) {
     try {
         const reponse = await axiosInstance.get(`/user/${username}`)
