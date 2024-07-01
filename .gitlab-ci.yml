@@ -1,15 +1,12 @@
 stages:
-  - build
+  - smoke
   - test
   - package
-  - release
 
 
-build-backend:
-  stage: build
+smoke-backend:
+  stage: smoke
   image: node:20-alpine
-  services:
-    - mongo:latest
   script:
     - "cd backend"
     - "npm i"
@@ -18,8 +15,6 @@ build-backend:
 test-backend:
   stage: test
   image: node:20-alpine
-  services:
-    - mongo:latest
   script:
     - cd backend
     - npm i
@@ -35,4 +30,4 @@ package-project:
     paths:
       - project.zip
   only:
-    - develop
+    - main

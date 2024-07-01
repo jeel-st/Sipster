@@ -1,9 +1,6 @@
 //Imports
 const database = require('../databases/databaseMain')
-const Form = require('multiparty').Form
 const { uploadOptions } = require('../utils/uploadLogic/config')
-const fs = require('fs');
-const path = require('path');
 const log = require("../logging/logger")
 const logicFile = require("../utils/profilePictureLogic/profilePictureLogic")
 const { ObjectId } = require('mongodb');

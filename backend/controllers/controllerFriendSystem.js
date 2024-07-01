@@ -42,23 +42,16 @@ async function deleteFriendRequest(req, res){
     try{
         const fromUserID = req.params.fromUserID
         const toUserID = req.params.toUserID
-        if(req.query.status == null && (req.query.remove == null || req.query.remove !== "true")){
-            res.status(404).send("Status and remove are null or wrong")
+        if(req.query.remove == null){
+            res.status(404).send("Remove is null")
             return;
         }
 
-        if(req.query.status == "true"){
-
-            const friendRequestDel = await database.acceptFriendRequest(fromUserID, toUserID)
-            res.send("User was accepted!")
-
-        }else if(req.query.status == "false"){
+        if(req.query.remove == "false"){
             const friendRequestDel = await database.declineFriendRequest(fromUserID, toUserID)
             res.send("User was declined")
 
-        }
-
-        if(req.query.remove == "true"){
+        }else if(req.query.remove == "true"){
             const friendRequestDel = await database.removeFriend(req)
             if (friendRequestDel == false) {
                 res.status(400).send("Sipster can't be removed as a friend")
@@ -70,6 +63,29 @@ async function deleteFriendRequest(req, res){
     }catch(err){
         console.error(err)
         res.status(500).send("Something went wrong " + err)
+    }
+}
+
+/**
+ * Diese Methode dient dazu, eine Freundesanfrage zu akzeptieren.
+ * 
+ * @param req: Object -> Die Anfrage
+ * @param res: Object -> Die Antwort
+ * @param acceptFriendRequest: Function -> Funktion zum Akzeptieren einer Freundesanfrage in der Datenbank
+ * @return: String -> Eine Bestätigungsmeldung oder eine entsprechende Fehlermeldung
+ * @throws Error -> Wenn ein interner Serverfehler auftritt oder die Anfrage nicht korrekt ist
+ */
+
+async function acceptFriendRequest(req, res){
+    try{
+        const fromUserID = req.params.fromUserID
+        const toUserID = req.params.toUserID
+
+            const friendRequestDel = await database.acceptFriendRequest(fromUserID, toUserID)
+            res.send("User was accepted!")
+
+    }catch(err){
+            res.status(500).send("Internal Server Error")
     }
 }
 
@@ -159,5 +175,6 @@ module.exports = {
     //getFriendNameList,
     getFriendList,
     getFriendRecommendations,
-    getInvitations
+    getInvitations,
+    acceptFriendRequest
 }

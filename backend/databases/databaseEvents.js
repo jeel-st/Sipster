@@ -18,7 +18,7 @@ async function getEvents() {
 /**
  * Mit dieser Methode wird ein neues Event in der Datenbank erstellt.
  * 
- * @param req:      Request- Objekt -> hier müssen Name, Datum, Zeit, Überschrift, Beschreibung und Tags mitgeschickt werden
+ * @param req:      Request- Objekt -> hier müssen Name, Datum, Überschrift, Beschreibung und Tags mitgeschickt werden
  * @return:         String (Bei Erfolg) -> "Success", 
  * @throws:         Error (Bei Fehler) -> "Can't add Event"
  */
