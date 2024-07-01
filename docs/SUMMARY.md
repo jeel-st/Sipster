@@ -40,4 +40,5 @@
     * [Homepage](backend/rest-api-s/homepage.md)
     * [Sips](backend/rest-api-s/sips.md)
   * [Datenbank](backend/datenbank.md)
+* [Fehlende Features und bekannte Fehler](fehlende-features-und-bekannte-fehler.md)
 * [Mitwirkende](mitwirkende.md)

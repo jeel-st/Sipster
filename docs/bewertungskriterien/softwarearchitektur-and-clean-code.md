@@ -9,7 +9,7 @@ Auch diese Anforderungen haben wir soweit korrekt umgesetzt. Das Klassendiagramm
 
 Aufgrund der Programmiersprache von JavaScript war es uns leider nicht möglich Interfaces zu erstellen, da diese in der Programmiersprache nicht vorhanden sind.&#x20;
 
-Die Dokumentation und Begründung, welches Architekturmuster gewählt wurde, kann man unter [Dokumentationen/Architecture Decision Record - ADRs/Nr. 002](../dokumentationen/architecture-decision-record-adrs/nr.-002-verwendung-eines-schichtmodells-in-kombination-mit-einer-microkernel-struktur-als-softwarea.md) finden. Factories finden sich besonders im Frontend. //TODO
+Die Dokumentation und Begründung, welches Architekturmuster gewählt wurde, kann man unter [Dokumentationen/Architecture Decision Record - ADRs/Nr. 002](../dokumentationen/architecture-decision-record-adrs/nr.-002-verwendung-eines-schichtmodells-in-kombination-mit-einer-microkernel-struktur-als-softwarea.md) finden. Factories finden sich bei uns im Frontend.  Unsere GameFactory.js kann unter `/sipster/frontend/app/routes` gefunden werden, darin befindet sich eine Factory.
 
 Die restlichen zwei ADR's behandeln die Themen "[Verwendung von React Native für die App Entwicklung](../dokumentationen/architecture-decision-record-adrs/nr.-001-verwendung-von-react-native-fur-die-app-entwicklung.md)" und "[Erstellung des Guides zur Nutzung von Changelogs/Tags](../dokumentationen/architecture-decision-record-adrs/nr.-003-erstellung-des-guides-zur-nutzung-von-changelogs-tags.md)" und sind ebenfalls unter [Dokumentationen/Architecture Decision Record - ADRs](../dokumentationen/architecture-decision-record-adrs/) zu finden.
 
