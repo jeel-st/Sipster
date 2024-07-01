@@ -11,7 +11,7 @@ const soundMap = {
 }
 
 const minTime = 30000; // 30 seconds
-const maxTime = 60000; // 1 minute
+const maxTime = 30000; // 1 minute
 
 // Custom hook for managing Bomb Party game state
 const useBombParty = () => {
