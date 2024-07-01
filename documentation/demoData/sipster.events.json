@@ -1,0 +1,80 @@
+[{
+  "_id": {
+    "$oid": "666b482f2a8cb9c8529d119c"
+  },
+  "name": "Unithekle",
+  "time": "20:00",
+  "header": "Vaihingen • 7 Apr 2024",
+  "desc": "Imagine a drinking night with Jordine...",
+  "tags": [
+    "community",
+    "120 sips"
+  ],
+  "date": {
+    "$date": "2024-04-07T20:00:43.338Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "666b48332a8cb9c8529d119d"
+  },
+  "name": "Straussi-3",
+  "time": "19:00",
+  "header": "Vaihingen • 18 06 2024",
+  "desc": "The legendary Straussi 3 Sommerfest returns! This time on whole new Level!!! Don't miss out",
+  "tags": [
+    "community",
+    "100 sips"
+  ],
+  "date": {
+    "$date": "2024-06-18T19:00:47.059Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "666b48362a8cb9c8529d119e"
+  },
+  "name": "Campus-Beach-Bar",
+  "time": "16:00",
+  "header": "Vaihingen • 19 07 2024",
+  "desc": "Ihr seit Student*innen und habt kein Geld für Urlaub? Gar kein Problem wir bringen den Strand zu euch bei unserer Beach Party zwischen Palmen und Pinã Coladãs!",
+  "tags": [
+    "community",
+    "150 sips"
+  ],
+  "date": {
+    "$date": "2024-07-19T16:00:50.411Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "666b48382a8cb9c8529d119f"
+  },
+  "name": "Jazz Festival",
+  "time": "20:00",
+  "header": "jazzopen stuttgart 2024",
+  "desc": "Freue dich! Die Jazzopen werden das Event dieses Jahres! Sichere dir Tickets jetzt!",
+  "tags": [
+    "community",
+    "priced"
+  ],
+  "date": {
+    "$date": "2024-07-27T20:00:52.701Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "666b48ee2a8cb9c8529d11a0"
+  },
+  "name": "Semester Closing x HS ES",
+  "time": "23:00",
+  "header": "Schräglage • 26. Juli 2024",
+  "desc": "Feiert mit I Love College und der Campus Leben der HS Esslingen die Semester Closing Party in der Schräglage!",
+  "tags": [
+    "community",
+    "priced"
+  ],
+  "date": {
+    "$date": "2024-07-26T23:00:54.823Z"
+  }
+}]

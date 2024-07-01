@@ -1,0 +1,670 @@
+[{
+  "_id": {
+    "$oid": "661cff86211a8acc9c714af1"
+  },
+  "username": "lisagtz",
+  "profilePicture": "/home/sipster/sipster/backend/static/profilePictures/Picture661cff86211a8acc9c714af1.jpg",
+  "profilePictureCom200": "/home/sipster/sipster/backend/static/profilePictures/compressed200/Picture661cff86211a8acc9c714af1.webp",
+  "encryptedPassword": "$2b$10$A0HtXn6nlLeKBLcrUfkNiO1lguPpwU4c6kuHj/pKWSLtiauyGwTR6",
+  "salt": "$2b$10$A0HtXn6nlLeKBLcrUfkNiO",
+  "email": "lg@hdm-stuttgart.de",
+  "firstName": "Lisa",
+  "lastName": "Götz",
+  "registerDate": "2024-04-15T10:20:54.007Z",
+  "friends": [
+    {
+      "$oid": "663bd3b7969fc6302facf1ee"
+    },
+    {
+      "$oid": "661d07706671060e01a4fd3d"
+    }
+  ],
+  "sips": 1000,
+  "events": [],
+  "profilePictureCom1080": "/home/sipster/sipster/backend/static/profilePictures/compressed1080/Picture661cff86211a8acc9c714af1.webp"
+},
+{
+  "_id": {
+    "$oid": "661d07706671060e01a4fd3d"
+  },
+  "username": "gamsa",
+  "profilePicture": "/home/sipster/sipster/backend/static/profilePictures/Picture661d07706671060e01a4fd3d.jpeg",
+  "encryptedPassword": "$2b$10$wPO5rIRz7K/SnxVLiRODyu2FB2AaSFsEmDAv2U88ecvhXp/kFDxzG",
+  "salt": "$2b$10$wPO5rIRz7K/SnxVLiRODyu",
+  "email": "lg107@hdm-stuttgart.de",
+  "firstName": "Lars",
+  "lastName": "Gerigk",
+  "registerDate": "2024-04-15T10:54:39.933Z",
+  "friends": [
+    {
+      "$oid": "663bd3b7969fc6302facf1ee"
+    },
+    {
+      "$oid": "661d5aeb7caebb258991f758"
+    },
+    {
+      "$oid": "661d5bdb670a3c30735043e8"
+    },
+    {
+      "$oid": "661cff86211a8acc9c714af1"
+    },
+    {
+      "$oid": "661d67b17e280ddfbcf6ec93"
+    },
+    {
+      "$oid": "661d09ba6671060e01a4fd3e"
+    }
+  ],
+  "sips": 5,
+  "events": [],
+  "profilePictureCom200": "/home/sipster/sipster/backend/static/profilePictures/compressed200/Picture661d07706671060e01a4fd3d.webp",
+  "profilePictureCom1080": "/home/sipster/sipster/backend/static/profilePictures/compressed1080/Picture661d07706671060e01a4fd3d.webp"
+},
+{
+  "_id": {
+    "$oid": "661d5aeb7caebb258991f758"
+  },
+  "username": "gingerbread_joe",
+  "profilePicture": "/home/sipster/sipster/backend/static/profilePictures/Picture661d5aeb7caebb258991f758.jpg",
+  "encryptedPassword": "$2b$10$5qER3Z7Q4FYpk18pHkk7huB0/Q9J3Vc2S1SX/3zxB/1LOCW10R0nC",
+  "salt": "$2b$10$5qER3Z7Q4FYpk18pHkk7hu",
+  "email": "joel.starkov@gmail.com",
+  "firstName": "Joel",
+  "lastName": "Starkov",
+  "registerDate": "2024-04-15T16:50:51.482Z",
+  "friends": [
+    {
+      "$oid": "663bd3b7969fc6302facf1ee"
+    },
+    {
+      "$oid": "661d07706671060e01a4fd3d"
+    },
+    {
+      "$oid": "661d09ba6671060e01a4fd3e"
+    }
+  ],
+  "sips": 1200,
+  "events": [],
+  "profilePictureCom200": "/home/sipster/sipster/backend/static/profilePictures/compressed200/Picture661d5aeb7caebb258991f758.webp",
+  "profilePictureCom1080": "/home/sipster/sipster/backend/static/profilePictures/compressed1080/Picture661d5aeb7caebb258991f758.webp"
+},
+{
+  "_id": {
+    "$oid": "661d5bdb670a3c30735043e8"
+  },
+  "username": "maikek",
+  "profilePicture": null,
+  "profilePictureCom200": null,
+  "encryptedPassword": "$2b$10$wILllnh6dhiagK9eiDSaDuoQn.foCq9mnw4/FqLllI.mOvnsnpVlu",
+  "salt": "$2b$10$wILllnh6dhiagK9eiDSaDu",
+  "email": "mk414@hdm-stuttgart.de",
+  "firstName": "Maike",
+  "lastName": "König",
+  "registerDate": "2024-04-15T16:54:51.548Z",
+  "friends": [
+    {
+      "$oid": "663bd3b7969fc6302facf1ee"
+    },
+    {
+      "$oid": "662f79c5d943e5c4c46d11cd"
+    },
+    {
+      "$oid": "661d07706671060e01a4fd3d"
+    }
+  ],
+  "sips": 300,
+  "events": [],
+  "profilePictureCom1080": null
+},
+{
+  "_id": {
+    "$oid": "662f79c5d943e5c4c46d11cd"
+  },
+  "username": "testing",
+  "profilePicture": null,
+  "profilePictureCom200": null,
+  "encryptedPassword": "$2b$10$sOy9Cica.B6eYVOFNoN9V.eNm0.ceMn.lmVYSWAqsFL/XQ.zIiK6K",
+  "salt": "$2b$10$sOy9Cica.B6eYVOFNoN9V.",
+  "email": "test@hdm.de",
+  "firstName": "test",
+  "lastName": "tester",
+  "registerDate": "2024-04-29T10:43:17.630Z",
+  "friends": [
+    {
+      "$oid": "663bd3b7969fc6302facf1ee"
+    },
+    {
+      "$oid": "661d5bdb670a3c30735043e8"
+    }
+  ],
+  "sips": 0,
+  "events": [],
+  "profilePictureCom1080": null
+},
+{
+  "_id": {
+    "$oid": "66376ff8d943e5c4c46d11d1"
+  },
+  "username": "emmy",
+  "profilePicture": null,
+  "profilePictureCom200": null,
+  "encryptedPassword": "$2b$10$5a3evFZQUCs7zoH.3rAYp.xuvYoD1Fwb3DH0rP5XXUM3WeOFWYDwi",
+  "salt": "$2b$10$5a3evFZQUCs7zoH.3rAYp.",
+  "email": "es@hdm-stuttgart.de",
+  "firstName": "emmy",
+  "lastName": "semar",
+  "registerDate": "2024-05-05T11:39:36.669Z",
+  "friends": [
+    {
+      "$oid": "663bd3b7969fc6302facf1ee"
+    }
+  ],
+  "sips": 150,
+  "events": [],
+  "profilePictureCom1080": null
+},
+{
+  "_id": {
+    "$oid": "663bd3b7969fc6302facf1ee"
+  },
+  "username": "Sipster",
+  "profilePicture": "/home/sipster/sipster/backend/static/profilePictures/Picture663bd3b7969fc6302facf1ee.png",
+  "profilePictureCom200": "/home/sipster/sipster/backend/static/profilePictures/compressed200/Picture663bd3b7969fc6302facf1ee.webp",
+  "encryptedPassword": "$2b$10$EOMmcB67leRRsUymDidLyO/erQ9dvrGc9IOvSvmupebYlKNe5fWdC",
+  "salt": "$2b$10$EOMmcB67leRRsUymDidLyO",
+  "email": "sipster@gmail.com",
+  "firstName": "Team",
+  "lastName": "Sipster",
+  "registerDate": "2024-05-08T19:34:15.089Z",
+  "friends": [
+    {
+      "$oid": "663bd3b7969fc6302facf1ee"
+    },
+    {
+      "$oid": "661d07706671060e01a4fd3d"
+    },
+    {
+      "$oid": "663bd3b7969fc6302facf1ee"
+    },
+    {
+      "$oid": "6640e5bc8700968c3d88c6a0"
+    },
+    {
+      "$oid": "666b440b862f539d60f295a8"
+    },
+    {
+      "$oid": "6670270d948955d97897c30a"
+    },
+    {
+      "$oid": "667036d5948955d97897c30b"
+    },
+    {
+      "$oid": "66704fd1948955d97897c30d"
+    },
+    {
+      "$oid": "66705042948955d97897c30e"
+    },
+    {
+      "$oid": "66705166948955d97897c30f"
+    },
+    {
+      "$oid": "66705218948955d97897c310"
+    },
+    {
+      "$oid": "667157e0948955d97897c312"
+    },
+    {
+      "$oid": "667438dfd78b24cd5f94ff0b"
+    },
+    {
+      "$oid": "6675b93cd78b24cd5f94ff0d"
+    },
+    {
+      "$oid": "667995c9a596afd32e6a2340"
+    },
+    {
+      "$oid": "6682b843d333561fe1e3e51c"
+    },
+    {
+      "$oid": "6682cdb1d333561fe1e3e51f"
+    }
+  ],
+  "events": [],
+  "profilePictureCom1080": "/home/sipster/sipster/backend/static/profilePictures/compressed1080/Picture663bd3b7969fc6302facf1ee.webp",
+  "sips": 1500
+},
+{
+  "_id": {
+    "$oid": "6640e5f38700968c3d88c6a1"
+  },
+  "username": "friendTest",
+  "profilePicture": null,
+  "profilePictureCom200": null,
+  "encryptedPassword": "$2b$10$ALjcvYo2vhFOtEu6s.VILeX/d8fS1b/whPnTWQqahmHUQtBPz5gx2",
+  "salt": "$2b$10$ALjcvYo2vhFOtEu6s.VILe",
+  "email": "ft486@hdm-stuttgart.de",
+  "firstName": "friend",
+  "lastName": "test",
+  "registerDate": "2024-05-12T15:53:23.664Z",
+  "friends": [
+    {
+      "$oid": "663bd3b7969fc6302facf1ee"
+    }
+  ],
+  "events": [],
+  "profilePictureCom1080": null
+},
+{
+  "_id": {
+    "$oid": "661d67b17e280ddfbcf6ec93"
+  },
+  "username": "juuliaeb",
+  "profilePicture": "/home/sipster/sipster/backend/static/profilePictures/Picture661d67b17e280ddfbcf6ec93.jpg",
+  "profilePictureCom200": "/home/sipster/sipster/backend/static/profilePictures/compressed200/Picture661d67b17e280ddfbcf6ec93.webp",
+  "encryptedPassword": "$2b$10$u4LSeMASSsEV4EsKYkyWXujTBFkMXCOvqc6.sHmwEkcENbMOH8aVC",
+  "salt": "$2b$10$u4LSeMASSsEV4EsKYkyWXu",
+  "email": "skskd@skske.de",
+  "firstName": "julia",
+  "lastName": "Öbert",
+  "registerDate": "2024-04-15T17:45:21.602Z",
+  "friends": [
+    {
+      "$oid": "663bd3b7969fc6302facf1ee"
+    },
+    {
+      "$oid": "661cff86211a8acc9c714af1"
+    },
+    {
+      "$oid": "661d5bdb670a3c30735043e8"
+    },
+    {
+      "$oid": "661d09ba6671060e01a4fd3e"
+    },
+    {
+      "$oid": "663770d2d943e5c4c46d11d2"
+    },
+    {
+      "$oid": "661d07706671060e01a4fd3d"
+    }
+  ],
+  "sips": 530,
+  "events": [
+    "666b48332a8cb9c8529d119d",
+    "666b48362a8cb9c8529d119e",
+    "666b482f2a8cb9c8529d119c",
+    "666b48382a8cb9c8529d119f",
+    "666b48ee2a8cb9c8529d11a0"
+  ],
+  "profilePictureCom1080": "/home/sipster/sipster/backend/static/profilePictures/compressed1080/Picture661d67b17e280ddfbcf6ec93.webp"
+},
+{
+  "_id": {
+    "$oid": "663770d2d943e5c4c46d11d2"
+  },
+  "username": "kyloschmidt",
+  "profilePicture": "/home/sipster/sipster/backend/static/profilePictures/Picture663770d2d943e5c4c46d11d2.jpg",
+  "profilePictureCom200": "/home/sipster/sipster/backend/static/profilePictures/compressed200/Picture663770d2d943e5c4c46d11d2.webp",
+  "encryptedPassword": "$2b$10$kU7EHWC7yVsaCjpkhc1CsuRzL.by0ba7NaLXXhT6Hr4/upyvdCzNG",
+  "salt": "$2b$10$kU7EHWC7yVsaCjpkhc1Csu",
+  "email": "ichbineinhund@hdm-stuttgart.de",
+  "firstName": "Kylo",
+  "lastName": "Schmidt",
+  "registerDate": "2024-05-05T11:43:14.749Z",
+  "friends": [
+    {
+      "$oid": "663bd3b7969fc6302facf1ee"
+    },
+    {
+      "$oid": "661d67b17e280ddfbcf6ec93"
+    }
+  ],
+  "sips": 0,
+  "events": [],
+  "profilePictureCom1080": "/home/sipster/sipster/backend/static/profilePictures/compressed1080/Picture663770d2d943e5c4c46d11d2.webp"
+},
+{
+  "_id": {
+    "$oid": "661d09ba6671060e01a4fd3e"
+  },
+  "username": "Cryptocryxx",
+  "profilePicture": "/home/sipster/sipster/backend/static/profilePictures/Picture661d09ba6671060e01a4fd3e.jpg",
+  "profilePictureCom200": "/home/sipster/sipster/backend/static/profilePictures/compressed200/Picture661d09ba6671060e01a4fd3e.webp",
+  "encryptedPassword": "$2b$10$.WRDJxIpRLyARDtIAqTBwOOGqSY.OZ62GORiIFCOETgCFqljH/rBu",
+  "salt": "$2b$10$.WRDJxIpRLyARDtIAqTBwO",
+  "email": "lb225@hdm-stuttgart.de",
+  "firstName": "Lorenz",
+  "lastName": "Bauscher",
+  "registerDate": "2024-04-15T11:04:26.722Z",
+  "friends": [
+    {
+      "$oid": "663bd3b7969fc6302facf1ee"
+    },
+    {
+      "$oid": "661cff86211a8acc9c714af1"
+    },
+    {
+      "$oid": "661d67b17e280ddfbcf6ec93"
+    },
+    {
+      "$oid": "661d5aeb7caebb258991f758"
+    },
+    {
+      "$oid": "661d07706671060e01a4fd3d"
+    },
+    {
+      "$oid": "6682cdb1d333561fe1e3e51f"
+    }
+  ],
+  "sips": 1346,
+  "events": [],
+  "profilePictureCom1080": "/home/sipster/sipster/backend/static/profilePictures/compressed1080/Picture661d09ba6671060e01a4fd3e.webp"
+},
+{
+  "_id": {
+    "$oid": "666b440b862f539d60f295a8"
+  },
+  "username": "Aldihexe",
+  "profilePicture": "/home/sipster/sipster/backend/static/profilePictures/Picture666b440b862f539d60f295a8.jpeg",
+  "profilePictureCom200": "/home/sipster/sipster/backend/static/profilePictures/compressed200/Picture666b440b862f539d60f295a8.webp",
+  "profilePictureCom1080": "/home/sipster/sipster/backend/static/profilePictures/compressed1080/Picture666b440b862f539d60f295a8.webp",
+  "encryptedPassword": "$2b$10$hPxUxFa2u9O5PdcCYCGRIehtL3th2xZqWHNgk1/oA4dqE8P.CwsAW",
+  "salt": "$2b$10$hPxUxFa2u9O5PdcCYCGRIe",
+  "email": "timknoerlein@outlook.com",
+  "firstName": "Tim",
+  "lastName": "Knoerlein",
+  "registerDate": "2024-06-13T19:10:03.660Z",
+  "friends": [
+    {
+      "$oid": "663bd3b7969fc6302facf1ee"
+    }
+  ],
+  "sips": 0
+},
+{
+  "_id": {
+    "$oid": "666c7d4429b5c06be12d6d1c"
+  },
+  "username": "RyanmagVfB",
+  "profilePicture": null,
+  "profilePictureCom200": null,
+  "profilePictureCom1080": null,
+  "encryptedPassword": "$2b$10$HcnreAZP1Y5gO6FxhPzRL.S8/FzDSoqtokQR0WmB7ksE0JEBTbbPq",
+  "salt": "$2b$10$HcnreAZP1Y5gO6FxhPzRL.",
+  "email": "ryan.roehrich@web.de",
+  "firstName": "Ryan",
+  "lastName": "Röhrich",
+  "registerDate": "2024-06-14T17:26:28.750Z",
+  "friends": [
+    {
+      "$oid": "663bd3b7969fc6302facf1ee"
+    }
+  ],
+  "sips": 800
+},
+{
+  "_id": {
+    "$oid": "6670270d948955d97897c30a"
+  },
+  "username": "Mkay",
+  "profilePicture": null,
+  "profilePictureCom200": null,
+  "profilePictureCom1080": null,
+  "encryptedPassword": "$2b$10$j4x480xJUmC1EE1oDyIeQekuyM/ZHSTuWGMy6y6mZkgn8D2GBi8De",
+  "salt": "$2b$10$j4x480xJUmC1EE1oDyIeQe",
+  "email": "maxkehrer@gmail.com",
+  "firstName": "Max",
+  "lastName": "Kehrer",
+  "registerDate": "2024-06-17T12:07:40.934Z",
+  "friends": [
+    {
+      "$oid": "663bd3b7969fc6302facf1ee"
+    }
+  ],
+  "sips": 0
+},
+{
+  "_id": {
+    "$oid": "667036d5948955d97897c30b"
+  },
+  "username": "Nils",
+  "profilePicture": null,
+  "profilePictureCom200": null,
+  "profilePictureCom1080": null,
+  "encryptedPassword": "$2b$10$6Bvv8/4wbGaw0Y45ECtBwedi8NuISODuTb.X8bTybmhqw1CmnoahS",
+  "salt": "$2b$10$6Bvv8/4wbGaw0Y45ECtBwe",
+  "email": "nf056@hdm-stuttgart.de",
+  "firstName": "Nils",
+  "lastName": "Fink",
+  "registerDate": "2024-06-17T13:15:01.727Z",
+  "friends": [
+    {
+      "$oid": "663bd3b7969fc6302facf1ee"
+    }
+  ],
+  "sips": 900
+},
+{
+  "_id": {
+    "$oid": "66704fd1948955d97897c30d"
+  },
+  "username": "schnüffelnase",
+  "profilePicture": null,
+  "profilePictureCom200": null,
+  "profilePictureCom1080": null,
+  "encryptedPassword": "$2b$10$sS52Gy1hci6Zh8j5b7EameqK2GKboKEsc63IUQ79GUoKjQxDRdb6C",
+  "salt": "$2b$10$sS52Gy1hci6Zh8j5b7Eame",
+  "email": "kylo@outlook.de",
+  "firstName": "Kylo",
+  "lastName": "schmidt",
+  "registerDate": "2024-06-17T15:01:37.840Z",
+  "friends": [
+    {
+      "$oid": "663bd3b7969fc6302facf1ee"
+    }
+  ],
+  "sips": 55
+},
+{
+  "_id": {
+    "$oid": "66705042948955d97897c30e"
+  },
+  "username": "test",
+  "profilePicture": null,
+  "profilePictureCom200": null,
+  "profilePictureCom1080": null,
+  "encryptedPassword": "$2b$10$esg.zxxrZ.V9zrSKj7aVRu3Zt.Bl3Hyg70UNTYqr6kIPB2yd8D2g6",
+  "salt": "$2b$10$esg.zxxrZ.V9zrSKj7aVRu",
+  "email": "test@outlook.de",
+  "firstName": "Test",
+  "lastName": "test",
+  "registerDate": "2024-06-17T15:03:30.695Z",
+  "friends": [
+    {
+      "$oid": "663bd3b7969fc6302facf1ee"
+    }
+  ],
+  "sips": 0
+},
+{
+  "_id": {
+    "$oid": "66705166948955d97897c30f"
+  },
+  "username": "test2",
+  "profilePicture": null,
+  "profilePictureCom200": null,
+  "profilePictureCom1080": null,
+  "encryptedPassword": "$2b$10$fbqMdHWjzC0PV2QAT8L7Euz15SfEuBV38A1REBTXgey95nl1NMCXW",
+  "salt": "$2b$10$fbqMdHWjzC0PV2QAT8L7Eu",
+  "email": "test2@outlook.de",
+  "firstName": "test2",
+  "lastName": "test2",
+  "registerDate": "2024-06-17T15:08:22.774Z",
+  "friends": [
+    {
+      "$oid": "663bd3b7969fc6302facf1ee"
+    }
+  ],
+  "sips": 0
+},
+{
+  "_id": {
+    "$oid": "66705218948955d97897c310"
+  },
+  "username": "test3",
+  "profilePicture": null,
+  "profilePictureCom200": null,
+  "profilePictureCom1080": null,
+  "encryptedPassword": "$2b$10$v0v60Z/WT7qDQzM3w63LR.yLmkKjZz3Q7YxuATZtLtAu6fc8oRd4S",
+  "salt": "$2b$10$v0v60Z/WT7qDQzM3w63LR.",
+  "email": "test3@outlook.de",
+  "firstName": "test3",
+  "lastName": "skka",
+  "registerDate": "2024-06-17T15:11:20.279Z",
+  "friends": [
+    {
+      "$oid": "663bd3b7969fc6302facf1ee"
+    }
+  ],
+  "sips": 0
+},
+{
+  "_id": {
+    "$oid": "667157e0948955d97897c312"
+  },
+  "username": "juuli",
+  "profilePicture": null,
+  "profilePictureCom200": null,
+  "profilePictureCom1080": null,
+  "encryptedPassword": "$2b$10$AOUn3DrYy0j9tgYyNcVWzObmoWvMoEGSNDlWgWJlP5OUsbekRYtMG",
+  "salt": "$2b$10$AOUn3DrYy0j9tgYyNcVWzO",
+  "email": "juls.ebert@outloo.de",
+  "firstName": "ldld",
+  "lastName": "myld",
+  "registerDate": "2024-06-18T09:48:16.393Z",
+  "friends": [
+    {
+      "$oid": "663bd3b7969fc6302facf1ee"
+    }
+  ],
+  "sips": 1234
+},
+{
+  "_id": {
+    "$oid": "66730726ac38b8e571f69857"
+  },
+  "username": "testUser",
+  "profilePicture": null,
+  "profilePictureCom200": null,
+  "profilePictureCom1080": null,
+  "encryptedPassword": "$2b$10$FroZWmkaLXQLJQqwou9TM.fZUuCBMncDhzcmllNcEc9P1mVmSNSJi",
+  "salt": "$2b$10$FroZWmkaLXQLJQqwou9TM.",
+  "email": "testuser@gmail.com",
+  "firstName": "Test",
+  "lastName": "User",
+  "registerDate": "2024-06-19T16:28:22.182Z",
+  "friends": [],
+  "sips": 200
+},
+{
+  "_id": {
+    "$oid": "66730b1aac38b8e571f69859"
+  },
+  "username": "test9",
+  "profilePicture": null,
+  "profilePictureCom200": null,
+  "profilePictureCom1080": null,
+  "encryptedPassword": "$2b$10$Jmb/eYZ70h4.yXPAuNdi0uhbKMe60lKe13lG0Vqb2GqoRI9a2Jqxi",
+  "salt": "$2b$10$Jmb/eYZ70h4.yXPAuNdi0u",
+  "email": "test10@gmx.de",
+  "firstName": "test7",
+  "lastName": "test8",
+  "registerDate": "2024-06-19T16:45:14.369Z",
+  "friends": [],
+  "sips": 0
+},
+{
+  "_id": {
+    "$oid": "6673ce37b76d5298c765c3ec"
+  },
+  "username": "malena.böckmann",
+  "profilePicture": null,
+  "profilePictureCom200": null,
+  "profilePictureCom1080": null,
+  "encryptedPassword": "$2b$10$ZNrw4YJkzciofMifW4GjMumFSgG3uTcwa5auLr8e4lLTmquAtNF.y",
+  "salt": "$2b$10$ZNrw4YJkzciofMifW4GjMu",
+  "email": "malena@outlook.de",
+  "firstName": "Malena",
+  "lastName": "Böckmann",
+  "registerDate": "2024-06-20T06:37:42.978Z",
+  "friends": [],
+  "sips": 444
+},
+{
+  "_id": {
+    "$oid": "667995c9a596afd32e6a2340"
+  },
+  "username": "testing123",
+  "profilePicture": null,
+  "profilePictureCom200": null,
+  "profilePictureCom1080": null,
+  "encryptedPassword": "$2b$10$XnsbZ/s6gj0USBaV.mkZW.7e2Sh3lhlZuJEtlUFY3oTwPmvUcXYIO",
+  "salt": "$2b$10$XnsbZ/s6gj0USBaV.mkZW.",
+  "email": "test@web.de",
+  "firstName": "test",
+  "lastName": "user",
+  "registerDate": "2024-06-24T15:50:33.363Z",
+  "friends": [
+    {
+      "$oid": "663bd3b7969fc6302facf1ee"
+    }
+  ],
+  "sips": 0
+},
+{
+  "_id": {
+    "$oid": "6682b843d333561fe1e3e51c"
+  },
+  "username": "Bree",
+  "profilePicture": "/home/sipster/sipster/backend/static/profilePictures/Picture6682b843d333561fe1e3e51c.jpeg",
+  "profilePictureCom200": "/home/sipster/sipster/backend/static/profilePictures/compressed200/Picture6682b843d333561fe1e3e51c.webp",
+  "profilePictureCom1080": "/home/sipster/sipster/backend/static/profilePictures/compressed1080/Picture6682b843d333561fe1e3e51c.webp",
+  "encryptedPassword": "$2b$10$YsYGCDnRn5rQmp70q9nKj.kR4G9L.SNWsyI92LtRyTOuOpzsWs0oW",
+  "salt": "$2b$10$YsYGCDnRn5rQmp70q9nKj.",
+  "email": "testeruser@gmail.com",
+  "firstName": "Bree",
+  "lastName": "Tester",
+  "registerDate": "2024-07-01T14:08:03.275Z",
+  "friends": [
+    {
+      "$oid": "663bd3b7969fc6302facf1ee"
+    }
+  ],
+  "sips": 0
+},
+{
+  "_id": {
+    "$oid": "6682cdb1d333561fe1e3e51f"
+  },
+  "username": "tj",
+  "profilePicture": "/home/sipster/sipster/backend/static/profilePictures/Picture6682cdb1d333561fe1e3e51f.jpeg",
+  "profilePictureCom200": "/home/sipster/sipster/backend/static/profilePictures/compressed200/Picture6682cdb1d333561fe1e3e51f.webp",
+  "profilePictureCom1080": "/home/sipster/sipster/backend/static/profilePictures/compressed1080/Picture6682cdb1d333561fe1e3e51f.webp",
+  "encryptedPassword": "$2b$10$Jnw41Njw/daYSTtoFyh64eXW3XIIRjBkAIYMhO2nJqUv27sU7bWLW",
+  "salt": "$2b$10$Jnw41Njw/daYSTtoFyh64e",
+  "email": "tj007@hdm-stuttgart.de",
+  "firstName": "Tobias",
+  "lastName": "Jordine",
+  "registerDate": "2024-07-01T15:39:29.368Z",
+  "friends": [
+    {
+      "$oid": "663bd3b7969fc6302facf1ee"
+    },
+    {
+      "$oid": "661d09ba6671060e01a4fd3e"
+    }
+  ],
+  "sips": 0,
+  "events": [
+    "666b482f2a8cb9c8529d119c"
+  ]
+}]
