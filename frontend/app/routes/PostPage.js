@@ -5,6 +5,7 @@ import { games } from '../constants'
 import { useUser } from '../utils/hooks/useUser'
 import GameAcitvityCam from '../components/games/GameAcitvityCam'
 import Activity from '../entitys/activity'
+import { activityLog } from '../utils/logger/config'
 
 /*
     PostPage is a page that allows the user to make with a post.
@@ -17,7 +18,7 @@ export default function PostPage() {
     const cameraRef = useRef(null);
     const activity = new Activity(games[0], user, [])
 
-    const handlePress = () => {}
+    const handlePress = () => {activityLog.debug('Comming soon')}
 
     return (
         <View className={classNames(

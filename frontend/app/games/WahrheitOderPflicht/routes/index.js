@@ -1,6 +1,6 @@
-//Import 
-import choose from './choose';
+//Import
+import choosePage from './choosePage';
 import truthPage from './truthPage';
 import darePage from './darePage'
 
-export{choose, truthPage, darePage};
+export{choosePage, truthPage, darePage};

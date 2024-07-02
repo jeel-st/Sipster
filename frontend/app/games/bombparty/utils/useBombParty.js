@@ -11,7 +11,7 @@ const soundMap = {
 }
 
 const minTime = 30000; // 30 seconds
-const maxTime = 60000; // 1 minute
+const maxTime = 30000; // 1 minute
 
 // Custom hook for managing Bomb Party game state
 const useBombParty = () => {
@@ -21,15 +21,36 @@ const useBombParty = () => {
     const [timer, setTimer] = useState(0)
     const [explodingTime, setExplodingTime] = useState(0)
     const [sound, setSound] = useState(null)
+    const [countdown, setCountdown] = useState(0)
 
     // Function to start the game
     const handleStartGame = async () => {
         // If the game is already in progress, exit the function
         if (isPlaying) return
 
+        setCountdown(3)
+
+        // Start countdown
+        const countdownInterval = setInterval(() => {
+            setCountdown(prevCountdown => {
+                if (prevCountdown <= 1) {
+                    clearInterval(countdownInterval)
+                    return 0
+                }
+                return prevCountdown - 1
+            })
+        }, 1000)
+
+        // Wait for countdown to finish
+        await new Promise(resolve => setTimeout(resolve, 3000))
+
         // Set a random game category
         const randomIndex = Math.floor(Math.random() * categories.length);
         setCategory(categories[randomIndex]);
+
+        // Set random exploding time between 30 seconds and 1 minute
+        const randomExplodingTime = Math.floor(Math.random() * (maxTime - minTime + 1)) + minTime;
+        setExplodingTime(randomExplodingTime);
 
         // Set game status to "playing"
         setIsPlaying(true)
@@ -38,10 +59,6 @@ const useBombParty = () => {
         // Load and play ticking sound
         const tickingSound = await playSound('Ticking.mp3')
         setSound(tickingSound)
-
-        // Set random exploding time between 30 seconds and 1 minute
-        const randomExplodingTime = Math.floor(Math.random() * (maxTime - minTime + 1)) + minTime;
-        setExplodingTime(randomExplodingTime);
 
     }
 
@@ -79,6 +96,7 @@ const useBombParty = () => {
             Vibration.vibrate(3 * 1000)
             // Set game status to "not playing"
             setIsPlaying(false)
+            gameLog.info('Bomb Party game ended')
         }
     }, [timer, sound])
 
@@ -103,16 +121,8 @@ const useBombParty = () => {
         }
     }, [sound])
 
-    // Effect for game end
-    useEffect(() => {
-        // If the game is not in progress
-        if (!isPlaying) {
-            gameLog.info('Bomb Party game ended')
-        }
-    }, [isPlaying])
-
     // Return relevant variables and functions for game state
-    return { isPlaying, category, handleStartGame }
+    return { isPlaying, category, countdown, handleStartGame }
 }
 
 export default useBombParty

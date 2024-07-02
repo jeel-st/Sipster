@@ -21,7 +21,7 @@ const useBeerPongExtreme = () => {
 
         // Set game status to "playing"
         setIsPlaying(true)
-        gameLog.info('Bomb Party game started')
+        gameLog.info('Beer Pong Extreme game started')
     }
 
     const handleIsReady = () => {
@@ -31,23 +31,15 @@ const useBeerPongExtreme = () => {
             setChallenge(category.challenges[randomIndex]);
 
             setIsReady(true)
-            gameLog.info('Bomb Party user is ready')
+            gameLog.info('Beer Pong Extreme user is ready')
         }else{
             setIsPlaying(false)
             setIsReady(false)
             setCategory(null)
             setChallenge(null)
-            gameLog.info('Bomb Party user is finished')
+            gameLog.info('Beer Pong Extreme game ended')
         }
     }
-
-    // Effect for game end
-    useEffect(() => {
-        // If the game is not in progress
-        if (!isPlaying) {
-            gameLog.info('Bomb Party game ended')
-        }
-    }, [isPlaying])
 
     // Return relevant variables and functions for game state
     return { isPlaying, isReady, category, challenge, handleStartGame, handleIsReady }

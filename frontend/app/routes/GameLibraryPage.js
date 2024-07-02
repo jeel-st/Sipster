@@ -1,5 +1,5 @@
 import { View, Text, Image, ScrollView, TextInput } from 'react-native'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { classNames } from '../utils'
 import { useNavBarColor } from '../utils/hooks/useNavBarColor'
@@ -8,6 +8,8 @@ import Game from '../entitys/game'
 import GameCard from '../components/games/GameCard'
 import useGameSearch from '../utils/hooks/useGameSearch'
 import { useAccount } from "../utils/hooks/useAccount";
+import { usePathname } from 'expo-router'
+import { useUser } from '../utils/hooks/useUser'
 
 /*
     GameLibraryPage is a page that displays all games in the library.
@@ -16,9 +18,9 @@ import { useAccount } from "../utils/hooks/useAccount";
     @return: JSX -> returns the GameLibraryPage component
 */
 export default function GameLibraryPage() {
-      const {handleSearch, filteredGames, searchInput} = useGameSearch(games);
+  const { handleSearch, filteredGames, searchInput } = useGameSearch(games);
 
-      const gameList = filteredGames === undefined ? games.map((game) => new Game(game)) : filteredGames.map((game) => new Game(game));
+  const gameList = filteredGames === undefined ? games.map((game) => new Game(game)) : filteredGames.map((game) => new Game(game));
 
 
   // Background is set depending on the operating system
@@ -30,7 +32,7 @@ export default function GameLibraryPage() {
   // useEffect hook to update the user state whenever the pathname changes
   const path = usePathname()
   useEffect(() => {
-      setUser(useUser())
+    setUser(useUser())
   }, [path]);
 
   // import of the logik
@@ -50,53 +52,57 @@ export default function GameLibraryPage() {
         'mt-4 mx-6 ' // spacing
       )}>
 
-      <View className={classNames(
+        <View className={classNames(
           'flex-col items-start justify-center', // position
-          )}>
+        )}>
 
-        {/* Sipster Logo */}
-        <Image style={{ width: 100, height: 50, resizeMode: 'contain', marginRight: 10, }} source={require('../assets/images/logo-small.png')} />
-      </View>
+          {/* Sipster Logo */}
+          <Image style={{ width: 100, height: 50, resizeMode: 'contain', marginRight: 10, }} source={require('../assets/images/logo-small.png')} />
+        </View>
 
 
       </View>
 
 
       <View className={classNames(
-          'flex justify-center', // position
-          'mt-3 mx-4 mb-4', // spacing
-          'h-40', // sizing
+        'flex justify-center', // position
+        'mt-3 mx-4 mb-4', // spacing
+        'h-40', // sizing
+      )}>
+        {/* Sip-Counter */}
+        <View className={classNames(
+          'flex-row justify-center', // position
+          'h-20 ', // sizing
+          'bg-yellow shadow-md shadow-black rounded-3xl', // styling
         )}>
-          {/* Sip-Counter */}
+
           <View className={classNames(
-            'flex items-end justify-center', // position
+            'flex-row items-center absolute right-0', // position
             'h-20 ', // sizing
-            'bg-yellow shadow-md shadow-black rounded-3xl', // styling
-            )}>
-              <Text className='text-center text-xl font-bold'>Level {level}</Text>
-              <Text className='text-center'>______</Text>
-              <View className="flex-row items-center">
-                  <Text className='text-center text-3xl font-bold mt-2 mr-2'>{user && user.sips}</Text>
-                  <Text className='text-center text-xl mt-2'>sips</Text>
-              </View>
+            'mr-6', // spacing
+          )}>
+            <Text className='text-center text-3xl font-bold mt-2 mr-2'>{user && user.sips}</Text>
+            <Text className='text-center text-xl mt-2'>sips</Text>
           </View>
-          <TextInput className={classNames(
-                    'pl-2 mt-4', // spacing
-                    'h-10', // sizing
-                    'rounded-xl shadow-md shadow-black text-white bg-secondary' // styling
-                )}
-              placeholder={'search'}
-              value={searchInput}
-              onChangeText={handleSearch}
-       />
+        </View>
+
+        <TextInput className={classNames(
+          'pl-2 mt-4', // spacing
+          'h-10', // sizing
+          'rounded-xl shadow-md shadow-black text-white bg-secondary' // styling
+        )}
+          placeholder={'search'}
+          value={searchInput}
+          onChangeText={handleSearch}
+        />
       </View>
 
 
 
       {/* Separation line */}
       <View className={classNames(
-                    'w-full h-[2px]',
-                    'bg-secondary')} />
+        'w-full h-[2px]',
+        'bg-secondary')} />
 
       {/* games */}
       <ScrollView showsVerticalScrollIndicator={false} className='mx-4'>
