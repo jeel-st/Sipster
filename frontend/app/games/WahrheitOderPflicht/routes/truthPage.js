@@ -5,8 +5,10 @@ import { AntDesign } from '@expo/vector-icons';
 import classNames from '../utils/classNames'
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useNavigation } from '@react-navigation/native';
-import truth from '../constants/truth'
 import { quitGame } from '../../../utils/navigator';
+import { useTask } from '../utils/useTask';
+import { usePlayer } from '../utils/usePlayer';
+
 
 /*
 truthPage displays the current question
@@ -19,14 +21,14 @@ export default function truthPage() {
     const players = JSON.parse(useLocalSearchParams().players);
     const router = useRouter();
     const navigation = useNavigation();
+    const {truthTask} = useTask();
+    const {handleNextPlayer} = usePlayer();
 
     // Header ausblenden
     React.useLayoutEffect(() => {
         navigation.setOptions({ headerShown: false });
     }, [navigation]);
 
-    const randomIndex = Math.floor(Math.random() * truth.length);
-    const category = truth[randomIndex];
 
     return (
         <View className={classNames(
@@ -86,7 +88,7 @@ export default function truthPage() {
                         <Text className={classNames(
                             'text-2xl text-black font-light'//styling
                         )}>
-                            {category}
+                            {truthTask}
                         </Text>
                     </View>
                 </View>
@@ -103,6 +105,7 @@ export default function truthPage() {
                         'rounded-3xl shadow-md shadow-black bg-purple' // styling
                     )}
                         onPress={() => {
+                            handleNextPlayer();
                             router.navigate({ pathname: '/games/WahrheitOderPflicht/routes/choosePage', params: { activity: JSON.stringify(activity), players: JSON.stringify(players) }  })
                         }}
                     >

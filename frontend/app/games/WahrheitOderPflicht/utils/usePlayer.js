@@ -8,7 +8,7 @@ import { useRouter } from 'expo-router';
 export function usePlayer(activity) {
   const [inputValue, setInputValue] = useState('');
   const [players, setPlayers] = useState([]);
-  const router = useRouter();
+  const [nextPlayer, setNextPlayer] = useState('');
 
   useEffect(() => {
     const taggedFriends = activity.taggedFriends.map(friend => friend.fullName)
@@ -46,5 +46,10 @@ export function usePlayer(activity) {
     setPlayers(newPlayers);
   }
 
-  return { handleInputChange, handlePlayer, handleDeletePlayer, players, inputValue, router, players }
+  const handleNextPlayer = () =>{
+    const randomIndex = Math.floor(Math.random() * players.length);
+    setNextPlayer(players[randomIndex])
+  }
+
+  return { handleInputChange, handlePlayer, handleDeletePlayer, players, inputValue, router, players, nextPlayer, handleNextPlayer }
 }

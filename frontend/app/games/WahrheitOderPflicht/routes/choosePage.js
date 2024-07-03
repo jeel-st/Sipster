@@ -6,7 +6,8 @@ import classNames from '../utils/classNames'
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useNavigation } from '@react-navigation/native';
 import { quitGame } from '../../../utils/navigator';
-
+import { useTask } from '../utils/useTask';
+import { usePlayer } from '../utils/usePlayer';
 
 /*
 choose Page lets the player whose turn it is choose between truth and dare
@@ -21,17 +22,14 @@ export default function choose() {
     const players = JSON.parse(useLocalSearchParams().players);
     const router = useRouter();
     const navigation = useNavigation();
+    const {handleDareTask, handleTruthTask } = useTask();
+    const {nextPlayer} = usePlayer();
 
     // Header disable
     React.useLayoutEffect(() => {
         navigation.setOptions({ headerShown: false });
     }, [navigation]);
 
-
-
-    // randomly selects the next player
-    const randomIndex = Math.floor(Math.random() * players.length);
-    const nextPlayer = players[randomIndex];
 
     return (
         <View className={classNames(
@@ -105,7 +103,9 @@ export default function choose() {
                         'w-100% h-60', // sizing
                         'rounded-3xl shadow-md shadow-black bg-yellow' // styling
                     )}
-                        onPress={() => { router.navigate({ pathname: '/games/WahrheitOderPflicht/routes/truthPage', params: { activity: JSON.stringify(activity), players: JSON.stringify(players) }  }) }}
+                        onPress={() => { 
+                            handleTruthTask();
+                            router.navigate({ pathname: '/games/WahrheitOderPflicht/routes/truthPage', params: { activity: JSON.stringify(activity), players: JSON.stringify(players) }  }) }}
                     >
                         <Text className={classNames(
                             'text-center', // position
@@ -123,7 +123,9 @@ export default function choose() {
                         'w-100% h-60', // sizing
                         'rounded-3xl shadow-md shadow-black bg-purple' // styling
                     )}
-                        onPress={() => { router.navigate({ pathname: '/games/WahrheitOderPflicht/routes/darePage', params: { activity: JSON.stringify(activity), players: JSON.stringify(players) }  }) }}
+                        onPress={() => { 
+                            handleDareTask();
+                            router.navigate({ pathname: '/games/WahrheitOderPflicht/routes/darePage', params: { activity: JSON.stringify(activity), players: JSON.stringify(players) }  }) }}
                     >
                         <Text className={classNames(
                             'text-center', // position
