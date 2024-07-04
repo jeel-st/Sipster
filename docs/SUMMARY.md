@@ -25,6 +25,8 @@
     * [Nr. 001: Verwendung von React Native für die App-Entwicklung](dokumentationen/architecture-decision-record-adrs/nr.-001-verwendung-von-react-native-fur-die-app-entwicklung.md)
     * [Nr. 002: Verwendung eines Schichtmodells in Kombination mit einer Microkernel-Struktur als Softwarea](dokumentationen/architecture-decision-record-adrs/nr.-002-verwendung-eines-schichtmodells-in-kombination-mit-einer-microkernel-struktur-als-softwarea.md)
     * [Nr. 003: Erstellung des Guides zur Nutzung von Changelogs/Tags](dokumentationen/architecture-decision-record-adrs/nr.-003-erstellung-des-guides-zur-nutzung-von-changelogs-tags.md)
+  * [Changelogs](dokumentationen/changelogs.md)
+  * [Einloggen in unsere Datenbank](dokumentationen/einloggen-in-unsere-datenbank.md)
 * [Frontend](frontend/README.md)
   * [Package structure](frontend/package-structure.md)
 * [Backend](backend/README.md)
