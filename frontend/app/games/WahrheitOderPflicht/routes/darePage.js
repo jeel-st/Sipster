@@ -4,10 +4,8 @@ import { View, Text, TouchableOpacity, Image } from 'react-native'
 import { AntDesign } from '@expo/vector-icons';
 import classNames from '../utils/classNames'
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { useNavigation } from '@react-navigation/native';
 import { quitGame } from '../../../utils/navigator';
 import { useTask } from '../utils/useTask';
-import { usePlayer } from '../utils/usePlayer';
 import { useNext } from '../utils/useNext';
 
 /*
@@ -21,15 +19,13 @@ export default function darePage() {
     const activity = JSON.parse(useLocalSearchParams().activity);
     const players = JSON.parse(useLocalSearchParams().players);
     const router = useRouter();
-    const navigation = useNavigation(); // Zugriff auf die Navigationsfunktionen
+
 
     const {dareTask } = useTask();
     //const {handleNextPlayer} = usePlayer();
     const {handleNextPlayer} = useNext(players);
 
-    React.useLayoutEffect(() => {
-        navigation.setOptions({ headerShown: false }); // Header ausblenden
-    }, [navigation]);
+
 
 
 

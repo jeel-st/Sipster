@@ -7,7 +7,6 @@ import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useNavigation } from '@react-navigation/native';
 import { quitGame } from '../../../utils/navigator';
 import { useTask } from '../utils/useTask';
-import { usePlayer } from '../utils/usePlayer';
 import { useNext } from '../utils/useNext';
 
 /*
@@ -28,10 +27,7 @@ export default function choose() {
     //const {nextPlayer} = usePlayer(activity);
     const {nextPlayer} = useNext(players);
 
-    // Header disable
-    React.useLayoutEffect(() => {
-        navigation.setOptions({ headerShown: false });
-    }, [navigation]);
+   
 
 
     return (

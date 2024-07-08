@@ -4,7 +4,6 @@ import { View, Text, TouchableOpacity, Image } from 'react-native'
 import { AntDesign } from '@expo/vector-icons';
 import classNames from '../utils/classNames'
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { useNavigation } from '@react-navigation/native';
 import { quitGame } from '../../../utils/navigator';
 import { useTask } from '../utils/useTask';
 import { usePlayer } from '../utils/usePlayer';
@@ -20,14 +19,10 @@ export default function truthPage() {
     const activity = JSON.parse(useLocalSearchParams().activity);
     const players = JSON.parse(useLocalSearchParams().players);
     const router = useRouter();
-    const navigation = useNavigation();
+
     const {truthTask} = useTask();
     const {handleNextPlayer} = usePlayer();
 
-    // Header ausblenden
-    React.useLayoutEffect(() => {
-        navigation.setOptions({ headerShown: false });
-    }, [navigation]);
 
 
     return (
