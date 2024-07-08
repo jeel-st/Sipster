@@ -1,6 +1,5 @@
 // Imports
 import { useEffect, useState } from 'react';
-import { useRouter } from 'expo-router';
 import dare from '../constants/dare';
 import truth from '../constants/truth';
 
@@ -11,12 +10,11 @@ export function useTask() {
   const [dareTask, setDareTask] = useState('');
   const [truthTask, setTruthTask] = useState([]);
 
-  useEffect(() => {
-    const taggedFriends = activity.taggedFriends.map(friend => friend.fullName)
-    taggedFriends.push(activity.user.fullName);
-    setPlayers(taggedFriends);
-  }, [activity]);
 
+  useEffect(() => {
+    handleDareTask();
+    handleTruthTask();
+  }, [dare, truth]);
   /*
     sets the input that is entered
     @param text: string -> input

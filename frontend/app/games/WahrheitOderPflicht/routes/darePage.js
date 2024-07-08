@@ -8,6 +8,7 @@ import { useNavigation } from '@react-navigation/native';
 import { quitGame } from '../../../utils/navigator';
 import { useTask } from '../utils/useTask';
 import { usePlayer } from '../utils/usePlayer';
+import { useNext } from '../utils/useNext';
 
 /*
 darePage displays the current question
@@ -21,8 +22,10 @@ export default function darePage() {
     const players = JSON.parse(useLocalSearchParams().players);
     const router = useRouter();
     const navigation = useNavigation(); // Zugriff auf die Navigationsfunktionen
+
     const {dareTask } = useTask();
-    const {handleNextPlayer} = usePlayer();
+    //const {handleNextPlayer} = usePlayer();
+    const {handleNextPlayer} = useNext(players);
 
     React.useLayoutEffect(() => {
         navigation.setOptions({ headerShown: false }); // Header ausblenden

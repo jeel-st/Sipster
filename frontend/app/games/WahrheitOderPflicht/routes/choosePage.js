@@ -8,6 +8,7 @@ import { useNavigation } from '@react-navigation/native';
 import { quitGame } from '../../../utils/navigator';
 import { useTask } from '../utils/useTask';
 import { usePlayer } from '../utils/usePlayer';
+import { useNext } from '../utils/useNext';
 
 /*
 choose Page lets the player whose turn it is choose between truth and dare
@@ -22,8 +23,10 @@ export default function choose() {
     const players = JSON.parse(useLocalSearchParams().players);
     const router = useRouter();
     const navigation = useNavigation();
+
     const {handleDareTask, handleTruthTask } = useTask();
-    const {nextPlayer} = usePlayer();
+    //const {nextPlayer} = usePlayer(activity);
+    const {nextPlayer} = useNext(players);
 
     // Header disable
     React.useLayoutEffect(() => {
