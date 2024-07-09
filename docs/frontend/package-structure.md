@@ -42,7 +42,7 @@
 
         * index.js
 
-        > Dieser Ordner enthält alle allgemeinen Funktionen und Module des Programms
+        > Dieser Ordner enthält alle allgemeinen Funktionen und Module des Programms. Der database Folder beinhaltet die Anfragen an das Backend, der hooks Folder die Logik der GUI und der Logger den Logger.
 
         * database Folder
         * hooks Folder
