@@ -5,7 +5,7 @@
 * 2 - SE2-Themen angewandt: SOLID-Prinzipien angewandt und dokumentiert. Interfaces und Factories sinnvoll eingesetzt.
 * 3 - Dokumentation des Codes und Architektur: Dokumentiert wie Komponenten miteinander kommunizieren. Dokumentation der architektonischen Entscheidungen mit Hilfe von ADR (_Architecture Decision Records_, mind. drei). Code-Dokumentationsprinzipen beschrieben und angewandt (nicht erlaubt: Begründung "der Code ist selbsterklärend")
 
-Auch diese Anforderungen haben wir soweit korrekt umgesetzt. Das Klassendiagramm des backends ist im git-repository unter "documentation" zu finden, anbei stelle ich es allerdings auch noch als Screenshot zur Verfügung. Auf die Erstellung eines Klassendiagramms haben wir unter Abspache mit Ihnen verzichtet, da wir leider keine Möglichkeit gefunden haben, dieses automatisiert zu erstellen.
+Auch diese Anforderungen haben wir soweit korrekt umgesetzt. Das Klassendiagramm des Backends ist im git-repository unter "documentation" zu finden, anbei stellen wir es allerdings auch noch als Screenshot zur Verfügung. Auf die Erstellung eines Klassendiagramms im Frontend haben wir unter Abspache mit Ihnen verzichtet, da wir leider keine Möglichkeit gefunden haben, dieses automatisiert zu erstellen.
 
 Aufgrund der Programmiersprache von JavaScript war es uns leider nicht möglich Interfaces zu erstellen, da diese in der Programmiersprache nicht vorhanden sind.&#x20;
 

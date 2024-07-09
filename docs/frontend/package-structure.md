@@ -43,3 +43,8 @@
         * index.js
 
         > Dieser Ordner enthält alle allgemeinen Funktionen und Module des Programms
+
+        * database Folder
+        * hooks Folder
+        * logger Folder
+
