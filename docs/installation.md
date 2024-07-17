@@ -34,6 +34,11 @@ Um die App auf dem Handy anzuzeigen, wird während der Entwicklungsphase die “
 
 Nun sollte der QR-Code mit dem Handy gescannt werden. &#x20;
 
+Sie können sich gerne einen eigenen Account zum Testen erstellen, oder auf einen von uns erstellten Account zugreifen:&#x20;
+
+* username: tj
+* password: Hdm2024++
+
 ### Optional:
 
 Es gibt in React 18 eine Warnung, die eigentlich nicht schlimm ist, man kann sie allerdings trotzdem deaktivieren.
