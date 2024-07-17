@@ -4,9 +4,9 @@ import { View, Text, TouchableOpacity, Image } from 'react-native'
 import { AntDesign } from '@expo/vector-icons';
 import classNames from '../utils/classNames'
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { useNavigation } from '@react-navigation/native';
-import dare from '../constants/dare'
 import { quitGame } from '../../../utils/navigator';
+import { useTask } from '../utils/useTask';
+import { useNext } from '../utils/useNext';
 
 /*
 darePage displays the current question
@@ -19,14 +19,13 @@ export default function darePage() {
     const activity = JSON.parse(useLocalSearchParams().activity);
     const players = JSON.parse(useLocalSearchParams().players);
     const router = useRouter();
-    const navigation = useNavigation(); // Zugriff auf die Navigationsfunktionen
 
-    React.useLayoutEffect(() => {
-        navigation.setOptions({ headerShown: false }); // Header ausblenden
-    }, [navigation]);
 
-    const randomIndex = Math.floor(Math.random() * dare.length);
-    const category = dare[randomIndex];
+    const {dareTask } = useTask();
+    //const {handleNextPlayer} = usePlayer();
+    const {handleNextPlayer} = useNext(players);
+
+
 
 
 
@@ -81,7 +80,7 @@ export default function darePage() {
                         <Text className={classNames(
                             'text-2xl text-black font-light'//styling
                         )}>
-                            {category}
+                            {dareTask}
                         </Text>
                     </View>
                 </View>
@@ -98,6 +97,7 @@ export default function darePage() {
                         'rounded-3xl shadow-md shadow-black bg-yellow' // styling
                     )}
                         onPress={() => {
+                            handleNextPlayer();
                             router.navigate({ pathname: '/games/WahrheitOderPflicht/routes/choosePage', params: { activity: JSON.stringify(activity), players: JSON.stringify(players) }  })
                         }}
                     >

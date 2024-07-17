@@ -19,6 +19,7 @@ WahrheitOderPflichtGame starts the Game and allow the player to add all other pl
 */
 export default function WahrheitOderPflichtGame({ activity }) {
     const { handleInputChange, handlePlayer, handleDeletePlayer, inputValue, router, players } = usePlayer(activity);
+    
 
     return (
 
@@ -135,7 +136,7 @@ export default function WahrheitOderPflichtGame({ activity }) {
                         )}
                         testID='Start Button'
                         onPress={() => {
-                            router.navigate({ pathname: '/games/WahrheitOderPflicht/routes/choosePage', params: { activity: JSON.stringify      (activity), players: JSON.stringify(players) } })
+                            router.navigate({ pathname: '/games/WahrheitOderPflicht/routes/choosePage', params: { activity: JSON.stringify(activity), players: JSON.stringify(players) } })
                         }}>
                         <Text className={classNames(
                             'text-center', // position
