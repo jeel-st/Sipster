@@ -1,11 +1,19 @@
+//Imports
 const express = require('express')
 const router = express.Router()
+const logMiddleware = require("./logMiddleware");
+
+router.use(logMiddleware);
 
 const friendSystemController = require('../controllers/controllerFriendSystem')
 
+//Router, die an Controller weiterleiten
+router.get('/invitations/:userID', friendSystemController.getInvitations)
 router.post('/', friendSystemController.postFriendRequest)
-router.delete('/:fromSipsterID/:toSipsterID', friendSystemController.deleteFriendRequest)
-router.get('/:username', friendSystemController.getFriendList)
-router.get('/reccommendations/:input', friendSystemController.getFriendRecommendations)
+router.delete('/delete/:fromUserID/:toUserID', friendSystemController.deleteFriendRequest)
+router.put('/accept/:fromUserID/:toUserID', friendSystemController.acceptFriendRequest)
+router.get('/:userID', friendSystemController.getFriendList)
+router.get('/:userID/:input', friendSystemController.getFriendRecommendations)
+
 
 module.exports = router

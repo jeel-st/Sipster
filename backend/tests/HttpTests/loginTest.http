@@ -1,0 +1,30 @@
+@host = http://localhost:3000
+
+
+###
+
+GET {{host}}/login/jeel/larsstinkt_*100 HTTP/1.1
+
+
+###
+
+GET {{host}}/login/Cryptocryxx/psw HTTP/1.1
+
+
+###
+
+POST {{host}}/login/ HTTP/1.1
+Content-Type: application/json
+
+{
+    "username": "TheLars",
+    "password": "JoelStinkt!100"
+}
+
+###
+
+GET {{host}}/login/Crypto/crYpT123!!! HTTP/1.1
+
+###
+
+GET {{host}}/login/juuliaeb/juuls123!E HTTP/1.1

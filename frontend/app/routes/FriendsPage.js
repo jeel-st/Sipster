@@ -2,41 +2,30 @@ import { View, Text, TouchableWithoutFeedback, Keyboard } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { classNames } from '../utils'
 import { styles } from '../constants'
-import { FriendsHeaderButtons, FriendsCategorys, FriendsContent } from '../components'
-import React, { useEffect, useState } from 'react';
-import useUser from '../utils/userFetcher'
+import { FriendsHeaderButtons, FriendsCategorys, FriendsContainer } from '../components'
+import React from 'react';
+import { useFriends } from '../utils/hooks/friends/useFriends'
+import { navBarColor } from '../utils/navBarColor'
 
+/*
+    FriendsPage is a page that displays the friends and allows the user to search and view friends.
+    Typ: Page/route
+
+    @return: JSX -> returns the FriendsPage component
+*/
 export default function FriendsPage() {
-    const user = useUser();
+    const { searchText,
+        selectedTab,
+        viewFriends,
+        viewCategorys,
+        searchFriendsVisible,
+        searchFriends,
+        filteredFriends,
+        handleSearchTextChange,
+        handleTabChange,
+        handleReloadFriends } = useFriends();
 
-    const [searchText, setSearchText] = useState('');
-    const [selectedTab, setSelectedTab] = useState(0)
-    const [viewFriends, setViewFriends] = useState(null)
-
-    const handleSearchTextChange = (text) => {
-        setSearchText(text);
-    };
-
-    const handleTabChange = (tabIndex) => {
-        setSelectedTab(tabIndex);
-
-        switch (tabIndex) {
-            case 0:
-                setViewFriends(user.friends)
-                break
-            case 1:
-                setViewFriends(user.friends)
-                break
-            case 2:
-                setViewFriends(user.friends)
-        }
-    };
-
-    useEffect(() => {
-        if (user) {
-            setViewFriends(user.friends);
-        }
-    }, [user]);
+    navBarColor(styles.Colors.primary)
 
     return (
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -44,23 +33,26 @@ export default function FriendsPage() {
                 'flex-1',
                 'bg-primary',
             )}>
-                {user && (
-                <>
-                    {/* Header Buttons*/}
-                    <FriendsHeaderButtons onSearchTextChange={handleSearchTextChange} />
+                {/* Header Buttons*/}
+                <FriendsHeaderButtons onSearchTextChange={handleSearchTextChange} />
 
-                    {/* Heading Text*/}
-                    <View className={classNames('px-4 pt-4')}>
-                        <Text className={styles.brandingText}>Friends</Text>
-                    </View>
+                {/* Heading Text*/}
+                <View className={classNames('px-4 pt-4')}>
+                    <Text className={styles.brandingText}>Friends</Text>
+                </View>
 
-                    {/* Friends Categorys*/}
-                    <FriendsCategorys selectedTab={selectedTab} onTabChange={handleTabChange} />
+                {/* Friends Categorys*/}
+                {viewCategorys && <FriendsCategorys selectedTab={selectedTab} onTabChange={handleTabChange} />}
 
-                    {/* Friends Content*/}
-                    <FriendsContent friends={viewFriends} searchText={searchText} />
-                </>
-            )}
+                {/* Friends Content*/}
+                <FriendsContainer
+                    friends={viewFriends}
+                    searchText={searchText}
+                    selectedTab={selectedTab}
+                    handleReloadFriends={handleReloadFriends}
+                    searchFriendsVisible={searchFriendsVisible}
+                    searchFriends={searchFriends}
+                    filteredFriends={filteredFriends} />
             </SafeAreaView>
         </TouchableWithoutFeedback>
     )

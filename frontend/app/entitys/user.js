@@ -1,22 +1,37 @@
- class User {
-    constructor(firstName, lastName, registerDate, username, email, friends) {
-        {/* User Information */ }
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.username = username;
-        this.email = email;
-        this.registerDate = registerDate;
+/*
+    User Class to create a user object
 
-        {/* Friends */ }
-        this.friends = friends;
+    @param userData: object -> the user object
+*/
+class User {
+    constructor(userData) {
+        {/* User Information */ }
+        this._id = userData._id;
+        this.firstName = userData.firstName;
+        this.lastName = userData.lastName;
+        this.fullName = `${userData.firstName} ${userData.lastName}`;
+        this.username = userData.username;
+        this.registerDate = userData.registerDate;
+        this.email = userData.email;
+        this.profilePicture = userData.profilePicture;
+        this.sips = userData.sips;
+        this.lastLogin = new Date();
+
+        {/* Friends Information */ }
+        this.friends = userData.friends;
     }
 
+    // Method to log the details of the User
     present() {
-        return `Name: ${this.firstName} ${this.lastName}\n` +
-            `Sipster ID: ${this.username}\n` +
+        const friendNames = this.friends.map(friend => friend.fullName).join(', ');
+        return `\nUser ID: ${this._id}\n` +
+            `Name: ${this.firstName} ${this.lastName}\n` +
+            `Username: ${this.username}\n` +
             `Email: ${this.email}\n` +
-            `Register Date: ${this.registerDate}`;
+            `Profile Picture: ${this.profilePicture}\n` +
+            `Last Login: ${this.lastLogin}\n` +
+            `Friends: ${friendNames}\n`;
     }
 }
 
-module.exports = User
+module.exports = User;

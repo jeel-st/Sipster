@@ -3,9 +3,12 @@
 # dependencies
 node_modules/
 profilePictures/
+*.log
 
 # Expo
+android/
 .expo/
+android/
 dist/
 web-build/
 
@@ -40,3 +43,4 @@ yarn-error.*
 
 expo-env.d.ts
 # @end expo-cli
+backend/logging/app.log

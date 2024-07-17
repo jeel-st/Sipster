@@ -1,0 +1,17 @@
+# Nr. 001: Verwendung von React Native für die App-Entwicklung
+
+* **Status**: _Akzeptiert_
+* **Kontext**: Bei der Entwicklung unserer Anwendung standen wir vor der Entscheidung, welches Framework wir verwenden sollten um die Benutzeroberfläche im Frontend umzusetzen. Unser Ziel war ganz klar eine plattformübergreifende Lösung zu finden, welche die App sowohl für iOS als auch Android Nutzern zugänglich macht.
+* **Entscheidung**: Wir haben beschlossen, React Native als Framework für die Entwicklung unserer mobilen Anwendung zu verwenden.
+* **Begründung**:
+  * **Plattformübergreifende Unterstützung**: React Native ermöglicht die Entwicklung von Anwendungen die sowohl auf iOS und Android lauffähig sind. Dies reduziert den Aufwand für die Entwicklung erheblich, da lediglich eine Codebasis geschrieben werden muss welche anschließend für die verschiedenen Betriebssysteme kompiliert werden.
+  * **JavaScript Basis**: React Native basiert auf JavaScript, was uns ermöglicht auf die vorhandenen Kenntnisse aus Web Development Frontend zurückzugreifen und diese ebenfalls auch weiter auszubauen. Dies vereinfacht die Einarbeitung und Entwicklung der App erheblich.
+  * **Performance**: React Native bietet schon im vorhinein eine gute Performance, da es eine native Benutzeroberfläche rendert und eine eigene rendering Pipeline verwendet.
+  * **Community**: React Native profitiert durch seine aktive und über Jahre wachsende Community von Entwicklern. Dies Ermöglicht eine Vielzahl von Open-Source-Bibliotheken, beschleunigtes Bug Fixing und vereinfacht die Einarbeitung durch zahlreiche Forumsdiskussionen erheblich.
+  * **Flexibilität**: React Native basiert auf Modularität von React Native Components, das bedeutet dass diese Komponenten einfach und mehrfach wiederverwendet werden können und bieten damit eine hohe Flexibilität und Anpassbarkeit. Dies beschleunigt den Entwicklungsprozess, die Lesbarkeit der Codebasis und verbessert die allgemeine Filestruktur.
+* **Alternative**:
+  * **Native Entwicklung:** Anstatt ein plattformübergreifendes Framework zu verwenden, könnten wir uns entscheiden, die Anwendung für jede Plattform separat zu entwickeln. Dies würde es uns ermöglichen, die spezifischen Vorteile und Funktionen jeder Plattform voll auszuschöpfen, jedoch hätte dies zu einem erhöhtem Entwicklungsaufwand geführt.
+  * **Flutter:** Flutter ist ein von Google entwickeltes plattformübergreifendes UI-Toolkit, das die Entwicklung von nativen Anwendungen für mobile, Web- und Desktop-Plattformen ermöglicht. Es verwendet die Programmiersprache Dart und bietet eine schnelle Entwicklung und eine hohe Leistung.
+  * **NativeScript:** NativeScript ist ein weiteres plattformübergreifendes Framework, das die Entwicklung von nativen Anwendungen für iOS und Android mit JavaScript oder TypeScript ermöglicht. Es bietet eine tiefe Integration in die nativen Plattformen und eine große Auswahl an Plugins und Erweiterungen.
+* **Konsequenzen**:
+  * Die Entscheidung für React Native bringt zahlreiche Vorteile mit sich, insbesondere in Bezug auf Entwicklungszeit, -kosten und plattformübergreifende Konsistenz. Es gibt jedoch auch einige potenzielle Nachteile, insbesondere in Bezug auf den Zugriff auf native Funktionen und Performance. Insgesamt bietet React Native eine starke Grundlage für die Entwicklung unserer mobilen Anwendung und ermöglicht es uns, unsere Ziele effizient und effektiv zu erreichen.
