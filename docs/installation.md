@@ -22,6 +22,8 @@ Hiermit werden alle notwendigen Abhängigkeiten installiert:
 npm install
 ```
 
+Falls der Befehl nicht funktionieren sollte, sollte überprüft werden, ob node.js korrekt installiert wurde.
+
 Hiermit  wird das Projekt gestartet:
 
 ```bash

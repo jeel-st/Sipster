@@ -10,22 +10,17 @@ Ein Comment-Style-Guide ist ein nützliches Werkzeug, um sicherzustellen, dass d
 
 1. **Imports**
 2. **Beschreibung der Komponente**
+   1. Eine ausführliche Beschreibung der Komponente, einschließlich ihres Zwecks und ihrer Funktion.
+   2. Angabe des Typs der Komponente und zu welchem Modul oder Bereich sie gehört, z.B. "Component from events".
+   3. **Parameter:** Jeder Parameter sollte wie folgt dokumentiert werden:
+      * `@param {name} {type} → {description}`
+   4. **Return:** Die Rückgabewerte der Funktion oder Methode sollten ebenfalls dokumentiert werden:
+      * `@return {type} → {description}`
+   5. **Throws**: Zusätzlich gibt es dies im Backend, um Errors zu dokumentieren:
+      * `@throws {type} → {description}`
+3. **Innerhalb der GUI**
+   1.  Einzelne Abschnitte oder Komponenten sollten kommentiert werden, um ihre Funktion oder ihren Zweck zu erklären.
 
-* Eine ausführliche Beschreibung der Komponente, einschließlich ihres Zwecks und ihrer Funktion.
-* Angabe des Typs der Komponente und zu welchem Modul oder Bereich sie gehört, z.B. "Component from events".
-* **Parameter:** Jeder Parameter sollte wie folgt dokumentiert werden:
-  * `@param {name} {type} → {description}`
-* **Return:** Die Rückgabewerte der Funktion oder Methode sollten ebenfalls dokumentiert werden:
-  * `@return {type} → {description}`
-* **Throws**: Zusätzlich gibt es dies im Backend, um Errors zu dokumentieren:
-  * `@throws {type} → {description}`
-
-1. **Innerhalb der GUI**
-
-*   Einzelne Abschnitte oder Komponenten sollten kommentiert werden, um ihre Funktion oder ihren Zweck zu erklären.
-
-    → {/\* input fields \*/}
-
-1. **Wichtig!**
-
-* Alles, was später möglicherweise nicht verstanden werden könnte, sollte kommentiert werden, um zukünftigen Entwicklern die Arbeit zu erleichtern.
+       → {/\* input fields \*/}
+4. **Wichtig!**
+   1. Alles, was später möglicherweise nicht verstanden werden könnte, sollte kommentiert werden, um zukünftigen Entwicklern die Arbeit zu erleichtern.

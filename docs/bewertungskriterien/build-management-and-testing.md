@@ -10,3 +10,5 @@ Obwohl wir Java Unit Tests nicht direkt mit JavaScript verwenden konnten, haben 
 Die Tests im backend sind unter `sipster/backend/tests` zu finden.
 
 Im frontend sind die Tests unter `sipster/frontend/app/__tests__` zu finden.
+
+Um die Tests auszuführen, sollte auf `sipster/backend` oder `sipster/frontend` navigiert werden und dort der Befehl `npm test` ausgeführt werden.

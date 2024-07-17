@@ -1,4 +1,12 @@
-# Nr. 002: Verwendung eines Schichtmodells in Kombination mit einer Microkernel-Struktur als Softwarea
+---
+description: >-
+  Verwendung eines Schichtmodells in Kombination mit einer Microkernel-Struktur
+  als Softwarearchitektur
+---
+
+# Nr. 002: Auswahl der Softwarearchitektur
+
+
 
 * **Status**: _Akzeptiert_
 * **Kontext**: Um das Projekt ganzheitlich zu planen und zu organisieren, standen wir vor der Entscheidung, eine Grundstruktur auszuwählen. Unser Ziel war es, eine klar wartbare und gut strukturierte Architektur zu wählen, die es dennoch ermöglicht, die App in Zukunft durch neue Spiele zu erweitern.

@@ -33,7 +33,7 @@
           * compressed1080
     *   tests
 
-        > Hier befinden sich einfache HTTP- Requests
+        > Hier befinden sich einfache HTTP- Requests und unsere JEST-Tests.
     *   utils
 
         > Hier befindet sich die komplizierte Logik. Der Ordner ist dabei, je nach Anwendungsfall, unter mehrere Unterordner unterteilt

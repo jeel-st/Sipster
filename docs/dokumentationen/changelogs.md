@@ -1,7 +1,47 @@
 # Changelogs
 
 ```
-## [2.0.0] - 2024-07-03 [develop]
+## [2.0.0] - 2024-07-17 [Main]
+
+### Added
+
+- Fertige Alpha Version 
+
+### Fixed
+
+- ...
+
+### Changed
+
+- ... 
+
+### Removed
+
+- ...
+
+
+
+## [1.5.0] - 2024-07-17 [develop]
+
+### Added
+
+- ...
+
+### Fixed
+
+- ...
+
+### Changed
+
+- Logik aus Ui entfernt 
+
+### Removed
+
+- ...
+
+
+
+## [1.4.0] - 2024-07-03 [develop]
 
 ### Added
 

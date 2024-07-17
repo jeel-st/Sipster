@@ -23,7 +23,7 @@
   * [Comment Style Guide](dokumentationen/comment-style-guide.md)
   * [Architecture Decision Record - ADRs](dokumentationen/architecture-decision-record-adrs/README.md)
     * [Nr. 001: Verwendung von React Native für die App-Entwicklung](dokumentationen/architecture-decision-record-adrs/nr.-001-verwendung-von-react-native-fur-die-app-entwicklung.md)
-    * [Nr. 002: Verwendung eines Schichtmodells in Kombination mit einer Microkernel-Struktur als Softwarea](dokumentationen/architecture-decision-record-adrs/nr.-002-verwendung-eines-schichtmodells-in-kombination-mit-einer-microkernel-struktur-als-softwarea.md)
+    * [Nr. 002: Auswahl der Softwarearchitektur](dokumentationen/architecture-decision-record-adrs/nr.-002-auswahl-der-softwarearchitektur.md)
     * [Nr. 003: Erstellung des Guides zur Nutzung von Changelogs/Tags](dokumentationen/architecture-decision-record-adrs/nr.-003-erstellung-des-guides-zur-nutzung-von-changelogs-tags.md)
   * [Changelogs](dokumentationen/changelogs.md)
   * [Einloggen in unsere Datenbank](dokumentationen/einloggen-in-unsere-datenbank.md)
