@@ -2,6 +2,7 @@ const database = require('../databases/databaseMain')
 const log = require("../logging/logger")
 const logicFile = require("../utils/activitiesLogic/activitiesLogic")
 
+//+
 /**
  * This methods manages the incoming request and forwards it to the database methods
  * here it forwards to database.postActivity(req) which posts a new Activity in the database
